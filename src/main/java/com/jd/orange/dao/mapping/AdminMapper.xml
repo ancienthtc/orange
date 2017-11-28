@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jd.orange.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.jd.orange.model.Admin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="admin" property="admin" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="alogin" property="alogin" jdbcType="TIMESTAMP" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="name_j" property="nameJ" jdbcType="VARCHAR" />
+    <result column="j_c" property="jC" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, admin, password, `level`, `name`, alogin, createtime, updatetime, name_j, j_c
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_admin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_admin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jd.orange.model.Admin" >
+    insert into t_admin (id, admin, password, 
+      `level`, `name`, alogin,
+      createtime, updatetime, name_j, 
+      j_c)
+    values (#{id,jdbcType=INTEGER}, #{admin,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{alogin,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{nameJ,jdbcType=VARCHAR}, 
+      #{jC,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jd.orange.model.Admin" >
+    insert into t_admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="admin != null" >
+        admin,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="level != null" >
+        `level`,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="alogin != null" >
+        alogin,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="nameJ != null" >
+        name_j,
+      </if>
+      <if test="jC != null" >
+        j_c,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="admin != null" >
+        #{admin,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alogin != null" >
+        #{alogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nameJ != null" >
+        #{nameJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        #{jC,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jd.orange.model.Admin" >
+    update t_admin
+    <set >
+      <if test="admin != null" >
+        admin = #{admin,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        `level` = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="alogin != null" >
+        alogin = #{alogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nameJ != null" >
+        name_j = #{nameJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        j_c = #{jC,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jd.orange.model.Admin" >
+    update t_admin
+    set admin = #{admin,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      `level` = #{level,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      alogin = #{alogin,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      name_j = #{nameJ,jdbcType=VARCHAR},
+      j_c = #{jC,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

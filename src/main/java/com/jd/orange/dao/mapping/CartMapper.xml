@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jd.orange.dao.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.jd.orange.model.Cart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="all" property="all" jdbcType="DOUBLE" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="format" property="format" jdbcType="INTEGER" />
+    <result column="user" property="user" jdbcType="INTEGER" />
+    <result column="detail_j" property="detailJ" jdbcType="VARCHAR" />
+    <result column="j_c" property="jC" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, amount, price, `all`, detail, createtime, format, `user`, detail_j, j_c
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jd.orange.model.Cart" >
+    insert into t_cart (id, amount, price, 
+      `all`, detail, createtime,
+      format, `user`, detail_j,
+      j_c)
+    values (#{id,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, 
+      #{all,jdbcType=DOUBLE}, #{detail,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{format,jdbcType=INTEGER}, #{user,jdbcType=INTEGER}, #{detailJ,jdbcType=VARCHAR}, 
+      #{jC,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jd.orange.model.Cart" >
+    insert into t_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="all != null" >
+        `all`,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="format != null" >
+        format,
+      </if>
+      <if test="user != null" >
+        `user`,
+      </if>
+      <if test="detailJ != null" >
+        detail_j,
+      </if>
+      <if test="jC != null" >
+        j_c,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="all != null" >
+        #{all,jdbcType=DOUBLE},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="format != null" >
+        #{format,jdbcType=INTEGER},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=INTEGER},
+      </if>
+      <if test="detailJ != null" >
+        #{detailJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        #{jC,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jd.orange.model.Cart" >
+    update t_cart
+    <set >
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="all != null" >
+        `all` = #{all,jdbcType=DOUBLE},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="format != null" >
+        format = #{format,jdbcType=INTEGER},
+      </if>
+      <if test="user != null" >
+        `user` = #{user,jdbcType=INTEGER},
+      </if>
+      <if test="detailJ != null" >
+        detail_j = #{detailJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        j_c = #{jC,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jd.orange.model.Cart" >
+    update t_cart
+    set amount = #{amount,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      `all` = #{all,jdbcType=DOUBLE},
+      detail = #{detail,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      format = #{format,jdbcType=INTEGER},
+      `user` = #{user,jdbcType=INTEGER},
+      detail_j = #{detailJ,jdbcType=VARCHAR},
+      j_c = #{jC,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jd.orange.dao.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.jd.orange.model.Address" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="CHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="zip" property="zip" jdbcType="VARCHAR" />
+    <result column="recipient" property="recipient" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="ismain" property="ismain" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="user" property="user" jdbcType="INTEGER" />
+    <result column="province_j" property="provinceJ" jdbcType="CHAR" />
+    <result column="city_j" property="cityJ" jdbcType="VARCHAR" />
+    <result column="area_j" property="areaJ" jdbcType="VARCHAR" />
+    <result column="detail_j" property="detailJ" jdbcType="VARCHAR" />
+    <result column="recipient_j" property="recipientJ" jdbcType="VARCHAR" />
+    <result column="j_c" property="jC" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, province, city, area, detail, zip, recipient, tel, phone, ismain, createtime, 
+    updatetime, `user`, province_j, city_j, area_j, detail_j, recipient_j, j_c
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_address
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jd.orange.model.Address" >
+    insert into t_address (id, province, city, 
+      area, detail, zip, 
+      recipient, tel, phone, ismain, 
+      createtime, updatetime, `user`,
+      province_j, city_j, area_j, 
+      detail_j, recipient_j, j_c
+      )
+    values (#{id,jdbcType=INTEGER}, #{province,jdbcType=CHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, 
+      #{recipient,jdbcType=VARCHAR}, #{tel,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{ismain,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{user,jdbcType=INTEGER}, 
+      #{provinceJ,jdbcType=CHAR}, #{cityJ,jdbcType=VARCHAR}, #{areaJ,jdbcType=VARCHAR}, 
+      #{detailJ,jdbcType=VARCHAR}, #{recipientJ,jdbcType=VARCHAR}, #{jC,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jd.orange.model.Address" >
+    insert into t_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="zip != null" >
+        zip,
+      </if>
+      <if test="recipient != null" >
+        recipient,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="ismain != null" >
+        ismain,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="user != null" >
+        `user`,
+      </if>
+      <if test="provinceJ != null" >
+        province_j,
+      </if>
+      <if test="cityJ != null" >
+        city_j,
+      </if>
+      <if test="areaJ != null" >
+        area_j,
+      </if>
+      <if test="detailJ != null" >
+        detail_j,
+      </if>
+      <if test="recipientJ != null" >
+        recipient_j,
+      </if>
+      <if test="jC != null" >
+        j_c,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=CHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="ismain != null" >
+        #{ismain,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=INTEGER},
+      </if>
+      <if test="provinceJ != null" >
+        #{provinceJ,jdbcType=CHAR},
+      </if>
+      <if test="cityJ != null" >
+        #{cityJ,jdbcType=VARCHAR},
+      </if>
+      <if test="areaJ != null" >
+        #{areaJ,jdbcType=VARCHAR},
+      </if>
+      <if test="detailJ != null" >
+        #{detailJ,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientJ != null" >
+        #{recipientJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        #{jC,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jd.orange.model.Address" >
+    update t_address
+    <set >
+      <if test="province != null" >
+        province = #{province,jdbcType=CHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null" >
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        recipient = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="ismain != null" >
+        ismain = #{ismain,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user != null" >
+        `user` = #{user,jdbcType=INTEGER},
+      </if>
+      <if test="provinceJ != null" >
+        province_j = #{provinceJ,jdbcType=CHAR},
+      </if>
+      <if test="cityJ != null" >
+        city_j = #{cityJ,jdbcType=VARCHAR},
+      </if>
+      <if test="areaJ != null" >
+        area_j = #{areaJ,jdbcType=VARCHAR},
+      </if>
+      <if test="detailJ != null" >
+        detail_j = #{detailJ,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientJ != null" >
+        recipient_j = #{recipientJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        j_c = #{jC,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jd.orange.model.Address" >
+    update t_address
+    set province = #{province,jdbcType=CHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      recipient = #{recipient,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=CHAR},
+      phone = #{phone,jdbcType=CHAR},
+      ismain = #{ismain,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      `user` = #{user,jdbcType=INTEGER},
+      province_j = #{provinceJ,jdbcType=CHAR},
+      city_j = #{cityJ,jdbcType=VARCHAR},
+      area_j = #{areaJ,jdbcType=VARCHAR},
+      detail_j = #{detailJ,jdbcType=VARCHAR},
+      recipient_j = #{recipientJ,jdbcType=VARCHAR},
+      j_c = #{jC,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

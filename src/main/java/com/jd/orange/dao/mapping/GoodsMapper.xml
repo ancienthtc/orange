@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jd.orange.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.jd.orange.model.Goods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DOUBLE" />
+    <result column="parameter1" property="parameter1" jdbcType="VARCHAR" />
+    <result column="parameter2" property="parameter2" jdbcType="VARCHAR" />
+    <result column="parameter3" property="parameter3" jdbcType="VARCHAR" />
+    <result column="shelf" property="shelf" jdbcType="TIMESTAMP" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="pic1" property="pic1" jdbcType="VARCHAR" />
+    <result column="pic2" property="pic2" jdbcType="VARCHAR" />
+    <result column="pic3" property="pic3" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="INTEGER" />
+    <result column="recommend" property="recommend" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="part" property="part" jdbcType="INTEGER" />
+    <result column="name_j" property="nameJ" jdbcType="VARCHAR" />
+    <result column="parameter1_j" property="parameter1J" jdbcType="VARCHAR" />
+    <result column="parameter2_j" property="parameter2J" jdbcType="VARCHAR" />
+    <result column="parameter3_j" property="parameter3J" jdbcType="VARCHAR" />
+    <result column="detail_j" property="detailJ" jdbcType="VARCHAR" />
+    <result column="j_c" property="jC" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `name`, freight, parameter1, parameter2, parameter3, shelf, detail, pic1, pic2,
+    pic3, picture, recommend, createtime, updatetime, part, name_j, parameter1_j, parameter2_j, 
+    parameter3_j, detail_j, j_c
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jd.orange.model.Goods" >
+    insert into t_goods (id, `name`, freight,
+      parameter1, parameter2, parameter3, 
+      shelf, detail, pic1, 
+      pic2, pic3, picture, 
+      recommend, createtime, updatetime, 
+      part, name_j, parameter1_j, 
+      parameter2_j, parameter3_j, detail_j, 
+      j_c)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{freight,jdbcType=DOUBLE}, 
+      #{parameter1,jdbcType=VARCHAR}, #{parameter2,jdbcType=VARCHAR}, #{parameter3,jdbcType=VARCHAR}, 
+      #{shelf,jdbcType=TIMESTAMP}, #{detail,jdbcType=VARCHAR}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{picture,jdbcType=INTEGER}, 
+      #{recommend,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{part,jdbcType=INTEGER}, #{nameJ,jdbcType=VARCHAR}, #{parameter1J,jdbcType=VARCHAR}, 
+      #{parameter2J,jdbcType=VARCHAR}, #{parameter3J,jdbcType=VARCHAR}, #{detailJ,jdbcType=VARCHAR}, 
+      #{jC,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jd.orange.model.Goods" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="parameter1 != null" >
+        parameter1,
+      </if>
+      <if test="parameter2 != null" >
+        parameter2,
+      </if>
+      <if test="parameter3 != null" >
+        parameter3,
+      </if>
+      <if test="shelf != null" >
+        shelf,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="pic1 != null" >
+        pic1,
+      </if>
+      <if test="pic2 != null" >
+        pic2,
+      </if>
+      <if test="pic3 != null" >
+        pic3,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="part != null" >
+        part,
+      </if>
+      <if test="nameJ != null" >
+        name_j,
+      </if>
+      <if test="parameter1J != null" >
+        parameter1_j,
+      </if>
+      <if test="parameter2J != null" >
+        parameter2_j,
+      </if>
+      <if test="parameter3J != null" >
+        parameter3_j,
+      </if>
+      <if test="detailJ != null" >
+        detail_j,
+      </if>
+      <if test="jC != null" >
+        j_c,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="parameter1 != null" >
+        #{parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2 != null" >
+        #{parameter2,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter3 != null" >
+        #{parameter3,jdbcType=VARCHAR},
+      </if>
+      <if test="shelf != null" >
+        #{shelf,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="pic1 != null" >
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=INTEGER},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="part != null" >
+        #{part,jdbcType=INTEGER},
+      </if>
+      <if test="nameJ != null" >
+        #{nameJ,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter1J != null" >
+        #{parameter1J,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2J != null" >
+        #{parameter2J,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter3J != null" >
+        #{parameter3J,jdbcType=VARCHAR},
+      </if>
+      <if test="detailJ != null" >
+        #{detailJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        #{jC,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jd.orange.model.Goods" >
+    update t_goods
+    <set >
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="parameter1 != null" >
+        parameter1 = #{parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2 != null" >
+        parameter2 = #{parameter2,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter3 != null" >
+        parameter3 = #{parameter3,jdbcType=VARCHAR},
+      </if>
+      <if test="shelf != null" >
+        shelf = #{shelf,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="pic1 != null" >
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        pic3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=INTEGER},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="part != null" >
+        part = #{part,jdbcType=INTEGER},
+      </if>
+      <if test="nameJ != null" >
+        name_j = #{nameJ,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter1J != null" >
+        parameter1_j = #{parameter1J,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2J != null" >
+        parameter2_j = #{parameter2J,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter3J != null" >
+        parameter3_j = #{parameter3J,jdbcType=VARCHAR},
+      </if>
+      <if test="detailJ != null" >
+        detail_j = #{detailJ,jdbcType=VARCHAR},
+      </if>
+      <if test="jC != null" >
+        j_c = #{jC,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jd.orange.model.Goods" >
+    update t_goods
+    set `name` = #{name,jdbcType=VARCHAR},
+      freight = #{freight,jdbcType=DOUBLE},
+      parameter1 = #{parameter1,jdbcType=VARCHAR},
+      parameter2 = #{parameter2,jdbcType=VARCHAR},
+      parameter3 = #{parameter3,jdbcType=VARCHAR},
+      shelf = #{shelf,jdbcType=TIMESTAMP},
+      detail = #{detail,jdbcType=VARCHAR},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=INTEGER},
+      recommend = #{recommend,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      part = #{part,jdbcType=INTEGER},
+      name_j = #{nameJ,jdbcType=VARCHAR},
+      parameter1_j = #{parameter1J,jdbcType=VARCHAR},
+      parameter2_j = #{parameter2J,jdbcType=VARCHAR},
+      parameter3_j = #{parameter3J,jdbcType=VARCHAR},
+      detail_j = #{detailJ,jdbcType=VARCHAR},
+      j_c = #{jC,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
