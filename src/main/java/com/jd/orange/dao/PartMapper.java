@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Part;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PartMapper {
     int deleteByPrimaryKey(Integer id);
 

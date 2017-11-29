@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Picture;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PictureMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Goods;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GoodsMapper {
     int deleteByPrimaryKey(Integer id);
 

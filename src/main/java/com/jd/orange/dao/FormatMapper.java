@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Format;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FormatMapper {
     int deleteByPrimaryKey(Integer id);
 

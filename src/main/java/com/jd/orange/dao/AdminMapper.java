@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Admin;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer id);
 

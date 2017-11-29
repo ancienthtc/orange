@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Cart;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CartMapper {
     int deleteByPrimaryKey(Integer id);
 

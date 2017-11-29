@@ -1,7 +1,9 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Address;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AddressMapper {
     int deleteByPrimaryKey(Integer id);
 
