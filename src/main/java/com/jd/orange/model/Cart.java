@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Cart {
@@ -13,6 +15,7 @@ public class Cart {
 
     private String detail;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
     private Integer format;

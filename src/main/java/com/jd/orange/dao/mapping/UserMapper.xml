@@ -24,9 +24,9 @@
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, nickname, email, realname, tel, phone, gender, birth, password,
-    checkcode, logintime, score, invalid, picture, createtime, updatetime, nickname_j, 
-    realname_j, gender_j, j_c
+    id, nickname, email, realname, tel, phone, gender, birth, password, checkcode, logintime, 
+    score, invalid, picture, createtime, updatetime, nickname_j, realname_j, gender_j, 
+    j_c
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -40,14 +40,14 @@
   </delete>
   <insert id="insert" parameterType="com.jd.orange.model.User" >
     insert into t_user (id, nickname, email, 
-      realname, tel, phone, gender,
+      realname, tel, phone, gender, 
       birth, password, checkcode, 
       logintime, score, invalid, 
       picture, createtime, updatetime, 
       nickname_j, realname_j, gender_j, 
       j_c)
     values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{realname,jdbcType=VARCHAR}, #{tel,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{gender,jdbcType=CHAR},
+      #{realname,jdbcType=VARCHAR}, #{tel,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{gender,jdbcType=CHAR}, 
       #{birth,jdbcType=DATE}, #{password,jdbcType=CHAR}, #{checkcode,jdbcType=CHAR}, 
       #{logintime,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, #{invalid,jdbcType=TIMESTAMP}, 
       #{picture,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 

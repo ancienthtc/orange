@@ -25,9 +25,10 @@
   </delete>
   <insert id="insert" parameterType="com.jd.orange.model.Part" >
     insert into t_part (id, `name`, `level`,
-      priority, belong, name_j, j_c)
+      priority, belong, name_j, 
+      j_c)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
-      #{priority,jdbcType=INTEGER}, #{belong,jdbcType=INTEGER}, #{nameJ,jdbcType=VARCHAR},
+      #{priority,jdbcType=INTEGER}, #{belong,jdbcType=INTEGER}, #{nameJ,jdbcType=VARCHAR}, 
       #{jC,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jd.orange.model.Part" >
@@ -83,10 +84,10 @@
     update t_part
     <set >
       <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
       <if test="level != null" >
-        level = #{level,jdbcType=INTEGER},
+        `level` = #{level,jdbcType=INTEGER},
       </if>
       <if test="priority != null" >
         priority = #{priority,jdbcType=INTEGER},

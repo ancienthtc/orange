@@ -1,17 +1,7 @@
 package com.jd.orange.model;
 
-import java.util.Date;
-
 public class OrderDetail {
     private Integer id;
-
-    private Date paytime;
-
-    private String address;
-
-    private String recipient;
-
-    private String contact;
 
     private String goodsname;
 
@@ -21,14 +11,6 @@ public class OrderDetail {
 
     private Double price;
 
-    private Double freight;
-
-    private Double otherprice;
-
-    private Double scorecost;
-
-    private String logistics;
-
     private String message;
 
     private String otherdetail;
@@ -37,15 +19,9 @@ public class OrderDetail {
 
     private Integer order;
 
-    private String addressJ;
-
-    private String recipientJ;
-
     private String goodsnameJ;
 
     private String formatJ;
-
-    private String logisticsJ;
 
     private String messageJ;
 
@@ -59,38 +35,6 @@ public class OrderDetail {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getPaytime() {
-        return paytime;
-    }
-
-    public void setPaytime(Date paytime) {
-        this.paytime = paytime;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public String getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(String recipient) {
-        this.recipient = recipient == null ? null : recipient.trim();
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact == null ? null : contact.trim();
     }
 
     public String getGoodsname() {
@@ -125,38 +69,6 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public Double getFreight() {
-        return freight;
-    }
-
-    public void setFreight(Double freight) {
-        this.freight = freight;
-    }
-
-    public Double getOtherprice() {
-        return otherprice;
-    }
-
-    public void setOtherprice(Double otherprice) {
-        this.otherprice = otherprice;
-    }
-
-    public Double getScorecost() {
-        return scorecost;
-    }
-
-    public void setScorecost(Double scorecost) {
-        this.scorecost = scorecost;
-    }
-
-    public String getLogistics() {
-        return logistics;
-    }
-
-    public void setLogistics(String logistics) {
-        this.logistics = logistics == null ? null : logistics.trim();
-    }
-
     public String getMessage() {
         return message;
     }
@@ -189,22 +101,6 @@ public class OrderDetail {
         this.order = order;
     }
 
-    public String getAddressJ() {
-        return addressJ;
-    }
-
-    public void setAddressJ(String addressJ) {
-        this.addressJ = addressJ == null ? null : addressJ.trim();
-    }
-
-    public String getRecipientJ() {
-        return recipientJ;
-    }
-
-    public void setRecipientJ(String recipientJ) {
-        this.recipientJ = recipientJ == null ? null : recipientJ.trim();
-    }
-
     public String getGoodsnameJ() {
         return goodsnameJ;
     }
@@ -219,14 +115,6 @@ public class OrderDetail {
 
     public void setFormatJ(String formatJ) {
         this.formatJ = formatJ == null ? null : formatJ.trim();
-    }
-
-    public String getLogisticsJ() {
-        return logisticsJ;
-    }
-
-    public void setLogisticsJ(String logisticsJ) {
-        this.logisticsJ = logisticsJ == null ? null : logisticsJ.trim();
     }
 
     public String getMessageJ() {

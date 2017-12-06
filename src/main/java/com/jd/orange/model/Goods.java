@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Goods {
@@ -15,6 +17,7 @@ public class Goods {
 
     private String parameter3;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shelf;
 
     private String detail;
@@ -29,8 +32,10 @@ public class Goods {
 
     private Integer recommend;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatetime;
 
     private Integer part;

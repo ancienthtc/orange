@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class User {
@@ -17,6 +19,7 @@ public class User {
 
     private String gender;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
 
     private String password;
@@ -27,12 +30,15 @@ public class User {
 
     private Integer score;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date invalid;
 
     private Integer picture;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatetime;
 
     private String nicknameJ;

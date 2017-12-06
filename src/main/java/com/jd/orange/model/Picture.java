@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Picture {
@@ -11,6 +13,7 @@ public class Picture {
 
     private String pictype;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
     private Integer jC;

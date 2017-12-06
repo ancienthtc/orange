@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Address {
@@ -23,8 +25,10 @@ public class Address {
 
     private Integer ismain;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatetime;
 
     private Integer user;

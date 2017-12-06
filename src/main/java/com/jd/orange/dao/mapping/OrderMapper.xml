@@ -7,13 +7,30 @@
     <result column="buyway" property="buyway" jdbcType="INTEGER" />
     <result column="shopstatus" property="shopstatus" jdbcType="INTEGER" />
     <result column="orderstatus" property="orderstatus" jdbcType="INTEGER" />
+    <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="goodsprice" property="goodsprice" jdbcType="DOUBLE" />
+    <result column="freight" property="freight" jdbcType="DOUBLE" />
+    <result column="otherprice" property="otherprice" jdbcType="DOUBLE" />
+    <result column="scorecost" property="scorecost" jdbcType="DOUBLE" />
+    <result column="allprice" property="allprice" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="recipient" property="recipient" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="returndetail" property="returndetail" jdbcType="VARCHAR" />
+    <result column="address_j" property="addressJ" jdbcType="VARCHAR" />
+    <result column="recipient_j" property="recipientJ" jdbcType="VARCHAR" />
+    <result column="logistics_j" property="logisticsJ" jdbcType="VARCHAR" />
+    <result column="returndetail_j" property="returndetailJ" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="user" property="user" jdbcType="INTEGER" />
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sequence, buyway, shopstatus, orderstatus, createtime, updatetime, `user`, j_c
+    id, sequence, buyway, shopstatus, orderstatus, paytime, goodsprice, freight, otherprice, 
+    scorecost, allprice, address, recipient, contact, logistics, returndetail, address_j, 
+    recipient_j, logistics_j, returndetail_j, createtime, updatetime, `user`, j_c
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,11 +44,21 @@
   </delete>
   <insert id="insert" parameterType="com.jd.orange.model.Order" >
     insert into t_order (id, sequence, buyway, 
-      shopstatus, orderstatus, createtime, 
+      shopstatus, orderstatus, paytime, 
+      goodsprice, freight, otherprice, 
+      scorecost, allprice, address, 
+      recipient, contact, logistics, 
+      returndetail, address_j, recipient_j, 
+      logistics_j, returndetail_j, createtime, 
       updatetime, `user`, j_c
       )
     values (#{id,jdbcType=INTEGER}, #{sequence,jdbcType=VARCHAR}, #{buyway,jdbcType=INTEGER}, 
-      #{shopstatus,jdbcType=INTEGER}, #{orderstatus,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{shopstatus,jdbcType=INTEGER}, #{orderstatus,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, 
+      #{goodsprice,jdbcType=DOUBLE}, #{freight,jdbcType=DOUBLE}, #{otherprice,jdbcType=DOUBLE}, 
+      #{scorecost,jdbcType=DOUBLE}, #{allprice,jdbcType=DOUBLE}, #{address,jdbcType=VARCHAR}, 
+      #{recipient,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{logistics,jdbcType=VARCHAR}, 
+      #{returndetail,jdbcType=VARCHAR}, #{addressJ,jdbcType=VARCHAR}, #{recipientJ,jdbcType=VARCHAR}, 
+      #{logisticsJ,jdbcType=VARCHAR}, #{returndetailJ,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{user,jdbcType=INTEGER}, #{jC,jdbcType=INTEGER}
       )
   </insert>
@@ -52,6 +79,51 @@
       </if>
       <if test="orderstatus != null" >
         orderstatus,
+      </if>
+      <if test="paytime != null" >
+        paytime,
+      </if>
+      <if test="goodsprice != null" >
+        goodsprice,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="otherprice != null" >
+        otherprice,
+      </if>
+      <if test="scorecost != null" >
+        scorecost,
+      </if>
+      <if test="allprice != null" >
+        allprice,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="recipient != null" >
+        recipient,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="logistics != null" >
+        logistics,
+      </if>
+      <if test="returndetail != null" >
+        returndetail,
+      </if>
+      <if test="addressJ != null" >
+        address_j,
+      </if>
+      <if test="recipientJ != null" >
+        recipient_j,
+      </if>
+      <if test="logisticsJ != null" >
+        logistics_j,
+      </if>
+      <if test="returndetailJ != null" >
+        returndetail_j,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -82,6 +154,51 @@
       <if test="orderstatus != null" >
         #{orderstatus,jdbcType=INTEGER},
       </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsprice != null" >
+        #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="otherprice != null" >
+        #{otherprice,jdbcType=DOUBLE},
+      </if>
+      <if test="scorecost != null" >
+        #{scorecost,jdbcType=DOUBLE},
+      </if>
+      <if test="allprice != null" >
+        #{allprice,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="logistics != null" >
+        #{logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="returndetail != null" >
+        #{returndetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressJ != null" >
+        #{addressJ,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientJ != null" >
+        #{recipientJ,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsJ != null" >
+        #{logisticsJ,jdbcType=VARCHAR},
+      </if>
+      <if test="returndetailJ != null" >
+        #{returndetailJ,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -111,6 +228,51 @@
       <if test="orderstatus != null" >
         orderstatus = #{orderstatus,jdbcType=INTEGER},
       </if>
+      <if test="paytime != null" >
+        paytime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsprice != null" >
+        goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="otherprice != null" >
+        otherprice = #{otherprice,jdbcType=DOUBLE},
+      </if>
+      <if test="scorecost != null" >
+        scorecost = #{scorecost,jdbcType=DOUBLE},
+      </if>
+      <if test="allprice != null" >
+        allprice = #{allprice,jdbcType=DOUBLE},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        recipient = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="logistics != null" >
+        logistics = #{logistics,jdbcType=VARCHAR},
+      </if>
+      <if test="returndetail != null" >
+        returndetail = #{returndetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressJ != null" >
+        address_j = #{addressJ,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientJ != null" >
+        recipient_j = #{recipientJ,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsJ != null" >
+        logistics_j = #{logisticsJ,jdbcType=VARCHAR},
+      </if>
+      <if test="returndetailJ != null" >
+        returndetail_j = #{returndetailJ,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null" >
         createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -132,9 +294,24 @@
       buyway = #{buyway,jdbcType=INTEGER},
       shopstatus = #{shopstatus,jdbcType=INTEGER},
       orderstatus = #{orderstatus,jdbcType=INTEGER},
+      paytime = #{paytime,jdbcType=TIMESTAMP},
+      goodsprice = #{goodsprice,jdbcType=DOUBLE},
+      freight = #{freight,jdbcType=DOUBLE},
+      otherprice = #{otherprice,jdbcType=DOUBLE},
+      scorecost = #{scorecost,jdbcType=DOUBLE},
+      allprice = #{allprice,jdbcType=DOUBLE},
+      address = #{address,jdbcType=VARCHAR},
+      recipient = #{recipient,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      logistics = #{logistics,jdbcType=VARCHAR},
+      returndetail = #{returndetail,jdbcType=VARCHAR},
+      address_j = #{addressJ,jdbcType=VARCHAR},
+      recipient_j = #{recipientJ,jdbcType=VARCHAR},
+      logistics_j = #{logisticsJ,jdbcType=VARCHAR},
+      returndetail_j = #{returndetailJ,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP},
-      user = #{user,jdbcType=INTEGER},
+      `user` = #{user,jdbcType=INTEGER},
       j_c = #{jC,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

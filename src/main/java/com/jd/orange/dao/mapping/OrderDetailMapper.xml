@@ -3,35 +3,23 @@
 <mapper namespace="com.jd.orange.dao.OrderDetailMapper" >
   <resultMap id="BaseResultMap" type="com.jd.orange.model.OrderDetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="recipient" property="recipient" jdbcType="VARCHAR" />
-    <result column="contact" property="contact" jdbcType="VARCHAR" />
     <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
     <result column="format" property="format" jdbcType="VARCHAR" />
     <result column="amount" property="amount" jdbcType="DOUBLE" />
     <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="freight" property="freight" jdbcType="DOUBLE" />
-    <result column="otherprice" property="otherprice" jdbcType="DOUBLE" />
-    <result column="scorecost" property="scorecost" jdbcType="DOUBLE" />
-    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="otherdetail" property="otherdetail" jdbcType="VARCHAR" />
     <result column="picture" property="picture" jdbcType="INTEGER" />
     <result column="order" property="order" jdbcType="INTEGER" />
-    <result column="address_j" property="addressJ" jdbcType="VARCHAR" />
-    <result column="recipient_j" property="recipientJ" jdbcType="VARCHAR" />
     <result column="goodsname_j" property="goodsnameJ" jdbcType="VARCHAR" />
     <result column="format_j" property="formatJ" jdbcType="VARCHAR" />
-    <result column="logistics_j" property="logisticsJ" jdbcType="VARCHAR" />
     <result column="message_j" property="messageJ" jdbcType="VARCHAR" />
     <result column="otherdetail_j" property="otherdetailJ" jdbcType="VARCHAR" />
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, paytime, address, recipient, contact, goodsname, format, amount, price, freight, 
-    otherprice, scorecost, logistics, message, otherdetail, picture, `order`, address_j,
-    recipient_j, goodsname_j, format_j, logistics_j, message_j, otherdetail_j, j_c
+    id, goodsname, format, amount, price, message, otherdetail, picture, `order`, goodsname_j,
+    format_j, message_j, otherdetail_j, j_c
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -44,42 +32,22 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jd.orange.model.OrderDetail" >
-    insert into t_order_detail (id, paytime, address, 
-      recipient, contact, goodsname, 
-      format, amount, price, 
-      freight, otherprice, scorecost, 
-      logistics, message, otherdetail, 
-      picture, `order`, address_j,
-      recipient_j, goodsname_j, format_j, 
-      logistics_j, message_j, otherdetail_j, 
-      j_c)
-    values (#{id,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, 
-      #{recipient,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{goodsname,jdbcType=VARCHAR}, 
-      #{format,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, 
-      #{freight,jdbcType=DOUBLE}, #{otherprice,jdbcType=DOUBLE}, #{scorecost,jdbcType=DOUBLE}, 
-      #{logistics,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, #{otherdetail,jdbcType=VARCHAR}, 
-      #{picture,jdbcType=INTEGER}, #{order,jdbcType=INTEGER}, #{addressJ,jdbcType=VARCHAR}, 
-      #{recipientJ,jdbcType=VARCHAR}, #{goodsnameJ,jdbcType=VARCHAR}, #{formatJ,jdbcType=VARCHAR}, 
-      #{logisticsJ,jdbcType=VARCHAR}, #{messageJ,jdbcType=VARCHAR}, #{otherdetailJ,jdbcType=VARCHAR}, 
-      #{jC,jdbcType=INTEGER})
+    insert into t_order_detail (id, goodsname, format, 
+      amount, price, message, 
+      otherdetail, picture, `order`,
+      goodsname_j, format_j, message_j, 
+      otherdetail_j, j_c)
+    values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{message,jdbcType=VARCHAR}, 
+      #{otherdetail,jdbcType=VARCHAR}, #{picture,jdbcType=INTEGER}, #{order,jdbcType=INTEGER}, 
+      #{goodsnameJ,jdbcType=VARCHAR}, #{formatJ,jdbcType=VARCHAR}, #{messageJ,jdbcType=VARCHAR}, 
+      #{otherdetailJ,jdbcType=VARCHAR}, #{jC,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jd.orange.model.OrderDetail" >
     insert into t_order_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
-      </if>
-      <if test="paytime != null" >
-        paytime,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="recipient != null" >
-        recipient,
-      </if>
-      <if test="contact != null" >
-        contact,
       </if>
       <if test="goodsname != null" >
         goodsname,
@@ -93,18 +61,6 @@
       <if test="price != null" >
         price,
       </if>
-      <if test="freight != null" >
-        freight,
-      </if>
-      <if test="otherprice != null" >
-        otherprice,
-      </if>
-      <if test="scorecost != null" >
-        scorecost,
-      </if>
-      <if test="logistics != null" >
-        logistics,
-      </if>
       <if test="message != null" >
         message,
       </if>
@@ -117,20 +73,11 @@
       <if test="order != null" >
         `order`,
       </if>
-      <if test="addressJ != null" >
-        address_j,
-      </if>
-      <if test="recipientJ != null" >
-        recipient_j,
-      </if>
       <if test="goodsnameJ != null" >
         goodsname_j,
       </if>
       <if test="formatJ != null" >
         format_j,
-      </if>
-      <if test="logisticsJ != null" >
-        logistics_j,
       </if>
       <if test="messageJ != null" >
         message_j,
@@ -146,18 +93,6 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="paytime != null" >
-        #{paytime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="recipient != null" >
-        #{recipient,jdbcType=VARCHAR},
-      </if>
-      <if test="contact != null" >
-        #{contact,jdbcType=VARCHAR},
-      </if>
       <if test="goodsname != null" >
         #{goodsname,jdbcType=VARCHAR},
       </if>
@@ -169,18 +104,6 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="freight != null" >
-        #{freight,jdbcType=DOUBLE},
-      </if>
-      <if test="otherprice != null" >
-        #{otherprice,jdbcType=DOUBLE},
-      </if>
-      <if test="scorecost != null" >
-        #{scorecost,jdbcType=DOUBLE},
-      </if>
-      <if test="logistics != null" >
-        #{logistics,jdbcType=VARCHAR},
       </if>
       <if test="message != null" >
         #{message,jdbcType=VARCHAR},
@@ -194,20 +117,11 @@
       <if test="order != null" >
         #{order,jdbcType=INTEGER},
       </if>
-      <if test="addressJ != null" >
-        #{addressJ,jdbcType=VARCHAR},
-      </if>
-      <if test="recipientJ != null" >
-        #{recipientJ,jdbcType=VARCHAR},
-      </if>
       <if test="goodsnameJ != null" >
         #{goodsnameJ,jdbcType=VARCHAR},
       </if>
       <if test="formatJ != null" >
         #{formatJ,jdbcType=VARCHAR},
-      </if>
-      <if test="logisticsJ != null" >
-        #{logisticsJ,jdbcType=VARCHAR},
       </if>
       <if test="messageJ != null" >
         #{messageJ,jdbcType=VARCHAR},
@@ -223,18 +137,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jd.orange.model.OrderDetail" >
     update t_order_detail
     <set >
-      <if test="paytime != null" >
-        paytime = #{paytime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="recipient != null" >
-        recipient = #{recipient,jdbcType=VARCHAR},
-      </if>
-      <if test="contact != null" >
-        contact = #{contact,jdbcType=VARCHAR},
-      </if>
       <if test="goodsname != null" >
         goodsname = #{goodsname,jdbcType=VARCHAR},
       </if>
@@ -246,18 +148,6 @@
       </if>
       <if test="price != null" >
         price = #{price,jdbcType=DOUBLE},
-      </if>
-      <if test="freight != null" >
-        freight = #{freight,jdbcType=DOUBLE},
-      </if>
-      <if test="otherprice != null" >
-        otherprice = #{otherprice,jdbcType=DOUBLE},
-      </if>
-      <if test="scorecost != null" >
-        scorecost = #{scorecost,jdbcType=DOUBLE},
-      </if>
-      <if test="logistics != null" >
-        logistics = #{logistics,jdbcType=VARCHAR},
       </if>
       <if test="message != null" >
         message = #{message,jdbcType=VARCHAR},
@@ -271,20 +161,11 @@
       <if test="order != null" >
         `order` = #{order,jdbcType=INTEGER},
       </if>
-      <if test="addressJ != null" >
-        address_j = #{addressJ,jdbcType=VARCHAR},
-      </if>
-      <if test="recipientJ != null" >
-        recipient_j = #{recipientJ,jdbcType=VARCHAR},
-      </if>
       <if test="goodsnameJ != null" >
         goodsname_j = #{goodsnameJ,jdbcType=VARCHAR},
       </if>
       <if test="formatJ != null" >
         format_j = #{formatJ,jdbcType=VARCHAR},
-      </if>
-      <if test="logisticsJ != null" >
-        logistics_j = #{logisticsJ,jdbcType=VARCHAR},
       </if>
       <if test="messageJ != null" >
         message_j = #{messageJ,jdbcType=VARCHAR},
@@ -300,27 +181,16 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jd.orange.model.OrderDetail" >
     update t_order_detail
-    set paytime = #{paytime,jdbcType=TIMESTAMP},
-      address = #{address,jdbcType=VARCHAR},
-      recipient = #{recipient,jdbcType=VARCHAR},
-      contact = #{contact,jdbcType=VARCHAR},
-      goodsname = #{goodsname,jdbcType=VARCHAR},
+    set goodsname = #{goodsname,jdbcType=VARCHAR},
       format = #{format,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=DOUBLE},
       price = #{price,jdbcType=DOUBLE},
-      freight = #{freight,jdbcType=DOUBLE},
-      otherprice = #{otherprice,jdbcType=DOUBLE},
-      scorecost = #{scorecost,jdbcType=DOUBLE},
-      logistics = #{logistics,jdbcType=VARCHAR},
       message = #{message,jdbcType=VARCHAR},
       otherdetail = #{otherdetail,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=INTEGER},
       `order` = #{order,jdbcType=INTEGER},
-      address_j = #{addressJ,jdbcType=VARCHAR},
-      recipient_j = #{recipientJ,jdbcType=VARCHAR},
       goodsname_j = #{goodsnameJ,jdbcType=VARCHAR},
       format_j = #{formatJ,jdbcType=VARCHAR},
-      logistics_j = #{logisticsJ,jdbcType=VARCHAR},
       message_j = #{messageJ,jdbcType=VARCHAR},
       otherdetail_j = #{otherdetailJ,jdbcType=VARCHAR},
       j_c = #{jC,jdbcType=INTEGER}
