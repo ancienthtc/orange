@@ -15,6 +15,7 @@ public class Admin {
 
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date alogin;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

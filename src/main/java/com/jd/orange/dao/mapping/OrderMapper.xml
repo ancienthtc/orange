@@ -38,6 +38,12 @@
     from t_order
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- new -->
+  <select id="orderAmount" resultType="java.lang.Integer">
+    SELECT COUNT(id) FROM t_order
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_order
     where id = #{id,jdbcType=INTEGER}

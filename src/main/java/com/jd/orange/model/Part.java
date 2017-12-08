@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import javax.persistence.Transient;
+
 public class Part {
     private Integer id;
 
@@ -14,6 +16,9 @@ public class Part {
     private String nameJ;
 
     private Integer jC;
+
+    @Transient
+    private String fname;//父分类名称
 
     public Integer getId() {
         return id;
@@ -69,5 +74,13 @@ public class Part {
 
     public void setjC(Integer jC) {
         this.jC = jC;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 }

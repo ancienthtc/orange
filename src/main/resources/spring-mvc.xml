@@ -60,6 +60,9 @@
     <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/html/**" location="/html/"/>
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/fontpage/**" location="/fontpage/"/>
+    <mvc:resources mapping="/backpage/**" location="/backpage/"/>
     <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
     <!--<mvc:resources mapping="/lib/**" location="/lib/"/>-->
 

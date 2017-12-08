@@ -43,7 +43,8 @@ public class Secret {
 			byte[] cipBytes = cip.doFinal(password.getBytes());
 			String sblob = new BASE64Encoder().encode(cipBytes);
 
-			return sblob;
+			//return sblob; //改造去=
+			return sblob.substring(0,sblob.length()-1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,8 +56,9 @@ public class Secret {
 	public static String dePass(String password){
 
 		try {
-
-			byte[] keyBuffer = new BASE64Decoder().decodeBuffer(password);
+			password=password+"=";
+			byte[] keyBuffer = new BASE64Decoder().decodeBuffer(password);//改造 +"="
+			//byte[] keyBuffer = new BASE64Decoder().decodeBuffer(password+"=");
 
 			SecretKey key = readKey();
 

@@ -17,7 +17,7 @@ public interface PartService {
     List<Part> getChildPart(Integer fpid);
 
     //获取所有分类(分页)
-    PagedResult<Part> getParts(Integer pageNo, Integer pageSize);
+    PagedResult<Part> getParts(Integer pageNo, Integer pageSize,String key);
 
     //分类创建
     int PartAdd(Part part);

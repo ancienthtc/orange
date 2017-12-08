@@ -227,6 +227,11 @@
       <artifactId>base64</artifactId>
       <version>2.3.8</version>
     </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>RELEASE</version>
+      </dependency>
 
 
   </dependencies>
@@ -244,6 +249,20 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <!-- 当mapper放在java中而不是resources中时 maven不自动编译 -->
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
   </build>
+
+
 
 </project>

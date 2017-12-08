@@ -20,4 +20,7 @@ public interface UserService {
     //用户注销
     int UserOff(Integer uid);
 
+    //用户统计
+    int getUserAmount();
+
 }

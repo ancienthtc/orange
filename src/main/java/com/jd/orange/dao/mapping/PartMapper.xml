@@ -11,7 +11,7 @@
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, `name`, `level`, priority, belong, name_j, j_c
+    id, `name`, `level`, priority, belong, name_j as nameJ, j_c as jC
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -19,6 +19,50 @@
     from t_part
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- 查询全部父分类 -->
+  <select id="getFatherParts" resultType="com.jd.orange.model.Part">
+    select
+      id, `name`, `level`, priority, belong, name_j as nameJ
+    from t_part
+    where level = 0
+  </select>
+  <!-- 查询父分类下子分类 -->
+  <select id="getChildPart" resultType="com.jd.orange.model.Part">
+    SELECT
+      id, `name`, `level`, priority, belong, name_j as nameJ
+    FROM t_part
+    WHERE belong = #{belong,jdbcType=INTEGER}
+  </select>
+  <!-- 分类列表(分页) -->
+  <!--<select id="partsList" resultType="com.jd.orange.model.Part">-->
+    <!--SELECT-->
+      <!--id, `name`, `level`, priority, belong, name_j as nameJ-->
+    <!--FROM t_part-->
+    <!--ORDER BY `level` DESC , priority DESC-->
+  <!--</select>-->
+  <select id="partsList" resultType="com.jd.orange.model.Part">
+    SELECT
+    a.id,
+    a.`name`,
+    a.name_j as nameJ,
+    a.`level`,
+    a.priority,
+    a.belong,
+    b.`name` as fname
+    FROM
+    t_part as a
+    LEFT JOIN t_part as b ON a.belong = b.id
+    <where>
+      <if test="key!=null">
+        a.`name` LIKE CONCAT('%',#{key},'%')
+        OR
+        nameJ LIKE CONCAT('%',#{key},'%')
+      </if>
+    </where>
+    ORDER BY `level` ASC , priority DESC
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_part
     where id = #{id,jdbcType=INTEGER}
