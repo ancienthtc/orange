@@ -27,6 +27,16 @@ public class PartServiceImpl implements PartService {
         return partMapper.getChildPart(fpid);
     }
 
+
+    @Override
+    public int PartDel(Integer pid) {
+        if(partMapper.getChildPart(pid).isEmpty())
+        {
+            return partMapper.deleteByPrimaryKey(pid);
+        }
+        return 0;
+    }
+
     @Override
     public PagedResult<Part> getParts(Integer pageNo, Integer pageSize,String key) {
         pageNo = pageNo == null?1:pageNo;

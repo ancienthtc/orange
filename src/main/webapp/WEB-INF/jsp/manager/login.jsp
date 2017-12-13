@@ -43,7 +43,7 @@
 <div class="loginbody">
     <div class="login-container">
         <div class="center">
-            <img src="images/logo1.png"/>
+            <img src="<%=basePath%>backpage/images/logo1.png"/>
         </div>
 
         <div class="space-6"></div>
@@ -57,7 +57,7 @@
                             管理员登陆
                         </h4>
 
-                        <div class="login_icon"><img src="images/login.png"/></div>
+                        <div class="login_icon"><img src="<%=basePath%>backpage/images/login.png"/></div>
 
                         <form class="">
                             <fieldset>

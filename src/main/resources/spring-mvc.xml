@@ -16,8 +16,13 @@
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="com.jd.orange"/>
 
+    <!-- 定时配置 -->
     <!-- 扫描定时器 -->
     <!--<context:component-scan base-package="com.jd.shop.timer" />-->
+    <context:annotation-config/>
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <context:component-scan base-package="com.jd.orange"/>
+    <task:annotation-driven/>
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"

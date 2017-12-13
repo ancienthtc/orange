@@ -351,7 +351,7 @@
                         <a href="#" class="dropdown-toggle"><i class="icon-list"></i><span
                                 class="menu-text"> 产品管理 </span><b class="arrow icon-angle-down"></b></a>
                         <ul class="submenu">
-                            <li class="home"><a href="javascript:void(0)" name="chanpinliebiao.html" title="产品列表"
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>goods/toGoodsList" title="产品列表"
                                                 class="iframeurl"><i class="icon-double-angle-right"></i>产品列表</a></li>
                         </ul>
                     </li>
@@ -359,7 +359,7 @@
                         <a href="#" class="dropdown-toggle"><i class="icon-user"></i><span
                                 class="menu-text">用户管理 </span><b class="arrow icon-angle-down"></b></a>
                         <ul class="submenu">
-                            <li class="home"><a href="javascript:void(0)" name="user_list.html" title="用户列表"
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>user/toUserList" title="用户列表"
                                                 class="iframeurl"><i class="icon-double-angle-right"></i>用户列表</a></li>
                         </ul>
                     </li>

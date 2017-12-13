@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <%
     String path = request.getContextPath();
@@ -40,21 +41,29 @@
 
             <ul class="search_content clearfix">
                 <li>
-                    <label class="l_f">分类名称</label>
-                    <input name="" type="text" class="text_add" placeholder="输入分类名称" style=" width:250px"/>
+                    <label class="l_f">产品名称</label>
+                    <input name="" type="text" class="text_add" placeholder="输入品牌名称" style=" width:250px"/>
                 </li>
-                <%--<li>--%>
-                    <%--<label class="l_f">开始时间</label>--%>
-                    <%--<input class="inline laydate-icon" id="start" style=" margin-left:10px;">--%>
-                <%--</li>--%>
-                <%--<li>--%>
-                    <%--<label class="l_f">结束时间</label>--%>
-                    <%--<input class="inline laydate-icon" id="start1" style=" margin-left:10px;">--%>
-                <%--</li>--%>
+                <li>
+                    <label class="l_f">开始时间</label>
+                    <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
+                </li>
+                <li>
+                    <label class="l_f">结束时间</label>
+                    <input class="inline laydate-icon" id="start1" style=" margin-left:10px;">
+                </li>
+
                 <li style="width:90px;">
                     <button type="button" class="btn_search"><i class="icon-search"></i>查询</button>
                 </li>
             </ul>
+        </div>
+        <div class="border clearfix">
+       <span class="l_f">
+        <a href="picture-add.html" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
+        
+       </span>
+            <span class="r_f">共：<b>${count}</b>件商品</span>
         </div>
         <!--产品列表展示-->
         <div class="h_products_list clearfix" id="products_list">
@@ -67,22 +76,23 @@
                 <table class="table table-striped table-bordered table-hover" id="sample-table">
                     <thead>
                     <tr>
-                        <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
+                        <th width="25px">
+                            <label><input type="checkbox" class="ace"><span class="lbl"></span></label>
                         </th>
-                        <th width="80px">分类编号</th>
-                        <th width="250px">分类名称</th>
-                        <th width="180px">分类名称(日)</th>
-                        <th width="100px">分类级别</th>
-                        <th width="100px">优先级</th>
-                        <th width="100px">父分类</th>
+                        <th width="80px">产品编号</th>
+                        <th width="250px">产品名称</th>
+                        <th width="100px">产品名称(日)</th>
+                        <th width="100px">是否推荐</th>
+                        <th width="100px">上架日期</th>
+                        <th width="180px">所属分类</th>
+                        <th width="70" class="sorting_disabled" rowspan="1" colspan="1" aria-label="状态"
+                            style="width: 52px;">状态
+                        </th>
                         <!--	<th width="70px">状态</th>  -->
                         <th width="200px">操作</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
-
-
-
                     <tr>
                         <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
                         </td>
@@ -93,15 +103,56 @@
                         <td width="100px">4525</td>
                         <td width="100px">法国</td>
                         <td width="180px">2014-6-11 11:11:42</td>
+                        <td class="td-status"><span class="label label-success radius">上架</span></td>
                         <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
                         <td class="td-manage">
-
+                            <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
+                               class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
                             <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
                             <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
                                class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
+                        </td>
+                        <td width="80px">45631</td>
+                        <td width="250px"><u style="cursor:pointer" class="text-primary" onclick="">小米 Max 全网通 高配版 3GB内存
+                            64GB ROM 金色 移动联通电信4G手机Y</u></td>
+                        <td width="100px">5467</td>
+                        <td width="100px">4525</td>
+                        <td width="100px">法国</td>
+                        <td width="180px">2014-6-11 11:11:42</td>
+                        <td class="td-status"><span class="label label-success radius">上架</span></td>
+                        <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
+                        <td class="td-manage">
+                            <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
+                               class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
+                            <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
+                        </td>
+                        <td width="80px">45631</td>
+                        <td width="250px"><u style="cursor:pointer" class="text-primary" onclick="">小米 Max 全网通 高配版 3GB内存
+                            64GB ROM 金色 移动联通电信4G手机Y</u></td>
+                        <td width="100px">5467</td>
+                        <td width="100px">4525</td>
+                        <td width="100px">法国</td>
+                        <td width="180px">2014-6-11 11:11:42</td>
+                        <td class="td-status"><span class="label label-success radius">上架</span></td>
+                        <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
+                        <td class="td-manage">
+                            <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
+                               class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
+                            <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -110,15 +161,8 @@
 </div>
 </body>
 </html>
+
 <script>
-
-    $(function(){
-
-        //页面加载时发送ajax请求获取列表
-        var info={pageNo:1,pageSize:10}
-        var url="<%=basePath%>part/getInitList";
-        send_post(url,info);
-    })
 
     function send_post(url,info) {
         $.post(url,info,
@@ -131,38 +175,58 @@
                 tbody.empty();
                 for(var i=0;i<result.dataList.length;i++)
                 {
+                    var show1="";
+                    var a="";
+                    if(result.dataList[i].recommend==0)
+                    {
+                        show1="不推荐";
+                    }
+                    else if(result.dataList[i].recommend==1)
+                    {
+                        show1="推荐";
+                    }
+
                     tbody.append("<tr>");
-                    tbody.append("<td  width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
-                    tbody.append("<td class='r_id' width='80px' value='"+result.dataList[i].id+"'>"+result.dataList[i].id+"</td>");
-                    tbody.append("<td class='r_name' width='250px'>"+result.dataList[i].name+"</td>");
-                    tbody.append("<td class='r_namej' width='100px'>"+result.dataList[i].nameJ+"</td>");
-                    tbody.append("<td class='r_lvel' width='100px'>"+result.dataList[i].level+"</td>");
-                    tbody.append("<td class='r_priority' width='100px'>"+result.dataList[i].priority+"</td>");
-                    tbody.append("<td class='fname' width='180px'>"+result.dataList[i].fname+"</td>");
-                    var a="<td>";
-                    a+="<a href=\"picture-add.html\" class=\"btn btn-xs btn-info\"><i class=\"icon-edit bigger-120\"></i></a>"
-                    a+="<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'122')\" class=\"btn btn-xs btn-warning\"><i class=\"icon-trash  bigger-120\"></i></a></td>";
-                    //tbody.append("<a href=\"picture-add.html\" class=\"btn btn-xs btn-info\"><i class=\"icon-edit bigger-120\"></i></a>");
-                    //tbody.append("<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'1')\" class=\"btn btn-xs btn-warning\"><i class=\"icon-trash  bigger-120\"></i></a>");
-                    //tbody.append("</td>");
+                    tbody.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    tbody.append("<td width='80px'>"+result.dataList[i].id+"</td>");
+                    tbody.append("<td width='100px'>"+result.dataList[i].name+"</td>");
+                    tbody.append("<td width='250px'><u style='cursor:pointer' class='text-primary' onclick=''>"+result.dataList[i].nameJ+"</u></td>");
+                    tbody.append("<td width='100px'>"+show1+"</td>");
+                    tbody.append("<td width='100px'>"+result.dataList[i].shelf+"</td>");
+                    tbody.append("<td width='180px'>"+result.dataList[i].pname+"</td>");
+                    a+="<td class='td-status'>";
+                    if(result.dataList[i].shelf.length<=0)
+                    {
+                        a+="<span class='label label-success radius'>上架</span>";
+                    }
+                    else {
+                        a+="<span class='label label-defaunt radius'>下架</span>";
+                    }
+                    a+="</td>";
+                    a+="<td class='td-manage'>";
+                    a+="<a onClick='member_stop(this,\"10001\")' href='javascript:;' title='停用' class='btn btn-xs btn-success'>";
+                    a+="<i class='icon-ok bigger-120'></i></a>";
+                    a+="<a href='picture-add.html' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' onclick='member_del(this,\"1\")' class='btn btn-xs btn-warning'>";
+                    a+="<i class='icon-trash  bigger-120'></i></a></td>";
                     tbody.append(a);
                     tbody.append("</tr>");
                 }
             },"json");
     }
 
-    //查询
-    $(".btn_search").click(function () {
-        var keys=$(".text_add").val();
-        var info={pageNo:1,pageSize:10,key:keys}
-        var url="<%=basePath%>part/getInitList";
+
+    $(function(){
+        var info={pageNo:1,pageSize:10}
+        var url="<%=basePath%>goods/getGoodsList"
         send_post(url,info);
-    });
+    })
 
 
 
+</script>
 
-
+<script>
     jQuery(function ($) {
         var oTable1 = $('#sample-table').dataTable({
             "aaSorting": [[1, "desc"]],//默认第几个排序
@@ -183,6 +247,8 @@
                 });
 
         });
+
+
         $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 
         function tooltip_placement(context, source) {
@@ -198,24 +264,10 @@
             return 'left';
         }
     });
-    // laydate({
-    //     elem: '#start',
-    //     event: 'focus'
-    // });
-    // $(function () {
-    //     $("#products_style").fix({
-    //         float: 'left',
-    //         //minStatue : true,
-    //         skin: 'green',
-    //         durationTime: false,
-    //         spacingw: 30,//设置隐藏时的距离
-    //         spacingh: 260,//设置显示时间距
-    //     });
-    // });
-    // laydate({
-    //     elem: '#start1',
-    //     event: 'focus'
-    // });
+    laydate({
+        elem: '#start',
+        event: 'focus'
+    });
     $(function () {
         $("#products_style").fix({
             float: 'left',
@@ -226,6 +278,11 @@
             spacingh: 260,//设置显示时间距
         });
     });
+    laydate({
+        elem: '#start1',
+        event: 'focus'
+    });
+
 </script>
 <script type="text/javascript">
     //初始化宽度、高度
@@ -288,21 +345,21 @@
 
     /*产品-停用*/
     function member_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+        layer.confirm('确认要下架吗？', function (index) {
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="下架"><i class="icon-ok bigger-120"></i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">下架</span>');
             $(obj).remove();
-            layer.msg('已停用!', {icon: 5, time: 1000});
+            layer.msg('下架成功!', {icon: 5, time: 1000});
         });
     }
 
     /*产品-启用*/
     function member_start(obj, id) {
-        layer.confirm('确认要启用吗？', function (index) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+        layer.confirm('确认要上架吗？', function (index) {
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="下架"><i class="icon-ok bigger-120"></i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">上架</span>');
             $(obj).remove();
-            layer.msg('已启用!', {icon: 6, time: 1000});
+            layer.msg('上架成功!', {icon: 6, time: 1000});
         });
     }
 
@@ -314,8 +371,6 @@
     /*产品-删除*/
     function member_del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
-            console.log($(this)+$(this).parent().parent().find(".r_id").val() )
-            //alert($(this).parent().parent().find(".r_id").text() );
             $(obj).parents("tr").remove();
             layer.msg('已删除!', {icon: 1, time: 1000});
         });

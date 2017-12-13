@@ -25,4 +25,5 @@ public interface PartMapper {
     List<Part> getChildPart(@Param("belong") Integer fpid);
 
     List<Part> partsList(@Param("key") String key);
+
 }

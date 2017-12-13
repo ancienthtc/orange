@@ -2,6 +2,7 @@ package com.jd.orange.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 public class Goods {
@@ -51,6 +52,9 @@ public class Goods {
     private String detailJ;
 
     private Integer jC;
+
+    @Transient
+    private String pname;//分类名称
 
     public Integer getId() {
         return id;
@@ -226,5 +230,13 @@ public class Goods {
 
     public void setjC(Integer jC) {
         this.jC = jC;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 }

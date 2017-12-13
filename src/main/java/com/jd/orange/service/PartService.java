@@ -24,4 +24,7 @@ public interface PartService {
 
     //分类修改
     int PartAlter(Part part);
+
+    int PartDel(Integer pid);
+
 }

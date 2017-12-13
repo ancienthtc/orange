@@ -125,4 +125,30 @@ public class PartController {
         return JSON.toJSONString(pagedResult, filter);
     }
 
+    //分类删除
+    @RequestMapping("/del")
+    @ResponseBody
+    public String delPart(Integer id)
+    {
+        if(partService.PartDel(id)>0)
+        {
+            return "true";
+        }
+        return "false";
+    }
+
+    //分类修改
+    @RequestMapping("/update")
+    @ResponseBody
+    public String updatePart(Part part)
+    {
+        log.info(part.getName()+" / "+part.getBelong());
+//        if (partService.PartAlter(part) > 0)
+//        {
+//            return "true";
+//        }
+
+        return "false";
+    }
+
 }

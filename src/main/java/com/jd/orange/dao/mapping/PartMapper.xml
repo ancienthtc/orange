@@ -57,7 +57,7 @@
       <if test="key!=null">
         a.`name` LIKE CONCAT('%',#{key},'%')
         OR
-        nameJ LIKE CONCAT('%',#{key},'%')
+        a.`name_j` LIKE CONCAT('%',#{key},'%')
       </if>
     </where>
     ORDER BY `level` ASC , priority DESC

@@ -36,6 +36,45 @@
     from t_goods
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- new -->
+  <!-- 获取商品数量 -->
+  <select id="getGoodsCount" resultType="java.lang.Integer">
+    SELECT count(1) FROM t_goods
+  </select>
+  <!-- 后台管理-获取商品列表 -->
+  <select id="getGoodsList" resultType="com.jd.orange.model.Goods">
+    SELECT
+    t_goods.id,
+    t_goods.`name`,
+    t_goods.name_j,
+    t_goods.shelf,
+    t_goods.recommend,
+    t_goods.createtime,
+    t_goods.updatetime,
+    t_goods.part,
+    t_part.`name` as pname
+    FROM
+    t_goods
+    LEFT JOIN t_part ON t_goods.part = t_part.id
+    <where>
+      <if test="key!=null">
+        t_goods.`name` LIKE CONCAT('%',#{key},'%') OR t_goods.`name_j` LIKE CONCAT('%',#{key},'%')
+      </if>
+      <choose>
+        <when test="start!=null and end==null">
+          AND createtime >= #{start,jdbcType=VARCHAR}
+        </when>
+        <when test="start==null and end!=null">
+          AND #{end,jdbcType=VARCHAR} >= createtime
+        </when>
+        <when test="start!=null and end!=null">
+          AND createtime BETWEEN #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR}
+        </when>
+      </choose>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_goods
     where id = #{id,jdbcType=INTEGER}
