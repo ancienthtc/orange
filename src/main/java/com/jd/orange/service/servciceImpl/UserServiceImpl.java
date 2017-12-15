@@ -1,12 +1,16 @@
 package com.jd.orange.service.servciceImpl;
 
+import com.github.pagehelper.PageHelper;
 import com.jd.orange.dao.UserMapper;
 import com.jd.orange.model.User;
 import com.jd.orange.service.UserService;
+import com.jd.orange.util.date.DateExample;
+import com.jd.orange.util.pagehelper.BeanUtil;
 import com.jd.orange.util.pagehelper.PagedResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -20,8 +24,53 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public PagedResult<User> getUsers(Integer pageNo, Integer pageSize) {
-        return null;
+    public PagedResult<User> getUsers(Integer pageNo, Integer pageSize, String keys,String start_c,String end_c,String start_u,String end_u) {
+        pageNo = pageNo == null?1:pageNo;
+        pageSize = pageSize == null?10:pageSize;
+        //startPage是告诉拦截器说我要开始分页了。分页参数是这两个。
+        PageHelper.startPage(pageNo,pageSize);
+        if(start_c!=null && end_c!=null)
+        {
+            if(DateExample.CompareDate(start_c,end_c)==1)
+            {
+                String s=end_c;
+                end_c=start_c;
+                start_c=s;
+            }
+        }
+        if(start_u!=null && end_u!=null)
+        {
+            if(DateExample.CompareDate(start_u,end_u)==1)
+            {
+                String s=end_u;
+                end_u=start_u;
+                start_u=s;
+            }
+        }
+        return BeanUtil.toPagedResult( userMapper.getUserList(keys,start_c,end_c,start_u,end_u) );
+    }
+
+    @Override
+    public List<User> getUsers(String keys, String start_c, String end_c, String start_u, String end_u) {
+        if(start_c!=null && end_c!=null)
+        {
+            if(DateExample.CompareDate(start_c,end_c)==1)
+            {
+                String s=end_c;
+                end_c=start_c;
+                start_c=s;
+            }
+        }
+        if(start_u!=null && end_u!=null)
+        {
+            if(DateExample.CompareDate(start_u,end_u)==1)
+            {
+                String s=end_u;
+                end_u=start_u;
+                start_u=s;
+            }
+        }
+        return  userMapper.getUserList(keys,start_c,end_c,start_u,end_u) ;
     }
 
     @Override

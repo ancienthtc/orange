@@ -41,6 +41,42 @@
     SELECT COUNT(id) FROM t_user
   </select>
 
+  <select id="getUserList" resultType="com.jd.orange.model.User">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="key!=null and key!='' ">
+        ( nickname LIKE CONCAT('%',#{key,jdbcType=VARCHAR},'%') OR tel LIKE CONCAT('%',#{key,jdbcType=VARCHAR},'%')
+        OR nickname_j LIKE CONCAT('%',#{key,jdbcType=VARCHAR},'%') OR email LIKE CONCAT('%',#{key,jdbcType=VARCHAR},'%') )
+      </if>
+      <choose>
+        <when test=" (sc!=null and ec==null) or (sc!='' and ec=='')  ">
+          AND createtime >= #{sc,jdbcType=VARCHAR}
+        </when>
+        <when test=" (sc==null and ec!=null) or (sc=='' and ec!='') ">
+          AND #{ec,jdbcType=VARCHAR} >= createtime
+        </when>
+        <when test=" (sc!=null and ec!=null) and (sc!='' and ec!='') ">
+          AND createtime >= #{sc,jdbcType=VARCHAR} AND #{ec,jdbcType=VARCHAR} >= createtime
+        </when>
+      </choose>
+
+      <choose>
+        <when test=" (su!=null and eu==null) or (su!='' and eu=='') ">
+          AND updatetime >= #{su,jdbcType=VARCHAR}
+        </when>
+        <when test=" (su==null and eu!=null) or (su=='' and eu!='') ">
+          AND #{eu,jdbcType=VARCHAR} >= updatetime
+        </when>
+        <when test=" (su!=null and eu!=null) and (su!='' and eu!='') ">
+          AND updatetime >= #{su,jdbcType=VARCHAR} AND #{eu,jdbcType=VARCHAR} >= updatetime
+        </when>
+      </choose>
+
+    </trim>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}

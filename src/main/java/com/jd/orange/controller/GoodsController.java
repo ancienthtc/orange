@@ -5,6 +5,10 @@ import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.model.Goods;
 import com.jd.orange.service.FormatService;
 import com.jd.orange.service.GoodsService;
+import com.jd.orange.service.ImageService;
+import com.jd.orange.util.Folder;
+import com.jd.orange.util.PictureType;
+import com.jd.orange.util.StringUtil.GenerateString;
 import com.jd.orange.util.pagehelper.PagedResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +41,27 @@ public class GoodsController {
     @Autowired
     private FormatService formatService;
 
+    @Autowired
+    private ImageService imageService;
+
     //跳转到产品列表(后台管理)
     @RequestMapping("/toGoodsList")
     public String toGoodsList(Model model)
     {
         model.addAttribute("count",goodsService.getGoodsCount());
         return "manager/chanpinliebiao";
+    }
+
+    @RequestMapping("/toGoodsDetail/{gid}")
+    public String toGoodsDetail(Model model,@PathVariable Integer gid)
+    {
+        //商品详情
+        model.addAttribute("goods",goodsService.getGoods(gid));
+        //商品规格
+        model.addAttribute("fomats",formatService.formatList(gid));
+        //其他商品图片
+        model.addAttribute("pictures",imageService.pictures(PictureType.Goods,gid));
+        return "manager/goodsDetail";
     }
 
     //测试页面
@@ -74,6 +93,19 @@ public class GoodsController {
         return "";
     }
 
+    //商品其他图片添加
+    @RequestMapping("/addOtherPicture")
+    @ResponseBody
+    public String addGoodsPicture(@RequestParam("file") MultipartFile file,HttpServletRequest request)
+    {
+        String title= new GenerateString().getUUID() +"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+        String filepath=request.getSession().getServletContext().getRealPath("/") + Folder.Upload + "/" + title;
+
+        log.info(title+"  "+filepath);
+
+        return "";
+    }
+
     //获取列表
     @RequestMapping(value = "/getGoodsList" , method = RequestMethod.POST)
     @ResponseBody
@@ -82,6 +114,14 @@ public class GoodsController {
         PagedResult<Goods> goodsPagedResult=goodsService.getGoodsList(pageNo,pageSize,key,start,end);
         //log.info( JSON.toJSONString(goodsPagedResult, filter) );
         return JSON.toJSONString(goodsPagedResult, filter);
+    }
+
+    //商品修改
+    @RequestMapping("/update")
+    @ResponseBody
+    public String goodsUpdate(Goods goods)
+    {
+        return "";
     }
 
     //商品上架
@@ -109,11 +149,22 @@ public class GoodsController {
     }
 
     //规格添加
+    public String formatAdd()
+    {
+        return "";
+    }
 
     //规格修改
+    public String formatUpdate()
+    {
+        return "";
+    }
 
     //规格删除
-
+    public String formatDel()
+    {
+        return "";
+    }
 
 
 }

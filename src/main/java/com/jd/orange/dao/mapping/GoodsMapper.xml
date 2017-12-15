@@ -57,22 +57,22 @@
     FROM
     t_goods
     LEFT JOIN t_part ON t_goods.part = t_part.id
-    <where>
-      <if test="key!=null">
-        t_goods.`name` LIKE CONCAT('%',#{key},'%') OR t_goods.`name_j` LIKE CONCAT('%',#{key},'%')
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="key!=null and key!='' ">
+        ( t_goods.`name` LIKE CONCAT('%',#{key},'%') OR t_goods.`name_j` LIKE CONCAT('%',#{key},'%') )
       </if>
       <choose>
-        <when test="start!=null and end==null">
+        <when test=" (start!=null and end==null) or (start!='' and end=='') ">
           AND createtime >= #{start,jdbcType=VARCHAR}
         </when>
-        <when test="start==null and end!=null">
+        <when test=" (end!=null and start==null) or (end!='' and start=='') ">
           AND #{end,jdbcType=VARCHAR} >= createtime
         </when>
-        <when test="start!=null and end!=null">
-          AND createtime BETWEEN #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR}
+        <when test=" (start!=null and end!=null) and (start!='' and end!='') ">
+          AND createtime >= #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR} >= createtime
         </when>
       </choose>
-    </where>
+    </trim>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

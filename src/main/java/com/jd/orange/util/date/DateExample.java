@@ -42,15 +42,15 @@ public class DateExample {
     public static int CompareDate(String date1,String date2)
     {
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-        if (date1==null && date2!=null)
+        if (date1.length()<=0 && date2.length()>0 )
         {
             return 1;
         }
-        else if (date2==null && date1!=null)
+        else if (date2.length()<=0 && date1.length()>0 )
         {
             return -1;
         }
-        else if(date1==null && date2==null)
+        else if(date1.length()<=0 && date2.length()<=0)
         {
             return 0;
         }

@@ -29,4 +29,6 @@ public interface GoodsService {
 
     //test
     List<Goods> getGoodsList(String key,String start ,String end);
+
+    Goods getGoods(Integer gid);
 }

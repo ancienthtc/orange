@@ -18,6 +18,16 @@
     from t_picture
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- new -->
+  <!-- 查询图片集 -->
+  <select id="getPictureList" resultType="com.jd.orange.model.Picture" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_picture
+    where pictype = #{info,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_picture
     where id = #{id,jdbcType=INTEGER}

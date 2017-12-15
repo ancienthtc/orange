@@ -63,6 +63,24 @@ public class ImageController {
         OutPutAgain(imagePath,request,response,0);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/goods")
+    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response)
+    {
+        String imagePath;
+        imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+        OutPutAgain(imagePath,request,response,0);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/show")
+    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response,String imagePath)
+    {
+        imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+        OutPutAgain(imagePath,request,response,0);
+    }
+
+
     private void OutPutAgain(String imagePath,HttpServletRequest request, HttpServletResponse response,Integer value)
     {
         FileInputStream in;

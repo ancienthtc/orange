@@ -25,8 +25,9 @@
 		<script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
 		<script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
 		<!-- page specific plugin scripts -->
-		<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>
-		<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>
+		<%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>--%>
+		<%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>--%>
+
         <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
         <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
         <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript" ></script>
@@ -41,7 +42,7 @@
     <div class="search_style">
      
       <ul class="search_content clearfix">
-       <li><label class="l_f">会员名称</label><input name="" type="text"  class="text_add" placeholder="输入会员名称、电话、邮箱"  style=" width:400px"/></li>
+       <li><label class="l_f">会员名称</label><input name="" type="text"  class="text_add" placeholder="输入会员名称、电话、邮箱"  style=" width:300px"/></li>
        <li><label class="l_f">创建开始时间</label><input class="inline laydate-icon" id="start1" style=" margin-left:10px;"></li>
        <li><label class="l_f">创建结束时间</label><input class="inline laydate-icon" id="start2" style=" margin-left:10px;"></li>
        <li><label class="l_f">修改开始时间</label><input class="inline laydate-icon" id="start3" style=" margin-left:10px;"></li>
@@ -52,9 +53,9 @@
      <!---->
      <div class="border clearfix">
        <span class="l_f">
-        <a href="javascript:ovid()" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>
+        <a href="javascript:;" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>
        </span>
-       <span class="r_f">共：<b>2345</b>条</span>
+       <span class="r_f">共：<b>${count}</b>条</span>
      </div>
      <!---->
      <div class="table_menu_list">
@@ -63,102 +64,41 @@
 		 <tr>
 				<th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
 				<th width="80">ID</th>
-				<th width="100">用户名</th>
+				<th width="100">中文昵称</th>
+                <th width="100">日文昵称</th>
+                <th width="100">中文姓名</th>
+                <th width="100">日文姓名</th>
 				<th width="80">性别</th>
+                <th width="150">邮箱</th>
 				<th width="120">手机</th>
-				<th width="150">邮箱</th>
-				<th width="">地址</th>
-				<th width="180">加入时间</th>
-                <th width="100">等级</th>
-				<th width="70">状态</th>                
+                <th width="120">电话</th>
+				<th width="120">生日</th>
+                <th width="120">上次登录时间</th>
+                <th width="120">创建时间</th>
+				<%--<th width="70">状态</th>--%>
 				<th width="250">操作</th>
 			</tr>
 		</thead>
-	<tbody>
-		<tr>
-          <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-          <td>1</td>
-          <td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','member-show.html','10001','500','400')">张三</u></td>
-          <td>男</td>
-          <td>13000000000</td>
-          <td>admin@mail.com</td>
-          <td class="text-l">北京市 海淀区</td>
-          <td>2014-6-11 11:11:42</td>
-          <td>普通用户</td>
-          <td class="td-status"><span class="label label-success radius">已启用</span></td>
-          <td class="td-manage">
-          <a title="编辑" onclick="member_edit('550')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a> 
-          <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>
-          </td>
-		</tr>
-        <tr>
-          <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-          <td>2</td>
-          <td><u style="cursor:pointer" class="text-primary" onclick="member_show('张小泉','member-show.html','1031','500','400')">张小泉</u></td>
-          <td>男</td>
-          <td>13000000000</td>
-          <td>admin@mail.com</td>
-          <td class="text-l">北京市 海淀区</td>
-          <td>2014-6-11 11:11:42</td>
-          <td>普通用户</td>
-          <td class="td-status"><span class="label label-success radius">已启用</span></td>
-          <td class="td-manage">
-          <a title="编辑" onclick="member_edit('310')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a> 
-        
-          <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>
-          </td>
-		</tr>
-         <tr>
-          <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-          <td>3</td>
-          <td><u style="cursor:pointer" class="text-primary" onclick="member_show('张小泉','member-show.html','10301','500','400')">张小泉</u></td>
-          <td>男</td>
-          <td>13000000000</td>
-          <td>admin@mail.com</td>
-          <td class="text-l">北京市 海淀区</td>
-          <td>2014-6-11 11:11:42</td>
-          <td>银牌用户</td>
-          <td class="td-status"><span class="label label-success radius">已启用</span></td>
-          <td class="td-manage">
-          <a title="编辑" onclick="member_edit('410')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a>
-         
-          <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>
-          </td>
-		</tr>
-         <tr>
-          <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-          <td>4</td>
-          <td><u style="cursor:pointer" class="text-primary" onclick="member_show('张小泉','member-show.html','10001','500','400')">张小泉</u></td>
-          <td>男</td>
-          <td>13000000000</td>
-          <td>admin@mail.com</td>
-          <td class="text-l">北京市 海淀区</td>
-          <td>2014-6-11 11:11:42</td>
-          <td>银牌用户</td>
-          <td class="td-status"><span class="label label-success radius">已启用</span></td>
-          <td class="td-manage">
-          <a title="编辑" onclick="member_edit('560')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a> 
-        
-          <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>
-          </td>
-		</tr>
-         <tr>
-          <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-          <td>5</td>
-          <td><u style="cursor:pointer" class="text-primary" onclick="member_show('张小泉','member-show.html','10001','500','400')">张小泉</u></td>
-          <td>男</td>
-          <td>13000000000</td>
-          <td>admin@mail.com</td>
-          <td class="text-l">北京市 海淀区</td>
-          <td>2014-6-11 11:11:42</td>
-          <td>银牌用户</td>
-          <td class="td-status"><span class="label label-success radius">已启用</span></td>
-          <td class="td-manage">
-          <a title="编辑" onclick="member_edit('510')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a> 
-        
-          <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>
-          </td>
-		</tr>
+	<tbody id="tbody">
+
+		<%--<tr>--%>
+          <%--<td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>--%>
+          <%--<td>1</td>--%>
+          <%--<td><u style="cursor:pointer" class="text-primary" onclick="member_show('张三','member-show.html','10001','500','400')">张三</u></td>--%>
+          <%--<td>男</td>--%>
+          <%--<td>13000000000</td>--%>
+          <%--<td>admin@mail.com</td>--%>
+          <%--<td class="text-l">北京市 海淀区</td>--%>
+          <%--<td>2014-6-11 11:11:42</td>--%>
+          <%--<td>普通用户</td>--%>
+          <%--<td class="td-status"><span class="label label-success radius">已启用</span></td>--%>
+          <%--<td class="td-manage">--%>
+          <%--<a title="编辑" onclick="member_edit('550')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="icon-edit bigger-120"></i></a> --%>
+          <%--<a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="icon-trash  bigger-120"></i></a>--%>
+          <%--</td>--%>
+		<%--</tr>--%>
+
+
       </tbody>
 	</table>
    </div>
@@ -189,6 +129,67 @@
  </div>
 </body>
 </html>
+
+<script>
+    function send_post(url,info) {
+        $.post(url,info,
+            function(result){
+                //console.log(result);
+                //console.log(result.dataList);
+                //获取tbody
+                var tbody=$("#tbody");
+                //清空tbody
+                tbody.empty();
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var show1="";
+                    var a="";
+                    tbody.append("<tr style='text-align: center'>");
+                    tbody.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    tbody.append("<td>"+result.dataList[i].id+"</td>");
+                    tbody.append("<td >"+result.dataList[i].nickname+"</td>");
+                    tbody.append("<td >"+result.dataList[i].nicknameJ+"</td>");
+                    tbody.append("<td >"+result.dataList[i].realname+"</td>");
+                    tbody.append("<td >"+result.dataList[i].realnameJ+"</td>");
+                    tbody.append("<td >"+result.dataList[i].gender+"  "+result.dataList[i].genderJ+"</td>");
+                    tbody.append("<td >"+result.dataList[i].email+"</td>");
+                    tbody.append("<td >"+result.dataList[i].tel+"</td>");
+                    tbody.append("<td >"+result.dataList[i].phone+"</td>");
+                    tbody.append("<td >"+result.dataList[i].birth+"</td>");
+                    tbody.append("<td >"+result.dataList[i].logintime+"</td>");
+                    tbody.append("<td >"+result.dataList[i].createtime+"</td>");
+                    a+="<td class='td-manage'>";
+                    a+="<a title='编辑' onclick='member_edit(\"550\")' href='javascript:;'  class='btn btn-xs btn-info' >";
+                    a+="<i class='icon-edit bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' onclick='member_del(this,\"1\")' class='btn btn-xs btn-warning'>";
+                    a+="<i class='icon-trash  bigger-120'></i></a></td>";
+                    tbody.append(a);
+                    tbody.append("</tr>");
+                }
+            },"json");
+    }
+
+    $(function(){
+        var info={pageNo:1,pageSize:10}
+        var url="<%=basePath%>user/getUserList"
+        send_post(url,info);
+    })
+
+    $(".btn_search").click(function () {
+        var keys=$(".text_add").val();
+        var sc=$('#start1').val();
+        var ec=$("#start2").val();
+        var su=$('#start3').val();
+        var eu=$("#start4").val();
+
+        var info={pageNo:1,pageSize:10,key:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
+        var url="<%=basePath%>user/getUserList";
+        send_post(url,info);
+    });
+
+</script>
+
+
 <script>
 jQuery(function($) {
 				var oTable1 = $('#sample-table').dataTable( {

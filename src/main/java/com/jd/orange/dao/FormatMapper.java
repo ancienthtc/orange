@@ -3,6 +3,8 @@ package com.jd.orange.dao;
 import com.jd.orange.model.Format;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FormatMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface FormatMapper {
     int updateByPrimaryKeySelective(Format record);
 
     int updateByPrimaryKey(Format record);
+
+    List<Format> formatList(Integer gid);
 }

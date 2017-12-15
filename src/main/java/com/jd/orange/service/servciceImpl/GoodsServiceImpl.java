@@ -44,38 +44,46 @@ public class GoodsServiceImpl implements GoodsService{
         pageSize = pageSize == null?10:pageSize;
         //startPage是告诉拦截器说我要开始分页了。分页参数是这两个。
         PageHelper.startPage(pageNo,pageSize);
-        if(start!=null && end!=null)
-        {
-            switch (DateExample.CompareDate(start,end))
-            {
-                case 1:
-                    return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,end,start));
-                //break;
-                default:
-                    return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,start,end));
-                //break;
-            }
-        }
-        else
-            return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,start,end));
+
+        return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,start,end));
+
+//        if(start!=null && end!=null)
+//        {
+//            switch (DateExample.CompareDate(start,end))
+//            {
+//                case 1:
+//                    return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,end,start));
+//                //break;
+//                default:
+//                    return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,start,end));
+//                //break;
+//            }
+//        }
+//        else
+//            return BeanUtil.toPagedResult(goodsMapper.getGoodsList(key,start,end));
     }
 
     @Override
     public List<Goods> getGoodsList(String key,String start ,String end) {
-        if(start!=null && end!=null)
-        {
-            switch (DateExample.CompareDate(start,end))
-            {
-                case 1:
-                    return goodsMapper.getGoodsList(key,end,start);
-                //break;
-                default:
-                    return goodsMapper.getGoodsList(key,start,end);
-                //break;
-            }
-        }
-        else
+//        if(start!=null && end!=null)
+//        {
+//            switch (DateExample.CompareDate(start,end))
+//            {
+//                case 1:
+//                    return goodsMapper.getGoodsList(key,end,start);
+//                //break;
+//                default:
+//                    return goodsMapper.getGoodsList(key,start,end);
+//                //break;
+//            }
+//        }
+//        else
             return goodsMapper.getGoodsList(key,start,end);
 
+    }
+
+    @Override
+    public Goods getGoods(Integer gid) {
+        return goodsMapper.selectByPrimaryKey(gid);
     }
 }

@@ -25,6 +25,15 @@
     from t_format
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- new -->
+  <select id="formatList" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Format">
+    select
+    <include refid="Base_Column_List" />
+    from t_format
+    where goods = #{gid,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_format
     where id = #{id,jdbcType=INTEGER}

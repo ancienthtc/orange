@@ -188,9 +188,9 @@
 
                     tbody.append("<tr>");
                     tbody.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
-                    tbody.append("<td width='80px'>"+result.dataList[i].id+"</td>");
+                    tbody.append("<td width='80px'><a href='<%=basePath%>goods/toGoodsDetail/"+result.dataList[i].id+"'>"+result.dataList[i].id+"</a></td>");
                     tbody.append("<td width='100px'>"+result.dataList[i].name+"</td>");
-                    tbody.append("<td width='250px'><u style='cursor:pointer' class='text-primary' onclick=''>"+result.dataList[i].nameJ+"</u></td>");
+                    tbody.append("<td width='250px'>"+result.dataList[i].nameJ+"</td>");
                     tbody.append("<td width='100px'>"+show1+"</td>");
                     tbody.append("<td width='100px'>"+result.dataList[i].shelf+"</td>");
                     tbody.append("<td width='180px'>"+result.dataList[i].pname+"</td>");
@@ -222,6 +222,14 @@
         send_post(url,info);
     })
 
+    $(".btn_search").click(function () {
+        var keys=$(".text_add").val();
+        var start=$('#start').val();
+        var end=$("#start1").val();
+        var info={pageNo:1,pageSize:10,key:keys,start:start,end:end}
+        var url="<%=basePath%>goods/getGoodsList";
+        send_post(url,info);
+    });
 
 
 </script>
