@@ -55,4 +55,17 @@ public class TestString {
         System.out.println(DateExample.CompareDate("1995-11-12 15:21","1999-12-11 09:59"));
     }
 
+    @Test
+    public void test5()
+    {
+        String pathandname="E:/Project/Intellij1/OrangeHouse/target/OrangeHouse/description/goods1513588975204bke2qpz9.jpg";
+        int start = pathandname.lastIndexOf("/");
+        if (start != -1 ) {
+            System.out.println( pathandname.substring(start + 1) );
+        } else {
+            System.out.println( "xx" );
+    }
+
+    }
+
 }

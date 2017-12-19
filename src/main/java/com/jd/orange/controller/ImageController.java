@@ -4,6 +4,7 @@ import com.jd.orange.util.Folder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,8 @@ public class ImageController {
      */
 
     @ResponseBody
-    @RequestMapping(value = "/show/{pic}")
-    public void showCommonPicture(HttpServletRequest request, HttpServletResponse response, @PathVariable String pic)
+    @RequestMapping(value = "/show")
+    public void showCommonPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam String pic)
     {
         String imagePath;
         if(pic==null)
@@ -43,8 +44,8 @@ public class ImageController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/goods/{pic}")
-    public void showGoodsPicture(HttpServletRequest request, HttpServletResponse response, @PathVariable String pic)
+    @RequestMapping(value = "/goods")
+    public void showGoodsPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam String pic)
     {
         String imagePath;
         if(pic==null)
@@ -57,28 +58,36 @@ public class ImageController {
         }
         else
         {
-            imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.GoodsDetail.getVal() + pic;
+            if( pic.contains("/") )    //判断是地址还是文件名
+            {
+                //pic=pic.substring( pic.lastIndexOf("/") + 1 );
+                imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.GoodsDetail.getVal() + pic;
+            }
+            else
+            {
+                imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.GoodsDetail.getVal() + pic;
+            }
         }
         //System.out.println(imagePath);
         OutPutAgain(imagePath,request,response,0);
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/goods")
-    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response)
-    {
-        String imagePath;
-        imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
-        OutPutAgain(imagePath,request,response,0);
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/show")
-    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response,String imagePath)
-    {
-        imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
-        OutPutAgain(imagePath,request,response,0);
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/goods")
+//    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response)
+//    {
+//        String imagePath;
+//        imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+//        OutPutAgain(imagePath,request,response,0);
+//    }
+//
+//    @ResponseBody
+//    @RequestMapping(value = "/show")
+//    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response,String imagePath)
+//    {
+//        imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+//        OutPutAgain(imagePath,request,response,0);
+//    }
 
 
     private void OutPutAgain(String imagePath,HttpServletRequest request, HttpServletResponse response,Integer value)

@@ -61,6 +61,8 @@
                 </div>
             </div>
 
+            <input type="text" name="name">
+
             <div class= "clearfix cl">
                 <div class = "Button_operation">
                 <button
@@ -76,12 +78,19 @@
                 </div>
             </div>
         </form>
+
     </div>
+
+    <form action="<%=basePath%>goods/tp2" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="text" name="name" >
+        <input type="submit" name="sub">
+    </form>
+
+
 </div>
 
-<script src = "<%=basePath%>backpage/js/jquery-1.9.1.min.js" >
-
-</script>
+<script src = "<%=basePath%>backpage/js/jquery-1.9.1.min.js" ></script>
 <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
 <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript"></script>

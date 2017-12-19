@@ -1237,16 +1237,16 @@ header {
 
 #firstPage,
 #lastPage {
-	width: 50px;
+	width: 70px;
 	color: #0073A9;
-	border: 1px solid #0073A9!important;
+	/*border: 1px solid #0073A9!important;*/
 }
 
 #prePage,
 #nextPage {
 	width: 70px;
 	color: #0073A9;
-	border: 1px solid #0073A9!important;
+	/*border: 1px solid #0073A9!important;*/
 }
 
 .page_div .current {

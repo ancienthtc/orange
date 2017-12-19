@@ -26,27 +26,27 @@
     <link href="<%=basePath%>backpage/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>backpage/Widget/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 
-    <title>新增图片</title>
+    <title></title>
 </head>
 <body>
 <header>
     <div class="container">
-        <div class="type_title">商品详情</div>
+        <div class="type_title">创建商品</div>
     </div>
 </header>
 <div class="clearfix" id="add_picture">
-    <div class="content">
+    <div class="container">
 
-        <form action="" method="post" class="form form-horizontal" id="form-article-add">
+        <form action="<%=basePath%>goods/add" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
             <div class=" clearfix cl">
 
                 <div class="Add_p_s">
                     <label class="form-label col-2">商品中文名：</label>
-                    <div class="formControls col-5">${goods.name}</div>
+                    <div class="formControls col-5"><input type="text" class="input-text" value="" placeholder="填写商品中文名" id="name" name="name"></div>
                 </div>
                 <div class="Add_p_s">
                     <label class="form-label col-2">商品日文名：</label>
-                    <div class="formControls col-5">${goods.nameJ}</div>
+                    <div class="formControls col-5"><input type="text" class="input-text" value="" placeholder="填写商品日文名" id="nameJ" name="nameJ"></div>
                 </div>
 
 
@@ -54,154 +54,94 @@
             <div class="clearfix fl">
                 <label class=" col-12">中文参数</label>
             </div>
-                <div class=" clearfix cl">
+            <div class=" clearfix cl">
 
-                    <div class="Add_p_s-canshu">
-                        <label class="form-label col-2">参数1：</label>
-                        <div class="formControls-canshu col-3">${goods.parameter1}</div>
-                    </div>
-                    <div class="Add_p_s-canshu">
-                        <label class="form-label col-2">参数2：</label>
-                        <div class="formControls-canshu col-3">${goods.parameter2}</div>
-                    </div>
-                    <div class="Add_p_s-canshu">
-                        <label class="form-label col-2">参数3：</label>
-                        <div class="formControls-canshu col-3">${goods.parameter3}</div>
-                    </div>
-
-
-
+                <div class="Add_p_s-canshu">
+                    <label class="form-label col-2">参数1：</label>
+                    <div class="formControls-canshu col-3"><input type="text" class="input-text" value="" placeholder="" id="parameter1" name="parameter1"></div>
                 </div>
+                <div class="Add_p_s-canshu">
+                    <label class="form-label col-2">参数2：</label>
+                    <div class="formControls-canshu col-3"><input type="text" class="input-text" value="" placeholder="" id="parameter2" name="parameter2"></div>
+                </div>
+                <div class="Add_p_s-canshu">
+                    <label class="form-label col-2">参数3：</label>
+                    <div class="formControls-canshu col-3"><input type="text" class="input-text" value="" placeholder="" id="parameter3" name="parameter3"></div>
+                </div>
+
+
+
+            </div>
             <div class="clearfix ">
                 <label class=" col-12">日文参数</label>
             </div>
-                <div class=" clearfix cl">
+            <div class=" clearfix cl">
 
-                    <div class="Add_p_s-canshu">
-                        <label class="form-label col-2">参数1：</label>
-                        <div class="formControls-canshu col-3">${goods.parameter1J}</div>
-                    </div>
-                    <div class="Add_p_s-canshu">
-                        <label class="form-label col-2">参数2：</label>
-                        <div class="formControls-canshu col-3">${goods.parameter2J}</div>
-                    </div>
-                    <div class="Add_p_s-canshu">
-                        <label class="form-label col-2">参数3：</label>
-                        <div class="formControls-canshu col-3">${goods.parameter3J}</div>
-                    </div>
-
-
-
+                <div class="Add_p_s-canshu">
+                    <label class="form-label col-2">参数1：</label>
+                    <div class="formControls-canshu col-3"><input type="text" class="input-text" value="" placeholder="" id="parameter1J" name="parameter1J"></div>
                 </div>
+                <div class="Add_p_s-canshu">
+                    <label class="form-label col-2">参数2：</label>
+                    <div class="formControls-canshu col-3"><input type="text" class="input-text" value="" placeholder="" id="parameter2J" name="parameter2J"></div>
+                </div>
+                <div class="Add_p_s-canshu">
+                    <label class="form-label col-2">参数3：</label>
+                    <div class="formControls-canshu col-3"><input type="text" class="input-text" value="" placeholder="" id="parameter3J" name="parameter3J"></div>
+                </div>
+
+
+
+            </div>
+
             <div class="clearfix cl">
-                <div class="fc">
-                <div class="tupian">
-                    <label class="form-label col-2">图片说明1：</label>
+                <label class="form-label col-2">上架日期：</label>
+                <div class="formControls col-2">
+                    <input class="inline laydate-icon" id="start" name="shelf" style=" margin-left:10px;">
                 </div>
-
-                <div class="formControls col-2 tupian-img" >
-                    <img src="<%=basePath%>image/goods?pic=${goods.pic1}" alt="图片">
-                </div>
-                    </div>
-                <div class="fc">
-                    <div class="tupian">
-                        <label class="form-label col-2">图片说明2：</label>
-                    </div>
-
-                    <div class="formControls col-2 tupian-img" >
-                        <img src="<%=basePath%>image/goods?pic=${goods.pic2}" alt="图片">
-                    </div>
-                </div>
-                <div class="fc">
-                    <div class="tupian">
-                        <label class="form-label col-2">图片说明3：</label>
-                    </div>
-
-                    <div class="formControls col-2 tupian-img">
-                        <img src="<%=basePath%>image/goods?pic=${goods.pic3}" alt="图片">
-                    </div>
+                <%--<div class="formControls col-2">--%>
+                    <%--<input type="button" class="input-text" value="下架" placeholder="" id="" name="">--%>
+                <%--</div>--%>
+                <%--<div class="formControls col-2 skin-minimal">--%>
+                    <%--<div class="check-box" style=" margin-top:5px">--%>
+                        <%--<input type="checkbox" id="checkbox-1"><label for="checkbox-1">&nbsp;</label>是否设置为推荐商品（推荐商品上线为8）</div>--%>
+                <%--</div>--%>
+            </div>
+            <div class="clearfix cl">
+                <label class="form-label col-2">图片说明1：</label>
+                <div class="formControls col-2 "  style="margin-top: 5px">
+                    <input type="file" id="exampleInputFile1" name="file1" >
                 </div>
             </div>
-            <div class="clearfix cl ">
-                <div  class="neirong">
-                <label class="form-label col-2">其他图片：</label>
-               </div>
-                <div class="genduo">
-                    <ul class="clearfix">
-                        <c:forEach var="item" items="${pictures}">
-                            <li class="genduotupin">
-                                <img src="<%=basePath%>image/show?pic=${item.filename}" alt="">
-                            </li>
-                        </c:forEach>
-
-                        <%--<li class="genduotupin">--%>
-                            <%--<img src="images/zanwu.png" alt="">--%>
-                        <%--</li>--%>
-                        <%--<li class="genduotupin">--%>
-                            <%--<img src="images/zanwu.png" alt="">--%>
-                        <%--</li>--%>
-                        <%--<li class="genduotupin">--%>
-                            <%--<img src="images/zanwu.png" alt="">--%>
-                        <%--</li>--%>
-                        <%--<li class="genduotupin">--%>
-                            <%--<img src="images/zanwu.png" alt="">--%>
-                        <%--</li>--%>
-                    </ul>
+            <div class="clearfix cl">
+                <label class="form-label col-2">图片说明2：</label>
+                <div class="formControls col-2 "  style="margin-top: 5px">
+                    <input type="file" id="exampleInputFile2" name="file2" >
+                </div>
+            </div>
+            <div class="clearfix cl">
+                <label class="form-label col-2">图片说明3：</label>
+                <div class="formControls col-2 " style="margin-top: 5px">
+                    <input type="file" id="exampleInputFile3" name="file3" >
                 </div>
             </div>
 
             <div class="clearfix cl">
-                <div style="display: flex">
                 <label class="form-label col-2">详细内容：</label>
-                    </div>
                 <div class="formControls col-10">
-                    <textarea readonly class="form-control" rows="3">${goods.detail}</textarea>
+                    <textarea class="form-control" rows="3" name="detail"></textarea>
                 </div>
             </div>
             <div class="clearfix cl">
-            <div style="display: flex" >
-                    <label class="form-label col-2">详细内容日:</label>
-            </div>
+                <label class="form-label col-2">详细内容日：</label>
                 <div class="formControls col-10">
-                    <textarea readonly class="form-control" rows="3">${goods.detailJ}</textarea>
+                    <textarea class="form-control" rows="3" name="detailJ"></textarea>
                 </div>
             </div>
             <div class="clearfix cl">
-                <div style="display: flex" >
-                    <label class="form-label col-2">产品规格:</label>
-                </div>
-                <div class="formControls col-10">
-                    <table class="table table-striped table-bordered table-hover" id="sample-table">
-                        <thead>
-                        <tr>
-                            <th width="125">规格号</th>
-                            <th width="125">规格名</th>
-                            <th width="125">规格名(日)</th>
-                            <th width="125">单位</th>
-                            <th width="125">单位(日)</th>
-                            <th width="125">价格</th>
-                            <th width="125">库存</th>
-                            <th width="125">销量</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <c:forEach var="item" items="${fomats}">
-                            <tr>
-                                <td>${item.id}</td>
-                                <td>${item.fname}</td>
-                                <td>${item.fnameJ}</td>
-                                <td>${item.fclass}</td>
-                                <td>${item.fclassJ}</td>
-                                <td>${item.price}</td>
-                                <td>${item.stock}</td>
-                                <td class="td-status">${item.sales}</td>
-                            </tr>
-                        </c:forEach>
-
-                        </tbody>
-                    </table>
-
+                <div class="Button_operation">
+                    <button  class="btn btn-primary radius" type="submit"><i class="icon-save "></i>保存并提交审核</button>
+                    <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 </div>
             </div>
         </form>

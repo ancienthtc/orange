@@ -236,6 +236,37 @@
       </if>
     </trim>
   </insert>
+
+  <!-- new -->
+  <update id="dropGoodsPic" parameterType="com.jd.orange.model.Goods">
+    UPDATE t_goods
+    <set>
+      <if test="pic1 == null" >
+        pic1 = NULL ,
+      </if>
+      <if test="pic2 == null" >
+        pic2 = NULL ,
+      </if>
+      <if test="pic3 == null" >
+        pic3 = NULL ,
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="goodsstatus">
+      UPDATE t_goods
+      <set>
+          <if test="status == 0" >
+              shelf = NULL ,
+          </if>
+          <if test="status == 1" >
+              shelf = #{date,jdbcType=TIMESTAMP} ,
+          </if>
+      </set>
+      where id = #{id,jdbcType=INTEGER}
+  </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.jd.orange.model.Goods" >
     update t_goods
     <set >

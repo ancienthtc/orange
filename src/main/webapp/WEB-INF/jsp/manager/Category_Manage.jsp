@@ -32,7 +32,7 @@
     <div id="category">
         <!---->
         <iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO SRC="<%=basePath%>part/toPartAdd"
-                class="page_right_style"></iframe>
+                class="page_right_style" height="500px" width="100%"></iframe>
     </div>
 </div>
 </body>

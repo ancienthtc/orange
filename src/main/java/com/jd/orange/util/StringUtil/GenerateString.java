@@ -12,6 +12,11 @@ public class GenerateString {
         return String.valueOf(DateExample.getTimestamp())+getRandomString(7);
     }
 
+    public String getFileName(String mark)
+    {
+        return mark+String.valueOf(DateExample.getTimestamp())+getRandomString(8);
+    }
+
     public String getRandomString(int length)
     {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";

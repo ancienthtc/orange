@@ -2,6 +2,7 @@ package com.jd.orange.service;
 
 import com.jd.orange.model.Goods;
 import com.jd.orange.util.pagehelper.PagedResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,11 +20,11 @@ public interface GoodsService {
 
     /**
      * 商品上架/下架
-     * @param goods
+     * @param gid
      * @param status 0-下架  1-上架
      * @return
      */
-    int GoodsShelf(Goods goods,Integer status);
+    int GoodsShelf(Integer gid,Integer status);
 
     int getGoodsCount();
 
@@ -31,4 +32,17 @@ public interface GoodsService {
     List<Goods> getGoodsList(String key,String start ,String end);
 
     Goods getGoods(Integer gid);
+
+    int GoodsAdd(Goods goods,MultipartFile file1,MultipartFile file2,MultipartFile file3,String ServerPath);
+
+    int goodsPicDel(Integer gid,String detail);
+
+    //update
+    //商品图片修改
+    int picUpdate(String ServerPath,Integer gid,int i,MultipartFile file);
+
+    int goodsUpdate(Goods goods);
+
+
+
 }

@@ -1,0 +1,155 @@
+/* CSS Document */
+/* CSS Document */
+html,body,p,ul,li,h1,h2,h3,h4,h5,h6,div,span,p{
+	margin:0;
+	padding:0;
+}
+html{font:"微软雅黑" 14px/1.42;}
+.fr{
+	float:right;
+}
+.fl{
+	float:left;
+}
+#pageU li{height: 40px !important;line-height: 35px;width: 60px;}
+ul li{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+	cursor:pointer;
+}
+.clear{
+	clear:both;
+}
+
+
+.col-dice-12,.col-dice-11,.col-dice-10,.col-dice-9,.col-dice-8,.col-dice-7,.col-dice-6,.col-dice-5,.col-dice-4,.col-dice-3,.col-dice-2,.col-dice-1{
+	position: relative;
+ 	min-height: 1px;
+  	padding-right: 15px;
+  	padding-left: 15px;
+}
+.col-dice-3 img{
+	width:100%;
+}
+.BORDER{
+	border:1px solid #CCC;
+	border-right:0px;
+	padding:2px 10px;
+	text-align:center;
+	float:left;
+	color:#0099FF;
+	cursor:pointer;
+	height: 40px;
+	line-height: 35px;
+}
+.curPage{
+	color:white;
+	background:#0099FF;
+	border:1px #0099ff solid;
+	padding:2px 10px;
+	float:left;
+	text-align:center;
+	cursor:pointer;
+}
+.disbled{
+	color:#CCCCCC;
+	border:1px #CCCCCC solid;
+	border-right:0px;
+	padding:2px 10px;
+	float:left;
+	text-align:center;
+	cursor:not-allowed;
+	height: 40px;
+	line-height: 35px;
+}
+.subMit{
+	border:1px #CCCCCC solid;
+	color:#666666;
+	background:white;
+	text-align:center;
+	width:200px;
+	font-size:20px;
+	line-height:2.0em;
+	border-radius:3px;
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+/* IE10-specific styles go here */ 
+.BORDER{
+	border:1px solid #CCC;
+	border-right:0px;
+	padding:2px 10px;
+	text-align:center;
+	float:left;
+	color:#0099FF;
+	cursor:pointer;
+}
+.curPage{
+	color:white;
+	background:#0099FF;
+	border:1px #0099ff solid;
+	padding:2px 10px;
+	float:left;
+	text-align:center;
+	cursor:pointer;
+}
+.fr{
+	float:right;
+}
+.fl{
+	float:left;
+}
+ul li{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+	cursor:pointer;
+}
+.clear{
+	clear:both;
+}
+}
+@media screen and (max-width: 1920px) {
+	html{ font-size:20px;}
+	.col-dice-3{
+		width:25%;
+	}
+}
+@media screen and (max-width: 1024px) {
+	html{ font-size:20px;}
+	.col-dice-3{
+		width:50%;
+	}
+}
+@media screen and (max-width: 778px) {
+	html{ font-size:20px;}
+	.col-dice-3{
+		width:100%;
+	}
+}
+
+.faceShow{
+	width:100%;
+	margin:0 auto;
+	position:relative;
+}
+.faceShow span{
+	line-height:10px;
+	padding:5px;
+	width:10%;
+	text-align:center;
+	border:1px #000000 solid;
+	
+}
+#faceContent{
+	width:800px;
+	border:1px #CCCCCC solid;
+	display:none;
+	border-radius:5px;
+}
+#clipDIV ul{
+	width:80%;
+	margin:0 auto;
+}

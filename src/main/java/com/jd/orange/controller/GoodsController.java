@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.model.Format;
 import com.jd.orange.model.Goods;
 import com.jd.orange.service.FormatService;
 import com.jd.orange.service.GoodsService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/goods")
@@ -52,6 +54,7 @@ public class GoodsController {
         return "manager/chanpinliebiao";
     }
 
+    //跳转商品详情
     @RequestMapping("/toGoodsDetail/{gid}")
     public String toGoodsDetail(Model model,@PathVariable Integer gid)
     {
@@ -61,8 +64,26 @@ public class GoodsController {
         model.addAttribute("fomats",formatService.formatList(gid));
         //其他商品图片
         model.addAttribute("pictures",imageService.pictures(PictureType.Goods,gid));
+
         return "manager/goodsDetail";
     }
+
+    //跳转商品添加
+    @RequestMapping("/toGoodsAdd")
+    public String toGoodsAdd()
+    {
+        return "manager/goodsAdd";
+    }
+
+    //跳转到商品修改
+    @RequestMapping("/toGoodsAlter/{gid}")
+    public String toGoodsAlter(@PathVariable Integer gid,Model model)
+    {
+        model.addAttribute("goods",goodsService.getGoods(gid));
+        model.addAttribute("formats",formatService.formatList(gid));
+        return "manager/goodsAlter";
+    }
+
 
     //测试页面
     @RequestMapping("/tp")
@@ -73,24 +94,27 @@ public class GoodsController {
 
     @RequestMapping("/tp2")
     @ResponseBody
-    public String testFile(@RequestParam("file") MultipartFile file)
+    public String testFile(@RequestParam("file") MultipartFile file , Goods goods)
     {
-        log.info(file.getName());
+        log.info(file.getName() + "/" );
         return "t";
     }
 
 
     //商品添加
     @RequestMapping("/add")
+    @ResponseBody
     public String GoodsInsert(HttpServletRequest request, Goods goods ,@RequestParam("file1") MultipartFile file1
             ,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3)
     {
-        String filePath=null;
-        //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title
-        //request.getSession().getServletContext().getRealPath("/") + "upload/"+ title
-
-
-        return "";
+        String ServerPath=null;
+        //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title + ".jpg"
+        ServerPath=request.getSession().getServletContext().getRealPath("/");
+        if (goodsService.GoodsAdd(goods,file1,file2,file3,ServerPath) > 0)
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //商品其他图片添加
@@ -104,6 +128,36 @@ public class GoodsController {
         log.info(title+"  "+filepath);
 
         return "";
+    }
+
+
+    //商品图片删除
+    @RequestMapping("/deletePic")
+    @ResponseBody
+    public String deletePic(Integer gid,String detail)
+    {
+        //detail:pic1 pic2 pic3
+        if( goodsService.goodsPicDel(gid,detail) > 0 )
+        {
+            return "true";
+        }
+        return "false";
+    }
+
+    //商品图片添加(商品修改)
+    @RequestMapping("/updatePic")
+    @ResponseBody
+    public String updatePic(HttpServletRequest request ,@RequestParam(value = "file") MultipartFile file ,@RequestParam Integer id ,@RequestParam Integer i)
+    {
+        //i : 第几个图片(i=1 ,i=2 ,i=3)
+        String ServerPath=null;
+        //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title + ".jpg"
+        ServerPath=request.getSession().getServletContext().getRealPath("/");
+        if( goodsService.picUpdate(ServerPath,id,i,file) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //获取列表
@@ -121,23 +175,38 @@ public class GoodsController {
     @ResponseBody
     public String goodsUpdate(Goods goods)
     {
-        return "";
+        goods.setPic1(null);
+        goods.setPic2(null);
+        goods.setPic3(null);
+        if(goodsService.goodsUpdate(goods) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //商品上架
-    @RequestMapping("/load")
+    @RequestMapping("/load/{gid}")
     @ResponseBody
-    public String goodsLoad()
+    public String goodsLoad(@PathVariable Integer gid)
     {
-        return "";
+        if( goodsService.GoodsShelf(gid,1) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //商品下架
-    @RequestMapping("/under")
+    @RequestMapping("/under/{gid}")
     @ResponseBody
-    public String goodsUnder()
+    public String goodsUnder(@PathVariable Integer gid)
     {
-        return "";
+        if( goodsService.GoodsShelf(gid,0) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //商品删除
@@ -149,8 +218,11 @@ public class GoodsController {
     }
 
     //规格添加
-    public String formatAdd()
+    @RequestMapping("/formatAdd")
+    @ResponseBody
+    public String formatAdd(Format format)
     {
+        log.info(JSON.toJSONString(format));
         return "";
     }
 

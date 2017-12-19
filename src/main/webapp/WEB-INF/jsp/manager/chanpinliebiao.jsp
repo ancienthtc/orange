@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
     <link href="<%=basePath%>backpage/Widget/icheck/icheck.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=basePath%>backpage/other/page.css" rel="stylesheet" type="text/css"/>
+
     <script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
@@ -32,9 +34,12 @@
     <script src="<%=basePath%>backpage/assets/laydate/laydate.js" type="text/javascript"></script>
     <script type="text/javascript" src="<%=basePath%>backpage/Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script>
     <script src="<%=basePath%>backpage/js/lrtk.js" type="text/javascript"></script>
+
+    <script src="<%=basePath%>backpage/other/page.js" type="text/javascript"></script>
+
     <title>分类列表</title>
 </head>
-<body>
+<body onload="clipInit()">
 <div class=" page-content clearfix">
     <div id="products_style">
         <div class="search_style">
@@ -60,7 +65,7 @@
         </div>
         <div class="border clearfix">
        <span class="l_f">
-        <a href="picture-add.html" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
+        <a href="<%=basePath%>goods/toGoodsAdd" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
         
        </span>
             <span class="r_f">共：<b>${count}</b>件商品</span>
@@ -159,8 +164,40 @@
         </div>
     </div>
 </div>
+
+<div class="fenye">
+    <div style="width:30%;float: left;">
+        <select name="select" id="fruit" style="width:120px;height:30px;margin: auto;display: block;">
+            <option value="">每页显示10页</option>
+            <option value="">每页显示20页</option>
+            <option value="">每页显示30页</option>
+            </select>
+                <p></p>
+    </div>
+
+    <div style="width:50%;float: left;" id="clipDIV">
+
+    </div>
+
+    <div style="width: 20%;float: left;font-size:18px;color: #858585;">
+        第1/10页
+    </div>
+</div>
+
+
+
 </body>
 </html>
+<script type="text/javascript">
+    var fruit=document.getElementById("fruit");
+    var option=document.getElementsByTagName("option");
+    var p=document.getElementsByTagName("p")[0];
+    fruit.onchange=function(){
+        p.innerText="你选择的是"+option[fruit.selectedIndex].innerText
+        console.log(option[fruit.selectedIndex]);
+    }
+</script>
+
 
 <script>
 
@@ -206,11 +243,12 @@
                     a+="<td class='td-manage'>";
                     a+="<a onClick='member_stop(this,\"10001\")' href='javascript:;' title='停用' class='btn btn-xs btn-success'>";
                     a+="<i class='icon-ok bigger-120'></i></a>";
-                    a+="<a href='picture-add.html' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>";
+                    a+="<a href='<%=basePath%>goods/toGoodsAlter/"+result.dataList[i].id+"' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>";
                     a+="<a title='删除' href='javascript:;' onclick='member_del(this,\"1\")' class='btn btn-xs btn-warning'>";
                     a+="<i class='icon-trash  bigger-120'></i></a></td>";
                     tbody.append(a);
                     tbody.append("</tr>");
+
                 }
             },"json");
     }

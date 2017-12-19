@@ -4,6 +4,7 @@ import com.jd.orange.model.Goods;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -24,4 +25,8 @@ public interface GoodsMapper {
     int getGoodsCount();
 
     List<Goods> getGoodsList(@Param("key") String key, @Param("start") String start, @Param("end") String end);
+
+    int dropGoodsPic(Goods record);
+
+    int goodsstatus(@Param("id")Integer id,@Param("status")Integer status,@Param("date")Timestamp shelf);
 }

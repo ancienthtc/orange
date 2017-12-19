@@ -53,7 +53,7 @@
      <!---->
      <div class="border clearfix">
        <span class="l_f">
-        <a href="javascript:;" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>
+        <%--<a href="javascript:;" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>--%>
        </span>
        <span class="r_f">共：<b>${count}</b>条</span>
      </div>
@@ -121,7 +121,10 @@
      <li><label class="label_name">固定电话：</label><span class="add_name"><input name="固定电话" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
      <li><label class="label_name">移动电话：</label><span class="add_name"><input name="移动电话" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
      <li><label class="label_name">电子邮箱：</label><span class="add_name"><input name="电子邮箱" type="text"  class="text_add"/></span><div class="prompt r_f"></div></li>
-     <li class="adderss"><label class="label_name">家庭住址：</label><span class="add_name"><input name="家庭住址" type="text"  class="text_add" style=" width:350px"/></span><div class="prompt r_f"></div></li>
+     <li class="adderss"><label class="label_name">家庭住址：</label>
+         <span class="add_name">
+         <input name="家庭住址" type="text"  class="text_add" style=" width:350px"/>
+     </span><div class="prompt r_f"></div></li>
      <li><label class="label_name">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：</label><span class="add_name">
      <label><input name="form-field-radio1" type="radio" checked="checked" class="ace"><span class="lbl">开启</span></label>&nbsp;&nbsp;&nbsp;
      <label><input name="form-field-radio1"type="radio" class="ace"><span class="lbl">关闭</span></label></span><div class="prompt r_f"></div></li>
@@ -182,7 +185,7 @@
         var su=$('#start3').val();
         var eu=$("#start4").val();
 
-        var info={pageNo:1,pageSize:10,key:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
+        var info={pageNo:1,pageSize:10,keys:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
         var url="<%=basePath%>user/getUserList";
         send_post(url,info);
     });
@@ -199,8 +202,8 @@ jQuery(function($) {
 		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
 		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
 		] } );
-				
-				
+
+
 				$('table th input:checkbox').on('click' , function(){
 					var that = this;
 					$(this).closest('table').find('tr > td:first-child input:checkbox')
@@ -208,20 +211,20 @@ jQuery(function($) {
 						this.checked = that.checked;
 						$(this).closest('tr').toggleClass('selected');
 					});
-						
+
 				});
-			
-			
+
+
 				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 				function tooltip_placement(context, source) {
 					var $source = $(source);
 					var $parent = $source.closest('table')
 					var off1 = $parent.offset();
 					var w1 = $parent.width();
-			
+
 					var off2 = $source.offset();
 					var w2 = $source.width();
-			
+
 					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
 					return 'left';
 				}

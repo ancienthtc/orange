@@ -236,7 +236,7 @@
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
                 <small>
-                    <img src="images/logo.png" width="470px">
+                    <img src="<%=basePath%>backpage/images/logo.png" width="470px">
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
