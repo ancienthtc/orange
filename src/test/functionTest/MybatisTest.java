@@ -1,9 +1,12 @@
 package functionTest;
 
+import com.alibaba.fastjson.JSON;
+import com.jd.orange.dao.OrderMapper;
 import com.jd.orange.model.Goods;
 import com.jd.orange.model.Part;
 import com.jd.orange.model.User;
 import com.jd.orange.service.GoodsService;
+import com.jd.orange.service.OrderService;
 import com.jd.orange.service.PartService;
 import com.jd.orange.service.UserService;
 import com.jd.orange.util.pagehelper.PagedResult;
@@ -12,15 +15,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring-mvc.xml","classpath:spring-mybatis.xml","classpath:mybatis-config.xml"})
+//@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class MybatisTest {
 
     @Autowired
@@ -31,6 +37,12 @@ public class MybatisTest {
 
     @Autowired
     private UserService userService;
+
+    @Resource
+    private OrderMapper orderMapper;
+
+    @Autowired
+    private OrderService orderService;
 
     @Test
     public void test1(){
@@ -98,5 +110,19 @@ public class MybatisTest {
         //user.setState(2);
         //System.out.println(userService.insertUser(user));
     }
+
+    @Test
+    public void test4()
+    {
+        Map<String,Integer> map=orderMapper.countOrderStatus();
+        System.out.println(JSON.toJSON(map));
+    }
+
+    @Test
+    public void test5()
+    {
+        System.out.println( JSON.toJSON( orderService.getOrderDetail("1") ) );
+    }
+
 
 }

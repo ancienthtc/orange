@@ -43,6 +43,10 @@ public interface GoodsService {
 
     int goodsUpdate(Goods goods);
 
+    //商品删除()
 
+    //商品销量统计
+
+    //全部商品销量统计
 
 }

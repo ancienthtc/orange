@@ -3,6 +3,7 @@ package com.jd.orange.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.common.AdminCheck;
 import com.jd.orange.model.Part;
 import com.jd.orange.service.PartService;
 import com.jd.orange.util.pagehelper.PagedResult;
@@ -37,6 +38,7 @@ public class PartController {
     private PartService partService;
 
     //后台页面板块页面
+    @AdminCheck
     @RequestMapping("/toPartList")
     public String toBackPartPage()
     {
@@ -44,6 +46,7 @@ public class PartController {
     }
 
     //创建分类(frame)
+    @AdminCheck
     @RequestMapping("/toPartAddFrame")
     public String toBackPartCreate()
     {
@@ -51,6 +54,7 @@ public class PartController {
     }
 
     //创建分类(内容)
+    @AdminCheck
     @RequestMapping("/toPartAdd")
     public String toBackPartCreate2(Model model)
     {
@@ -99,7 +103,7 @@ public class PartController {
     }
 
     //获取分类(子分类)
-    @RequestMapping("/getPartChoice")
+    @RequestMapping(value = "/getPartChoice" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getLevelPart(Integer id)
     {
@@ -110,7 +114,7 @@ public class PartController {
     }
 
     //获取分类列表
-    @RequestMapping(value = "/getInitList" , method = RequestMethod.POST)
+    @RequestMapping(value = "/getInitList" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getPartList(Integer pageNo, Integer pageSize, String key) {
         PagedResult<Part> pagedResult=partService.getParts(pageNo,pageSize,key);
@@ -147,7 +151,10 @@ public class PartController {
 //        {
 //            return "true";
 //        }
-
+        if( partService.PartUpdate(part) > 0 )
+        {
+            return "true";
+        }
         return "false";
     }
 

@@ -1,6 +1,7 @@
 package com.jd.orange.service.servciceImpl;
 
 import com.github.pagehelper.PageHelper;
+import com.jd.orange.dao.FormatMapper;
 import com.jd.orange.dao.GoodsMapper;
 import com.jd.orange.model.Goods;
 import com.jd.orange.service.GoodsService;
@@ -28,6 +29,9 @@ public class GoodsServiceImpl implements GoodsService{
     @Autowired
     private GoodsMapper goodsMapper;
 
+    @Autowired
+    private FormatMapper formatMapper;
+
     @Override
     @Transactional
     public int GoodsAdd(Goods goods, MultipartFile file1, MultipartFile file2, MultipartFile file3, String ServerPath) {
@@ -36,6 +40,8 @@ public class GoodsServiceImpl implements GoodsService{
         String filename1 = new GenerateString().getFileName("goods")+getOriginal(file1);
         String filename2 = new GenerateString().getFileName("goods")+getOriginal(file2);
         String filename3 = new GenerateString().getFileName("goods")+getOriginal(file3);
+        //创建时间
+        goods.setCreatetime(DateExample.getNowTimeByDate());
         //文件名
         if(imageService.pictureAdd(file1,ServerPath,filename1 )>0)
         {
@@ -134,6 +140,8 @@ public class GoodsServiceImpl implements GoodsService{
         ServerPath = ServerPath + Folder.GoodsDetail.getVal();
         String filename = new GenerateString().getFileName("goods")+getOriginal(file);
         Goods goods=goodsMapper.selectByPrimaryKey(gid);
+        //修改时间
+        goods.setUpdatetime(DateExample.getNowTimeByDate());
         switch (i)
         {
             case 1:
@@ -177,6 +185,8 @@ public class GoodsServiceImpl implements GoodsService{
     @Override
     public int goodsUpdate(Goods goods)
     {
+        //修改时间
+        goods.setUpdatetime(DateExample.getNowTimeByDate());
         return goodsMapper.updateByPrimaryKeySelective(goods);
     }
 
@@ -193,7 +203,7 @@ public class GoodsServiceImpl implements GoodsService{
         }
         else if(status==1)
         {
-            if( goods.getShelf()==null )
+            if( goods.getShelf()==null && formatMapper.goodsShelfCondition(gid) > 0 )
             {
                 return goodsMapper.goodsstatus(gid,status,DateExample.getLocalTimeFormat());
             }

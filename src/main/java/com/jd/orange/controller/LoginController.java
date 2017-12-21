@@ -1,5 +1,6 @@
 package com.jd.orange.controller;
 
+import com.jd.orange.common.AdminCheck;
 import com.jd.orange.model.Admin;
 import com.jd.orange.model.User;
 import com.jd.orange.service.LoginService;
@@ -47,6 +48,7 @@ public class LoginController {
     }
 
     //管理员登录成功后跳转/跳转到后台首页
+    @AdminCheck()
     @RequestMapping("/ToAdminIndex")
     public String AdminLoginSucess()
     {

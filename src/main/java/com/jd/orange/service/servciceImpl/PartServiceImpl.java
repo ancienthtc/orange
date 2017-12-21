@@ -58,4 +58,11 @@ public class PartServiceImpl implements PartService {
         return 0;
     }
 
+    @Override
+    public int PartUpdate(Part part) {
+        //Part old=partMapper.selectByPrimaryKey(part.getId());
+
+        return partMapper.updateByPrimaryKeySelective(part);
+    }
+
 }

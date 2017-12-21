@@ -28,5 +28,6 @@ public interface GoodsMapper {
 
     int dropGoodsPic(Goods record);
 
+    //shelf 也是updatetime
     int goodsstatus(@Param("id")Integer id,@Param("status")Integer status,@Param("date")Timestamp shelf);
 }

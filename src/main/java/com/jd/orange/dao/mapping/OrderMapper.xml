@@ -27,6 +27,53 @@
     <result column="user" property="user" jdbcType="INTEGER" />
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
+
+  <resultMap id="OrderDetailMap" type="com.jd.orange.model.Order">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sequence" property="sequence" jdbcType="VARCHAR" />
+    <result column="buyway" property="buyway" jdbcType="INTEGER" />
+    <result column="shopstatus" property="shopstatus" jdbcType="INTEGER" />
+    <result column="orderstatus" property="orderstatus" jdbcType="INTEGER" />
+    <result column="paytime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="goodsprice" property="goodsprice" jdbcType="DOUBLE" />
+    <result column="freight" property="freight" jdbcType="DOUBLE" />
+    <result column="otherprice" property="otherprice" jdbcType="DOUBLE" />
+    <result column="scorecost" property="scorecost" jdbcType="DOUBLE" />
+    <result column="allprice" property="allprice" jdbcType="DOUBLE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="recipient" property="recipient" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="logistics" property="logistics" jdbcType="VARCHAR" />
+    <result column="returndetail" property="returndetail" jdbcType="VARCHAR" />
+    <result column="address_j" property="addressJ" jdbcType="VARCHAR" />
+    <result column="recipient_j" property="recipientJ" jdbcType="VARCHAR" />
+    <result column="logistics_j" property="logisticsJ" jdbcType="VARCHAR" />
+    <result column="returndetail_j" property="returndetailJ" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="user" property="user" jdbcType="INTEGER" />
+    <result column="j_c" property="jC" jdbcType="INTEGER" />
+
+    <collection property="orderDetails" column="order" ofType="com.jd.orange.model.OrderDetail">
+      <id column="id" property="id" jdbcType="INTEGER" />
+      <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+      <result column="format" property="format" jdbcType="VARCHAR" />
+      <result column="amount" property="amount" jdbcType="DOUBLE" />
+      <result column="price" property="price" jdbcType="DOUBLE" />
+      <result column="message" property="message" jdbcType="VARCHAR" />
+      <result column="otherdetail" property="otherdetail" jdbcType="VARCHAR" />
+      <result column="picture" property="picture" jdbcType="INTEGER" />
+      <result column="order" property="order" jdbcType="INTEGER" />
+      <result column="goodsname_j" property="goodsnameJ" jdbcType="VARCHAR" />
+      <result column="format_j" property="formatJ" jdbcType="VARCHAR" />
+      <result column="message_j" property="messageJ" jdbcType="VARCHAR" />
+      <result column="otherdetail_j" property="otherdetailJ" jdbcType="VARCHAR" />
+      <result column="j_c" property="jC" jdbcType="INTEGER" />
+      <result column="filename" property="filename" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+
   <sql id="Base_Column_List" >
     id, sequence, buyway, shopstatus, orderstatus, paytime, goodsprice, freight, otherprice, 
     scorecost, allprice, address, recipient, contact, logistics, returndetail, address_j, 
@@ -42,6 +89,55 @@
   <!-- new -->
   <select id="orderAmount" resultType="java.lang.Integer">
     SELECT COUNT(id) FROM t_order
+  </select>
+
+  <!-- 订单统计 -->
+  <select id="countOrderStatus" resultType="map">
+    SELECT
+      SUM(CASE WHEN orderstatus=0 and shopstatus=0 then 1 else 0 end) as o0 ,
+      SUM(CASE WHEN orderstatus=1 and shopstatus=0 then 1 else 0 end) as o1 ,
+      SUM(CASE WHEN orderstatus=1 and shopstatus=1 then 1 else 0 end) as o2 ,
+      SUM(CASE WHEN orderstatus=2 and shopstatus=1 then 1 else 0 end) as o3 ,
+      SUM(CASE WHEN orderstatus=3 and shopstatus=1 then 1 else 0 end) as o4 ,
+      SUM(CASE WHEN orderstatus=4 and shopstatus=1 then 1 else 0 end) as o5 ,
+      SUM(CASE WHEN orderstatus=5 and shopstatus=2 then 1 else 0 end) as o6 ,
+      SUM(CASE WHEN orderstatus=6 and shopstatus=3 then 1 else 0 end) as o7 ,
+      SUM(CASE WHEN orderstatus=7 then 1 else 0 end) as o8
+    FROM t_order
+  </select>
+
+  <select id="selectOrderByOrderStatus" resultType="com.jd.orange.model.Order" parameterType="java.lang.Integer">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `t_order`
+    WHERE
+    orderstatus = #{orderStatus,jdbcType=INTEGER}
+    <if test=" shopStatus != null " >
+      AND shopstatus = #{shopStatus,jdbcType=INTEGER}
+    </if>
+    AND buyway = #{way,jdbcType=INTEGER}
+    ORDER BY  createtime
+  </select>
+
+  <select id="selectOrderWithDetail" parameterType="java.lang.String" resultMap="OrderDetailMap">
+    SELECT
+    t_order.id,t_order.sequence,t_order.buyway,t_order.shopstatus,t_order.orderstatus,
+    t_order.paytime,t_order.goodsprice,t_order.freight,t_order.otherprice,
+    t_order.scorecost,t_order.allprice,t_order.address,t_order.recipient,
+    t_order.contact
+    ,t_order.logistics,t_order.returndetail,t_order.address_j,t_order.recipient_j,
+    t_order.logistics_j,t_order.returndetail_j,t_order.createtime,t_order.updatetime,
+    t_order.`user`,t_order.j_c,t_order_detail.id,t_order_detail.goodsname,
+    t_order_detail.format,t_order_detail.amount,t_order_detail.price,
+    t_order_detail.message,t_order_detail.otherdetail,t_order_detail.picture,
+    t_order_detail.`order`,t_order_detail.goodsname_j,t_order_detail.format_j,
+    t_order_detail.message_j,t_order_detail.otherdetail_j,t_order_detail.j_c,
+    t_picture.filename
+    FROM
+    t_order
+    INNER JOIN t_order_detail ON t_order_detail.`order` = t_order.id
+    LEFT JOIN t_picture ON t_order_detail.picture = t_picture.id
+    WHERE t_order.sequence = #{sequence}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

@@ -366,11 +366,11 @@
                     <li><a href="#" class="dropdown-toggle"><i class="icon-laptop"></i><span
                             class="menu-text">订单管理 </span><b class="arrow icon-angle-down"></b></a>
                         <ul class="submenu">
-                            <li class="home"><a href="javascript:void(0)" name="Orderform.html" title="线上订单管理"
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>order/toAdminOrderOnline" title="线上订单管理"
                                                 class="iframeurl"><i class="icon-double-angle-right"></i>线上订单管理</a></li>
-                            <li class="home"><a href="javascript:void(0)" name="xianxiaguanli.html" title="线下订单管理"
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>order/toAdminOrderOffline" title="线下订单管理"
                                                 class="iframeurl"><i class="icon-double-angle-right"></i>线下订单管理</a></li>
-                            <li class="home"><a href="javascript:void(0)" name="Shops_Audit.html" title="订单统计"
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>order/toAdminOrderCount" title="订单统计"
                                                 class="iframeurl"><i class="icon-double-angle-right"></i>订单统计</a></li>
                         </ul>
                     </li>

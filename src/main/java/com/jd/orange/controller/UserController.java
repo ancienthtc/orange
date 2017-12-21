@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.common.AdminCheck;
 import com.jd.orange.model.User;
 import com.jd.orange.service.UserService;
 import com.jd.orange.util.pagehelper.PagedResult;
@@ -32,6 +33,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @AdminCheck
     @RequestMapping("/toUserList")
     public String toUserPageList(Model model)
     {
@@ -39,6 +41,7 @@ public class UserController {
         return "manager/user_list";
     }
 
+    @AdminCheck
     @RequestMapping("/toUserDetail")
     public String toUserDetail(Model model,Integer uid)
     {
@@ -46,7 +49,7 @@ public class UserController {
         return "manager/member-show";
     }
 
-    @RequestMapping(value = "/getUserList" , method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserList" , method = RequestMethod.POST ,  produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getUserList(Integer pageNo, Integer pageSize, String keys,String start_c,String end_c,String start_u,String end_u)
     {

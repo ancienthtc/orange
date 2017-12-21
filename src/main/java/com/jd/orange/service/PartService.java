@@ -27,4 +27,6 @@ public interface PartService {
 
     int PartDel(Integer pid);
 
+    int PartUpdate(Part part);
+
 }

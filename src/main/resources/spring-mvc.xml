@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
                         http://www.springframework.org/schema/context
@@ -11,10 +12,17 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
                         http://www.springframework.org/schema/task
-                        http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+                        http://www.springframework.org/schema/task/spring-task-3.2.xsd
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 自动扫描  @Controller-->
-    <context:component-scan base-package="com.jd.orange"/>
+    <!--<context:component-scan base-package="com.jd.orange"/>-->
+    <!--<context:component-scan base-package="com.jd.orange">-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.jd.orange">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
 
     <!-- 定时配置 -->
     <!-- 扫描定时器 -->
@@ -77,6 +85,12 @@
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
     <mvc:annotation-driven />
+
+    <!-- AOP -->
+    <!-- 启动对@AspectJ注解的支持  -->
+    <!--<bean id="myInterceptor" class="com.jd.orange.common.AdminAspect"/>-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
 
     <!-- 拦截器 -->
     <!--<mvc:interceptors>-->

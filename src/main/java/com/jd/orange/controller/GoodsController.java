@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.common.AdminCheck;
 import com.jd.orange.model.Format;
 import com.jd.orange.model.Goods;
 import com.jd.orange.service.FormatService;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping("/goods")
@@ -47,6 +47,7 @@ public class GoodsController {
     private ImageService imageService;
 
     //跳转到产品列表(后台管理)
+    @AdminCheck
     @RequestMapping("/toGoodsList")
     public String toGoodsList(Model model)
     {
@@ -55,6 +56,7 @@ public class GoodsController {
     }
 
     //跳转商品详情
+    @AdminCheck
     @RequestMapping("/toGoodsDetail/{gid}")
     public String toGoodsDetail(Model model,@PathVariable Integer gid)
     {
@@ -69,6 +71,7 @@ public class GoodsController {
     }
 
     //跳转商品添加
+    @AdminCheck
     @RequestMapping("/toGoodsAdd")
     public String toGoodsAdd()
     {
@@ -76,6 +79,7 @@ public class GoodsController {
     }
 
     //跳转到商品修改
+    @AdminCheck
     @RequestMapping("/toGoodsAlter/{gid}")
     public String toGoodsAlter(@PathVariable Integer gid,Model model)
     {
@@ -94,7 +98,7 @@ public class GoodsController {
 
     @RequestMapping("/tp2")
     @ResponseBody
-    public String testFile(@RequestParam("file") MultipartFile file , Goods goods)
+    public String testFile(@RequestParam("file") MultipartFile file )
     {
         log.info(file.getName() + "/" );
         return "t";
@@ -161,12 +165,12 @@ public class GoodsController {
     }
 
     //获取列表
-    @RequestMapping(value = "/getGoodsList" , method = RequestMethod.POST)
+    @RequestMapping(value = "/getGoodsList" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getGoodsList(Integer pageNo, Integer pageSize, String key,String start,String end)
     {
         PagedResult<Goods> goodsPagedResult=goodsService.getGoodsList(pageNo,pageSize,key,start,end);
-        //log.info( JSON.toJSONString(goodsPagedResult, filter) );
+        log.info( JSON.toJSONString(goodsPagedResult, filter) );
         return JSON.toJSONString(goodsPagedResult, filter);
     }
 
@@ -222,14 +226,22 @@ public class GoodsController {
     @ResponseBody
     public String formatAdd(Format format)
     {
-        log.info(JSON.toJSONString(format));
-        return "";
+        //log.info(JSON.toJSONString(format));
+        if ( formatService.formatAdd(format) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //规格修改
-    public String formatUpdate()
+    public String formatUpdate(Format format)
     {
-        return "";
+        if( formatService.formatUpdate(format) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //规格删除

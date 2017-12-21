@@ -234,7 +234,7 @@
                                     <td width="125"><input type="text" value="${i.stock}" name="stock"></td>
                                     <td width="125"><input type="text" value="${i.sales}" name="sales"></td>
                                     <td width="125" class="td-manage">
-                                        <a title="编辑" onclick="member_edit('550')" href="javascript:;"
+                                        <a title="编辑" onclick="formatUpdate()" href="javascript:;"
                                            class="btn btn-xs btn-info">修改</a>
                                     </td>
                                     <td width="125">
@@ -319,7 +319,10 @@
                 },
                 success:function (date) {
                     console.log(date);
-
+                    if(date=="true")
+                        alert("添加成功");
+                    else
+                        alert("添加失败");
                 },
                 error : function(data) {
                     alert("错误");
@@ -330,6 +333,10 @@
 
 
     })
+
+    function formatUpdate() {
+        console.log( $(this).parent().parent().find("input[name='fname']").val() )
+    }
 
 </script>
 

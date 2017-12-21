@@ -75,6 +75,11 @@
     </trim>
   </select>
 
+  <!-- 上架条件 -->
+  <select id="goodsShelfCondition" parameterType="java.lang.Integer">
+    SELECT count(1) FROM `t_format` WHERE goods=#{id,jdbcType=INTEGER} AND stock>0
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_goods
     where id = #{id,jdbcType=INTEGER}
@@ -259,10 +264,13 @@
       <set>
           <if test="status == 0" >
               shelf = NULL ,
+              updatetime = #{date,jdbcType=TIMESTAMP}
           </if>
           <if test="status == 1" >
               shelf = #{date,jdbcType=TIMESTAMP} ,
+              updatetime = #{date,jdbcType=TIMESTAMP}
           </if>
+
       </set>
       where id = #{id,jdbcType=INTEGER}
   </update>

@@ -1,5 +1,7 @@
 package com.jd.orange.model;
 
+import javax.persistence.Transient;
+
 public class OrderDetail {
     private Integer id;
 
@@ -28,6 +30,9 @@ public class OrderDetail {
     private String otherdetailJ;
 
     private Integer jC;
+
+    @Transient
+    private String filename;
 
     public Integer getId() {
         return id;
@@ -139,5 +144,13 @@ public class OrderDetail {
 
     public void setjC(Integer jC) {
         this.jC = jC;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

@@ -20,4 +20,8 @@ public interface FormatMapper {
     int updateByPrimaryKey(Format record);
 
     List<Format> formatList(Integer gid);
+
+    //上架条件 产品至少有一个规格，并且库存大于0
+    int goodsShelfCondition(Integer gid);
+
 }
