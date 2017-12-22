@@ -48,11 +48,17 @@
                             <div class="widget-header header-color-green2"><h4 class="lighter smaller">订单类型分类</h4></div>
                             <div class="widget-body">
                                 <ul class="b_P_Sort_list">
-                                    <li class="lb_bs"><i class="fa fa-sticky-note pink "></i> <a href="#">食品类(235)</a>
-                                    </li>
-                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">数码配件(2215)</a></li>
-                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">手机(3456)</a></li>
-                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">手机(3456)</a></li>
+
+                                    <li class="lb_bs"><i class="fa fa-sticky-note pink "></i> <a href="#">待确认(${OrderStatus.o0})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">待付款(${OrderStatus.o1})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">待发货(${OrderStatus.o2})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">待收货(${OrderStatus.o3})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">已完成(${OrderStatus.o4})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">退货确认(${OrderStatus.o5})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">待退货(${OrderStatus.o6})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">完成退货(${OrderStatus.o7})</a></li>
+                                    <li><i class="fa fa-sticky-note pink "></i> <a href="#">取消(${OrderStatus.o8})</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -63,261 +69,399 @@
                     <div class="search_style" style="display: inline-block;">
 
                         <ul class="search_content clearfix">
-                            <li><label class="l_f">订单编号</label><input name="" type="text" class="text_add"
-                                                                      placeholder="订单订单编号" style=" width:250px"></li>
-                            <li><label class="l_f">时间</label><input class="inline laydate-icon" id="start"
-                                                                    style=" margin-left:10px;"></li>
+                            <li><label class="l_f">订单编号</label>
+                                <input name="" type="text" class="text_add" placeholder="订单订单编号" style=" width:250px">
+                            </li>
+                            <li><label class="l_f">时间</label>
+                                <input class="inline laydate-icon" id="start" style=" margin-left:10px;"></li>
                             <li style="width:90px;">
                                 <button type="button" class="btn_search"><i class="fa fa-search"></i>查询</button>
                             </li>
                         </ul>
                     </div>
+
                     <!--订单列表展示-->
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                            </th>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                             <th width="120px">订单编号</th>
-                            <th width="250px">产品名称</th>
-                            <th width="100px">总价</th>
-                            <th width="100px">优惠</th>
-                            <th width="100px">订单时间</th>
-                            <th width="180px">所属类型</th>
-                            <th width="80px">数量</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
                             <th width="70px">状态</th>
                             <th width="200px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                一只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                二只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10061')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
-                        </tr>
+                            <c:forEach var="i" items="${Os0}">
+                                <tr>
+                                    <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                    <td>${i.sequence}</td>
+                                    <td class="order_product_name">
+                                        未付款
+                                    </td>
+                                    <td>---</td>
+                                    <td>${i.goodsprice}</td>
+                                    <td>${i.scorecost}</td>
+                                    <td>${i.allprice}</td>
+                                    <td>${i.contact}</td>
+                                    <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                    <td>
+                                        <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                           class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                        <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                                class="fa fa-list bigger-120"></i></a>
+                                        <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                           class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
 
                     <table class="table table-striped table-bordered table-hover" style="display: none;">
                         <thead>
                         <tr>
-                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                            </th>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                             <th width="120px">订单编号</th>
-                            <th width="250px">产品名称</th>
-                            <th width="100px">总价</th>
-                            <th width="100px">优惠</th>
-                            <th width="100px">订单时间</th>
-                            <th width="180px">所属类型</th>
-                            <th width="80px">数量</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
                             <th width="70px">状态</th>
                             <th width="200px">操作</th>
                         </tr>
+                        </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                三只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                四只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10061')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
-                        </tr>
+                        <c:forEach var="i" items="${Os1}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    未付款
+                                </td>
+                                <td>---</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
 
                     <table class="table table-striped table-bordered table-hover" style="display:none;">
                         <thead>
                         <tr>
-                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                            </th>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                             <th width="120px">订单编号</th>
-                            <th width="250px">产品名称</th>
-                            <th width="100px">总价</th>
-                            <th width="100px">优惠</th>
-                            <th width="100px">订单时间</th>
-                            <th width="180px">所属类型</th>
-                            <th width="80px">数量</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
                             <th width="70px">状态</th>
                             <th width="200px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                5只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                6只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10061')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
-                        </tr>
+                        <c:forEach var="i" items="${Os2}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    已付款
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
 
                     <table class="table table-striped table-bordered table-hover" style="display: none;">
                         <thead>
                         <tr>
-                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                            </th>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                             <th width="120px">订单编号</th>
-                            <th width="250px">产品名称</th>
-                            <th width="100px">总价</th>
-                            <th width="100px">优惠</th>
-                            <th width="100px">订单时间</th>
-                            <th width="180px">所属类型</th>
-                            <th width="80px">数量</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
                             <th width="70px">状态</th>
                             <th width="200px">操作</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="i" items="${Os3}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    已付款
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-bordered table-hover" style="display: none;">
+                        <thead>
                         <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                7只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                            <th width="120px">订单编号</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
+                            <th width="70px">状态</th>
+                            <th width="200px">操作</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="i" items="${Os4}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    已付款
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-bordered table-hover" style="display: none;">
+                        <thead>
                         <tr>
-                            <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                            <td>20160705445622</td>
-                            <td class="order_product_name">
-                                8只松鼠
-                            </td>
-                            <td>456.5</td>
-                            <td>14</td>
-                            <td>2016-7-5</td>
-                            <td>食品</td>
-                            <td>2</td>
-                            <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                            <td>
-                                <a onClick="Delivery_stop(this,'10061')" href="javascript:;" title="发货"
-                                   class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                <a title="订单详细" href="order_detailed.html" class="btn btn-xs btn-info order_detailed"><i
-                                        class="fa fa-list bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                            </td>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                            <th width="120px">订单编号</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
+                            <th width="70px">状态</th>
+                            <th width="200px">操作</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="i" items="${Os5}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    已付款
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-bordered table-hover" style="display: none;">
+                        <thead>
+                        <tr>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                            <th width="120px">订单编号</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
+                            <th width="70px">状态</th>
+                            <th width="200px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="i" items="${Os6}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    未退款
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-bordered table-hover" style="display: none;">
+                        <thead>
+                        <tr>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                            <th width="120px">订单编号</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
+                            <th width="70px">状态</th>
+                            <th width="200px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="i" items="${Os7}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    已退款
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-bordered table-hover" style="display: none;">
+                        <thead>
+                        <tr>
+                            <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                            <th width="120px">订单编号</th>
+                            <th width="250px">付款状态</th>
+                            <th width="100px">付款时间</th>
+                            <th width="100px">商品总价</th>
+                            <th width="100px">积分扣除</th>
+                            <th width="180px">订单总价</th>
+                            <th width="80px">联系方式</th>
+                            <th width="70px">状态</th>
+                            <th width="200px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="i" items="${Os8}">
+                            <tr>
+                                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td>${i.sequence}</td>
+                                <td class="order_product_name">
+                                    <c:choose>
+                                        <c:when test="${i.shopstatus==0}">待付款</c:when>
+                                        <c:when test="${i.shopstatus==1}">已付款</c:when>
+                                        <c:when test="${i.shopstatus==2}">待退款</c:when>
+                                        <c:when test="${i.shopstatus==3}">已退款</c:when>
+                                    </c:choose>
+                                </td>
+                                <td>${i.paytime}</td>
+                                <td>${i.goodsprice}</td>
+                                <td>${i.scorecost}</td>
+                                <td>${i.allprice}</td>
+                                <td>${i.contact}</td>
+                                <td class="td-status"><span class="label label-success radius">代发货</span></td>
+                                <td>
+                                    <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
+                                       class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
+                                    <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
+                                            class="fa fa-list bigger-120"></i></a>
+                                    <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
+                                       class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
 

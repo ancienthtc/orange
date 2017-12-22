@@ -64,20 +64,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="search_style" style="display: inline-block;">
+
+                    <ul class="search_content clearfix">
+                        <li><label class="l_f"> 订单编号</label>
+                            <input name="" type="text" class="text_add" placeholder="订单订单编号" style=" width:250px"></li>
+                        <li><label class="l_f">开始时间</label>
+                            <input class="inline laydate-icon" id="start" style=" margin-left:10px;">
+                        </li>
+                        <li><label class="l_f">结束时间</label>
+                            <input class="inline laydate-icon" id="start1" style=" margin-left:10px;">
+                        </li>
+                        <li style="width:90px;">
+                            <button type="button" class="btn_search"><i class="fa fa-search"></i>查询</button>
+                        </li>
+                    </ul>
+                </div>
                 <!--左侧样式-->
                 <div class="list_right_style">
-                    <div class="search_style" style="display: inline-block;">
 
-                        <ul class="search_content clearfix">
-                            <li><label class="l_f">订单编号</label><input name="" type="text" class="text_add"
-                                                                      placeholder="订单订单编号" style=" width:250px"></li>
-                            <li><label class="l_f">时间</label><input class="inline laydate-icon" id="start"
-                                                                    style=" margin-left:10px;"></li>
-                            <li style="width:90px;">
-                                <button type="button" class="btn_search"><i class="fa fa-search"></i>查询</button>
-                            </li>
-                        </ul>
-                    </div>
                     <!--订单列表展示-->
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
@@ -556,6 +562,10 @@
     //时间选择
     laydate({
         elem: '#start',
+        event: 'focus'
+    });
+    laydate({
+        elem: '#start1',
         event: 'focus'
     });
 

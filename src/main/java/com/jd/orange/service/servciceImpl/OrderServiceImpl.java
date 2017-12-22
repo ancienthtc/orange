@@ -21,8 +21,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Map<String, Integer> getOrderCount() {
-        return orderMapper.countOrderStatus();
+    public Map<String, Integer> getOrderCount(Integer way) {
+        return orderMapper.countOrderStatus(way);
     }
 
     @Override

@@ -23,7 +23,7 @@ public interface OrderMapper {
 
     int orderAmount();
 
-    Map<String,Integer> countOrderStatus();
+    Map<String,Integer> countOrderStatus(@Param("way") Integer way);
 
     /**
      * @param orderStatus 0-未确认 1-未发货 2-待收货 3-已完成 4-未确认退货 5-等待退货 6-完成退货 7-取消

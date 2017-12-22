@@ -104,6 +104,7 @@
       SUM(CASE WHEN orderstatus=6 and shopstatus=3 then 1 else 0 end) as o7 ,
       SUM(CASE WHEN orderstatus=7 then 1 else 0 end) as o8
     FROM t_order
+    WHERE buyway = #{way,jdbcType=INTEGER}
   </select>
 
   <select id="selectOrderByOrderStatus" resultType="com.jd.orange.model.Order" parameterType="java.lang.Integer">

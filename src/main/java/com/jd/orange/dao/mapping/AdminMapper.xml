@@ -30,6 +30,32 @@
     where admin = #{admin,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
   </select>
 
+  <select id="getAdminListByLevel" resultType="com.jd.orange.model.Admin" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List" />
+    FROM `t_admin`
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="key!=null and key!='' ">
+        (
+        `name` LIKE CONCAT('%',#{key},'%')
+        OR `name_j` LIKE CONCAT('%',#{key},'%')
+        OR `admin` LIKE CONCAT('%',#{key},'%')
+        )
+      </if>
+      <choose>
+        <when test=" (start!=null and end==null) or (start!='' and end=='') ">
+          AND createtime >= #{start,jdbcType=VARCHAR}
+        </when>
+        <when test=" (end!=null and start==null) or (end!='' and start=='') ">
+          AND #{end,jdbcType=VARCHAR} >= createtime
+        </when>
+        <when test=" (start!=null and end!=null) and (start!='' and end!='') ">
+          AND createtime >= #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR} >= createtime
+        </when>
+      </choose>
+      AND #{level,jdbcType=INTEGER} > `level`
+    </trim>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_admin
     where id = #{id,jdbcType=INTEGER}

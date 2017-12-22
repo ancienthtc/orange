@@ -10,6 +10,7 @@ import com.jd.orange.util.StringUtil.GenerateString;
 import com.jd.orange.util.date.DateExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -26,13 +27,23 @@ public class ImageServiceImpl implements ImageService{
     @Override
     public List<Picture> pictures(PictureType type, Integer id) {
         //type+id
-        return pictureMapper.getPictureList(type.getVal()+id);
+        if(id==null)
+        {
+            return pictureMapper.getPictureList(type.getVal());
+        }
+        else
+        {
+            return pictureMapper.getPictureList(type.getVal()+id);
+        }
     }
 
     @Override
-    public int pictureAdd(MultipartFile file , String serverPath , PictureType type, Integer id, Picture picture) {
+    @Transactional
+    public int pictureAdd(MultipartFile file , String serverPath , PictureType type, Integer id) {
         String title=new GenerateString().getUUID() +"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-        String folderPath=serverPath+Folder.Upload;
+        String folderPath=serverPath+Folder.Upload + "\\" ;
+
+
         if (!file.isEmpty()) {
             try {
                 // 文件夹不存在就创建
@@ -42,12 +53,20 @@ public class ImageServiceImpl implements ImageService{
                 }
                 // 转存文件
                 file.transferTo(new File(folderPath + title));
-
+                Picture picture=new Picture();
                 picture.setCreatetime(DateExample.getNowTimeByDate());//创建时间
                 picture.setFilename(title);//文件名
                 picture.setRoute(folderPath);//文件夹路径
-                picture.setPictype(type.getVal()+id);//设置"外键"
+                if(id==null)
+                {
+                    picture.setPictype(type.getVal());//设置"外键"
+                }
+                else
+                {
+                    picture.setPictype(type.getVal()+id);//设置"外键"
+                }
 
+                return pictureMapper.insertSelective(picture);
             } catch (Exception e) {
                 e.printStackTrace();
                 return 0;
@@ -56,6 +75,7 @@ public class ImageServiceImpl implements ImageService{
         return 0;
     }
 
+    //(商品模块使用)
     @Override
     public int pictureAdd(MultipartFile file, String folderPath , String filename) {
         if (!file.isEmpty()) {
@@ -104,5 +124,8 @@ public class ImageServiceImpl implements ImageService{
         }
     }
 
-
+    @Override
+    public int getOtherCount() {
+        return pictureMapper.getOtherPicCount();
+    }
 }

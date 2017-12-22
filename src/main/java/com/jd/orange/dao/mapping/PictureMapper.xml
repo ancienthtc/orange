@@ -28,6 +28,10 @@
     where pictype = #{info,jdbcType=VARCHAR}
   </select>
 
+  <select id="getOtherPicCount" resultType="java.lang.Integer">
+    SELECT count(1) from t_picture WHERE pictype="other"
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_picture
     where id = #{id,jdbcType=INTEGER}

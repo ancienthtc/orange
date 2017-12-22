@@ -15,11 +15,13 @@ public interface ImageService {
     List<Picture> pictures(PictureType type,Integer id);
 
     //添加图片
-    int pictureAdd(MultipartFile file , String serverPath , PictureType type, Integer id, Picture picture);
+    int pictureAdd(MultipartFile file , String serverPath , PictureType type, Integer id);
 
     int pictureAdd(MultipartFile file , String folderPath , String filename);
 
     int imageDelete(String absolutePath,Integer id , String pictype);
 
     boolean fileDel(String absolutePath);
+
+    int getOtherCount();
 }

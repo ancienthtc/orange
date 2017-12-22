@@ -114,7 +114,7 @@ public class MybatisTest {
     @Test
     public void test4()
     {
-        Map<String,Integer> map=orderMapper.countOrderStatus();
+        Map<String,Integer> map=orderMapper.countOrderStatus(0);
         System.out.println(JSON.toJSON(map));
     }
 

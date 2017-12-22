@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/goods")
 public class GoodsController {
 
-    private static final Logger log = LoggerFactory.getLogger(PartController.class);
+    private static final Logger log = LoggerFactory.getLogger(GoodsController.class);
 
     private ValueFilter filter = new ValueFilter() {
         @Override

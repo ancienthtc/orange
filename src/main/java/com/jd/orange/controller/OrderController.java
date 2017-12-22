@@ -17,7 +17,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    private static final Logger log = LoggerFactory.getLogger(PartController.class);
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
     private ValueFilter filter = new ValueFilter() {
         @Override
@@ -33,7 +33,7 @@ public class OrderController {
     @RequestMapping(value = "/toAdminOrderOnline")
     public String toAdminOrderOnline(Model model)
     {
-        model.addAttribute("OrderStatus",orderService.getOrderCount());
+        model.addAttribute("OrderStatus",orderService.getOrderCount(0));
         model.addAttribute("Os0",orderService.getOrderListByStatus(0,0,0));
         model.addAttribute("Os1",orderService.getOrderListByStatus(1,0,0));
         model.addAttribute("Os2",orderService.getOrderListByStatus(1,1,0));
@@ -48,8 +48,18 @@ public class OrderController {
 
     //进入线下订单管理
     @RequestMapping(value = "/toAdminOrderOffline")
-    public String toAdminOrderOffline()
+    public String toAdminOrderOffline(Model model)
     {
+        model.addAttribute("OrderStatus",orderService.getOrderCount(1));
+        model.addAttribute("Os0",orderService.getOrderListByStatus(0,0,1));
+        model.addAttribute("Os1",orderService.getOrderListByStatus(1,0,1));
+        model.addAttribute("Os2",orderService.getOrderListByStatus(1,1,1));
+        model.addAttribute("Os3",orderService.getOrderListByStatus(2,1,1));
+        model.addAttribute("Os4",orderService.getOrderListByStatus(3,1,1));
+        model.addAttribute("Os5",orderService.getOrderListByStatus(4,1,1));
+        model.addAttribute("Os6",orderService.getOrderListByStatus(5,2,1));
+        model.addAttribute("Os7",orderService.getOrderListByStatus(6,3,1));
+        model.addAttribute("Os8",orderService.getOrderListByStatus(7,null,1));
         return "manager/xianxiaguanli";
     }
 

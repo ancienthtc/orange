@@ -13,7 +13,7 @@ public interface OrderService {
     //订单数量
     int orderAmount();
 
-    Map<String,Integer> getOrderCount();
+    Map<String,Integer> getOrderCount(Integer way);
 
     List<Order> getOrderListByStatus(Integer orderStatus,Integer shopStatus,Integer way);
 

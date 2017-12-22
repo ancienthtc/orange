@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/user")
 public class UserController {
 
-    private static final Logger log = LoggerFactory.getLogger(PartController.class);
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private ValueFilter filter = new ValueFilter() {
         @Override

@@ -20,4 +20,7 @@ public interface PictureMapper {
     int updateByPrimaryKey(Picture record);
 
     List<Picture> getPictureList(String info);
+
+    //获取数量
+    int getOtherPicCount();
 }
