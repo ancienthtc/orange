@@ -26,4 +26,6 @@ public interface PartMapper {
 
     List<Part> partsList(@Param("key") String key);
 
+    Part getPartById(Integer id);
+
 }

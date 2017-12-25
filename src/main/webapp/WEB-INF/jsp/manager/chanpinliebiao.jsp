@@ -165,38 +165,12 @@
     </div>
 </div>
 
-<div class="fenye">
-    <div style="width:30%;float: left;">
-        <select name="select" id="fruit" style="width:120px;height:30px;margin: auto;display: block;">
-            <option value="">每页显示10页</option>
-            <option value="">每页显示20页</option>
-            <option value="">每页显示30页</option>
-            </select>
-                <p></p>
-    </div>
-
-    <div style="width:50%;float: left;" id="clipDIV">
-
-    </div>
-
-    <div style="width: 20%;float: left;font-size:18px;color: #858585;">
-        第1/10页
-    </div>
-</div>
 
 
 
 </body>
 </html>
-<script type="text/javascript">
-    var fruit=document.getElementById("fruit");
-    var option=document.getElementsByTagName("option");
-    var p=document.getElementsByTagName("p")[0];
-    fruit.onchange=function(){
-        p.innerText="你选择的是"+option[fruit.selectedIndex].innerText
-        console.log(option[fruit.selectedIndex]);
-    }
-</script>
+
 
 
 <script>

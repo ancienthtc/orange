@@ -18,4 +18,6 @@ public interface AdminService {
     PagedResult<Admin> getAdminListByLevel(Integer pageNo, Integer pageSize, String key, String start , String end , int level);
 
     Map<String,Number> getHomeCount();
+
+    int AdminAdd(Admin admin);
 }

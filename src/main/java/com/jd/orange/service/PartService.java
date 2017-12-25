@@ -25,8 +25,13 @@ public interface PartService {
     //分类修改
     int PartAlter(Part part);
 
+    //分类删除
     int PartDel(Integer pid);
 
+    //分类更新
     int PartUpdate(Part part);
+
+    //获取某分类
+    Part getPart(Integer pid);
 
 }

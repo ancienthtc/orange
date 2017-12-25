@@ -63,6 +63,21 @@
     ORDER BY `level` ASC , priority DESC
   </select>
 
+  <select id="getPartById" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Part">
+    SELECT
+    a.id,
+    a.`name`,
+    a.name_j as nameJ,
+    a.`level`,
+    a.priority,
+    a.belong,
+    b.`name` as fname
+    FROM
+    t_part as a
+    LEFT JOIN t_part as b ON a.belong = b.id
+    WHERE a.id = #{id,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_part
     where id = #{id,jdbcType=INTEGER}

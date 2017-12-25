@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,6 +64,14 @@ public class PartController {
         model.addAttribute("parts",parts);
 
         return "manager/product-category-add";
+    }
+
+    //修改分类
+    @RequestMapping("/toPartUpdate/{pid}")
+    public String toPartUpdate(@PathVariable Integer pid,Model model)
+    {
+        model.addAttribute("part",partService.getPart(pid));
+        return "manager/product-category-update";
     }
 
 

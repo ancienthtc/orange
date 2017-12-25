@@ -32,12 +32,12 @@
 </head>
 <body>
 <div class="type_style">
-    <div class="type_title">产品类型信息</div>
+    <div class="type_title">添加产品分类</div>
     <div class="type_content">
-        <div class="Operate_btn">
-            <a class="btn  btn-warning"><i class="icon-edit align-top bigger-125"></i>新增商品类型</a>
+        <%--<div class="Operate_btn">--%>
+            <%--<a class="btn  btn-warning"><i class="icon-edit align-top bigger-125"></i>新增商品类型</a>--%>
 
-        </div>
+        <%--</div>--%>
         <form action="<%=basePath%>part/add" method="post" class="form form-horizontal" id="form-user-add">
             <div class="Operate_cont clearfix">
                 <label class="form-label"><span class="c-red">中文&nbsp;&nbsp;&nbsp;&nbsp;</span>分类名称：</label>

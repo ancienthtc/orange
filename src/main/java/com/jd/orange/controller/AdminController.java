@@ -107,6 +107,19 @@ public class AdminController {
         return JSON.toJSONString(adminService.getAdminListByLevel(pageNo,pageSize,key,start,end,admin.getLevel() ),filter );
     }
 
+    //管理员添加
+    @RequestMapping("/add")
+    @ResponseBody
+    public String AdminAdd(Admin admin)
+    {
+        //log.info(admin.getAdmin()+" "+admin.getLevel()+" "+admin.getName() );
+        if(adminService.AdminAdd(admin) > 0 )
+        {
+            return "true";
+        }
+        return "false";
+    }
+
 
     //添加轮播图
     @RequestMapping("/FigureAdd")

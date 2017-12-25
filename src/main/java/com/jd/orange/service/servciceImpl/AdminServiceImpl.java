@@ -6,6 +6,7 @@ import com.jd.orange.model.Admin;
 import com.jd.orange.service.AdminService;
 import com.jd.orange.util.pagehelper.BeanUtil;
 import com.jd.orange.util.pagehelper.PagedResult;
+import com.jd.orange.util.password.Secret;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,4 +42,15 @@ public class AdminServiceImpl implements AdminService {
     public Map<String, Number> getHomeCount() {
         return null;
     }
+
+    @Override
+    public int AdminAdd(Admin admin) {
+        if(admin.getLevel()==null || admin.getLevel() <0)
+        {
+            return 0;
+        }
+        admin.setPassword(Secret.enPass(admin.getPassword()) );
+        return adminMapper.insertSelective(admin);
+    }
+
 }
