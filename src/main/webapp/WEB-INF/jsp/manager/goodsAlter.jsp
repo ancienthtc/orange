@@ -106,7 +106,7 @@
                 <div class="formControls col-2 skin-minimal">
                     <div class="check-box" style=" margin-top:5px">
                         <input type="checkbox" id="checkbox-1">
-                        <label for="checkbox-1">&nbsp;</label>是否设置为推荐商品（推荐商品上线为8）
+                        <label for="checkbox-1">&nbsp;&nbsp;</label>是否设置为推荐商品（推荐商品上线为8）
                     </div>
                 </div>
             </div>
