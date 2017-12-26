@@ -53,15 +53,14 @@ public class PartServiceImpl implements PartService {
         return partMapper.insertSelective(part);
     }
 
-    @Override
-    public int PartAlter(Part part) {
-        return 0;
-    }
 
     @Override
     public int PartUpdate(Part part) {
         //Part old=partMapper.selectByPrimaryKey(part.getId());
-
+        if(part.getId()==part.getBelong())
+        {
+            return 0;
+        }
         return partMapper.updateByPrimaryKeySelective(part);
     }
 
@@ -69,5 +68,10 @@ public class PartServiceImpl implements PartService {
     public Part getPart(Integer pid) {
         return partMapper.getPartById(pid);
     }
+
+//    @Override
+//    public Part getFatherPart(Integer id) {
+//        return null;
+//    }
 
 }

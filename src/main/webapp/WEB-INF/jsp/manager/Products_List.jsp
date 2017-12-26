@@ -141,7 +141,7 @@
                     tbody.append("<td class='r_priority' width='100px'>"+result.dataList[i].priority+"</td>");
                     tbody.append("<td class='fname' width='180px'>"+result.dataList[i].fname+"</td>");
                     var a="<td>";
-                    a+="<a href=\"picture-add.html\" class=\"btn btn-xs btn-info\"><i class=\"icon-edit bigger-120\"></i></a>"
+                    a+="<a href='<%=basePath%>part/toPartUpdate/"+result.dataList[i].id+"' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>"
                     a+="<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'122')\" class=\"btn btn-xs btn-warning\"><i class=\"icon-trash  bigger-120\"></i></a></td>";
                     //tbody.append("<a href=\"picture-add.html\" class=\"btn btn-xs btn-info\"><i class=\"icon-edit bigger-120\"></i></a>");
                     //tbody.append("<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'1')\" class=\"btn btn-xs btn-warning\"><i class=\"icon-trash  bigger-120\"></i></a>");

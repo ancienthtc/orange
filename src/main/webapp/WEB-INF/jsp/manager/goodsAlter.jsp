@@ -25,7 +25,8 @@
     <![endif]-->
     <link href="<%=basePath%>backpage/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>backpage/Widget/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-
+    <%--<link href="<%=basePath%>css/admin/bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
+    <link href="<%=basePath%>css/admin/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
     <title>新增图片</title>
 </head>
 <body>
@@ -109,41 +110,60 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix cl">
-                <label class="form-label col-2">图片说明1：</label>
-                <div class="formControls col-2 "  style="margin-top: 5px">
-                    <img src="<%=basePath%>image/goods?pic=${goods.pic1}" width="300px" height="250px" style="float: left;">
-                    <div style="float: left;margin-top: 140px;margin-left: 20px">
-                        替换图片1:
-                    </div>
-                    <input type="file" id="exampleInputFile1" style="float: left;margin-top: 140px;">
-                    <input type="button" value="删除" style="float: left;margin-top: 140px;">
-                </div>
 
-            </div>
-            <div class="clearfix cl">
-                <label class="form-label col-2">图片说明2：</label>
-                <div class="formControls col-2 "  style="margin-top: 5px">
-                    <img src="<%=basePath%>image/goods?pic=${goods.pic2}" width="300px" height="250px" style="float: left;">
-                    <div style="float: left;margin-top: 140px;margin-left: 20px">
-                        替换图片2:
-                    </div>
-                    <input type="file" id="exampleInputFile2" style="float: left;margin-top: 140px;margin-left: 20px">
-                    <input type="button" value="删除" style="float: left;margin-top: 140px;">
-                </div>
-            </div>
-            <div class="clearfix cl">
-                <label class="form-label col-2">图片说明3：</label>
-                <div class="formControls col-2 " style="margin-top: 5px">
-                    <img src="<%=basePath%>image/goods?pic=${goods.pic3}" width="300px" height="250px" style="float: left;">
-                    <div style="float: left;margin-top: 140px;margin-left: 20px">
-                        替换图片3:
-                    </div>
-                    <input type="file" id="exampleInputFile3" style="float: left;margin-top: 140px;margin-left: 20px">
-                    <input type="button" value="删除" style="float: left;margin-top: 140px;">
-                </div>
-            </div>
 
+            <div class="container">
+                <div class="page-header">
+                    <form>
+                        <div class="form-group" id="uploadForm" enctype='multipart/form-data'>
+                            <div class="h4">图片预览</div>
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <img id="picImg" style="width: 100%;height: auto;max-height: 140px;" src="<%=basePath%>images/default.png" alt="">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png">
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <img id="picImg" style="width: 100%;height: auto;max-height: 140px;" src="<%=basePath%>images/default.png" alt="">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png">
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                            <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+                                <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+                                    <img id="picImg" style="width: 100%;height: auto;max-height: 140px;" src="<%=basePath%>images/default.png" alt="">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png">
+                        </span>
+                                    <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="uploadSubmit" class="btn btn-info">提交</button>
+                    </form>
+                </div>
+            </div>
 
             <div class="clearfix cl">
                 <label class="form-label col-2">图片上传：</label>
@@ -198,6 +218,7 @@
                     <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 </div>
             </div>
+
         </form>
 
 
@@ -306,6 +327,9 @@
 <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
 <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="<%=basePath%>backpage/js/form.js"></script>
+<script type="text/javascript" src="<%=basePath%>backpage/js/form.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/admin/bootstrap-fileinput.js"></script>
+<%--<script type="text/javascript" src="<%=basePath%>js/admin/jquery.min.js"></script>--%>
 
 <script>
 

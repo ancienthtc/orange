@@ -20,6 +20,9 @@ public class Part {
     @Transient
     private String fname;//父分类名称
 
+    @Transient
+    private Integer flevel;//父分类等级
+
     public Integer getId() {
         return id;
     }
@@ -82,5 +85,13 @@ public class Part {
 
     public void setFname(String fname) {
         this.fname = fname;
+    }
+
+    public Integer getFlevel() {
+        return flevel;
+    }
+
+    public void setFlevel(Integer flevel) {
+        this.flevel = flevel;
     }
 }

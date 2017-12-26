@@ -70,7 +70,17 @@ public class PartController {
     @RequestMapping("/toPartUpdate/{pid}")
     public String toPartUpdate(@PathVariable Integer pid,Model model)
     {
-        model.addAttribute("part",partService.getPart(pid));
+        Part part=partService.getPart(pid);
+        model.addAttribute("part",part);
+        model.addAttribute("parts",partService.getFatherPart());
+        if(part.getFlevel() != null)
+        {
+            if( part.getFlevel() > 0 )
+            {
+                model.addAttribute("child",partService.getPart(part.getBelong()));
+            }
+        }
+
         return "manager/product-category-update";
     }
 
@@ -109,6 +119,44 @@ public class PartController {
         partService.PartAdd(part);
         return "redirect:/part/toPartAdd";
         //return "manager/product-category-add";
+    }
+
+    @RequestMapping("/update")
+    public String partUpdate(Part part, HttpServletRequest request)
+    {
+
+        String[] str = request.getParameterValues("belong");    //多个同name select处理
+        if(str.length>=1)
+        {
+            if(str.length==2) //{xx,-2}
+            {
+                if(str[1].equals("-2"))
+                {
+                    part.setBelong(Integer.valueOf(str[0]));//创建二级子类
+                    part.setLevel(1);
+                }
+                else
+                {
+                    part.setBelong(Integer.valueOf(str[1]));//创建三级子类
+                    part.setLevel(2);
+                }
+            }
+            else    //{xx}
+            {
+                if(str[0].equals("-1"))
+                {
+                    part.setBelong( null );//创建一级父类
+                    part.setLevel(0);
+                }
+                else
+                {
+                    part.setLevel(1);
+                }
+            }
+        }
+        //partService.PartAdd(part);
+        partService.PartUpdate(part);
+        return "redirect:/part/toPartList";
     }
 
     //获取分类(子分类)
@@ -151,6 +199,7 @@ public class PartController {
     }
 
     //分类修改
+    /*
     @RequestMapping("/update")
     @ResponseBody
     public String updatePart(Part part)
@@ -166,5 +215,6 @@ public class PartController {
         }
         return "false";
     }
+    */
 
 }

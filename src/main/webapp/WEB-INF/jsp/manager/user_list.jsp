@@ -315,7 +315,10 @@ function member_edit(id){
 		 });
 		  if(num>0){  return false;}	 	
           else{
-			  layer.alert('添加成功！',{
+
+		      alert("xx");
+
+			  layer.alert('修改成功！',{
                title: '提示框',				
 			icon:1,		
 			  });

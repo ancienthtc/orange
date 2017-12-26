@@ -22,9 +22,6 @@ public interface PartService {
     //分类创建
     int PartAdd(Part part);
 
-    //分类修改
-    int PartAlter(Part part);
-
     //分类删除
     int PartDel(Integer pid);
 
@@ -33,5 +30,7 @@ public interface PartService {
 
     //获取某分类
     Part getPart(Integer pid);
+
+    //Part getFatherPart(Integer id);
 
 }

@@ -71,7 +71,8 @@
     a.`level`,
     a.priority,
     a.belong,
-    b.`name` as fname
+    b.`name` as fname,
+    b.`level` as flevel
     FROM
     t_part as a
     LEFT JOIN t_part as b ON a.belong = b.id
@@ -153,6 +154,9 @@
       </if>
       <if test="belong != null" >
         belong = #{belong,jdbcType=INTEGER},
+      </if>
+      <if test="belong == null" >
+        belong = NULL ,
       </if>
       <if test="nameJ != null" >
         name_j = #{nameJ,jdbcType=VARCHAR},
