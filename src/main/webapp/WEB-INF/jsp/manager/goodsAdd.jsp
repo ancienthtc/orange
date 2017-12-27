@@ -138,6 +138,22 @@
                     <textarea class="form-control" rows="3" name="detailJ"></textarea>
                 </div>
             </div>
+
+            <div class="clearfix cl">
+                <label class="form-label"><span class="c-red"></span>创建分类类型：</label>
+                <select id="f1" name="part" onchange="" style="margin-left:10px;width: 150px;">
+                    <option value="-1">选择分类</option>
+                </select>
+                <select id="f2" name="part" style="margin-left:10px;width: 150px;">
+
+                </select>
+
+                <select id="f3" name="part" style="margin-left:10px;width: 150px;">
+
+                </select>
+
+            </div>
+
             <div class="clearfix cl">
                 <div class="Button_operation">
                     <button  class="btn btn-primary radius" type="submit"><i class="icon-save "></i>保存并提交审核</button>
@@ -165,6 +181,73 @@
 <script src="<%=basePath%>backpage/js/lrtk.js" type="text/javascript" ></script>
 <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
 <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
+
+<script>
+    $(function() {
+
+        $.ajax({
+            url:"<%=basePath%>part/getPartChoiceFather",
+            //data:{aid:$(this).attr("aid")},
+            type:"post",
+            dataType:"text",
+            success:function(result){
+                var f1=$("#f1");
+                f1.empty();
+                console.log(result);
+                f1.append("<option value='-1'>选择分类</option>");
+                $.each(result,function(i,row){
+                    f1.append("<option value="+row.id+">中文名:"+row.name+"  日文名:"+row.nameJ+"</option>");
+                    console.log(result[i].id + " " + result[i].name);
+                })
+            },
+            error:function(){
+                alert("请求失败");
+            }
+        });
+
+
+        //给下拉列表添加事件
+        $("#f1").change(function(){
+            $.post("<%=basePath%>part/getPartChoiceChild",{id:$(this).val()},
+                function(result){
+                    console.log(result);
+                    var f2=$("#f2");
+                    f2.empty();
+                    if(result.length>0)
+                    {
+                        f2.append("<option value='-2'>选择</option>");
+                    }
+                    for(var i=0;i<result.length;i++)
+                    {
+                        f2.append("<option value="+result[i].id+">中文名:"+result[i].name+"  日文名:"+result[i].nameJ+"</option>");
+                    }
+
+                },"json");
+        });
+
+        $("#f2").change(function(){
+            $.post("<%=basePath%>part/getPartChoiceChild",{id:$(this).val()},
+                function(result){
+                    console.log(result);
+                    var f3=$("#f3");
+                    f3.empty();
+                    if(result.length>0)
+                    {
+                        f3.append("<option value='-3'>选择</option>");
+                    }
+                    for(var i=0;i<result.length;i++)
+                    {
+                        f3.append("<option value="+result[i].id+">中文名:"+result[i].name+"  日文名:"+result[i].nameJ+"</option>");
+                    }
+
+                },"json");
+        });
+
+
+    });
+
+</script>
+
 <script>
     $(function() {
         $("#add_picture").fix({

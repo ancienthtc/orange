@@ -114,10 +114,15 @@ public class GoodsController {
         String ServerPath=null;
         //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title + ".jpg"
         ServerPath=request.getSession().getServletContext().getRealPath("/");
-        if (goodsService.GoodsAdd(goods,file1,file2,file3,ServerPath) > 0)
-        {
-            return "true";
-        }
+
+        log.info(goods.getPart().toString());
+
+
+        //临时注释
+//        if (goodsService.GoodsAdd(goods,file1,file2,file3,ServerPath) > 0)
+//        {
+//            return "true";
+//        }
         return "false";
     }
 
