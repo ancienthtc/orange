@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
     <link href="<%=basePath%>backpage/Widget/icheck/icheck.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/admin/other.css"/>
+
     <script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
@@ -105,6 +107,11 @@
 
                     </tbody>
                 </table>
+                <div id="pagehere"></div>
+                <div>
+                    <input type="hidden" id="pageNo" value=""/>
+                    <input type="hidden" id="pages" value=""/>
+                </div>
             </div>
         </div>
     </div>
@@ -142,13 +149,37 @@
                     tbody.append("<td class='fname' width='180px'>"+result.dataList[i].fname+"</td>");
                     var a="<td>";
                     a+="<a href='<%=basePath%>part/toPartUpdate/"+result.dataList[i].id+"' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>"
-                    a+="<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'122')\" class=\"btn btn-xs btn-warning\"><i class=\"icon-trash  bigger-120\"></i></a></td>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning del' pid='"+result.dataList[i].id+"'><i class='icon-trash  bigger-120'></i></a></td>";
                     //tbody.append("<a href=\"picture-add.html\" class=\"btn btn-xs btn-info\"><i class=\"icon-edit bigger-120\"></i></a>");
                     //tbody.append("<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,'1')\" class=\"btn btn-xs btn-warning\"><i class=\"icon-trash  bigger-120\"></i></a>");
                     //tbody.append("</td>");
                     tbody.append(a);
                     tbody.append("</tr>");
                 }
+                //页码隐藏域
+                var s="<div class='page'  v-show='show'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo").val(result.pageNo);$("#pages").val(result.pages);
+                $("#pagehere").empty().append(s);
+                afterLoad();//事后绑定
             },"json");
     }
 
@@ -160,8 +191,84 @@
         send_post(url,info);
     });
 
+    //绑定事件
+    function afterLoad() {
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
 
+        $(".del").click(function () {
+            //alert( $(this).attr("pid") );
+            $.ajax({
+                url:"<%=basePath%>/",
+                data:{pid:$(this).attr("pid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
 
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo").val();
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var keys=$(".text_add").val();
+            var info={pageNo:parseInt(page)-1,pageSize:10,key:keys}
+            var url="<%=basePath%>part/getInitList";
+            //console.log(info);
+            send_post(url,info);
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo").val();
+            var pages=$("#pages").val();
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var keys=$(".text_add").val();
+            var info={pageNo:parseInt(page)+1,pageSize:10,key:keys}
+            var url="<%=basePath%>part/getInitList";
+            //console.log(info);
+            send_post(url,info);
+        });
+
+        //页码
+        $(".pg").click(function () {
+            var page= $(this).text();
+            var keys=$(".text_add").val();
+            var info={pageNo:page,pageSize:10,key:keys}
+            var url="<%=basePath%>part/getInitList";
+            //console.log(info );
+            send_post(url,info);
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg").val();
+            var keys=$(".text_add").val();
+            var start=$('#start').val();
+            var end=$("#start1").val();
+            var info={pageNo:page,pageSize:10,key:keys}
+            var url="<%=basePath%>part/getInitList";
+            //console.log(info );
+            send_post(url,info);
+        });
+
+    }
 
 
     jQuery(function ($) {

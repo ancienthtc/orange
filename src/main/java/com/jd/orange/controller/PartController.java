@@ -159,15 +159,24 @@ public class PartController {
         return "redirect:/part/toPartList";
     }
 
+    //获取分类(父分类)
+    @RequestMapping(value = "/getPartChoiceFather" , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String getFatherPart()
+    {
+        List<Part> father_parts = partService.getFatherPart();
+        return JSON.toJSONString(father_parts, filter);
+    }
+
     //获取分类(子分类)
-    @RequestMapping(value = "/getPartChoice" , produces = "text/html;charset=UTF-8;")
+    @RequestMapping(value = "/getPartChoiceChild", produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getLevelPart(Integer id)
     {
         //log.info(id.toString());
         List<Part> child_parts = partService.getChildPart(id);
         //log.info(JSON.toJSONString(child_parts));
-        return JSON.toJSONString(child_parts);
+        return JSON.toJSONString(child_parts, filter);
     }
 
     //获取分类列表

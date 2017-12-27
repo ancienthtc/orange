@@ -20,4 +20,6 @@ public interface AdminService {
     Map<String,Number> getHomeCount();
 
     int AdminAdd(Admin admin);
+
+    int AdminDel(Integer aid);
 }

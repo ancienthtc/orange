@@ -23,5 +23,7 @@ public interface ImageService {
 
     boolean fileDel(String absolutePath);
 
+    boolean figureDel(Integer pid);
+
     int getOtherCount();
 }

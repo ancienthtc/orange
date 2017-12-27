@@ -22,12 +22,13 @@
     <link rel="stylesheet" href="<%=basePath%>backpage/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
     <link href="<%=basePath%>backpage/Widget/icheck/icheck.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>backpage/other/page.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="<%=basePath%>css/admin/other.css"/>
 
     <script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
-    <script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>
-    <script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>
+    <%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>--%>
+    <%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>--%>
     <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
     <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
     <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript"></script>
@@ -98,68 +99,14 @@
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    <tr>
-                        <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                        </td>
-                        <td width="80px">45631</td>
-                        <td width="250px"><u style="cursor:pointer" class="text-primary" onclick="">小米 Max 全网通 高配版 3GB内存
-                            64GB ROM 金色 移动联通电信4G手机Y</u></td>
-                        <td width="100px">5467</td>
-                        <td width="100px">4525</td>
-                        <td width="100px">法国</td>
-                        <td width="180px">2014-6-11 11:11:42</td>
-                        <td class="td-status"><span class="label label-success radius">上架</span></td>
-                        <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
-                        <td class="td-manage">
-                            <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
-                               class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
-                            <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                        </td>
-                        <td width="80px">45631</td>
-                        <td width="250px"><u style="cursor:pointer" class="text-primary" onclick="">小米 Max 全网通 高配版 3GB内存
-                            64GB ROM 金色 移动联通电信4G手机Y</u></td>
-                        <td width="100px">5467</td>
-                        <td width="100px">4525</td>
-                        <td width="100px">法国</td>
-                        <td width="180px">2014-6-11 11:11:42</td>
-                        <td class="td-status"><span class="label label-success radius">上架</span></td>
-                        <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
-                        <td class="td-manage">
-                            <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
-                               class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
-                            <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                        </td>
-                        <td width="80px">45631</td>
-                        <td width="250px"><u style="cursor:pointer" class="text-primary" onclick="">小米 Max 全网通 高配版 3GB内存
-                            64GB ROM 金色 移动联通电信4G手机Y</u></td>
-                        <td width="100px">5467</td>
-                        <td width="100px">4525</td>
-                        <td width="100px">法国</td>
-                        <td width="180px">2014-6-11 11:11:42</td>
-                        <td class="td-status"><span class="label label-success radius">上架</span></td>
-                        <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
-                        <td class="td-manage">
-                            <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
-                               class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
-                            <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
-                        </td>
-                    </tr>
+
                     </tbody>
                 </table>
+                <div id="pagehere"></div>
+                <div>
+                    <input type="hidden" id="pageNo" value=""/>
+                    <input type="hidden" id="pages" value=""/>
+                </div>
             </div>
         </div>
     </div>
@@ -218,12 +165,36 @@
                     a+="<a onClick='member_stop(this,\"10001\")' href='javascript:;' title='停用' class='btn btn-xs btn-success'>";
                     a+="<i class='icon-ok bigger-120'></i></a>";
                     a+="<a href='<%=basePath%>goods/toGoodsAlter/"+result.dataList[i].id+"' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>";
-                    a+="<a title='删除' href='javascript:;' onclick='member_del(this,\"1\")' class='btn btn-xs btn-warning'>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning del' gid='"+result.dataList[i].id+"' >";
                     a+="<i class='icon-trash  bigger-120'></i></a></td>";
                     tbody.append(a);
                     tbody.append("</tr>");
-
                 }
+                //页码隐藏域
+                var s="<div class='page'  v-show='show'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo").val(result.pageNo);$("#pages").val(result.pages);
+                $("#pagehere").empty().append(s);
+                afterLoad();//事后绑定
+
             },"json");
     }
 
@@ -242,6 +213,91 @@
         var url="<%=basePath%>goods/getGoodsList";
         send_post(url,info);
     });
+
+    //绑定事件
+    function afterLoad() {
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
+
+        $(".del").click(function () {
+            //alert( $(this).attr("pid") );
+            $.ajax({
+                url:"<%=basePath%> / ",
+                data:{gid:$(this).attr("gid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
+
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo").val();
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var keys=$(".text_add").val();
+            var start=$('#start').val();
+            var end=$("#start1").val();
+            var info={pageNo:parseInt(page)-1,pageSize:10,key:keys,start:start,end:end}
+            var url="<%=basePath%>goods/getGoodsList";
+            //console.log(info);
+            send_post(url,info);
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo").val();
+            var pages=$("#pages").val();
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var keys=$(".text_add").val();
+            var start=$('#start').val();
+            var end=$("#start1").val();
+            var info={pageNo:parseInt(page)+1,pageSize:10,key:keys,start:start,end:end}
+            var url="<%=basePath%>goods/getGoodsList";
+            //console.log(info);
+            send_post(url,info);
+        });
+
+        //页码
+        $(".pg").click(function () {
+            var page= $(this).text();
+            var keys=$(".text_add").val();
+            var start=$('#start').val();
+            var end=$("#start1").val();
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end}
+            var url="<%=basePath%>goods/getGoodsList";
+            //console.log(info );
+            send_post(url,info);
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg").val();
+            var keys=$(".text_add").val();
+            var start=$('#start').val();
+            var end=$("#start1").val();
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end}
+            var url="<%=basePath%>goods/getGoodsList";
+            //console.log(info );
+            send_post(url,info);
+        });
+
+    }
 
 
 </script>

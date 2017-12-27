@@ -98,7 +98,7 @@
             //第二个参数data:待发送的值keyalue
             //第三个参数callback:发送返回时回调函数
             //第四个参数type:返回内容格式，常用text，json,
-            $.post("<%=basePath%>part/getPartChoice",{id:$(this).val()},
+            $.post("<%=basePath%>part/getPartChoiceChild",{id:$(this).val()},
                 function(result){
                     console.log(result);
                     //获取第二级城市的id

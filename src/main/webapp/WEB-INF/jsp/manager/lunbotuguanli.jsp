@@ -38,9 +38,9 @@
 <div class=" page-content clearfix">
     <div id="products_style">
         <div class="border clearfix">
-       <span class="l_f">
-        <a href="picture-add.html" title="添加轮播图" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加轮播图</a>
-       </span>
+        <span class="l_f">
+        <a href="<%=basePath%>admin/toFigureAdd" title="添加轮播图" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加轮播图</a>
+        </span>
         </div>
         <!--产品列表展示-->
         <div class="h_products_list clearfix" id="products_list">
@@ -80,12 +80,13 @@
                             <td width="180px"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${i.createtime}" /></td>
                             <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
                             <td class="td-manage">
-                                <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"
-                                   class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>
-                                <a href="lunbotu_xq.html" class="btn btn-xs btn-info"><i
-                                        class="icon-edit bigger-120"></i></a>
-                                <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                                   class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
+                                <%--<a onClick="member_stop(this,'10001')" href="javascript:;" title="停用"--%>
+                                   <%--class="btn btn-xs btn-success"><i class="icon-ok bigger-120"></i></a>--%>
+                                <%--<a href="lunbotu_xq.html" class="btn btn-xs btn-info"><i--%>
+                                        <%--class="icon-edit bigger-120"></i></a>--%>
+                                <a title="删除" href="javascript:;" pid="${i.id}" class="btn btn-xs btn-warning del">
+                                    <i class="icon-trash  bigger-120"></i>
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -147,6 +148,31 @@
 </div>
 </body>
 </html>
+<script>
+    $(".del").click(function () {
+        //alert( $(this).attr("pid") );
+        $.ajax({
+            url:"<%=basePath%>admin/FigureDel",
+            data:{pid:$(this).attr("pid")},
+            type:"get",
+            dataType:"text",
+            success:function(data){
+                if(data=="true")
+                    alert("删除成功");
+                else
+                    alert("删除失败");
+                window.location.href="<%=basePath%>admin/toFigure";
+            },
+            error:function(){
+                alert("请求失败");
+            }
+        });
+
+    });
+
+</script>
+
+
 <script>
     jQuery(function ($) {
         var oTable1 = $('#sample-table').dataTable({

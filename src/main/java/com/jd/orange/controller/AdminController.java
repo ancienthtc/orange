@@ -76,7 +76,8 @@ public class AdminController {
     @RequestMapping("/toFigureAdd")
     public String to_figure_add()
     {
-        return "manager/picture-add";
+        //return "manager/picture-add";
+        return "manager/figureAdd";
     }
 
     //进入管理员管理
@@ -120,7 +121,18 @@ public class AdminController {
         return "false";
     }
 
+    @RequestMapping("/del")
+    @ResponseBody
+    public String AdminDel(Integer aid)
+    {
+        if ( adminService.AdminDel(aid) > 0 )
+        {
+            return "true";
+        }
+        return "false";
+    }
 
+    /*  轮播图管理  */
     //添加轮播图
     @RequestMapping("/FigureAdd")
     @ResponseBody
@@ -136,5 +148,17 @@ public class AdminController {
         }
         return "false";
     }
+
+    @RequestMapping("/FigureDel")
+    @ResponseBody
+    public String FigureDel(Integer pid)
+    {
+        if( imageService.figureDel(pid) )
+        {
+            return "true";
+        }
+        return "false";
+    }
+
 
 }

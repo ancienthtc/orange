@@ -125,6 +125,19 @@ public class ImageServiceImpl implements ImageService{
     }
 
     @Override
+    public boolean figureDel(Integer pid) {
+        Picture picture=pictureMapper.selectByPrimaryKey(pid);
+        String absolutePath=picture.getRoute()+picture.getFilename();
+        int i=pictureMapper.deleteByPrimaryKey(pid);
+        if( fileDel(absolutePath) && i > 0  )
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    @Override
     public int getOtherCount() {
         return pictureMapper.getOtherPicCount();
     }

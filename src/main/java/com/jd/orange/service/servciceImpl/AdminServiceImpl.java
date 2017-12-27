@@ -53,4 +53,9 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.insertSelective(admin);
     }
 
+    @Override
+    public int AdminDel(Integer aid) {
+        return adminMapper.deleteByPrimaryKey(aid);
+    }
+
 }
