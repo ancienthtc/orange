@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>jd</groupId>
   <artifactId>OrangeHouse</artifactId>
@@ -129,9 +129,9 @@
     </dependency>
 
     <!--<dependency>-->
-      <!--<groupId>cglib</groupId>-->
-      <!--<artifactId>cglib</artifactId>-->
-      <!--<version>${cglib.version}</version>-->
+    <!--<groupId>cglib</groupId>-->
+    <!--<artifactId>cglib</artifactId>-->
+    <!--<version>${cglib.version}</version>-->
     <!--</dependency>-->
 
     <!-- 添加mybatis依赖 -->
@@ -166,6 +166,14 @@
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>1.1.41</version>
+    </dependency>
+
+    <!-- net json(api接口使用) -->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+      <classifier>jdk15</classifier>
     </dependency>
 
     <!-- 添加日志相关jar包 -->
@@ -260,11 +268,11 @@
       <artifactId>base64</artifactId>
       <version>2.3.8</version>
     </dependency>
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>RELEASE</version>
-      </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>RELEASE</version>
+    </dependency>
 
 
   </dependencies>
