@@ -467,7 +467,8 @@ header {
 #add_picture .Widescreen{ left:0px}
 #form-article-add{ padding:20px 0px;}
 #form-article-add .cl{ margin-bottom:15px; position:relative; min-height:35px; width:100%; left:0px}
-#form-article-add .cl .form-label{ line-height:35px; width:100px;}
+#form-article-add .cl .form-label{ line-height:35px;}
+.color_part{color: red !important;}
 #form-article-add .cl .Add_p_s .form-label{}
 #form-article-add .cl .Add_p_s{ width:414px; position:relative; min-height:35px; float:left; margin-bottom:15px;}
 #form-article-add .cl .Add_p_s-canshu{ width:310px; position:relative; min-height:35px; float:left; margin-bottom:15px;}

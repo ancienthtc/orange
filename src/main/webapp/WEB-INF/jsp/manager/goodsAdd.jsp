@@ -94,11 +94,11 @@
 
             </div>
 
-            <div class="clearfix cl">
-                <label class="form-label col-2">上架日期：</label>
-                <div class="formControls col-2">
-                    <input class="inline laydate-icon" id="start" name="shelf" style=" margin-left:10px;">
-                </div>
+            <%--<div class="clearfix cl">--%>
+                <%--<label class="form-label col-2">上架日期：</label>--%>
+                <%--<div class="formControls col-2">--%>
+                    <%--<input class="inline laydate-icon" id="start" name="shelf" style=" margin-left:10px;">--%>
+                <%--</div>--%>
                 <%--<div class="formControls col-2">--%>
                     <%--<input type="button" class="input-text" value="下架" placeholder="" id="" name="">--%>
                 <%--</div>--%>
@@ -106,7 +106,8 @@
                     <%--<div class="check-box" style=" margin-top:5px">--%>
                         <%--<input type="checkbox" id="checkbox-1"><label for="checkbox-1">&nbsp;</label>是否设置为推荐商品（推荐商品上线为8）</div>--%>
                 <%--</div>--%>
-            </div>
+            <%--</div>--%>
+
             <div class="clearfix cl">
                 <label class="form-label col-2">图片说明1：</label>
                 <div class="formControls col-2 "  style="margin-top: 5px">
@@ -140,15 +141,15 @@
             </div>
 
             <div class="clearfix cl">
-                <label class="form-label"><span class="c-red"></span>创建分类类型：</label>
-                <select id="f1" name="part" onchange="" style="margin-left:10px;width: 150px;">
+                <label class="form-label color_part"><span class="c-red"></span>选择所属分类*：</label>
+                <select id="f1" name="part" onchange="" style="margin-left:10px;">
                     <option value="-1">选择分类</option>
                 </select>
-                <select id="f2" name="part" style="margin-left:10px;width: 150px;">
+                <select id="f2" name="part" style="margin-left:10px;">
 
                 </select>
 
-                <select id="f3" name="part" style="margin-left:10px;width: 150px;">
+                <select id="f3" name="part" style="margin-left:10px;">
 
                 </select>
 
@@ -165,7 +166,8 @@
     </div>
 </div>
 </div>
-<script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
+<%--<script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>--%>
+<script src="<%=basePath%>js/admin/jquery-3.1.1.js"></script>
 <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
 <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
 <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript" ></script>
@@ -195,10 +197,20 @@
                 f1.empty();
                 console.log(result);
                 f1.append("<option value='-1'>选择分类</option>");
-                $.each(result,function(i,row){
+
+
+                $.each($.parseJSON(result), function (index,row) {
+                    //console.log( this[index]["name"] );
+                    //console.log( this[index].name + "  " + this[this].nameJ );
+                    //console.log( row.name+"  "+row.nameJ );
                     f1.append("<option value="+row.id+">中文名:"+row.name+"  日文名:"+row.nameJ+"</option>");
-                    console.log(result[i].id + " " + result[i].name);
                 })
+
+                // $.each(result,function(i,row){
+                //     f1.append("<option value="+row.id+">中文名:"+row.name+"  日文名:"+row.nameJ+"</option>");
+                //     console.log(result[i].id + " " + result[i].name);
+                // })
+
             },
             error:function(){
                 alert("请求失败");
@@ -213,6 +225,8 @@
                     console.log(result);
                     var f2=$("#f2");
                     f2.empty();
+                    var f3=$("#f3");
+                    f3.empty();
                     if(result.length>0)
                     {
                         f2.append("<option value='-2'>选择</option>");

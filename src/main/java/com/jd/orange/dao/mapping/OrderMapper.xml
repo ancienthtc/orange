@@ -120,6 +120,35 @@
     ORDER BY  createtime
   </select>
 
+  <select id="selectOrderByOrderStatusWithPage" resultType="com.jd.orange.model.Order" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `t_order`
+    <trim prefix="where" prefixOverrides="and|or">
+      `orderstatus` = #{orderStatus,jdbcType=INTEGER}
+      <if test=" shopStatus != null " >
+        AND `shopstatus` = #{shopStatus,jdbcType=INTEGER}
+      </if>
+      AND `buyway` = #{way,jdbcType=INTEGER}
+      <if test="key!=null and key!='' ">
+        AND  t_order.`sequence` LIKE CONCAT('%',#{key},'%')
+      </if>
+      <choose>
+        <when test=" (start!=null and end==null) or (start!='' and end=='') ">
+          AND createtime >= #{start,jdbcType=VARCHAR}
+        </when>
+        <when test=" (end!=null and start==null) or (end!='' and start=='') ">
+          AND #{end,jdbcType=VARCHAR} >= createtime
+        </when>
+        <when test=" (start!=null and end!=null) and (start!='' and end!='') ">
+          AND createtime >= #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR} >= createtime
+        </when>
+      </choose>
+    </trim>
+    ORDER BY  createtime
+  </select>
+
+
   <select id="selectOrderWithDetail" parameterType="java.lang.String" resultMap="OrderDetailMap">
     SELECT
     t_order.id,t_order.sequence,t_order.buyway,t_order.shopstatus,t_order.orderstatus,

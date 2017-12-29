@@ -1,0 +1,162 @@
+﻿.order-numbers.add {
+        -webkit-animation-name: add-animate;
+        -webkit-animation-duration: 800ms;
+        -webkit-animation-timing-function: ease;
+    }
+  
+/*动画*/
+/*放大特效 大*/
+@-webkit-keyframes add-animate {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+/*放大特效 小*/
+@-webkit-keyframes add-animate-sm {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(2);
+        transform: scale(1.3);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes runoff-left {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-90deg);
+        opacity: .4;
+    }
+
+    100% {
+        transform: rotate(-160deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes runoff-left {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(-90deg);
+        opacity: .4;
+    }
+
+    100% {
+        -webkit-transform: rotate(-160deg);
+        opacity: 0;
+    }
+}
+
+@keyframes runoff-right {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
+        opacity: .4;
+    }
+
+    100% {
+        transform: rotate(160deg);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes runoff-right {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(90deg);
+        opacity: .4;
+    }
+
+    100% {
+        -webkit-transform: rotate(160deg);
+        opacity: 0;
+    }
+}  
+
+.cart_num{
+        
+        display: inline-block;
+        position: absolute;
+        top: 48px !important;
+        background-color: red;
+        line-height: 18px;
+        font-style: normal;
+        border-radius: 100%;
+        font-size: 10px;
+        color: #fff;
+        left: 28px;
+        height: 18px;
+        width: 18px;
+        text-align: center;
+        
+    }
+    .addcart{
+        position:absolute; top: -82px; right:10px;display: block;  width: 50px; height: 50px;
+    }
+    .addcart img{
+        width: 44px!important; height: 44px !important;padding: 0px; margin-left: 10px;
+    }
+    .goolist_name{
+        background-color: #fff;
+        padding-left: 5px;
+        position: relative;
+        padding-right: 5px;
+    }
+    .prolist li a {
+        height: 160px !important;
+    }
+    .index-cart{
+        z-index: 99999;
+        bottom: 0px !important;
+        left: 0px !important;
+        background-image: none;
+    }
+    .index-cart img{
+        width: 50px;
+        height: 44px;
+        margin-top: 44px;
+    }
+    .frozen{
+            position: absolute;width: 60px;height: 40px;top: 115px;left: 0px;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 14px;
+            z-index: 2;
+            padding: 0px;
+    }
+
+    .frozen img{ width: 50px!important; height: 25px !important;padding: 0px; margin-left: -8px; margin-bottom: -5px;}

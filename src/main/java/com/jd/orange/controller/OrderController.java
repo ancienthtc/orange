@@ -1,7 +1,10 @@
 package com.jd.orange.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.model.Order;
 import com.jd.orange.service.OrderService;
+import com.jd.orange.util.pagehelper.PagedResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/order")
@@ -84,5 +89,13 @@ public class OrderController {
         return "";
     }
 
+    @RequestMapping(value = "/getAdminOrderOnline" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String getAdminOrderOnline(Integer pageNo, Integer pageSize, String key,String start,String end,Integer orderStatus,Integer shopStatus)
+    {
+        //PagedResult<Order> orderlists=orderService.getOrderListByStatus(pageNo,pageSize,key,start,end,orderStatus,shopStatus,0);
+
+        return JSON.toJSONString( orderService.getOrderListByStatus(pageNo,pageSize,key,start,end,orderStatus,shopStatus,0) , filter );
+    }
 
 }

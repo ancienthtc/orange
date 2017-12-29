@@ -9,12 +9,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
         <link href="<%=basePath%>backpage/assets/css/codemirror.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/ace.min.css" />
         <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="<%=basePath%>css/admin/other.css"/>
+
 		<script src="<%=basePath%>backpage/assets/js/jquery.min.js"></script>
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='<%=basePath%>backpage/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
@@ -59,7 +61,7 @@
      </div>
      <!---->
      <div class="table_menu_list">
-       <table class="table table-striped table-bordered table-hover" id="sample-table">
+            <table class="table table-striped table-bordered table-hover" id="sample-table">
 		<thead>
 		 <tr>
 				<th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
@@ -101,6 +103,11 @@
 
       </tbody>
 	</table>
+            <div id="pagehere"></div>
+            <div>
+                <input type="hidden" id="pageNo" value=""/>
+                <input type="hidden" id="pages" value=""/>
+            </div>
    </div>
   </div>
  </div>
@@ -164,11 +171,35 @@
                     a+="<td class='td-manage'>";
                     a+="<a title='编辑' onclick='member_edit(\"550\")' href='javascript:;'  class='btn btn-xs btn-info' >";
                     a+="<i class='icon-edit bigger-120'></i></a>";
-                    a+="<a title='删除' href='javascript:;' onclick='member_del(this,\"1\")' class='btn btn-xs btn-warning'>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning del' uid='"+result.dataList[i].id+"'>";
                     a+="<i class='icon-trash  bigger-120'></i></a></td>";
                     tbody.append(a);
                     tbody.append("</tr>");
                 }
+                //页码隐藏域
+                var s="<div class='page'  v-show='show'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo").val(result.pageNo);$("#pages").val(result.pages);
+                $("#pagehere").empty().append(s);
+                afterLoad();//事后绑定
             },"json");
     }
 
@@ -189,6 +220,101 @@
         var url="<%=basePath%>user/getUserList";
         send_post(url,info);
     });
+
+    //绑定事件
+    function afterLoad() {
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
+
+        $(".del").click(function () {
+            //alert( $(this).attr("pid") );
+            $.ajax({
+                url:"<%=basePath%> / ",
+                data:{uid:$(this).attr("uid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
+
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo").val();
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var keys=$(".text_add").val();
+            var sc=$('#start1').val();
+            var ec=$("#start2").val();
+            var su=$('#start3').val();
+            var eu=$("#start4").val();
+            var info={pageNo:parseInt(page)-1,pageSize:10,keys:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
+            var url="<%=basePath%>user/getUserList";
+            //console.log(info);
+            send_post(url,info);
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo").val();
+            var pages=$("#pages").val();
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var keys=$(".text_add").val();
+            var sc=$('#start1').val();
+            var ec=$("#start2").val();
+            var su=$('#start3').val();
+            var eu=$("#start4").val();
+            var info={pageNo:parseInt(page)+1,pageSize:10,keys:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
+            var url="<%=basePath%>user/getUserList";
+            //console.log(info);
+            send_post(url,info);
+        });
+
+        //页码
+        $(".pg").click(function () {
+            var page= $(this).text();
+            var keys=$(".text_add").val();
+            var sc=$('#start1').val();
+            var ec=$("#start2").val();
+            var su=$('#start3').val();
+            var eu=$("#start4").val();
+            var info={pageNo:page,pageSize:10,keys:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
+            var url="<%=basePath%>user/getUserList";
+            //console.log(info );
+            send_post(url,info);
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg").val();
+            var keys=$(".text_add").val();
+            var sc=$('#start1').val();
+            var ec=$("#start2").val();
+            var su=$('#start3').val();
+            var eu=$("#start4").val();
+            var info={pageNo:page,pageSize:10,keys:keys,start_c:sc,end_c:ec,start_u:su,end_u:eu}
+            var url="<%=basePath%>user/getUserList";
+            //console.log(info );
+            send_post(url,info);
+        });
+
+    }
+
+
 
 </script>
 

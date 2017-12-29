@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/goods")
@@ -114,15 +115,34 @@ public class GoodsController {
         String ServerPath=null;
         //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title + ".jpg"
         ServerPath=request.getSession().getServletContext().getRealPath("/");
+        String[] str = request.getParameterValues("part");
+        if(str.length<2)
+        {
+            return "false";
+        }
+        else if(str.length==2)
+        {
+            if(Integer.valueOf(str[1])<0) {
+                return "false";
+            }
+            goods.setPart(Integer.valueOf(str[1]));
+        }
+        else if(str.length==3)
+        {
+            if(Integer.valueOf(str[2])<0)
+                goods.setPart(Integer.valueOf(str[1]));
+            else
+                goods.setPart(Integer.valueOf(str[2]));
+        }
+        else
+        {
+            return "false";
+        }
 
-        log.info(goods.getPart().toString());
-
-
-        //临时注释
-//        if (goodsService.GoodsAdd(goods,file1,file2,file3,ServerPath) > 0)
-//        {
-//            return "true";
-//        }
+        if (goodsService.GoodsAdd(goods,file1,file2,file3,ServerPath) > 0)
+        {
+            return "true";
+        }
         return "false";
     }
 

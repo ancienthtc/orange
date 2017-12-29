@@ -1,6 +1,7 @@
 package com.jd.orange.service;
 
 import com.jd.orange.model.Order;
+import com.jd.orange.util.pagehelper.PagedResult;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,9 @@ public interface OrderService {
     Map<String,Integer> getOrderCount(Integer way);
 
     List<Order> getOrderListByStatus(Integer orderStatus,Integer shopStatus,Integer way);
+
+    PagedResult<Order> getOrderListByStatus(Integer pageNo, Integer pageSize, String key, String start, String end,
+                                            Integer orderStatus, Integer shopStatus,Integer way);
 
     Order getOrderDetail(String sequence);
 }

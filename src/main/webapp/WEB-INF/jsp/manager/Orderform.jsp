@@ -21,6 +21,8 @@
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/ace-ie.min.css"/>
     <![endif]-->
+    <link rel="stylesheet" href="<%=basePath%>css/admin/other.css"/>
+
     <script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
@@ -89,7 +91,7 @@
                         <thead>
                         <tr>
                             <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-                            <th width="120px">订单编号</th>
+                            <th width="120px">订单编号0</th>
                             <th width="250px">付款状态</th>
                             <th width="100px">付款时间</th>
                             <th width="100px">商品总价</th>
@@ -100,38 +102,45 @@
                             <th width="200px">操作</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            <c:forEach var="i" items="${Os0}">
-                                <tr>
-                                    <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-                                    <td>${i.sequence}</td>
-                                    <td class="order_product_name">
-                                        未付款
-                                    </td>
-                                    <td>---</td>
-                                    <td>${i.goodsprice}</td>
-                                    <td>${i.scorecost}</td>
-                                    <td>${i.allprice}</td>
-                                    <td>${i.contact}</td>
-                                    <td class="td-status"><span class="label label-success radius">代发货</span></td>
-                                    <td>
-                                        <a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"
-                                           class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>
-                                        <a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i
-                                                class="fa fa-list bigger-120"></i></a>
-                                        <a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"
-                                           class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                        <tbody id="tbody0">
+                            <%--<c:forEach var="i" items="${Os0}">--%>
+                                <%--<tr>--%>
+                                    <%--<td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>--%>
+                                    <%--<td>${i.sequence}</td>--%>
+                                    <%--<td class="order_product_name">--%>
+                                        <%--未付款--%>
+                                    <%--</td>--%>
+                                    <%--<td>---</td>--%>
+                                    <%--<td>${i.goodsprice}</td>--%>
+                                    <%--<td>${i.scorecost}</td>--%>
+                                    <%--<td>${i.allprice}</td>--%>
+                                    <%--<td>${i.contact}</td>--%>
+                                    <%--<td class="td-status"><span class="label label-success radius">代发货</span></td>--%>
+                                    <%--<td>--%>
+                                        <%--<a onClick="Delivery_stop(this,'10001')" href="javascript:;" title="发货"--%>
+                                           <%--class="btn btn-xs btn-success"><i class="fa fa-cubes bigger-120"></i></a>--%>
+                                        <%--<a title="订单详细" href="<%=basePath%>order/toOrderDetail/${i.sequence}" class="btn btn-xs btn-info order_detailed"><i--%>
+                                                <%--class="fa fa-list bigger-120"></i></a>--%>
+                                        <%--<a title="删除" href="javascript:;" onclick="Order_form_del(this,'1')"--%>
+                                           <%--class="btn btn-xs btn-warning"><i class="fa fa-trash  bigger-120"></i></a>--%>
+                                    <%--</td>--%>
+                                <%--</tr>--%>
+                            <%--</c:forEach>--%>
                         </tbody>
+                        <div id="pagehere0"></div>
+                        <div>
+                            <input type="hidden" id="pageNo0" value=""/>
+                            <input type="hidden" id="pages0" value=""/>
+                        </div>
                     </table>
+
+
 
                     <table class="table table-striped table-bordered table-hover" style="display: none;">
                         <thead>
                         <tr>
                             <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-                            <th width="120px">订单编号</th>
+                            <th width="120px">订单编号1</th>
                             <th width="250px">付款状态</th>
                             <th width="100px">付款时间</th>
                             <th width="100px">商品总价</th>
@@ -143,7 +152,7 @@
                         </tr>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody1">
                             <c:forEach var="i" items="${Os1}">
                                 <tr>
                                     <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
@@ -168,13 +177,18 @@
                                 </tr>
                             </c:forEach>
                         </tbody>
+                        <div id="pagehere1"></div>
+                        <div>
+                            <input type="hidden" id="pageNo1" value=""/>
+                            <input type="hidden" id="pages1" value=""/>
+                        </div>
                     </table>
 
                     <table class="table table-striped table-bordered table-hover" style="display:none;">
                         <thead>
                         <tr>
                             <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-                            <th width="120px">订单编号</th>
+                            <th width="120px">订单编号2</th>
                             <th width="250px">付款状态</th>
                             <th width="100px">付款时间</th>
                             <th width="100px">商品总价</th>
@@ -210,13 +224,19 @@
                                 </tr>
                             </c:forEach>
                         </tbody>
+                        <div id="pagehere2"></div>
+                        <div>
+                            <input type="hidden" id="pageNo2" value=""/>
+                            <input type="hidden" id="pages2" value=""/>
+                        </div>
                     </table>
+
 
                     <table class="table table-striped table-bordered table-hover" style="display: none;">
                         <thead>
                         <tr>
                             <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-                            <th width="120px">订单编号</th>
+                            <th width="120px">订单编号3</th>
                             <th width="250px">付款状态</th>
                             <th width="100px">付款时间</th>
                             <th width="100px">商品总价</th>
@@ -252,6 +272,11 @@
                                 </tr>
                             </c:forEach>
                         </tbody>
+                        <div id="pagehere3"></div>
+                        <div>
+                            <input type="hidden" id="pageNo3" value=""/>
+                            <input type="hidden" id="pages3" value=""/>
+                        </div>
                     </table>
 
                     <table class="table table-striped table-bordered table-hover" style="display: none;">
@@ -510,6 +535,195 @@
 </div>
 </body>
 </html>
+
+<script>
+
+    $(function(){
+        var info0={pageNo:1,pageSize:10,orderStatus:0,shopStatus:0}
+        var info1={pageNo:1,pageSize:10,orderStatus:1,shopStatus:0}
+        var url="<%=basePath%>order/getAdminOrderOnline"
+        send_post0(url,info0);
+    })
+
+    function send_post0(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody0=$("#tbody0");
+                //清空tbody
+                tbody0.empty();
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var show1="";
+                    var a="";
+                    tbody0.append("<tr style='text-align: center'>");
+                    tbody0.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    tbody0.append("<td>"+result.dataList[i].sequence+"</td>");
+                    tbody0.append("<td >未付款</td>");
+                    tbody0.append("<td >---</td>");
+                    tbody0.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    tbody0.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    tbody0.append("<td >"+result.dataList[i].allprice+"</td>");
+                    tbody0.append("<td >"+result.dataList[i].contact+"</td>");
+                    tbody0.append("<td class='td-status'><span class='label label-success radius'>代发货</span></td>");
+
+                    a+="<td>";
+                    a+="<a href='javascript:;' title='发货' class='btn btn-xs btn-success'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    tbody0.append(a);
+                    tbody0.append("</tr>");
+                }
+                //页码隐藏域
+                var s="<div class='page'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg0' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo0").val(result.pageNo);$("#pages0").val(result.pages);
+                $("#pagehere0").empty().append(s);
+                afterLoad();//事后绑定
+            },"json");
+    }
+
+    function send_post1(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody1=$("#tbody0");
+                //清空tbody
+                tbody1.empty();
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var show1="";
+                    var a="";
+                    tbody1.append("<tr style='text-align: center'>");
+                    tbody1.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    tbody1.append("<td>"+result.dataList[i].sequence+"</td>");
+                    tbody1.append("<td >未付款</td>");
+                    tbody1.append("<td >---</td>");
+                    tbody1.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    tbody1.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    tbody1.append("<td >"+result.dataList[i].allprice+"</td>");
+                    tbody1.append("<td >"+result.dataList[i].contact+"</td>");
+                    tbody1.append("<td class='td-status'><span class='label label-success radius'>代发货</span></td>");
+
+                    a+="<td>";
+                    a+="<a href='javascript:;' title='发货' class='btn btn-xs btn-success'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    tbody1.append(a);
+                    tbody1.append("</tr>");
+                }
+                //页码隐藏域
+                var s="<div class='page'  v-show='show'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg1' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo1").val(result.pageNo);$("#pages1").val(result.pages);
+                $("#pagehere1").empty().append(s);
+                afterLoad();//事后绑定
+            },"json");
+    }
+
+    function send_post2(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody1=$("#tbody0");
+                //清空tbody
+                tbody1.empty();
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var show1="";
+                    var a="";
+                    tbody1.append("<tr style='text-align: center'>");
+                    tbody1.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    tbody1.append("<td>"+result.dataList[i].sequence+"</td>");
+                    tbody1.append("<td >未付款</td>");
+                    tbody1.append("<td >---</td>");
+                    tbody1.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    tbody1.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    tbody1.append("<td >"+result.dataList[i].allprice+"</td>");
+                    tbody1.append("<td >"+result.dataList[i].contact+"</td>");
+                    tbody1.append("<td class='td-status'><span class='label label-success radius'>代发货</span></td>");
+
+                    a+="<td>";
+                    a+="<a href='javascript:;' title='发货' class='btn btn-xs btn-success'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    tbody1.append(a);
+                    tbody1.append("</tr>");
+                }
+                //页码隐藏域
+                var s="<div class='page'  v-show='show'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg1' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo1").val(result.pageNo);$("#pages1").val(result.pages);
+                $("#pagehere1").empty().append(s);
+                afterLoad();//事后绑定
+            },"json");
+    }
+
+
+</script>
+
+
+
 <script>
 
     $(".b_P_Sort_list li ").click(function () {

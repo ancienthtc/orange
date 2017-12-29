@@ -38,7 +38,7 @@ public class AdminAspect {
     public void controllerAspect()
     {
 
-        System.out.println("我是一个切入点");
+        //System.out.println("我是一个切入点");
     }
 
     /**
@@ -48,7 +48,7 @@ public class AdminAspect {
     @Before("controllerAspect()")
     public void doBefore(JoinPoint joinPoint)
     {
-        System.out.println("=====AdminAspect前置通知开始=====");
+        //System.out.println("=====AdminAspect前置通知开始=====");
         //handleLog(joinPoint, null);
     }
 
@@ -59,7 +59,7 @@ public class AdminAspect {
     @AfterReturning(pointcut = "controllerAspect()")
     public void doAfter(JoinPoint joinPoint)
     {
-        System.out.println("=====AdminAspect后置通知开始=====");
+        //System.out.println("=====AdminAspect后置通知开始=====");
         //handleLog(joinPoint, null);
     }
 

@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.common.AdminCheck;
 import com.jd.orange.model.User;
+import com.jd.orange.service.ImageService;
+import com.jd.orange.service.PartService;
 import com.jd.orange.service.UserService;
+import com.jd.orange.util.PictureType;
 import com.jd.orange.util.pagehelper.PagedResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +36,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ImageService imageService;
+
+    @Autowired
+    private PartService partService;
+
+    /**  管理员模块  */
     @AdminCheck
     @RequestMapping("/toUserList")
     public String toUserPageList(Model model)
@@ -58,5 +68,15 @@ public class UserController {
         return JSON.toJSONString(userPagedResult,filter);
     }
 
+
+    /**  用户模块  */
+    //进入商城首页
+    @RequestMapping("/toShopIndex")
+    public String toShopIndex(Model model)
+    {
+        model.addAttribute("figure",imageService.pictures(PictureType.Other,null));
+        model.addAttribute("parts",partService.getFatherPart());
+        return "user/index";
+    }
 
 }

@@ -33,6 +33,9 @@ public interface OrderMapper {
      */
     List<Order> selectOrderByOrderStatus(@Param("orderStatus") Integer orderStatus,@Param("shopStatus") Integer shopStatus,@Param("way") Integer way);
 
+    List<Order> selectOrderByOrderStatusWithPage(@Param("key")String key,@Param("start") String start,@Param("end") String end
+            ,@Param("orderStatus") Integer orderStatus,@Param("shopStatus") Integer shopStatus,@Param("way") Integer way);
+
     Order selectOrderWithDetail(String sequence);
 
 }

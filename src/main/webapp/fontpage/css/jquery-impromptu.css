@@ -1,0 +1,89 @@
+﻿/*
+------------------------------
+	Impromptu
+------------------------------
+*/
+button:focus{outline:none}
+.jqifade{
+    position: absolute;
+    background-color: #777777;
+}
+div.jqi{
+    width: 250px;
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    position: absolute;
+    background-color: #ffffff;
+    font-size: 18px;
+    text-align: left;
+    border: solid 1px #eeeeee;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 7px;
+}
+div.jqi .jqicontainer{
+}
+div.jqi .jqiclose{
+    color: #BBBBBB;
+    cursor: default;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    top: -3px;
+    width: 21px;
+}
+div.jqi .jqititle{
+    padding: 5px 10px;
+    font-size: 16px;
+    line-height: 20px;
+    border-bottom: solid 1px #eeeeee;
+    text-align: center;
+}
+div.jqi .jqimessage{
+    padding: 20px 0 10px;
+    line-height: 20px;
+    color: #444444;
+    text-align: center;
+}
+div.jqi .jqibuttons{
+    text-align: center;
+    padding: 20px 0 10px;
+}
+div.jqi button{
+    padding: 6px 10px;
+    margin: 0 10px;
+    background-color: #c00;
+    border: solid 1px #f4f4f4;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    width:40%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+div.jqi button.jqidefaultbutton{
+    background-color:#ee4b02b5;
+}
+.jqiwarning .jqi .jqibuttons{
+    background-color: #BF5E26;
+}
+
+.jqi .jqiarrow{ position: absolute; height: 0; width:0; line-height: 0; font-size: 0; border: solid 10px transparent;}
+
+.jqi .jqiarrowtl{ left: 10px; top: -20px; border-bottom-color: #ffffff; }
+.jqi .jqiarrowtc{ left: 50%; top: -20px; border-bottom-color: #ffffff; margin-left: -10px; }
+.jqi .jqiarrowtr{ right: 10px; top: -20px; border-bottom-color: #ffffff; }
+
+.jqi .jqiarrowbl{ left: 10px; bottom: -20px; border-top-color: #ffffff; }
+.jqi .jqiarrowbc{ left: 50%; bottom: -20px; border-top-color: #ffffff; margin-left: -10px; }
+.jqi .jqiarrowbr{ right: 10px; bottom: -20px; border-top-color: #ffffff; }
+
+.jqi .jqiarrowlt{ left: -20px; top: 10px; border-right-color: #ffffff; }
+.jqi .jqiarrowlm{ left: -20px; top: 50%; border-right-color: #ffffff; margin-top: -10px; }
+.jqi .jqiarrowlb{ left: -20px; bottom: 10px; border-right-color: #ffffff; }
+
+.jqi .jqiarrowrt{ right: -20px; top: 10px; border-left-color: #ffffff; }
+.jqi .jqiarrowrm{ right: -20px; top: 50%; border-left-color: #ffffff; margin-top: -10px; }
+.jqi .jqiarrowrb{ right: -20px; bottom: 10px; border-left-color: #ffffff; }
+
