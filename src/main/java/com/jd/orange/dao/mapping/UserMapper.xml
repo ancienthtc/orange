@@ -77,6 +77,15 @@
     </trim>
   </select>
 
+  <select id="userLogin" resultType="com.jd.orange.model.User">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user
+    WHERE
+    `password`= #{pass,jdbcType=VARCHAR}
+    AND ( nickname = #{name,jdbcType=VARCHAR} OR email = #{name,jdbcType=VARCHAR} OR tel = #{name,jdbcType=VARCHAR} )
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
@@ -310,4 +319,11 @@
       j_c = #{jC,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateLoginTime">
+    UPDATE t_user
+    SET logintime = #{time,jdbcType=TIMESTAMP}
+    WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+
 </mapper>

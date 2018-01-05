@@ -1,0 +1,16 @@
+.mui-control-item{width: 100px;height: 50px;line-height: 50px !important;font-size: 1.1rem !important;}
+.fl{font-size:1rem;padding-left: 5px;line-height: 40px;}
+.search-menu h2{line-height: 40px !important;height: 40px;}
+.youjiantou {
+    margin-top: 5px !important;
+}
+.search-menu .mui-table-view-cell {
+    width: 32% !important;
+    display: inline-block;
+    text-align: center;
+}
+.mui-table-view-cell img{width: 100px;}
+.search-menu .mui-table-view-cell p {
+    text-align: center;
+    font-size: 0.9rem;
+}

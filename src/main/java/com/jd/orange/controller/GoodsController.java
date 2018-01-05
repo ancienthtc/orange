@@ -276,4 +276,31 @@ public class GoodsController {
     }
 
 
+
+    /* 用户模块 */
+    //进入商品列表
+    @RequestMapping("/toGoodsListPage")
+    public String goodsListPage( @RequestParam(required = false) Integer pid , Model model)
+    {
+        model.addAttribute("goods",goodsService.GoodsListPage(pid));
+        return "user/chanpinliebiao";
+    }
+
+    //进入商品详情
+    @RequestMapping("/toGoodsDetailPage")
+    public String goodsDetailPage( @RequestParam(required = true) Integer gid , Model model )
+    {
+        model.addAttribute("goods",goodsService.getGoodsDetail(gid));
+        return "user/chanpin_xqy";
+    }
+
+    //规格信息获取
+    @RequestMapping(value = "/getFormat" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String getFormatInfo(Integer fid)
+    {
+        log.info(JSON.toJSONString(formatService.getFormat(fid)));
+        return JSON.toJSONString(formatService.getFormat(fid) , filter);
+    }
+
 }

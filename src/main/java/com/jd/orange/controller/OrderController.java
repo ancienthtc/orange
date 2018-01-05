@@ -98,4 +98,15 @@ public class OrderController {
         return JSON.toJSONString( orderService.getOrderListByStatus(pageNo,pageSize,key,start,end,orderStatus,shopStatus,0) , filter );
     }
 
+
+
+
+    /* 用户模块 */
+    //进入我的订单
+    @RequestMapping("/toMyOrder")
+    public String toMyOrder()
+    {
+        return "user/wodedingdan";
+    }
+
 }

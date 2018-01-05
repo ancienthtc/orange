@@ -239,5 +239,26 @@ public class GoodsServiceImpl implements GoodsService{
         return goodsMapper.dropGoodsPic(goods);
     }
 
+    @Override
+    public List<Goods> GoodsListPage(Integer pid) {
+        return goodsMapper.selectGoodsWithFormatsByPart(pid);
+    }
 
+    @Override
+    public Goods getGoodsDetail(Integer id) {
+        Goods goods=goodsMapper.selectGoodsWithFormatById(id);
+        if( goods.getPic1()!=null && goods.getPic1().contains("\\"))
+        {
+            goods.setPic1( goods.getPic1().substring( goods.getPic1().lastIndexOf("\\") + 1 ) );
+        }
+        if( goods.getPic2()!=null && goods.getPic2().contains("\\"))
+        {
+            goods.setPic2( goods.getPic2().substring( goods.getPic2().lastIndexOf("\\") + 1 ) );
+        }
+        if( goods.getPic3()!=null && goods.getPic3().contains("\\"))
+        {
+            goods.setPic3( goods.getPic3().substring( goods.getPic3().lastIndexOf("\\") + 1 ) );
+        }
+        return goods;
+    }
 }

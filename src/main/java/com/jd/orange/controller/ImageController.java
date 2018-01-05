@@ -58,9 +58,14 @@ public class ImageController {
         }
         else
         {
-            if( pic.contains("/") )    //判断是地址还是文件名
+            if( pic.contains("/")  )    //判断是地址还是文件名
             {
-                //pic=pic.substring( pic.lastIndexOf("/") + 1 );
+                pic=pic.substring( pic.lastIndexOf("/") + 1 );
+                imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.GoodsDetail.getVal() + pic;
+            }
+            else if( pic.contains("\\"))
+            {
+                pic=pic.substring( pic.lastIndexOf("\\") + 1 );
                 imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.GoodsDetail.getVal() + pic;
             }
             else

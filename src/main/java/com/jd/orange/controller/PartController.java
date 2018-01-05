@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -38,7 +35,7 @@ public class PartController {
     @Autowired
     private PartService partService;
 
-    //后台页面板块页面
+    /**后台页面板块页面*/
     @AdminCheck
     @RequestMapping("/toPartList")
     public String toBackPartPage()
@@ -225,5 +222,24 @@ public class PartController {
         return "false";
     }
     */
+
+    /**前台页面板块页面*/
+    //进入分类
+    @RequestMapping("/toShopList")
+    public String toShopList(@RequestParam(required = false) Integer pid,Model model)
+    {
+        model.addAttribute("fatherPart",partService.getFatherPart());
+        if(pid!=null)
+        {
+            List<Part> childParts=partService.getChildPart(pid);
+            model.addAttribute("pid",pid);
+            model.addAttribute("childParts",childParts);
+            model.addAttribute("allChild",partService.getAllChild(pid));
+        }
+
+        return "user/feilei";
+    }
+
+
 
 }

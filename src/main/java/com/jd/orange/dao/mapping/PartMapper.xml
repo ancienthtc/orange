@@ -79,6 +79,22 @@
     WHERE a.id = #{id,jdbcType=INTEGER}
   </select>
 
+  <select id="allchild" parameterType="java.lang.Integer" resultType="map">
+    SELECT
+    a.`id` as father_id,
+    a.`name` as father_name,
+    b.`id` as child_id,
+    b.`name` as child_name,
+    b.belong as belong,
+    b.priority as child_priority,
+    a.`level` as `father_level`,
+    b.`level` as `child_level`
+    FROM
+    t_part a
+    LEFT JOIN t_part b ON b.belong = a.id
+    WHERE a.belong = #{fpid,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_part
     where id = #{id,jdbcType=INTEGER}

@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 public class Goods {
     private Integer id;
@@ -55,6 +56,9 @@ public class Goods {
 
     @Transient
     private String pname;//分类名称
+
+    @Transient
+    private List<Format> formats;
 
     public Integer getId() {
         return id;
@@ -238,5 +242,13 @@ public class Goods {
 
     public void setPname(String pname) {
         this.pname = pname;
+    }
+
+    public List<Format> getFormats() {
+        return formats;
+    }
+
+    public void setFormats(List<Format> formats) {
+        this.formats = formats;
     }
 }

@@ -20,4 +20,6 @@ public interface FormatService {
 
     //规格删除
     int formatDel(Integer fid);
+
+    Format getFormat(Integer fid);
 }

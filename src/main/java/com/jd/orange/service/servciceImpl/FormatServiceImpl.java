@@ -52,4 +52,10 @@ public class FormatServiceImpl implements FormatService{
         }
         return i;
     }
+
+    @Override
+    public Format getFormat(Integer fid) {
+        return formatMapper.selectByPrimaryKey(fid);
+    }
+
 }

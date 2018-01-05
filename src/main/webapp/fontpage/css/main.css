@@ -201,7 +201,7 @@ a,a:hover{text-decoration: none;}
     font:bold 16px/36px "";
     color:#fff;
     text-align: center;
-    background:#ee4b02;
+    background:#ee4b02 !important;
     border:none;
 	display:block;
 	margin: auto;
@@ -287,7 +287,7 @@ a,a:hover{text-decoration: none;}
     right: 0;
     width:90px;
     height: 36px;
-    background: #093;
+    background: #ee4b02 !important;
     font:normal 12px/36px "";
     color:#fff;
     text-align: center;

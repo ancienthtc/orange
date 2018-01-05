@@ -42,7 +42,7 @@ public class UserController {
     @Autowired
     private PartService partService;
 
-    /**  管理员模块  */
+    /*  管理员模块  */
     @AdminCheck
     @RequestMapping("/toUserList")
     public String toUserPageList(Model model)
@@ -69,7 +69,7 @@ public class UserController {
     }
 
 
-    /**  用户模块  */
+    /*  用户模块  */
     //进入商城首页
     @RequestMapping("/toShopIndex")
     public String toShopIndex(Model model)
@@ -77,6 +77,60 @@ public class UserController {
         model.addAttribute("figure",imageService.pictures(PictureType.Other,null));
         model.addAttribute("parts",partService.getFatherPart());
         return "user/index";
+    }
+
+    //进入案内
+    @RequestMapping("/toGuide")
+    public String toGuide()
+    {
+        return "user/annei";
+    }
+
+    //进入个人中心
+    @RequestMapping("/toCenter")
+    public String toCenter()
+    {
+        return "user/gerenzhongxin";
+    }
+
+    //进入修改资料
+    @RequestMapping("/toInfo")
+    public String toInfo()
+    {
+        return "user/xougaiziliao";
+    }
+
+    //进入收货地址
+    @RequestMapping("/toAddress")
+    public String toAddress()
+    {
+        return "user/shouhuodizhi";
+    }
+
+    //进入修改密码
+    @RequestMapping("/toAlterPass")
+    public String toAlterPass()
+    {
+        return "user/xougaimima";
+    }
+
+    //进入联系我们
+    @RequestMapping("/toContact")
+    public String toContact()
+    {
+        return "user/lianxiwomen";
+    }
+
+    @RequestMapping("/toForgetPass")
+    public String forgetPass()
+    {
+        return "user/zhaohuimima";
+    }
+
+    @RequestMapping("/toResetPass")
+    public String resetPass()
+    {
+        return "user/zhaohuimima_cz";
     }
 
 }

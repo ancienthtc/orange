@@ -117,9 +117,14 @@
                     <c:if test="${not empty parts}">
                         <c:forEach var="i" varStatus="s" items="${parts}">
 
-                            <c:if test="${s.count}%4==0" var="v">
-
-                            </c:if>
+                            <div class="index_u">
+                                <a href="feilei.php">
+                                    <div style="background:#FE5400;">
+                                        <img src="<%=basePath%>fontpage/images/qita.png">
+                                    </div>
+                                    <span>${i.name}</span>
+                                </a>
+                            </div>
 
                         </c:forEach>
                     </c:if>
@@ -127,106 +132,108 @@
 
 
                     <!-- -->
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#FE5400;">
-                                <img src="<%=basePath%>fontpage/images/mianbao.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#1ccfa4;">
-                                <img src="<%=basePath%>fontpage/images/shengxian.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#F22451;">
-                                <img src="<%=basePath%>fontpage/images/danbaizhi.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#992ad4;">
-                                <img src="<%=basePath%>fontpage/images/yiban.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u_t1">面包</div>
-                    <div class="index_u_t1">生鲜</div>
-                    <div class="index_u_t1">常用</div>
-                    <div class="index_u_t1">一般</div>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#FE5400;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/mianbao.png">--%>
+                            <%--</div>--%>
+
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#1ccfa4;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/shengxian.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#F22451;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/danbaizhi.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#992ad4;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/yiban.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u_t1">面包</div>--%>
+                    <%--<div class="index_u_t1">生鲜</div>--%>
+                    <%--<div class="index_u_t1">常用</div>--%>
+                    <%--<div class="index_u_t1">一般</div>--%>
 
                     <!-- -->
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#59da3f;">
-                                <img src="<%=basePath%>fontpage/images/lengdong.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#23b658;">
-                                <img src="<%=basePath%>fontpage/images/xxian.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#ffc526;">
-                                <img src="<%=basePath%>fontpage/images/yinliao.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#00adee;">
-                                <img src="<%=basePath%>fontpage/images/jiushui.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u_t1"> 冷冻</div>
-                    <div class="index_u_t1">休闲</div>
-                    <div class="index_u_t1">饮料</div>
-                    <div class="index_u_t1">酒类</div>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#59da3f;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/lengdong.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#23b658;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/xxian.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#ffc526;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/yinliao.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#00adee;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/jiushui.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u_t1"> 冷冻</div>--%>
+                    <%--<div class="index_u_t1">休闲</div>--%>
+                    <%--<div class="index_u_t1">饮料</div>--%>
+                    <%--<div class="index_u_t1">酒类</div>--%>
 
                     <!-- -->
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#ee4b02;">
-                                <img src="<%=basePath%>fontpage/images/zhahuo.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#f26d5f;">
-                                <img src="<%=basePath%>fontpage/images/yinger.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#ea9518;">
-                                <img src="<%=basePath%>fontpage/images/xuexiao.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u">
-                        <a href="feilei.php">
-                            <div style="background:#ff395c;">
-                                <img src="<%=basePath%>fontpage/images/qita.png">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="index_u_t1">杂货</div>
-                    <div class="index_u_t1">婴儿</div>
-                    <div class="index_u_t1">学校</div>
-                    <div class="index_u_t1">其他</div>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#ee4b02;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/zhahuo.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#f26d5f;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/yinger.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#ea9518;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/xuexiao.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u">--%>
+                        <%--<a href="feilei.php">--%>
+                            <%--<div style="background:#ff395c;">--%>
+                                <%--<img src="<%=basePath%>fontpage/images/qita.png">--%>
+                            <%--</div>--%>
+                        <%--</a>--%>
+                    <%--</div>--%>
+                    <%--<div class="index_u_t1">杂货</div>--%>
+                    <%--<div class="index_u_t1">婴儿</div>--%>
+                    <%--<div class="index_u_t1">学校</div>--%>
+                    <%--<div class="index_u_t1">其他</div>--%>
+
                 </div>
 
                 <!--V3.3.1-->
@@ -923,9 +930,9 @@
 
 
 <div class="index_foot_fg"></div>
-<?php
-	include("footer.php");
-	?>
+
+<jsp:include page="footer.jsp"></jsp:include>
+
 <script>
     $(function () {
         //$.post('/Content/welcome/cart_num',
@@ -938,7 +945,7 @@
 
         if (true) {
 
-            $("#f1").html('<img src="img/shouye1.png" width="30" height="30">');
+            $("#f1").html('<img src="<%=basePath%>fontpage/img/shouye1.png" width="30" height="30">');
             $("#t1").css("color", "#ee4b02");
         }
 

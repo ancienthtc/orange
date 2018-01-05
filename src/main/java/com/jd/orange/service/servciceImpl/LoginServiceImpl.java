@@ -1,9 +1,11 @@
 package com.jd.orange.service.servciceImpl;
 
 import com.jd.orange.dao.AdminMapper;
+import com.jd.orange.dao.UserMapper;
 import com.jd.orange.model.Admin;
 import com.jd.orange.model.User;
 import com.jd.orange.service.LoginService;
+import com.jd.orange.util.StringUtil.GenerateString;
 import com.jd.orange.util.date.DateExample;
 import com.jd.orange.util.password.Secret;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,18 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private AdminMapper adminMapper;
 
+    @Resource
+    private UserMapper userMapper;
+
     @Override
-    public User UserLogin(String nickname, String email, String tel, String password) {
+    public User UserLogin(String name , String password) {
+        User user=userMapper.userLogin(name,password);
+        if(user!=null)
+        {
+            //user.setLogintime(DateExample.getNowTimeByDate());
+            userMapper.updateLoginTime(user.getId(),DateExample.getLocalTimeFormat());
+            return user;
+        }
         return null;
     }
 
@@ -36,5 +48,12 @@ public class LoginServiceImpl implements LoginService {
         return admin;
     }
 
-
+    @Override
+    public int userRegister(User user) {
+        user.setNickname( "新用户"+String.valueOf(DateExample.getTimestamp() ).substring(0,10)+new GenerateString().getRandomString(4) );
+        user.setNicknameJ("新しいユーザー"+String.valueOf(DateExample.getTimestamp() ).substring(0,10)+new GenerateString().getRandomString(4));
+        user.setCreatetime(DateExample.getNowTimeByDate());
+        user.setPassword( Secret.enPass(user.getPassword()) );
+        return userMapper.insertSelective(user);
+    }
 }

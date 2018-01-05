@@ -49,4 +49,10 @@ public interface GoodsService {
 
     //全部商品销量统计
 
+
+    //商品列表页面
+    List<Goods> GoodsListPage(Integer pid);
+
+    Goods getGoodsDetail(Integer id);
+
 }

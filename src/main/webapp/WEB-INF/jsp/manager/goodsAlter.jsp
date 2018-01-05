@@ -27,6 +27,7 @@
     <link href="<%=basePath%>backpage/Widget/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
     <%--<link href="<%=basePath%>css/admin/bootstrap.min.css" rel="stylesheet" type="text/css" />--%>
     <link href="<%=basePath%>css/admin/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <link href="<%=basePath%>backpage/css/jhsdate.css" rel="stylesheet" type="text/css" />
     <title>新增图片</title>
 </head>
 <body>
@@ -221,91 +222,102 @@
 
         </form>
 
-
-            <div class="clearfix cl">
-                <div style="display: flex" >
-                    <label class="form-label col-2">产品规格:</label>
-                </div>
-                <div class="formControls col-10">
-                    <table class="table table-striped table-bordered table-hover" id="sample-table">
-                        <thead>
-                        <tr>
-                           <th width="125">规格号</th>
-                            <th width="125">规格名</th>
-                            <th width="125">规格名(日)</th>
-                            <th width="125">单位</th>
-                            <th width="125">单位(日)</th>
-                            <th width="125">价格</th>
-                            <th width="125">库存</th>
-                            <th width="125">销量</th>
-                            <th width="125">修改</th>
-                            <th width="125">删除</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tbody">
-
-                            <c:forEach var="i" items="${formats}">
-                                <tr class="biaodan">
-                                    <td width="125">${i.id}</td>
-                                    <td width="125"><input type="text" value="${i.fname}" name="fname"></td>
-                                    <td width="125"><input type="text" value="${i.fnameJ}" name="fnameJ"></td>
-                                    <td width="125"><input type="text" value="${i.fclass}" name="fclass"></td>
-                                    <td width="125"><input type="text" value="${i.fclassJ}" name="fclassJ"></td>
-                                    <td width="125"><input type="text" value="${i.price}" name="price"></td>
-                                    <td width="125"><input type="text" value="${i.stock}" name="stock"></td>
-                                    <td width="125"><input type="text" value="${i.sales}" name="sales"></td>
-                                    <td width="125" class="td-manage">
-                                        <a title="编辑" onclick="formatUpdate()" href="javascript:;"
-                                           class="btn btn-xs btn-info">修改</a>
-                                    </td>
-                                    <td width="125">
-                                        <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                                           class="btn btn-xs btn-warning">删除</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        <form id="format" action="<%=basePath%>goods/formatAdd" method="post" class="form form-horizontal">
-            <input type="hidden" name="goods" value="${goods.id}">
-            <div class=" clearfix cl">
-
-                <div class="Add_p_s">
-                    <label class="form-label col-2">规格名：</label>
-                    <div class="formControls col-5"><input type="text" class="input-text" value="" placeholder="" id="fname" name="fname"></div>
-                </div>
-                <div class="Add_p_s">
-                    <label class="form-label col-2">规格名(日)：</label>
-                    <div class="formControls col-5"><input type="text" class="input-text" value="" placeholder="" id="fnameJ" name="fnameJ"></div>
-                </div>
-                <div class="Add_p_s-biaodan">
-                    <label class="form-label col-2">单位：</label>
-                    <div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="fclass" name="fclass"></div>
-                </div>
-                <div class="Add_p_s-biaodan">
-                    <label class="form-label col-2">单位(日)：</label>
-                    <div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="fclassJ" name="fclassJ"></div>
-                </div>
-                <div class="Add_p_s-biaodan">
-                    <label class="form-label col-2">库存：</label>
-                    <div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="stock" name="stock"></div>
-                </div>
-                <div class="Add_p_s-biaodan">
-                    <label class="form-label col-2">价格：</label>
-                    <div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="price" name="price"></div>
-                </div>
+        <div style="text-align:center;margin-top:50px;width: 20%;float: left;">
+            <span>年月日选择:</span>
+            <input type="text" id="date" class="shangjia_sj" placeholder="请选择年/月/日"/>
+        </div>
+        <div style="text-align:center;margin-top:50px;width: 20%;float: left;">
+            <span>时间选择:</span>
+            <input type="text" id="time" class="shangjia_sj"placeholder="请选择分/秒"/>
+        </div>
 
 
+            <%--<div class="clearfix cl">--%>
+                <%--<div style="display: flex" >--%>
+                    <%--<label class="form-label col-2">产品规格:</label>--%>
+                <%--</div>--%>
+                <%--<div class="formControls col-10">--%>
+                    <%--<table class="table table-striped table-bordered table-hover" id="sample-table">--%>
+                        <%--<thead>--%>
+                        <%--<tr>--%>
+                           <%--<th width="125">规格号</th>--%>
+                            <%--<th width="125">规格名</th>--%>
+                            <%--<th width="125">规格名(日)</th>--%>
+                            <%--<th width="125">单位</th>--%>
+                            <%--<th width="125">单位(日)</th>--%>
+                            <%--<th width="125">价格</th>--%>
+                            <%--<th width="125">库存</th>--%>
+                            <%--<th width="125">销量</th>--%>
+                            <%--<th width="125">修改</th>--%>
+                            <%--<th width="125">删除</th>--%>
+                        <%--</tr>--%>
+                        <%--</thead>--%>
+                        <%--<tbody id="tbody">--%>
 
-            </div>
-            <div class="tianjia container">
-                <input type="submit" value="添加产品规格" id="subFormat">
-            </div>
-        </form>
+                            <%--<c:forEach var="i" items="${formats}">--%>
+                                <%--<tr class="biaodan">--%>
+                                    <%--<td width="125">${i.id}</td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.fname}" name="fname"></td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.fnameJ}" name="fnameJ"></td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.fclass}" name="fclass"></td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.fclassJ}" name="fclassJ"></td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.price}" name="price"></td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.stock}" name="stock"></td>--%>
+                                    <%--<td width="125"><input type="text" value="${i.sales}" name="sales"></td>--%>
+                                    <%--<td width="125" class="td-manage">--%>
+                                        <%--<a title="编辑" onclick="formatUpdate()" href="javascript:;"--%>
+                                           <%--class="btn btn-xs btn-info">修改</a>--%>
+                                    <%--</td>--%>
+                                    <%--<td width="125">--%>
+                                        <%--<a title="删除" href="javascript:;" onclick="member_del(this,'1')"--%>
+                                           <%--class="btn btn-xs btn-warning">删除</a>--%>
+                                    <%--</td>--%>
+                                <%--</tr>--%>
+                            <%--</c:forEach>--%>
+
+                        <%--</tbody>--%>
+                    <%--</table>--%>
+
+                <%--</div>--%>
+            <%--</div>--%>
+
+
+        <%--<form id="format" action="<%=basePath%>goods/formatAdd" method="post" class="form form-horizontal">--%>
+            <%--<input type="hidden" name="goods" value="${goods.id}">--%>
+            <%--<div class=" clearfix cl">--%>
+
+                <%--<div class="Add_p_s">--%>
+                    <%--<label class="form-label col-2">规格名：</label>--%>
+                    <%--<div class="formControls col-5"><input type="text" class="input-text" value="" placeholder="" id="fname" name="fname"></div>--%>
+                <%--</div>--%>
+                <%--<div class="Add_p_s">--%>
+                    <%--<label class="form-label col-2">规格名(日)：</label>--%>
+                    <%--<div class="formControls col-5"><input type="text" class="input-text" value="" placeholder="" id="fnameJ" name="fnameJ"></div>--%>
+                <%--</div>--%>
+                <%--<div class="Add_p_s-biaodan">--%>
+                    <%--<label class="form-label col-2">单位：</label>--%>
+                    <%--<div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="fclass" name="fclass"></div>--%>
+                <%--</div>--%>
+                <%--<div class="Add_p_s-biaodan">--%>
+                    <%--<label class="form-label col-2">单位(日)：</label>--%>
+                    <%--<div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="fclassJ" name="fclassJ"></div>--%>
+                <%--</div>--%>
+                <%--<div class="Add_p_s-biaodan">--%>
+                    <%--<label class="form-label col-2">库存：</label>--%>
+                    <%--<div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="stock" name="stock"></div>--%>
+                <%--</div>--%>
+                <%--<div class="Add_p_s-biaodan">--%>
+                    <%--<label class="form-label col-2">价格：</label>--%>
+                    <%--<div class="formControls-biaodan col-3"><input type="text" class="input-text" value="" placeholder="" id="price" name="price"></div>--%>
+                <%--</div>--%>
+
+
+
+            <%--</div>--%>
+            <%--<div class="tianjia container">--%>
+                <%--<input type="submit" value="添加产品规格" id="subFormat">--%>
+            <%--</div>--%>
+        <%--</form>--%>
 
     </div>
 </div>
@@ -329,6 +341,7 @@
 <script type="text/javascript" src="<%=basePath%>backpage/js/form.js"></script>
 <script type="text/javascript" src="<%=basePath%>backpage/js/form.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/admin/bootstrap-fileinput.js"></script>
+<script type="text/javascript" src="<%=basePath%>backpage/js/jhsdate.js"></script>
 <%--<script type="text/javascript" src="<%=basePath%>js/admin/jquery.min.js"></script>--%>
 
 <script>
@@ -364,7 +377,31 @@
 
 </script>
 
-
+<script type="text/javascript">
+    $('#date').jHsDate();
+    $('#time').jHsDate({
+        format:'hh:mm'
+    });
+    $('#datetimeformat').jHsDate({
+        format: 'yyyy年MM月dd日 hh时mm分'
+    });
+    $('#datetimedef').jHsDate({
+        defDate: '2017-01-01',
+        defIsShow: true
+    });
+    $('#dateread').jHsDate({
+        inputIsRead: true
+    });
+    $('#datemaxmin').jHsDate({
+        minDate: '2010-01-01',
+        maxDate: '2017-05-31'
+    });
+    $('#datecallback').jHsDate({
+        callBack: function () {
+            alert('我是回掉函数')
+        }
+    });
+</script>
 
 <script>
     $(function () {

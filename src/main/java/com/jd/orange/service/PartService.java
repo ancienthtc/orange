@@ -4,6 +4,7 @@ import com.jd.orange.model.Part;
 import com.jd.orange.util.pagehelper.PagedResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ThinkPad on 2017/11/28.
@@ -32,5 +33,6 @@ public interface PartService {
     Part getPart(Integer pid);
 
     //Part getFatherPart(Integer id);
+    List<Map<String,Object>> getAllChild(Integer fpid);
 
 }

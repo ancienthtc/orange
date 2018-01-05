@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PartMapper {
@@ -27,5 +28,7 @@ public interface PartMapper {
     List<Part> partsList(@Param("key") String key);
 
     Part getPartById(Integer id);
+
+    List<Map<String,Object>> allchild(@Param("fpid") Integer fpid);
 
 }

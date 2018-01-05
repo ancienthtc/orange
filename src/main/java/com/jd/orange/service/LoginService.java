@@ -8,8 +8,11 @@ import com.jd.orange.model.User;
  */
 public interface LoginService {
 
-    User UserLogin(String nickname,String email,String tel,String password);
+    User UserLogin(String name,String password);
 
 
     Admin AdminLogin(String admin,String password);
+
+    int userRegister(User user);
+
 }

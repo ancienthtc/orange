@@ -70,7 +70,7 @@ img{max-width: 100%;vertical-align: top; border: 0;}
 .mui-table-view-cell{ padding: 15px;}
 #segmentedControls{ background: #fff; margin-bottom: 1rem; }
 #segmentedControlContents .mui-table-view{ margin:0 .15rem;}
-#segmentedControlContents{ margin-bottom: 1rem;}
+/*#segmentedControlContents{ margin-bottom: 1rem;}*/
 .mui-bar-tab .mui-tab-item.mui-active{ color: #f23030;}
 .shop-street-top{ position:fixed; top:0px; left:0; right:0; z-index:115;}
 /*.header { position:relative;width: 100%; height:50px;background: #F6F6F9; zoom: 1; z-index:999999999;}

@@ -30,4 +30,8 @@ public interface GoodsMapper {
 
     //shelf 也是updatetime
     int goodsstatus(@Param("id")Integer id,@Param("status")Integer status,@Param("date")Timestamp shelf);
+
+    List<Goods> selectGoodsWithFormatsByPart(@Param("pid") Integer pid);
+
+    Goods selectGoodsWithFormatById(@Param("id") Integer id);
 }

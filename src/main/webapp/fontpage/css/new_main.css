@@ -1650,9 +1650,12 @@ body {
 .index_u{
 	float:left;
 	width:25%;
-	height: 50px;
+	position: relative;
+    top: 3px;
 	
 	}
+.index_u span{width:50px;height: 20px;display: inline-block;color: #666666;font-size: 13px;line-height: 20px;margin: 3px 0 8px 0;}
+
 	.index_u div{width:50px;height:50px;margin: auto;border-radius:100%;}
 	.index_u div img{width: 30px;height:30px;margin-top:10px;}
 .index_u_t1{

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PartServiceImpl implements PartService {
@@ -69,7 +70,12 @@ public class PartServiceImpl implements PartService {
         return partMapper.getPartById(pid);
     }
 
-//    @Override
+    @Override
+    public List<Map<String, Object>> getAllChild(Integer fpid) {
+        return partMapper.allchild(fpid);
+    }
+
+    //    @Override
 //    public Part getFatherPart(Integer id) {
 //        return null;
 //    }

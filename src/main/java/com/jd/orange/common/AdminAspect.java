@@ -84,7 +84,7 @@ public class AdminAspect {
     {
         HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
-        System.out.println(session.getAttribute("admin"));
+        //System.out.println(session.getAttribute("admin"));
         //HttpSession session=null;
         Admin admin= (Admin) session.getAttribute("admin");
 

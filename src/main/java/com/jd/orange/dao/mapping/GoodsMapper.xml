@@ -25,6 +25,48 @@
     <result column="detail_j" property="detailJ" jdbcType="VARCHAR" />
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
+
+  <resultMap id="GoodsFormats" type="com.jd.orange.model.Goods">
+    <id column="gid" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DOUBLE" />
+    <result column="parameter1" property="parameter1" jdbcType="VARCHAR" />
+    <result column="parameter2" property="parameter2" jdbcType="VARCHAR" />
+    <result column="parameter3" property="parameter3" jdbcType="VARCHAR" />
+    <result column="shelf" property="shelf" jdbcType="TIMESTAMP" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="pic1" property="pic1" jdbcType="VARCHAR" />
+    <result column="pic2" property="pic2" jdbcType="VARCHAR" />
+    <result column="pic3" property="pic3" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="INTEGER" />
+    <result column="recommend" property="recommend" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="part" property="part" jdbcType="INTEGER" />
+    <result column="name_j" property="nameJ" jdbcType="VARCHAR" />
+    <result column="parameter1_j" property="parameter1J" jdbcType="VARCHAR" />
+    <result column="parameter2_j" property="parameter2J" jdbcType="VARCHAR" />
+    <result column="parameter3_j" property="parameter3J" jdbcType="VARCHAR" />
+    <result column="detail_j" property="detailJ" jdbcType="VARCHAR" />
+    <result column="j_c" property="jC" jdbcType="INTEGER" />
+
+    <collection property="formats" column="goods" ofType="com.jd.orange.model.Format">
+      <id column="fid" property="id" jdbcType="INTEGER" />
+      <result column="fname" property="fname" jdbcType="VARCHAR" />
+      <result column="fclass" property="fclass" jdbcType="VARCHAR" />
+      <result column="price" property="price" jdbcType="DOUBLE" />
+      <result column="stock" property="stock" jdbcType="DOUBLE" />
+      <result column="sales" property="sales" jdbcType="DOUBLE" />
+      <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+      <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+      <result column="goods" property="goods" jdbcType="INTEGER" />
+      <result column="fname_j" property="fnameJ" jdbcType="VARCHAR" />
+      <result column="fclass_j" property="fclassJ" jdbcType="VARCHAR" />
+      <result column="j_c" property="jC" jdbcType="INTEGER" />
+    </collection>
+
+  </resultMap>
+
   <sql id="Base_Column_List" >
     id, `name`, freight, parameter1, parameter2, parameter3, shelf, detail, pic1, pic2,
     pic3, picture, recommend, createtime, updatetime, part, name_j, parameter1_j, parameter2_j, 
@@ -78,6 +120,40 @@
   <!-- 上架条件 -->
   <select id="goodsShelfCondition" parameterType="java.lang.Integer">
     SELECT count(1) FROM `t_format` WHERE goods=#{id,jdbcType=INTEGER} AND stock>0
+  </select>
+
+  <select id="selectGoodsWithFormatsByPart" parameterType="java.lang.Integer" resultMap="GoodsFormats">
+    SELECT
+    t_goods.id gid,t_goods.`name`,t_goods.freight,t_goods.parameter1,t_goods.parameter2,
+    t_goods.parameter3,t_goods.shelf,t_goods.detail,t_goods.pic1,
+    t_goods.pic2,t_goods.pic3,t_goods.picture,t_goods.recommend,
+    t_goods.createtime,t_goods.updatetime,t_goods.part,t_goods.name_j,
+    t_goods.parameter1_j,t_goods.parameter2_j,t_goods.parameter3_j,t_goods.detail_j,t_goods.j_c,
+    t_format.id fid,t_format.fname,t_format.fclass,t_format.price,
+    t_format.stock,t_format.sales,t_format.createtime,t_format.updatetime,
+    t_format.goods,t_format.fname_j,t_format.fclass_j,t_format.j_c
+    FROM
+    t_goods
+    LEFT JOIN t_format ON t_format.goods = t_goods.id
+    WHERE t_goods.part = #{pid,jdbcType=INTEGER} AND shelf IS NOT NULL
+    ORDER BY shelf DESC
+  </select>
+
+  <select id="selectGoodsWithFormatById" parameterType="java.lang.Integer" resultMap="GoodsFormats">
+    SELECT
+    t_goods.id gid,t_goods.`name`,t_goods.freight,t_goods.parameter1,t_goods.parameter2,
+    t_goods.parameter3,t_goods.shelf,t_goods.detail,t_goods.pic1,
+    t_goods.pic2,t_goods.pic3,t_goods.picture,t_goods.recommend,
+    t_goods.createtime,t_goods.updatetime,t_goods.part,t_goods.name_j,
+    t_goods.parameter1_j,t_goods.parameter2_j,t_goods.parameter3_j,t_goods.detail_j,t_goods.j_c,
+    t_format.id fid,t_format.fname,t_format.fclass,t_format.price,
+    t_format.stock,t_format.sales,t_format.createtime,t_format.updatetime,
+    t_format.goods,t_format.fname_j,t_format.fclass_j,t_format.j_c
+    FROM
+    t_goods
+    LEFT JOIN t_format ON t_format.goods = t_goods.id
+    WHERE t_goods.id = #{id,jdbcType=INTEGER}
+    ORDER BY shelf DESC
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
