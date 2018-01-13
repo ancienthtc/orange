@@ -20,7 +20,7 @@
     j_c
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_format
     where id = #{id,jdbcType=INTEGER}
@@ -29,9 +29,36 @@
   <!-- new -->
   <select id="formatList" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Format">
     select
-    <include refid="Base_Column_List" />
+    id, fname, fclass, price, stock, sales, createtime, updatetime, goods, fname_j as fnameJ, fclass_j as fclassJ, j_c
     from t_format
     where goods = #{gid,jdbcType=INTEGER}
+  </select>
+
+  <select id="goodsShelfCondition" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT IFNULL(SUM(stock),0) FROM `t_format` WHERE goods = #{gid,jdbcType=INTEGER}
+  </select>
+
+  <select id="formatCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT count(1) FROM t_format WHERE goods = #{gid,jdbcType=INTEGER}
+  </select>
+
+  <!-- 查询规格及所属商品 -->
+  <select id="formatDetail" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Format">
+    SELECT
+    t_format.fname,
+    t_format.fclass,
+    t_format.price,
+    t_format.stock,
+    t_format.sales,
+    t_format.goods,
+    t_goods.`name` AS gname,
+    t_goods.shelf,
+    t_goods.freight,
+    t_goods.pic1
+    FROM
+    t_format
+    INNER JOIN t_goods ON t_format.goods = t_goods.id
+    WHERE t_format.id = #{fid,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

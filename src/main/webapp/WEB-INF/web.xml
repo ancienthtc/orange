@@ -102,6 +102,18 @@
     <welcome-file>/index.jsp</welcome-file>
   </welcome-file-list>
 
+  <!-- 404 / 500 -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/build.jsp</location>
+  </error-page>
+
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/error.jsp</location>
+  </error-page>
+
   <!-- session配置 -->
   <session-config>
     <session-timeout>15</session-timeout>

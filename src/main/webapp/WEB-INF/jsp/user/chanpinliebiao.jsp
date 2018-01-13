@@ -66,27 +66,29 @@
                 </div>
                 <div class="product">
                     <ul class="prolist clearfix" id="goodsList">
-
-                        <c:forEach var="i" items="${goods}">
-                            <li>
-                                <a href="<%=basePath%>goods/toGoodsDetailPage?gid=${i.id}">
-                                    <span class="tag tag2" style="display:none;">售罄</span>
-                                    <img src="<%=basePath%>image/goods?pic=${i.pic1}">
-                                </a>
-                                <div class="goolist_name">
-                                    <p class="title">${i.name}</p>
-                                    <p>
-                                        <span class="price">¥${i.formats.get(0).price}</span>
-                                        <span class="kilo" style="float:right">¥ ${i.formats.get(0).price}/${i.formats.get(0).fclass}</span>
-                                    </p>
-                                    <a href="gouwuche.php">
-                                    <span class="addcart"  onclick="addcart($(this))">
-                                        <img src="<%=basePath%>fontpage/img/cell_list_addcart.png">
-                                    </span>
+                        <c:if test="${not empty goods}">
+                            <c:forEach var="i" items="${goods}">
+                                <li>
+                                    <a href="<%=basePath%>goods/toGoodsDetailPage?gid=${i.id}">
+                                        <span class="tag tag2" style="display:none;">售罄</span>
+                                        <img src="<%=basePath%>image/goods?pic=${i.pic1.substring( i.pic1.lastIndexOf("\\") + 1 )}">
                                     </a>
-                                </div>
-                            </li>
-                        </c:forEach>
+                                    <div class="goolist_name">
+                                        <p class="title">${i.name}</p>
+                                        <p>
+                                            <span class="price">¥${i.formats.get(0).price}</span>
+                                            <span class="kilo" style="float:right">¥ ${i.formats.get(0).price}/${i.formats.get(0).fclass}</span>
+                                        </p>
+                                            <%--<a href="gouwuche.php">--%>
+                                            <%--<span class="addcart"  onclick="addcart($(this))">--%>
+                                            <%--<img src="<%=basePath%>fontpage/img/cell_list_addcart.png">--%>
+                                            <%--</span>--%>
+                                            <%--</a>--%>
+                                    </div>
+                                </li>
+                            </c:forEach>
+                        </c:if>
+
 
                     </ul>
                 </div>

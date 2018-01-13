@@ -2,6 +2,7 @@ package com.jd.orange.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 public class Cart {
@@ -25,6 +26,22 @@ public class Cart {
     private String detailJ;
 
     private Integer jC;
+
+    @Transient
+    private String img;
+
+    @Transient
+    private String fname;
+
+    @Transient
+    private String gname;
+
+    @Transient
+    private String fclass;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Transient
+    private Date shelf;
 
     public Integer getId() {
         return id;
@@ -104,5 +121,45 @@ public class Cart {
 
     public void setjC(Integer jC) {
         this.jC = jC;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
+    }
+
+    public String getFclass() {
+        return fclass;
+    }
+
+    public void setFclass(String fclass) {
+        this.fclass = fclass;
+    }
+
+    public Date getShelf() {
+        return shelf;
+    }
+
+    public void setShelf(Date shelf) {
+        this.shelf = shelf;
     }
 }

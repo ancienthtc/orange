@@ -13,6 +13,8 @@ public class OrderDetail {
 
     private Double price;
 
+    private String fclass;
+
     private String message;
 
     private String otherdetail;
@@ -72,6 +74,14 @@ public class OrderDetail {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getFclass() {
+        return fclass;
+    }
+
+    public void setFclass(String fclass) {
+        this.fclass = fclass == null ? null : fclass.trim();
     }
 
     public String getMessage() {

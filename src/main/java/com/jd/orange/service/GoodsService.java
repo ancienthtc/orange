@@ -24,7 +24,7 @@ public interface GoodsService {
      * @param status 0-下架  1-上架
      * @return
      */
-    int GoodsShelf(Integer gid,Integer status);
+    int GoodsShelf(Integer gid,Integer status ,String shelf);
 
     int getGoodsCount();
 
@@ -39,9 +39,30 @@ public interface GoodsService {
 
     //update
     //商品图片修改
+
+    /**
+     * i=1 pic1 i=2 pic2 i=3 pic3
+     * @param ServerPath
+     * @param gid
+     * @param i
+     * @param file
+     * @return
+     */
     int picUpdate(String ServerPath,Integer gid,int i,MultipartFile file);
 
     int goodsUpdate(Goods goods);
+
+    //商品推荐
+    int goodsRecommend(Integer id,Integer recommend);
+
+    //推荐商品
+    List<Goods> getRecommend();
+
+    //热销商品
+    List<Goods> getHotSales();
+
+    //新商品
+    List<Goods> getNewGoods();
 
     //商品删除()
 

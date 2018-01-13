@@ -280,84 +280,22 @@
                 </div>
                 <div class="index_floor_list">
                     <ul id="ghList">
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
+
+                        <c:forEach var="i" items="${hot}">
+                            <a href="<%=basePath%>goods/toGoodsDetailPage?gid=${i.id}">
+                                <li style="width: 33%; height: 120px;">
+                                    <div class="index_floor_bk2">
+                                        <div class="index_floor_list_d3">
+                                            <img src="<%=basePath%>image/goods?pic=${i.pic1.substring( i.pic1.lastIndexOf("\\") + 1 )}" style="width:90px;height:90px;">
+                                        </div>
+                                        <div class="index_floor_list_d4" style="display:block;">
+                                            <p class="index_floor_list_pa">${i.name}</p>
+                                            <span class="index_floor_list_pb">￥${i.price}</span>
+                                        </div>
                                     </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa">柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
+                                </li>
+                            </a>
+                        </c:forEach>
                     </ul>
                 </div>
                 <!---蔬菜类 商品列表结束-->
@@ -382,84 +320,22 @@
                 </div>
                 <div class="index_floor_list">
                     <ul id="ghList">
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
+                        <c:forEach var="i" items="${recommend}">
+                            <a href="<%=basePath%>goods/toGoodsDetailPage?gid=${i.id}">
+                                <li style="width: 33%; height: 120px;">
+                                    <div class="index_floor_bk2">
+                                        <div class="index_floor_list_d3">
+                                            <img src="<%=basePath%>image/goods?pic=${i.pic1.substring( i.pic1.lastIndexOf("\\") + 1 )}" style="width:90px;height:90px;">
+                                        </div>
+                                        <div class="index_floor_list_d4" style="display:block;">
+                                            <p class="index_floor_list_pa">${i.name}</p>
+                                            <span class="index_floor_list_pb">￥${i.price}</span>
+                                        </div>
                                     </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa">柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
+                                </li>
+                            </a>
+                        </c:forEach>
+
                     </ul>
                 </div>
                 <!---干活类 商品列表结束-->
@@ -473,84 +349,22 @@
                 </div>
                 <div class="index_floor_list">
                     <ul id="ghList">
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
+
+                        <c:forEach var="i" items="${newGoods}">
+                            <a href="<%=basePath%>goods/toGoodsDetailPage?gid=${i.id}">
+                                <li style="width: 33%; height: 120px;">
+                                    <div class="index_floor_bk2">
+                                        <div class="index_floor_list_d3">
+                                            <img src="<%=basePath%>image/goods?pic=${i.pic1.substring( i.pic1.lastIndexOf("\\") + 1 )}" style="width:90px;height:90px;">
+                                        </div>
+                                        <div class="index_floor_list_d4" style="display:block;">
+                                            <p class="index_floor_list_pa">${i.name}</p>
+                                            <span class="index_floor_list_pb">￥${i.price}</span>
+                                        </div>
                                     </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa">柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                        <a href="chanpin_xqy.php">
-                            <li style="width: 33%; height: 120px;">
-                                <div class="index_floor_bk2">
-                                    <div class="index_floor_list_d3">
-                                        <img src="<%=basePath%>fontpage/img/g_1705310944410103520.jpg" style="width:90px;height:90px;">
-                                    </div>
-                                    <div class="index_floor_list_d4" style="display:block;">
-                                        <p class="index_floor_list_pa"> 柠檬</p>
-                                        <span class="index_floor_list_pb">￥3.70</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
+                                </li>
+                            </a>
+                        </c:forEach>
                     </ul>
                 </div>
                 <!---水产类 商品列表开始-->

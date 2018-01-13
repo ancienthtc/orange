@@ -22,4 +22,6 @@ public interface FormatService {
     int formatDel(Integer fid);
 
     Format getFormat(Integer fid);
+
+    Format getFormatDetail(Integer fid);
 }

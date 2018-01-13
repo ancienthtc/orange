@@ -52,10 +52,10 @@ input::-moz-focus-inner {
 	border-color: transparent !important;
 }
 
-input {
+/*input {
 	-webkit-appearance: none;
 	outline: none;
-}
+}*/
 
 input[type="checkbox"] {
 	-webkit-appearance: none;
@@ -118,7 +118,7 @@ input, select, button {
 	vertical-align: baseline;
 	border-radius: 0;
 	background-color: transparent;
-	-webkit-appearance: none;
+/*	-webkit-appearance: none;*/
 	-moz-appearance: none;
 }
 
@@ -1379,7 +1379,7 @@ li {
 }
 
 .aui-list-product-item-price {
-	font-size: 16px;
+	font-size: 15px;
 	color: #EB5211;
 }
 
@@ -1448,7 +1448,7 @@ li {
 
 .aui-list-product-fl-img {
 	height: auto;
-	width: 6rem;
+	width: 5rem;
 	overflow: hidden;
 }
 
@@ -1466,6 +1466,8 @@ li {
 	flex: 1;
 	padding-left: 10px;
 	background-color: #FFF;
+	width: 200px;
+	display: table;
 }
 
 .aui-list-product-fl-text h3 {
@@ -1477,10 +1479,15 @@ li {
 	text-overflow: ellipsis;
 	line-height: 1rem;
 	max-height: 3rem;
-	color: #505050;
+	color:#999;
 	text-align: justify;
 	font-weight: normal;
 	margin-top: 5px;
+	width: 120px;
+	height: 16px;
+	overflow: hidden;
+	float: left;
+	text-align: center;
 }
 .ddzl{font-size: 14px;}
 .aui-list-product-fl-mes {
@@ -1498,6 +1505,9 @@ li {
 	-ms-flex-pack: justify;
 	justify-content: space-between;
 	color: #999;
+	float: left;
+	width: 100%;
+	height: 5vh;
 }
 
 .aui-list-product-fl-bag span {
@@ -1977,13 +1987,13 @@ input.check:checked {
 	font-weight: 800;
 }
 
-/* 填写订单地址  */
+ 填写订单地址  
 .aui-address-content {
-/*	padding-top: 44px;*/
+	padding-top: 44px;
 }
 
 .aui-address-well {
-	/*padding-bottom: 44px;*/
+	padding-bottom: 44px;
 }
 
 .aui-address-box-list {
@@ -2093,6 +2103,7 @@ input.check:checked {
 	align-items: center;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	color: #81838e;
+	height: 8.4vh;
 }
 
 .aui-address-cell-bd {
@@ -2105,7 +2116,7 @@ input.check:checked {
 .aui-address-cell-ft {
 	text-align: right;
 	color:#81838e;
-	padding-right: 15px;
+	padding-right:5px;
 	font-size: 16px;
 }
 

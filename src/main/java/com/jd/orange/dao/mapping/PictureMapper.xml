@@ -44,7 +44,7 @@
       #{pictype,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{jC,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jd.orange.model.Picture" >
+  <insert id="insertSelective" parameterType="com.jd.orange.model.Picture" useGeneratedKeys="true" keyProperty="id" >
     insert into t_picture
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

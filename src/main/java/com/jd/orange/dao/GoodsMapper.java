@@ -34,4 +34,17 @@ public interface GoodsMapper {
     List<Goods> selectGoodsWithFormatsByPart(@Param("pid") Integer pid);
 
     Goods selectGoodsWithFormatById(@Param("id") Integer id);
+
+    //推荐商品个数
+    int getReommendCount();
+
+    //推荐商品
+    List<Goods> getRecommendGoods();
+
+    //热销
+    List<Goods> getHotSales(@Param("limit") Integer limit);
+
+    //新商品
+    List<Goods> getNewGoods(@Param("limit") Integer limit);
+
 }

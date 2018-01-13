@@ -2,6 +2,7 @@ package com.jd.orange.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 public class Format {
@@ -30,6 +31,19 @@ public class Format {
     private String fclassJ;
 
     private Integer jC;
+
+    @Transient
+    private String gname;   //所属商品名称
+
+    @Transient
+    private String pic1;    //图片
+
+    @Transient
+    private Double freight; //商品运费
+
+    @Transient
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date shelf;
 
     public Integer getId() {
         return id;
@@ -125,5 +139,37 @@ public class Format {
 
     public void setjC(Integer jC) {
         this.jC = jC;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
+    }
+
+    public String getPic1() {
+        return pic1;
+    }
+
+    public void setPic1(String pic1) {
+        this.pic1 = pic1;
+    }
+
+    public Double getFreight() {
+        return freight;
+    }
+
+    public void setFreight(Double freight) {
+        this.freight = freight;
+    }
+
+    public Date getShelf() {
+        return shelf;
+    }
+
+    public void setShelf(Date shelf) {
+        this.shelf = shelf;
     }
 }

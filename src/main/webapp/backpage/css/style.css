@@ -463,7 +463,7 @@ header {
 	color: #333;
 }
 #add_picture{ padding:0px 0px; margin:0px;}
-#add_picture { overflow: auto; }
+/*#add_picture { overflow: auto; }*/
 #add_picture .Widescreen{ left:0px}
 #form-article-add{ padding:20px 0px;}
 #form-article-add .cl{ margin-bottom:15px; position:relative; min-height:35px; width:100%; left:0px}
@@ -1271,3 +1271,46 @@ header {
 
 /**/
 #tbody td{height: 50px;text-align: center;border: 1px solid #DDD;}
+
+
+/*1月8号添加的css*/
+.shangxiaxian{width: 90%;height: auto;margin: auto;font-size: 16px;display: table;margin-bottom: 20px;}
+.xiaxian{width:11%;height:40px;float: left;}
+.xiaxian input{width:16px;height:16px;margin: 13px 0 0 0;float: left;}
+.xiaxian span{line-height: 40px;float: left;margin-left: 5px;}
+.shangxian{width: 38%;height:40px;float: left;}
+.shangxian input{width:16px;height:16px;margin: 13px 0 0 0;float: left;}
+.shangxian span{line-height: 40px;float: left;margin-left: 5px;}
+
+.cpguige{width:90%;height:400px;margin: auto;font-size: 14px;color:#333333b8; }
+.cpgg_nr{width: 100%;height:auto;border: 1px solid #d5d5d5;}
+.cpgg_nr th{width: 10%;height:45px;border: 1px solid #d5d5d5;line-height: 30px;text-align: center;}
+.table_xg{width: 60% !important;background: #428bca;color: white;border: 1px solid #428bca;border-radius: 4px;color: white !important;height: 30px}
+.table_sc{width: 60% !important;background:#ffb752;color: white;border: 1px solid #ffb752;border-radius: 4px;color: white !important;height: 30px}
+.cp_wzbj th input{width: 80%;color:#333333b8;text-align: center;margin: auto;}
+.cpgg_tj{width:50%;height:50px;float: left;line-height: 50px;text-align: center;margin: 20px 0 20px 0;}
+.cpgg_tj input{height:20px;width: 50%}
+.cpgg_tj_2{width: 100%;height: 50px;display:inline-block;}
+.cpgg_tj_2 div{width: 25%;height:50px;line-height: 50px;float: left;text-align: center;}
+.cpgg_form{width: 100%;height: 50PX;margin-top:25px;}
+.cpgg_form input{margin:auto;width: 100px;height: 40px;background:#428bca;color: white;display: block;border: 1px solid #428bca;border-radius: 2px;}
+.cp_tjsj{margin: 0 0 0 10px !important;}
+.search_sxx{float: left;margin-left: 20px;margin-top: 5px;}
+.sx_wz{height: 40px;line-height:30px;float: left;}
+
+.spmc_tj{width: 90%;height: auto;margin: auto;line-height: 50px;display: table;}
+.spmc_tj div{width: 50%;float: left;text-align:left;}
+.spmc_tj div input{height:20px;line-height: 30px;width: 60%;}
+.zwcs{width: 90%;height: 100px;margin: auto;}
+.zwcs_bt{margin: 10px 0 10px 0;}
+.zwcs_bt{width: 100% !important;text-align:inherit !important;}
+.zwcs div{width: 33.33333%;float: left;text-align: center;}
+.zwcs input{width:55%;}
+.container{width: 90%;margin: auto;}
+.fileinput-new{text-align: center;}
+.clearfix_xq{width:90%;display: table;margin: auto;}
+.form-label {text-align: left !important;margin: 10px 0 10px 0;}
+.spms_bj{width: 90%;margin: auto;display: table;}
+.formControls{width: 100%;}
+.formControls textarea {margin-left: 0 !important;width: 100% !important;}
+.Button_operation {text-align: center;}

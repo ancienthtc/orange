@@ -7,6 +7,7 @@
     <result column="format" property="format" jdbcType="VARCHAR" />
     <result column="amount" property="amount" jdbcType="DOUBLE" />
     <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="fclass" property="fclass" jdbcType="VARCHAR" />
     <result column="message" property="message" jdbcType="VARCHAR" />
     <result column="otherdetail" property="otherdetail" jdbcType="VARCHAR" />
     <result column="picture" property="picture" jdbcType="INTEGER" />
@@ -18,8 +19,8 @@
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, goodsname, format, amount, price, message, otherdetail, picture, `order`, goodsname_j,
-    format_j, message_j, otherdetail_j, j_c
+    id, goodsname, format, amount, price, fclass, message, otherdetail, picture, order,
+    goodsname_j, format_j, message_j, otherdetail_j, j_c
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -33,17 +34,19 @@
   </delete>
   <insert id="insert" parameterType="com.jd.orange.model.OrderDetail" >
     insert into t_order_detail (id, goodsname, format, 
-      amount, price, message, 
-      otherdetail, picture, `order`,
-      goodsname_j, format_j, message_j, 
-      otherdetail_j, j_c)
+      amount, price, fclass,
+      message, otherdetail, picture,
+      order, goodsname_j, format_j,
+      message_j, otherdetail_j, j_c
+      )
     values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, 
-      #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{message,jdbcType=VARCHAR}, 
-      #{otherdetail,jdbcType=VARCHAR}, #{picture,jdbcType=INTEGER}, #{order,jdbcType=INTEGER}, 
-      #{goodsnameJ,jdbcType=VARCHAR}, #{formatJ,jdbcType=VARCHAR}, #{messageJ,jdbcType=VARCHAR}, 
-      #{otherdetailJ,jdbcType=VARCHAR}, #{jC,jdbcType=INTEGER})
+      #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{fclass,jdbcType=VARCHAR},
+      #{message,jdbcType=VARCHAR}, #{otherdetail,jdbcType=VARCHAR}, #{picture,jdbcType=INTEGER},
+      #{order,jdbcType=INTEGER}, #{goodsnameJ,jdbcType=VARCHAR}, #{formatJ,jdbcType=VARCHAR},
+      #{messageJ,jdbcType=VARCHAR}, #{otherdetailJ,jdbcType=VARCHAR}, #{jC,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.jd.orange.model.OrderDetail" >
+  <insert id="insertSelective" parameterType="com.jd.orange.model.OrderDetail" useGeneratedKeys="true" keyProperty="id" >
     insert into t_order_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -60,6 +63,9 @@
       </if>
       <if test="price != null" >
         price,
+      </if>
+      <if test="fclass != null" >
+        fclass,
       </if>
       <if test="message != null" >
         message,
@@ -105,6 +111,9 @@
       <if test="price != null" >
         #{price,jdbcType=DOUBLE},
       </if>
+      <if test="fclass != null" >
+        #{fclass,jdbcType=VARCHAR},
+      </if>
       <if test="message != null" >
         #{message,jdbcType=VARCHAR},
       </if>
@@ -149,6 +158,9 @@
       <if test="price != null" >
         price = #{price,jdbcType=DOUBLE},
       </if>
+      <if test="fclass != null" >
+        fclass = #{fclass,jdbcType=VARCHAR},
+      </if>
       <if test="message != null" >
         message = #{message,jdbcType=VARCHAR},
       </if>
@@ -185,6 +197,7 @@
       format = #{format,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=DOUBLE},
       price = #{price,jdbcType=DOUBLE},
+      fclass = #{fclass,jdbcType=VARCHAR},
       message = #{message,jdbcType=VARCHAR},
       otherdetail = #{otherdetail,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=INTEGER},

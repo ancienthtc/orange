@@ -31,6 +31,11 @@ public class FormatServiceImpl implements FormatService{
 
     @Override
     public int formatAdd(Format format) {
+        //查询规格数量
+        if(formatMapper.formatCount(format.getGoods()) >= 10 )
+        {
+            return 0;
+        }
         format.setCreatetime(DateExample.getNowTimeByDate());
         return formatMapper.insertSelective(format);
     }
@@ -39,6 +44,7 @@ public class FormatServiceImpl implements FormatService{
     public int formatUpdate(Format format) {
         format.setUpdatetime(DateExample.getNowTimeByDate());
         return formatMapper.updateByPrimaryKeySelective(format);
+        //return formatMapper.updateByPrimaryKey(format);
     }
 
     @Override
@@ -48,7 +54,7 @@ public class FormatServiceImpl implements FormatService{
         //商品不满足条件自动下架
         if( !(formatMapper.goodsShelfCondition(format.getGoods()) > 0) )
         {
-            goodsService.GoodsShelf(format.getGoods(),0);
+            goodsService.GoodsShelf(format.getGoods(),0,null);
         }
         return i;
     }
@@ -56,6 +62,11 @@ public class FormatServiceImpl implements FormatService{
     @Override
     public Format getFormat(Integer fid) {
         return formatMapper.selectByPrimaryKey(fid);
+    }
+
+    @Override
+    public Format getFormatDetail(Integer fid) {
+        return null;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.jd.orange.util.date;
 
 import java.sql.Timestamp;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +24,17 @@ public class DateExample {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         return Timestamp.valueOf( sdf.format(DateExample.getNowTimeByCalendar().getTime()) );
+    }
+
+    public static Timestamp getLocalTimeFormat(String time)
+    {
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        if(!time.contains(":"))
+        {
+            time=time.trim()+" 00:00:00";
+        }
+        return Timestamp.valueOf( time );
     }
 
     public static long getTimestamp()

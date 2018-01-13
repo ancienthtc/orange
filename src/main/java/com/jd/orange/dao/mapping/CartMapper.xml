@@ -25,14 +25,79 @@
 
   <!-- new -->
   <select id="getUserCart" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Cart">
-    SELECT * from t_cart WHERE `user` = #{id,jdbcType=INTEGER}
+    SELECT
+    t_cart.id,
+    t_cart.amount,
+    t_cart.price,
+    t_cart.`all`,
+    t_cart.detail,
+    t_cart.createtime,
+    t_cart.format,
+    t_cart.`user`,
+    t_cart.detail_j,
+    t_cart.j_c,
+    t_format.fname as `fname`,
+    t_format.fclass as `fclass`,
+    t_goods.name as `gname`,
+    t_goods.pic1 as img ,
+    t_goods.shelf as shelf
+    FROM
+    t_cart
+    LEFT JOIN t_format ON t_cart.format = t_format.id
+    LEFT JOIN t_goods ON t_format.goods = t_goods.id
+    WHERE t_cart.`user` = #{id,jdbcType=INTEGER}
+    ORDER BY t_cart.createtime DESC
   </select>
 
+  <select id="getOldCartItem" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Cart">
+    SELECT * FROM t_cart WHERE `user` = #{uid,jdbcType=INTEGER} AND format = #{format,jdbcType=INTEGER}
+  </select>
+
+  <select id="getCommitItems" parameterType="list" resultType="map">
+    SELECT
+    t_cart.id as cid,t_cart.amount,t_cart.detail,t_cart.format as fid,
+    t_format.fname,t_format.fclass,t_format.price,
+    t_cart.amount * t_format.price as `all`,t_format.goods as gid,
+    t_goods.`name` as gname,t_goods.freight,t_goods.pic1
+    FROM
+    t_cart
+    INNER JOIN t_format ON t_cart.format = t_format.id
+    INNER JOIN t_goods ON t_format.goods = t_goods.id
+    WHERE t_goods.shelf is not null and t_cart.id IN
+    <foreach collection="list" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="getUserCartItemCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(1) FROM t_cart WHERE `user` = #{uid,jdbcType=INTEGER}
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_cart
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!-- new -->
+  <delete id="clearCartByUser" parameterType="java.lang.Integer">
+    delete from t_cart
+    where `user` = #{uid,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="delCartItems" parameterType="list">
+    DELETE FROM t_cart WHERE id in
+    <foreach collection="list" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <!--<update id="test" parameterType="list">-->
+    <!--UPDATE t_cart SET j_c=1 WHERE id IN-->
+    <!--<foreach collection="list" item="item" open="(" separator="," close=")">-->
+      <!--#{item}-->
+    <!--</foreach>-->
+  <!--</update>-->
+
   <insert id="insert" parameterType="com.jd.orange.model.Cart" >
     insert into t_cart (id, amount, price, 
       `all`, detail, createtime,

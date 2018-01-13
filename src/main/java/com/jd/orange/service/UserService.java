@@ -27,4 +27,6 @@ public interface UserService {
 
     List<User> getUsers(String keys, String start_c, String end_c, String start_u, String end_u);
 
+    User getUser(Integer uid);
+
 }

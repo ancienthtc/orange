@@ -1,6 +1,7 @@
 package com.jd.orange.service;
 
 import com.jd.orange.model.Picture;
+import com.jd.orange.util.Folder;
 import com.jd.orange.util.PictureType;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,11 +20,20 @@ public interface ImageService {
 
     int pictureAdd(MultipartFile file , String folderPath , String filename);
 
-    int imageDelete(String absolutePath,Integer id , String pictype);
+    /**
+     * id: t_picture  pictype: t_goods
+     * @param absolutePath
+     * @param id
+     * @param pictype
+     * @return
+     */
+    boolean imageDelete(String absolutePath,Integer id , String pictype);
 
     boolean fileDel(String absolutePath);
 
     boolean figureDel(Integer pid);
 
     int getOtherCount();
+
+    Picture ImageCopy(String absolutePath ,String ServerPath, Folder folder, PictureType type);
 }

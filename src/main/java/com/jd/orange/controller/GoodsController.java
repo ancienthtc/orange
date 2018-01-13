@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -174,8 +175,8 @@ public class GoodsController {
     }
 
     //商品图片添加(商品修改)
-    @RequestMapping("/updatePic")
-    @ResponseBody
+    //@RequestMapping("/updatePic")
+    //@ResponseBody
     public String updatePic(HttpServletRequest request ,@RequestParam(value = "file") MultipartFile file ,@RequestParam Integer id ,@RequestParam Integer i)
     {
         //i : 第几个图片(i=1 ,i=2 ,i=3)
@@ -201,37 +202,74 @@ public class GoodsController {
 
     //商品修改
     @RequestMapping("/update")
-    @ResponseBody
-    public String goodsUpdate(Goods goods)
+    //@ResponseBody
+    public String goodsUpdate(HttpServletRequest request ,Goods goods,@RequestParam(value = "file1" , required = false) MultipartFile file1
+            ,@RequestParam(value = "file2" , required = false) MultipartFile file2,@RequestParam(value = "file3" ,required = false ) MultipartFile file3)
     {
-        goods.setPic1(null);
-        goods.setPic2(null);
-        goods.setPic3(null);
-        if(goodsService.goodsUpdate(goods) > 0 )
+        String ServerPath=null;
+        //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title + ".jpg"
+        ServerPath=request.getSession().getServletContext().getRealPath("/");
+        //System.out.println(goods.getId());
+        if( file1.getSize() > 0 )
         {
-            return "true";
+            goodsService.picUpdate(ServerPath,goods.getId(),1,file1);
+        }
+        else
+            goods.setPic1(null);
+        if( file2.getSize() > 0 )
+        {
+            goodsService.picUpdate(ServerPath,goods.getId(),2,file2);
+        }
+        else
+            goods.setPic2(null);
+        if( file3.getSize() > 0 )
+        {
+            goodsService.picUpdate(ServerPath,goods.getId(),3,file3);
+        }
+        else
+            goods.setPic3(null);
+
+//        if(goodsService.goodsUpdate(goods)>0)
+//        {
+//            return "true";
+//        }
+//        else
+//        {
+//            return "false";
+//        }
+        goodsService.goodsUpdate(goods);
+        return "redirect:/goods/toGoodsAlter/"+goods.getId();
+    }
+
+    //商品 上架/下架
+    @RequestMapping("/shelf")
+    @ResponseBody
+    public String goodsShelf(Integer id,String shelf)
+    {
+        if(shelf==null || shelf=="") //下架
+        {
+            if( goodsService.GoodsShelf(id,0,shelf) > 0 )
+            {
+                return "true";
+            }
+            return "false";
+        }
+        else if(shelf.length()>0)   //上架
+        {
+            if( goodsService.GoodsShelf(id,1,shelf) > 0 )
+            {
+                return "true";
+            }
+            return "false";
         }
         return "false";
     }
 
-    //商品上架
-    @RequestMapping("/load/{gid}")
+    @RequestMapping("/recommend")
     @ResponseBody
-    public String goodsLoad(@PathVariable Integer gid)
+    public String goodsRecommend(Integer id,Integer recommend)
     {
-        if( goodsService.GoodsShelf(gid,1) > 0 )
-        {
-            return "true";
-        }
-        return "false";
-    }
-
-    //商品下架
-    @RequestMapping("/under/{gid}")
-    @ResponseBody
-    public String goodsUnder(@PathVariable Integer gid)
-    {
-        if( goodsService.GoodsShelf(gid,0) > 0 )
+        if (goodsService.goodsRecommend(id,recommend) > 0 )
         {
             return "true";
         }
@@ -252,16 +290,25 @@ public class GoodsController {
     public String formatAdd(Format format)
     {
         //log.info(JSON.toJSONString(format));
+        if(format.getGoods()==null)
+        {
+            return "false";
+        }
         if ( formatService.formatAdd(format) > 0 )
         {
             return "true";
         }
         return "false";
+
     }
 
     //规格修改
+    @RequestMapping("/formatUpdate")
+    @ResponseBody
     public String formatUpdate(Format format)
     {
+        if(format.getFname().length()<=0 )
+            return "false";
         if( formatService.formatUpdate(format) > 0 )
         {
             return "true";
@@ -270,9 +317,15 @@ public class GoodsController {
     }
 
     //规格删除
-    public String formatDel()
+    @RequestMapping("/formatDel")
+    @ResponseBody
+    public String formatDel(Integer id)
     {
-        return "";
+        if( formatService.formatDel(id) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
 
@@ -280,9 +333,13 @@ public class GoodsController {
     /* 用户模块 */
     //进入商品列表
     @RequestMapping("/toGoodsListPage")
-    public String goodsListPage( @RequestParam(required = false) Integer pid , Model model)
+    public String goodsListPage( @RequestParam(required = false) Integer pid , @RequestParam(required = false) Integer type , Model model)
     {
-        model.addAttribute("goods",goodsService.GoodsListPage(pid));
+        if(pid!=null && type==null)
+        {
+            model.addAttribute("goods",goodsService.GoodsListPage(pid));
+        }
+
         return "user/chanpinliebiao";
     }
 

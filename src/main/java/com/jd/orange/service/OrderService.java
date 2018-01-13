@@ -1,6 +1,7 @@
 package com.jd.orange.service;
 
 import com.jd.orange.model.Order;
+import com.jd.orange.model.User;
 import com.jd.orange.util.pagehelper.PagedResult;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface OrderService {
                                             Integer orderStatus, Integer shopStatus,Integer way);
 
     Order getOrderDetail(String sequence);
+
+    //创建订单
+    Map<String,Object> create(String json, User user,String ServerPath);
 }

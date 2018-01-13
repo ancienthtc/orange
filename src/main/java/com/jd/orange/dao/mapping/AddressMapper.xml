@@ -32,6 +32,20 @@
     from t_address
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="getAddressByUser" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Address">
+    SELECT <include refid="Base_Column_List" /> FROM `t_address` WHERE `user`= #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getAddressCountByUser" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(1) FROM t_address WHERE `user` = #{uid,jdbcType=INTEGER}
+  </select>
+
+  <select id="getUserMain" parameterType="java.lang.Integer" resultType="com.jd.orange.model.Address">
+    SELECT <include refid="Base_Column_List" /> from t_address
+    WHERE `user` = #{uid,jdbcType=INTEGER} AND ismain=1 LIMIT 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_address
     where id = #{id,jdbcType=INTEGER}
@@ -255,4 +269,15 @@
       j_c = #{jC,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!-- new -->
+  <update id="setNoMainByUser" parameterType="java.lang.Integer">
+    UPDATE t_address SET ismain = 0 WHERE `user` = #{uid,jdbcType=INTEGER}
+  </update>
+
+  <update id="setMainById" parameterType="java.lang.Integer">
+    UPDATE t_address SET ismain = 1 WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+
+
 </mapper>

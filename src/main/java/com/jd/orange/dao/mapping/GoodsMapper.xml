@@ -115,6 +115,7 @@
         </when>
       </choose>
     </trim>
+    ORDER BY recommend DESC , shelf DESC , updatetime DESC
   </select>
 
   <!-- 上架条件 -->
@@ -154,6 +155,62 @@
     LEFT JOIN t_format ON t_format.goods = t_goods.id
     WHERE t_goods.id = #{id,jdbcType=INTEGER}
     ORDER BY shelf DESC
+  </select>
+
+  <select id="getReommendCount" resultType="java.lang.Integer">
+    SELECT SUM(CASE WHEN recommend=1 then 1 else 0 end) FROM t_goods
+  </select>
+
+  <select id="getRecommendGoods" resultType="com.jd.orange.model.Goods">
+    select * from (  SELECT
+    g.id ,g.`name`,g.freight,
+    g.shelf,g.pic1,g.pic2,
+    g.pic3,g.recommend,
+    b.stock,b.sales,b.price
+    FROM
+    t_goods g
+    LEFT JOIN
+    t_format as b
+    ON b.goods = g.id
+    WHERE g.shelf is not null and g.recommend=1
+    ORDER BY b.sales DESC,b.price , b.stock desc
+    ) as t
+    #WHERE shelf is not null and recommend=1
+    GROUP BY t.id
+  </select>
+
+  <select id="getHotSales" resultType="com.jd.orange.model.Goods">
+    SELECT
+    g.id ,g.`name`,g.freight,
+    g.shelf,g.pic1,g.pic2,
+    g.pic3,g.recommend,g.createtime,
+    f.price, f.stock , f.sales ,
+    SUM(f.sales) as s
+    FROM
+    t_goods as g
+    INNER JOIN (SELECT * from t_format ORDER BY sales DESC , price , stock DESC) as f ON f.goods = g.id
+    WHERE g.shelf is not null
+    GROUP BY g.id
+    ORDER BY s desc
+    LIMIT #{limit,jdbcType=INTEGER}
+  </select>
+
+  <select id="getNewGoods" resultType="com.jd.orange.model.Goods">
+    select * from (  SELECT
+    g.id ,g.`name`,g.freight,
+    g.shelf,g.pic1,g.pic2,
+    g.pic3,g.recommend,g.createtime,
+    b.stock,b.sales,b.price
+    FROM
+    t_goods g
+    LEFT JOIN
+    t_format as b
+    ON b.goods = g.id
+    WHERE g.shelf is not null
+    ORDER BY g.createtime desc,b.sales DESC,b.price , b.stock desc
+    ) as t
+    GROUP BY t.id
+    LIMIT #{limit,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

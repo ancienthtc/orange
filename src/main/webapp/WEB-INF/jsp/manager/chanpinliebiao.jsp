@@ -155,15 +155,15 @@
                     a+="<td class='td-status'>";
                     if(result.dataList[i].shelf.length<=0)
                     {
-                        a+="<span class='label label-success radius'>上架</span>";
+                        a+="<span class='label label-defaunt radius'>下架</span>";
                     }
                     else {
-                        a+="<span class='label label-defaunt radius'>下架</span>";
+                        a+="<span class='label label-success radius'>上架</span>";
                     }
                     a+="</td>";
                     a+="<td class='td-manage'>";
-                    a+="<a onClick='member_stop(this,\"10001\")' href='javascript:;' title='停用' class='btn btn-xs btn-success'>";
-                    a+="<i class='icon-ok bigger-120'></i></a>";
+                    //a+="<a onClick='member_stop(this,\"10001\")' href='javascript:;' title='停用' class='btn btn-xs btn-success'>";
+                    //a+="<i class='icon-ok bigger-120'></i></a>";
                     a+="<a href='<%=basePath%>goods/toGoodsAlter/"+result.dataList[i].id+"' class='btn btn-xs btn-info'><i class='icon-edit bigger-120'></i></a>";
                     a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning del' gid='"+result.dataList[i].id+"' >";
                     a+="<i class='icon-trash  bigger-120'></i></a></td>";

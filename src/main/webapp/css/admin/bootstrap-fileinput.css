@@ -20,6 +20,7 @@
 .fileinput {
   display: inline-block;
   margin-bottom: 9px;
+  margin-right: 100px;
 }
 .fileinput .form-control {
   display: inline-block;

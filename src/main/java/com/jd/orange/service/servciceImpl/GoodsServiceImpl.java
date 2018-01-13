@@ -140,44 +140,115 @@ public class GoodsServiceImpl implements GoodsService{
         ServerPath = ServerPath + Folder.GoodsDetail.getVal();
         String filename = new GenerateString().getFileName("goods")+getOriginal(file);
         Goods goods=goodsMapper.selectByPrimaryKey(gid);
-        //修改时间
-        goods.setUpdatetime(DateExample.getNowTimeByDate());
+
         switch (i)
         {
             case 1:
-                //更新pic1
-                if(goods.getPic1()==null)
+                //先删文件
+                if( imageService.fileDel(goods.getPic1()) )//文件存在并删除成功
                 {
+                    //增加图片
                     if(imageService.pictureAdd(file,ServerPath,filename )>0)
                     {
+                        //修改数据库
                         goods.setPic1(ServerPath+filename);
+                        //修改时间
+                        //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                        return goodsMapper.updateByPrimaryKeySelective(goods);
                     }
-                    return goodsMapper.updateByPrimaryKeySelective(goods);
                 }
-                else
-                    return 0;
+                else//文件删除失败 1-不存在 2-其他原因
+                {
+                    if(goods.getPic1()==null)   //尚未指定图片
+                    {
+                        //增加图片
+                        if(imageService.pictureAdd(file,ServerPath,filename )>0)
+                        {
+                            //修改数据库
+                            goods.setPic1(ServerPath+filename);
+                            //修改时间
+                            //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                            return goodsMapper.updateByPrimaryKeySelective(goods);
+                        }
+                    }
+                    else if( ! (new File(goods.getPic1()).exists()) )//图片已经不存在
+                    {
+                        //增加图片
+                        if(imageService.pictureAdd(file,ServerPath,filename )>0)
+                        {
+                            //修改数据库
+                            goods.setPic1(ServerPath+filename);
+                            //修改时间
+                            //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                            return goodsMapper.updateByPrimaryKeySelective(goods);
+                        }
+                    }
+                }
+                return 0;
             case 2:
-                if(goods.getPic2()==null)
+                if( imageService.fileDel(goods.getPic2()) )//文件存在并删除成功
                 {
                     if(imageService.pictureAdd(file,ServerPath,filename )>0)
                     {
                         goods.setPic2(ServerPath+filename);
+                        //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                        return goodsMapper.updateByPrimaryKeySelective(goods);
                     }
-                    return goodsMapper.updateByPrimaryKeySelective(goods);
                 }
-                else
-                    return 0;
+                else//文件删除失败 1-不存在 2-其他原因
+                {
+                    if(goods.getPic2()==null)   //尚未指定图片
+                    {
+                        if(imageService.pictureAdd(file,ServerPath,filename )>0)
+                        {
+                            goods.setPic2(ServerPath+filename);
+                            //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                            return goodsMapper.updateByPrimaryKeySelective(goods);
+                        }
+                    }
+                    else if( ! (new File(goods.getPic2()).exists()) )//图片已经不存在
+                    {
+                        if(imageService.pictureAdd(file,ServerPath,filename )>0)
+                        {
+                            goods.setPic2(ServerPath+filename);
+                            //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                            return goodsMapper.updateByPrimaryKeySelective(goods);
+                        }
+                    }
+                }
+                return 0;
             case 3:
-                if(goods.getPic3()==null)
+                if( imageService.fileDel(goods.getPic3()) )//文件存在并删除成功
                 {
                     if(imageService.pictureAdd(file,ServerPath,filename )>0)
                     {
                         goods.setPic3(ServerPath+filename);
+                        //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                        return goodsMapper.updateByPrimaryKeySelective(goods);
                     }
-                    return goodsMapper.updateByPrimaryKeySelective(goods);
                 }
-                else
-                    return 0;
+                else//文件删除失败 1-不存在 2-其他原因
+                {
+                    if(goods.getPic3()==null)   //尚未指定图片
+                    {
+                        if(imageService.pictureAdd(file,ServerPath,filename )>0)
+                        {
+                            goods.setPic3(ServerPath+filename);
+                            //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                            return goodsMapper.updateByPrimaryKeySelective(goods);
+                        }
+                    }
+                    else if( ! (new File(goods.getPic3()).exists()) )//图片已经不存在
+                    {
+                        if(imageService.pictureAdd(file,ServerPath,filename )>0)
+                        {
+                            goods.setPic3(ServerPath+filename);
+                            //goods.setUpdatetime(DateExample.getNowTimeByDate());
+                            return goodsMapper.updateByPrimaryKeySelective(goods);
+                        }
+                    }
+                }
+                return 0;
             default:return 0;
         }
     }
@@ -191,26 +262,61 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Override
-    public int GoodsShelf(Integer gid, Integer status) {
+    public int GoodsShelf(Integer gid, Integer status ,String shelf) {
         //status 0-下架  1-上架
         Goods goods=goodsMapper.selectByPrimaryKey(gid);
         if(status==0 )
         {
-            if( goods.getShelf()!=null )
-            {
-                return goodsMapper.goodsstatus(gid,status,DateExample.getLocalTimeFormat());
-            }
+//            if( goods.getShelf()!=null )
+//            {
+//
+//            }
+            return goodsMapper.goodsstatus(gid,status,null);
         }
         else if(status==1)
         {
             if( goods.getShelf()==null && formatMapper.goodsShelfCondition(gid) > 0 )
             {
-                return goodsMapper.goodsstatus(gid,status,DateExample.getLocalTimeFormat());
+                return goodsMapper.goodsstatus(gid,status,DateExample.getLocalTimeFormat(shelf));
             }
         }
         return 0;
     }
 
+    @Override
+    public int goodsRecommend(Integer id, Integer recommend) {
+        Goods goods=new Goods();
+        goods.setId(id);
+        if(recommend==1)
+        {
+            if(goodsMapper.getReommendCount() >=6 )
+            {
+                return 0;
+            }
+            goods.setRecommend(1);
+        }
+        else if(recommend==0)
+        {
+            goods.setRecommend(0);
+        }
+        return goodsMapper.updateByPrimaryKeySelective(goods);
+    }
+
+    //推荐商品列
+    @Override
+    public List<Goods> getRecommend() {
+        return goodsMapper.getRecommendGoods();
+    }
+
+    @Override
+    public List<Goods> getHotSales() {
+        return goodsMapper.getHotSales(6);
+    }
+
+    @Override
+    public List<Goods> getNewGoods() {
+        return goodsMapper.getNewGoods(6);
+    }
 
     @Override
     public int goodsPicDel(Integer gid , String detail) {

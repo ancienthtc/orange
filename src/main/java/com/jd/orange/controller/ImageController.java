@@ -77,6 +77,27 @@ public class ImageController {
         OutPutAgain(imagePath,request,response,0);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/order")
+    public void showOrderPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam String pic)
+    {
+        String imagePath;
+        if(pic==null)
+        {
+            pic="";
+        }
+        if(pic.equals("undefined") || pic.equals("") || pic.equals("null") || pic.equals("default")) //默认图片
+        {
+            imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+        }
+        else
+        {
+            imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Order.getVal() + pic;
+        }
+        //System.out.println(imagePath);
+        OutPutAgain(imagePath,request,response,0);
+    }
+
 //    @ResponseBody
 //    @RequestMapping(value = "/goods")
 //    public void showGoodsPictureDefault(HttpServletRequest request, HttpServletResponse response)

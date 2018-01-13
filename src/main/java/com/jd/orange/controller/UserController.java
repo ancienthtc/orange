@@ -3,10 +3,10 @@ package com.jd.orange.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.UserCheck;
+import com.jd.orange.model.Address;
 import com.jd.orange.model.User;
-import com.jd.orange.service.ImageService;
-import com.jd.orange.service.PartService;
-import com.jd.orange.service.UserService;
+import com.jd.orange.service.*;
 import com.jd.orange.util.PictureType;
 import com.jd.orange.util.pagehelper.PagedResult;
 import org.slf4j.Logger;
@@ -16,7 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -41,6 +44,12 @@ public class UserController {
 
     @Autowired
     private PartService partService;
+
+    @Autowired
+    private GoodsService goodsService;
+
+    @Autowired
+    private AddressService addressService;
 
     /*  管理员模块  */
     @AdminCheck
@@ -76,6 +85,12 @@ public class UserController {
     {
         model.addAttribute("figure",imageService.pictures(PictureType.Other,null));
         model.addAttribute("parts",partService.getFatherPart());
+        //热销产品
+        model.addAttribute("hot",goodsService.getHotSales());
+        //推荐产品
+        model.addAttribute("recommend",goodsService.getRecommend());
+        //新产品
+        model.addAttribute("newGoods",goodsService.getNewGoods());
         return "user/index";
     }
 
@@ -101,10 +116,26 @@ public class UserController {
     }
 
     //进入收货地址
+    @UserCheck
     @RequestMapping("/toAddress")
-    public String toAddress()
+    public String toAddress(HttpSession session,Model model)
     {
+        User user= (User)session.getAttribute("user");
+        model.addAttribute("addressses",addressService.getAddressByUser(user.getId()));
         return "user/shouhuodizhi";
+    }
+
+    //进入收货地址详情
+    @UserCheck
+    @RequestMapping("/toAddressDetail")
+    public String toAddressDetail(@RequestParam(required = false) Integer aid , HttpSession session,Model model)
+    {
+        if(aid!=null)   //修改
+        {
+            model.addAttribute("address",addressService.getAddressById(aid));
+        }
+
+        return "user/shouhuodizhi_xqy";
     }
 
     //进入修改密码
@@ -121,16 +152,74 @@ public class UserController {
         return "user/lianxiwomen";
     }
 
+    //进入忘记密码
     @RequestMapping("/toForgetPass")
     public String forgetPass()
     {
         return "user/zhaohuimima";
     }
 
+    //进入重置密码
     @RequestMapping("/toResetPass")
     public String resetPass()
     {
         return "user/zhaohuimima_cz";
     }
+
+
+    /* 地址模块 */
+    //设置默认/取消默认
+    @RequestMapping("/setMain")
+    @ResponseBody
+    public String mainAddressSet(Integer id,Integer status,HttpSession session)
+    {
+        User user = (User)session.getAttribute("user");
+        if( addressService.setMain(id,status,user.getId()) > 0 )
+        {
+            return "true";
+        }
+        return "false";
+    }
+
+    //地址 增加/修改
+    @RequestMapping("/addressAdd")
+    @ResponseBody
+    public String AddressAdd(Address address,HttpSession session)
+    {
+        if(address.getId()==null)   //增加
+        {
+            User user=(User) session.getAttribute("user");
+            if(user==null)
+            {
+                return "false";
+            }
+            address.setUser(user.getId());
+            if( addressService.addAddress(address) > 0 )
+            {
+                return "true";
+            }
+
+        }
+        else    //修改
+        {
+            if( addressService.updateAddress(address) > 0 )
+            {
+                return "true";
+            }
+        }
+        return "false";
+    }
+
+    @RequestMapping("/addressDel")
+    @ResponseBody
+    public String AddressDel(Integer aid)
+    {
+        if( addressService.addressDel(aid) > 0 )
+        {
+            return "true";
+        }
+        return "false";
+    }
+
 
 }

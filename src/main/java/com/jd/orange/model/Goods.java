@@ -60,6 +60,15 @@ public class Goods {
     @Transient
     private List<Format> formats;
 
+    @Transient
+    private Double price;
+
+    @Transient
+    private Double stock;
+
+    @Transient
+    private Double sales;
+
     public Integer getId() {
         return id;
     }
@@ -250,5 +259,29 @@ public class Goods {
 
     public void setFormats(List<Format> formats) {
         this.formats = formats;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getStock() {
+        return stock;
+    }
+
+    public void setStock(Double stock) {
+        this.stock = stock;
+    }
+
+    public Double getSales() {
+        return sales;
+    }
+
+    public void setSales(Double sales) {
+        this.sales = sales;
     }
 }

@@ -91,13 +91,19 @@
                 <li>
                     <span>商品规格：</span>
                     <c:if test="${goods.formats.size()>1}">
-                        <em class="click" value="${goods.formats.get(0).id}">${goods.formats.get(0).fname}</em>
+                        <c:if test="${goods.formats.get(0).stock > 0}">
+                            <em class="click" value="${goods.formats.get(0).id}">${goods.formats.get(0).fname}</em>
+                        </c:if>
                         <c:forEach var="item" items="${goods.formats}" begin="1">
-                            <em value="${item.id}">${item.fname}</em>
+                            <c:if test="${item.stock > 0}">
+                                <em value="${item.id}">${item.fname}</em>
+                            </c:if>
                         </c:forEach>
                     </c:if>
                     <c:if test="${goods.formats.size()==1}">
-                        <em class="click" value="${goods.formats.get(0).id}">${goods.formats.get(0).fname}</em>
+                        <c:if test="${goods.formats.get(0).stock > 0}">
+                            <em class="click" value="${goods.formats.get(0).id}">${goods.formats.get(0).fname}</em>
+                        </c:if>
                     </c:if>
                 </li>
             </ul>
@@ -137,6 +143,9 @@
 						线下支付
                 </span>
             </p>
+            <p>
+                <span>留言:</span><span><input type="text" name="detail" id="message"></span>
+            </p>
         </div>
     </div>
 
@@ -147,19 +156,31 @@
                     商品详情
                 </a>
             </li>
-            <%--<li>--%>
-                <%--<a>--%>
-                    <%--交易记录--%>
-                <%--</a>--%>
-            <%--</li>--%>
+            <li>
+                <a>
+                    商品参数
+                </a>
+            </li>
         </ul>
         <div class="goods_box">
             <!-- 商品其他图片 -->
             <img src="<%=basePath%>fontpage/images/1.jpg" width="100%">
             <img src="<%=basePath%>fontpage/images/3.jpg" width="100%">
         </div>
-        <%--<div class="goods_box" style="display: none">--%>
-            <%--<div class="deal_list">--%>
+        <div class="goods_box" style="display: none">
+            <div class="deal_list">
+                <p>
+                    <span>产品参数1:</span><span>${goods.parameter1}</span>
+                </p>
+                <p>
+                    <span>产品参数2:</span><span>${goods.parameter2}</span>
+                </p>
+                <p>
+                    <span>产品参数3:</span><span>${goods.parameter3}</span>
+                </p>
+                <p>
+                    <span>${goods.detail}</span>
+                </p>
                 <%--<p>--%>
                     <%--<span>18762678928</span><span>1<em>[xl,深蓝]</em></span><span>2015-12-04</span>--%>
                 <%--</p>--%>
@@ -172,13 +193,13 @@
                 <%--<p>--%>
                     <%--<span>18762678928</span><span>1<em>[xl,深蓝]</em></span><span>2015-12-04</span>--%>
                 <%--</p>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+            </div>
+        </div>
     </div>
     <div class="bottomdiv clearfix">
         <div class="inner clearfix">
             <div class="fl btn_sure">
-                <a href="lijigoumai.php">
+                <a class="buy">
                     立即购买
                 </a>
             </div>
@@ -240,22 +261,58 @@
             //console.log( "fid:"+$(".click").attr("value") );
             //console.log("amount:"+$(".Amount").val() );
             var url="<%=basePath%>cart/add";
-            var info={format:$(".click").attr("value"),amount:$(".Amount").val()};
+
+            var $choice = $(".click");
+            if($choice.length==0)
+            {
+                alert("请选择规格");
+                return;
+            }
+
+            var info={format:$(".click").attr("value"),amount:$(".Amount").val(),detail:$("#message").val()};
 
             $.post(url,info,
                 function(result){
-                    //console.log(result);
+                    console.log(result);
                     if(result=="true")
                     {
                         alert("加入成功");
                     }
                     else
                     {
-                        alert("加入失败");
+                        alert(result);
+                        if(result=="请先登录")
+                        {
+                            window.location.href="<%=basePath%>login/login";
+                        }
                     }
-                },"json");
+                },"text");
+        });
+
+
+        $(".buy").click(function () {
+            var json='{"format":"'+$(".click").attr("value")+'","amount":"'+$(".Amount").val()+'","detail":"'+$("#message").val()+'"}';
+
+            //提交购物车
+            var form = $("<form></form>");
+            form.attr('action', "<%=basePath%>cart/commit");
+            form.attr('method', 'post');
+            form.attr('target', '_self');
+
+            var input1 = $("<input type='hidden' name='json' />");
+            input1.attr('value', json);
+            form.append(input1);
+
+            var input2 = $("<input type='hidden' name='type' />");
+            input2.attr('value', 0);
+            form.append(input2);
+
+            form.appendTo("body");
+            form.css('display', 'none');
+            form.submit();
 
         });
+
 
     })
 </script>

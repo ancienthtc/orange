@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -96,26 +99,35 @@ public class ImageServiceImpl implements ImageService{
         return 0;
     }
 
-
-
-
     @Override
-    public int imageDelete(String absolutePath, Integer id, String pictype) {
-        if(id!=null)    //Picture表
+    @Transactional
+    public boolean imageDelete(String absolutePath, Integer id, String pictype) {
+        if(id!=null && pictype==null)    //Picture表
+        {
+            if( pictureMapper.deleteByPrimaryKey(id) > 0 )
+            {
+                return fileDel(absolutePath);
+            }
+        }
+        if(pictype!=null && id==null)   //轮播图片
         {
 
         }
-        if(pictype!=null)   //商品图片
+        if(pictype!=null && id!=null)   //type+id
         {
 
         }
-        return 0;
+        return false;
     }
 
     //项目图片删除
     @Override
     public boolean fileDel(String absolutePath) {
         //imagePath = request.getSession().getServletContext().getRealPath("/")+ "upload/" + pic;
+        if(absolutePath==null)
+        {
+            return false;
+        }
         File file = new File(absolutePath);
         if (file.exists()){
             return file.delete();
@@ -140,5 +152,57 @@ public class ImageServiceImpl implements ImageService{
     @Override
     public int getOtherCount() {
         return pictureMapper.getOtherPicCount();
+    }
+
+    //订单(复制商品图片)
+    @Override
+    public Picture ImageCopy(String absolutePath ,String ServerPath, Folder folder, PictureType type)
+    {
+        if(absolutePath==null || ServerPath==null)
+        {
+            return null;
+        }
+        Picture picture=new Picture();
+        picture.setRoute(ServerPath+folder.getVal());
+        picture.setFilename(new GenerateString().getFileName(type.getVal()));
+        picture.setPictype(type.toString());
+        picture.setCreatetime(DateExample.getNowTimeByDate());
+        try {
+            // 打开输入流
+            FileInputStream fis = new FileInputStream(absolutePath);
+
+            //判断文件夹
+            File saveDir = new File(ServerPath+folder.getVal());
+            if (!saveDir.exists() && !saveDir.isDirectory()) { // 文件夹不存在就创建
+                saveDir.mkdir();
+            }
+            // 打开输出流
+            FileOutputStream fos = new FileOutputStream(picture.getRoute()+picture.getFilename());
+
+            // 读取和写入信息
+            int len = 0;
+            // 创建一个字节数组，当做缓冲区
+            byte[] b = new byte[1024];
+            while ((len = fis.read(b)) != -1) {
+                fos.write(b, 0, len);
+            }
+
+            // 关闭流  先开后关  后开先关
+            fos.close(); // 后开先关
+            fis.close(); // 先开后关
+            pictureMapper.insertSelective(picture);
+
+            return picture;
+        }catch (IOException e)
+        {
+            return null;
+        }
+    }
+
+
+    public static void copyFile3(String srcPath, String destPath) throws IOException {
+
+
+
     }
 }

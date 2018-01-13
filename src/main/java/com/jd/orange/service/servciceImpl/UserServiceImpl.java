@@ -87,4 +87,9 @@ public class UserServiceImpl implements UserService{
     public int getUserAmount() {
         return userMapper.userAmoumt();
     }
+
+    @Override
+    public User getUser(Integer uid) {
+        return userMapper.selectByPrimaryKey(uid);
+    }
 }

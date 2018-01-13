@@ -313,5 +313,12 @@ position: relative;}
 .youjiantou{width: 30px;height: 30px;margin-top: 11px;}
 
 
+.dizhi_kb{width: 100%;height: 5vh;line-height: 5vh;text-align: center;color: #81838e;}
+.sp_zj{height: 60px;line-height: 60px;float: right;margin-right:3%;color: #999;font-size: 1rem;}
+.fanshi{width:30%;display: table;}
+.jy_fs{width:70%;float: left;margin-right: 4%;}
+.jy_fs div{float: left;width: 50%;height:4vh;line-height: 4vh;}
+.jy_fs div input{width: 15px;height: 15px;}
+.jy_fs div span{font-size: 1rem;position: relative;top:2px;}
 
  

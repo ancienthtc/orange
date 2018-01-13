@@ -24,4 +24,7 @@ public interface FormatMapper {
     //上架条件 产品至少有一个规格，并且库存大于0
     int goodsShelfCondition(Integer gid);
 
+    int formatCount(Integer gid);
+
+    Format formatDetail(Integer fid);
 }
