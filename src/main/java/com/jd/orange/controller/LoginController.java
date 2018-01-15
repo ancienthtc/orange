@@ -113,6 +113,7 @@ public class LoginController {
 //        }
 
         session.setAttribute("textcode",new GenerateString().getRandomString(4));
+        session.setMaxInactiveInterval(15 * 60);//session 15分钟时长
         result= Juhe.sendCode(phone,(String)session.getAttribute("textcode"));
 
 

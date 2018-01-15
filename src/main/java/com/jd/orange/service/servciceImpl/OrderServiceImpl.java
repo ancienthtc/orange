@@ -90,29 +90,48 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
-
+    /*订单创建*/
     @Override
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public Map<String, Object> create(String json,User user,String ServerPath) {
         //定义变量
         Map<String, Object> m = new HashMap<String, Object>();
         Order order=new Order();
         //参数获取
         //解析json
-        JSONObject object = JSON.parseObject(json);
+        JSONObject object;
+        try {
+            object = JSON.parseObject(json);
+        }catch (Exception e)
+        {
+            m.put("order", null);
+            m.put("msg", "结算异常");
+            m.put("status", 8);
+            return m;
+        }
+
+
         JSONArray jsonArray = object.getJSONArray("goods");
         List<HashMap> goodslist = JSON.parseArray(jsonArray.toJSONString(), HashMap.class);
 
-        //外部参数
-        Integer aid = object.getInteger("aid");
-        Integer buyway = object.getInteger("buyway");
-        Integer cost = object.getInteger("cost");
-        Map<String,Double> prices = cartService.CalculatePrice2(goodslist);
-        Double AP=prices.get("AP");
-        Double OP=prices.get("OP");
-        Address address=addressMapper.selectByPrimaryKey(aid);//aid(存在地址)
 
         try {
+            //外部参数
+            if(object.get("aid")==null || object.get("aid").toString().equalsIgnoreCase(":null"))
+            {
+                m.put("order", null);
+                m.put("msg", "存在错误参数");
+                m.put("status", 2);
+                //return m;
+                throw new Exception();
+            }
+            Integer aid = object.getInteger("aid");
+            Integer buyway = object.getInteger("buyway");
+            Integer cost = object.getInteger("cost");
+            Map<String,Double> prices = cartService.CalculatePrice2(goodslist);
+            Double AP=prices.get("AP");
+            Double OP=prices.get("OP");
+            Address address=addressMapper.selectByPrimaryKey(aid);//aid(存在地址)
             //1.检查必要参数 fid,amount(stock),aid(存在地址)
             if (!OrderCheckAddress(address)) {
                 m.put("order", null);
@@ -167,51 +186,63 @@ public class OrderServiceImpl implements OrderService{
                 m.put("status", 4);
                 throw new Exception();
             }
-
+            //Integer orderid = order.getId();
+            //订单详情创建
             for (HashMap<String, Object> item : goodslist) {
                 OrderDetail orderDetail = new OrderDetail();
-                if (order.getId() == null) {
+                if (order.getId() == null) {    //检查Order
                     m.put("order", null);
                     m.put("msg", "订单创建异常");
                     m.put("status", 5);
                     throw new Exception();
                 }
+                if( Double.valueOf(item.get("amount").toString()) <= 0 && Double.valueOf(item.get("amount").toString()) > 99 )//验证amount
+                {
+                    m.put("order", null);
+                    m.put("msg", "存在错误参数");
+                    m.put("status", 2);
+                    throw new Exception();
+                }
                 orderDetail.setOrder(order.getId());//关联
                 //4.获取商品，规格信息
+                if(item.get("fid")==null)   //验证fid
+                {
+                    m.put("order", null);
+                    m.put("msg", "存在错误参数");
+                    m.put("status", 2);
+                    throw new Exception();
+                }
                 Integer fid = Integer.valueOf(item.get("fid").toString());
                 Format format = formatMapper.formatDetail(fid);
                 //5.购物车
-                String cid = item.get("cid").toString();
+                Object cid = item.get("cid");//cid
                 if (cid != null) {
-                    if (cartService.CartItemDel(Integer.valueOf(cid)) == 0) {
+                    if (cartService.CartItemDel(Integer.valueOf(cid.toString())) == 0) {
                         m.put("order", null);
                         m.put("msg", "购物车删除失败");
                         m.put("status", 6);
                         throw new Exception();
                     }
                 }
-                //6.goodslist验证
-
-
-                //7.设置
+                //6.设置
                 orderDetail.setGoodsname(format.getGname());
                 orderDetail.setFormat(format.getFname());
-                orderDetail.setAmount(Double.valueOf(item.get("amount").toString()));
+                orderDetail.setAmount(Double.valueOf(item.get("amount").toString()));//amount
                 orderDetail.setPrice(format.getPrice());
                 orderDetail.setFclass(format.getFclass());
-                orderDetail.setMessage(item.get("detail").toString());
+                if(item.get("detail") != null)
+                {
+                    orderDetail.setMessage(item.get("detail").toString());//detail
+                }
 
-                if(item.get("pic1")==null)
+                if(format.getPic1()!=null)
                 {
                     //商品图片转存订单图片
-                    Picture picture = imageService.ImageCopy(item.get("pic1").toString(), ServerPath, Folder.Order, PictureType.Order);
+                    Picture picture = imageService.ImageCopy(format.getPic1(), ServerPath, Folder.Order, PictureType.Order);
                     if (picture != null) {
                         orderDetail.setPicture(picture.getId());
                     }
                 }
-
-
-
                 int j = orderDetailMapper.insertSelective(orderDetail);
                 if (j == 0) {
                     m.put("order", null);
@@ -222,6 +253,18 @@ public class OrderServiceImpl implements OrderService{
             }
         }catch (Exception e)
         {
+            if(m.get("status")==null)
+            {
+                m.put("status",2);
+            }
+            if(m.get("msg")==null)
+            {
+                m.put("msg","存在错误参数");
+            }
+            if(m.get("order") == null)
+            {
+                m.put("order",null);
+            }
             return m;
         }
         m.put("order",order);
@@ -230,5 +273,14 @@ public class OrderServiceImpl implements OrderService{
         return m;
     }
 
+
+    @Override
+    public PagedResult<Order> getUserOrderByStatus(Integer uid, Integer pageNo, Integer pageSize, Integer shopstatus, Integer orderstatus) {
+        pageNo = pageNo == null?1:pageNo;
+        pageSize = pageSize == null?5:pageSize;
+        //startPage是告诉拦截器说我要开始分页了。分页参数是这两个。
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtil.toPagedResult( orderMapper.getUserOrderByStatus(uid,shopstatus,orderstatus) );
+    }
 
 }

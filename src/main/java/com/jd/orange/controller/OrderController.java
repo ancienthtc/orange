@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Order;
 import com.jd.orange.model.User;
 import com.jd.orange.service.OrderService;
@@ -97,7 +98,7 @@ public class OrderController {
     }
 
     //创建订单
-    @RequestMapping(value = "/create" , method = RequestMethod.POST)
+    @RequestMapping(value = "/create" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String CreateOrder(@RequestBody String json, HttpSession session,HttpServletRequest request)
     {
@@ -135,12 +136,59 @@ public class OrderController {
 
     /* 用户模块 */
     //进入我的订单
+    @UserCheck
     @RequestMapping("/toMyOrder")
     public String toMyOrder()
     {
         return "user/wodedingdan";
     }
 
+    @RequestMapping("/getUserNoSure")
+    @ResponseBody
+    public String getUserNoSure(Integer pageNo,HttpSession session)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            return "";
+        }
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,0) );
+    }
 
+    @RequestMapping("/getUserNoPay")
+    @ResponseBody
+    public String getUserNoPay(Integer pageNo,HttpSession session)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            return "";
+        }
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,1) );
+    }
+
+    @RequestMapping("/getUserNoReceive")
+    @ResponseBody
+    public String getUserNoReceive(Integer pageNo,HttpSession session)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            return "";
+        }
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,2) );
+    }
+
+    @RequestMapping("/getUserFinish")
+    @ResponseBody
+    public String getUserFinish(Integer pageNo,HttpSession session)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            return "";
+        }
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,3) );
+    }
 
 }

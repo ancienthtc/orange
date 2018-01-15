@@ -29,4 +29,5 @@ public interface UserService {
 
     User getUser(Integer uid);
 
+    int UserInfoUpdate(User user);
 }

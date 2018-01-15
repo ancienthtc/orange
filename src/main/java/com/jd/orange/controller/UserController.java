@@ -102,6 +102,7 @@ public class UserController {
     }
 
     //进入个人中心
+    @UserCheck
     @RequestMapping("/toCenter")
     public String toCenter()
     {
@@ -109,6 +110,7 @@ public class UserController {
     }
 
     //进入修改资料
+    @UserCheck
     @RequestMapping("/toInfo")
     public String toInfo()
     {
@@ -210,6 +212,7 @@ public class UserController {
         return "false";
     }
 
+    //地址 删除
     @RequestMapping("/addressDel")
     @ResponseBody
     public String AddressDel(Integer aid)
@@ -221,5 +224,21 @@ public class UserController {
         return "false";
     }
 
+    //个人信息
+    @RequestMapping("/update")
+    @ResponseBody
+    public String UserInfoUpdate(User user,HttpSession session)
+    {
+        if(user.getNickname().length()<=0)
+        {
+            return "false";
+        }
+        if( userService.UserInfoUpdate(user) > 0 )
+        {
+            session.setAttribute("user",userService.getUser(user.getId()));//刷新session
+            return "true";
+        }
+        return "false";
+    }
 
 }

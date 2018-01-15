@@ -85,7 +85,7 @@
                                                      style="margin: 3px 0 0 5px;">
                                             </div>
                                             <div class="user-list">
-                                                <p>随遇而安</p>
+                                                <p>${sessionScope.user.nickname}</p>
                                                 <%--<p>个性签名:这个家伙很懒 没有留下什么!</p>--%>
                                             </div>
                                             <!--<div class="user-vip">
@@ -142,7 +142,7 @@
                             <!-- END 头部 -->
                             <!-- 我的订单 -->
                             <div class="step7 border-1px">
-                                <a href="wodedingdan.php" class="s-href">
+                                <a href="<%=basePath%>order/toMyOrder" class="s-href">
                                     <div class="s-item bdb-1px">
                                         <div class="sitem-l">
                                             <i class="sitem-icon">

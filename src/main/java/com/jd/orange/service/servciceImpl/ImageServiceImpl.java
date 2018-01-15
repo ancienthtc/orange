@@ -164,7 +164,7 @@ public class ImageServiceImpl implements ImageService{
         }
         Picture picture=new Picture();
         picture.setRoute(ServerPath+folder.getVal());
-        picture.setFilename(new GenerateString().getFileName(type.getVal()));
+        picture.setFilename(new GenerateString().getFileName(type.getVal())+"."+absolutePath.substring(absolutePath.lastIndexOf(".")+1) );
         picture.setPictype(type.toString());
         picture.setCreatetime(DateExample.getNowTimeByDate());
         try {

@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/cart_check.css">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/animate.css">
-    <link rel="stylesheet" href="<%=basePath%>fontpage/css/new_main.css">
+    <link rel="stylesheet" href="<%=basePath%>fontpage/css/new_main1.css">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/jquery-impromptu.css">
     <script src="<%=basePath%>fontpage/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <style>
@@ -65,16 +65,16 @@
 
 <div class="tab1">
     <!-- 选项卡1 -->
-    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;">
+    <div class="nav_coupon_none">
         <div>
             <div class="ddbh">
                 <ul>
-                    <li class="li1" style="font-size:13px;">
+                    <li class="li1">
                         订单编号：201712201034339b9da1
                     </li>
                     <li class="li2">
                         <a href="#">
-                            <span style="color:#d61d35;"> 待付款 </span>
+                            <span> 待付款 </span>
                         </a>
                     </li>
                 </ul>
@@ -84,15 +84,14 @@
                 <ul>
                     <li class="li3">
                         <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg" alt=""
-                                 style="width: 60px; height: 60px">
+                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
                         </a>
                     </li>
                     <li class="li4">
-                        <span style="float:right;font-weight:bold;">×1.00</span>
-                        <span style="float:left;">苏北稻花香大米</span>
+                        <span>×1.00</span>
+                        <span class="z_fudong">苏北稻花香大米</span>
                         <br>
-                        <span style="color: red;float:left;">￥48.00</span>
+                        <span class="jiage_3">￥48.00</span>
                     </li>
                 </ul>
                 <div style="clear: both"></div>
@@ -114,12 +113,12 @@
         <div>
             <div class="ddbh">
                 <ul>
-                    <li class="li1" style="font-size:13px;">
+                    <li class="li1">
                         订单编号：201712201034339b9da1
                     </li>
                     <li class="li2">
                         <a href="#">
-                            <span style="color:#d61d35;"> 待付款 </span>
+                            <span> 待付款 </span>
                         </a>
                     </li>
                 </ul>
@@ -129,15 +128,14 @@
                 <ul>
                     <li class="li3">
                         <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg" alt=""
-                                 style="width: 60px; height: 60px">
+                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
                         </a>
                     </li>
                     <li class="li4">
-                        <span style="float:right;font-weight:bold;">×1.00</span>
-                        <span style="float:left;">苏北稻花香大米</span>
+                        <span>×1.00</span>
+                        <span>苏北稻花香大米</span>
                         <br>
-                        <span style="color: red;float:left;">￥48.00</span>
+                        <span class="jiage_3">￥48.00</span>
                     </li>
                 </ul>
                 <div style="clear: both"></div>
@@ -165,12 +163,12 @@
         <div>
             <div class="ddbh">
                 <ul>
-                    <li class="li1" style="font-size:13px;">
+                    <li class="li1">
                         订单编号：201712201034339b9da1
                     </li>
                     <li class="li2">
                         <a href="#">
-                            <span style="color:#d61d35;"> 待审核 </span>
+                            <span> 待付款 </span>
                         </a>
                     </li>
                 </ul>
@@ -180,14 +178,14 @@
                 <ul>
                     <li class="li3">
                         <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/f4.jpg" alt="" style="width: 60px; height: 60px">
+                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
                         </a>
                     </li>
                     <li class="li4">
-                        <span style="float:right;font-weight:bold;">×1.00</span>
-                        <span style="float:left;">柠檬</span>
+                        <span>×1.00</span>
+                        <span class="z_fudong">苏北稻花香大米</span>
                         <br>
-                        <span style="color: red;float:left;">￥48.00</span>
+                        <span class="jiage_3">￥48.00</span>
                     </li>
                 </ul>
                 <div style="clear: both"></div>
@@ -214,12 +212,12 @@
         <div>
             <div class="ddbh">
                 <ul>
-                    <li class="li1" style="font-size:13px;">
+                    <li class="li1">
                         订单编号：201712201034339b9da1
                     </li>
                     <li class="li2">
                         <a href="#">
-                            <span style="color:#d61d35;"> 待收货 </span>
+                            <span> 待付款 </span>
                         </a>
                     </li>
                 </ul>
@@ -229,14 +227,14 @@
                 <ul>
                     <li class="li3">
                         <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/f4.jpg" alt="" style="width: 60px; height: 60px">
+                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
                         </a>
                     </li>
                     <li class="li4">
-                        <span style="float:right;font-weight:bold;">×1.00</span>
-                        <span style="float:left;">柠檬</span>
+                        <span>×1.00</span>
+                        <span class="z_fudong">苏北稻花香大米</span>
                         <br>
-                        <span style="color: red;float:left;">￥48.00</span>
+                        <span class="jiage_3">￥48.00</span>
                     </li>
                 </ul>
                 <div style="clear: both"></div>
@@ -263,12 +261,12 @@
         <div>
             <div class="ddbh">
                 <ul>
-                    <li class="li1" style="font-size:13px;">
+                    <li class="li1">
                         订单编号：201712201034339b9da1
                     </li>
                     <li class="li2">
                         <a href="#">
-                            <span style="color:#d61d35;"> 已收货 </span>
+                            <span> 待付款 </span>
                         </a>
                     </li>
                 </ul>
@@ -278,14 +276,14 @@
                 <ul>
                     <li class="li3">
                         <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/f4.jpg" alt="" style="width: 60px; height: 60px">
+                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
                         </a>
                     </li>
                     <li class="li4">
-                        <span style="float:right;font-weight:bold;">×1.00</span>
-                        <span style="float:left;">柠檬</span>
+                        <span>×1.00</span>
+                        <span class="z_fudong">苏北稻花香大米</span>
                         <br>
-                        <span style="color: red;float:left;">￥48.00</span>
+                        <span class="jiage_3">￥48.00</span>
                     </li>
                 </ul>
                 <div style="clear: both"></div>
@@ -305,6 +303,28 @@
             </div>
         </div>
     </div>
+</div>
+<div class="fenye">
+    <a href="#">
+        <div class="sx_ys">
+            上一页
+        </div>
+    </a>
+
+    <div class="zj_xl">
+        <select name="">
+            <option value="">第1页</option>
+            <option value="">第2页</option>
+            <option value="">第3页</option>
+            <option value="">第4页</option>
+        </select>
+    </div>
+    <a href="#">
+        <div class="sx_ys">
+            上一页
+        </div>
+    </a>
+
 </div>
 <!-- END 选项卡1 -->
 
@@ -406,6 +426,19 @@ buttons: { "确定": true }
 }
 </script>-->
 </body>
+
+<script>
+
+
+    function send_post(url, info) {
+        $.post(url, info, function (result) {
+
+        }, "json");
+    }
+
+
+</script>
+
 </html>
 <script type="text/javascript">$(".sitem-l").click(function () {
         $(this).addClass("action").siblings().removeClass("action");

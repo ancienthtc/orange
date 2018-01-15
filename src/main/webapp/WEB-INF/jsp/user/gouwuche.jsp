@@ -222,7 +222,7 @@
         var all = $(".select em").length;   //物品个数
         var $elements = $(".select").children(".pitch_on:not([sub='false'])");
         var len = $elements.length;
-        if(all==len)
+        if(all==len && all > 0)
         {
             $("#all_pitch_on").addClass("pitch_on");
         }

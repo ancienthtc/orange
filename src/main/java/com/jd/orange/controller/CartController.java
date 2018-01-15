@@ -183,8 +183,8 @@ public class CartController {
         model.addAttribute("all",cartService.CalculatePrice(show));
         //用户可用积分 session获取
         //可用积分最高抵1/10价
-        log.info(JSON.toJSONString(show,filter));
-        session.setAttribute("toOrder",JSON.toJSONString(show,filter) );
+        //log.info(JSON.toJSONString(show,filter));
+        //session.setAttribute("toOrder",JSON.toJSONString(show,filter) );
         return "user/lijigoumai";
     }
 

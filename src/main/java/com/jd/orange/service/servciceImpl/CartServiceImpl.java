@@ -50,6 +50,7 @@ public class CartServiceImpl implements CartService{
                 oldCart.setPrice(format.getPrice());
             }
             oldCart.setAll(oldCart.getAmount()*oldCart.getPrice());
+            oldCart.setDetail(cart.getDetail());//更新留言
             return cartMapper.updateByPrimaryKeySelective(oldCart);
         }
         else//不存在
@@ -210,8 +211,10 @@ public class CartServiceImpl implements CartService{
         while (it.hasNext())
         {
             Map<String,Object> m=(Map<String,Object>) it.next();
-            allprice += Double.valueOf( m.get("all").toString() )  ;
-            otherprcie += Double.valueOf( m.get("freight").toString() );
+            Format format = formatMapper.formatDetail( Integer.valueOf(m.get("fid").toString()) );
+            Double amount = Double.valueOf(m.get("amount").toString());
+            allprice += amount*format.getPrice();
+            otherprcie += format.getFreight();
         }
         map.put("AP",allprice);
         map.put("OP",otherprcie);

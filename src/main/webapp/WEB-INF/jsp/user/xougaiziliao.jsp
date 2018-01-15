@@ -65,13 +65,22 @@
 </nav>-->
 
 <div class="usercenter  accdv">
-
+    <input type="hidden" name="id" value="${sessionScope.user.id}">
+    <input type="hidden" name="gender" value="${sessionScope.user.gender}">
     <div class="row">
         <div class="col-md-2">
             昵称：
         </div>
         <div class="col-md-10">
-            <input type="text" name="" id="" class="form-control" placeholder="请输入昵称">
+            <input type="text" name="nickname" value="${sessionScope.user.nickname}" class="form-control" placeholder="请输入昵称">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            真实姓名：
+        </div>
+        <div class="col-md-10">
+            <input type="text" name="realname" value="${sessionScope.user.realname}" class="form-control" placeholder="请输入昵称">
         </div>
     </div>
     <div class="row">
@@ -79,14 +88,19 @@
             性别：
         </div>
         <div class="col-md-10">
+
             <label class="checkbox-inline">
                 <input type="radio" name="optionsRadiosinline" id="optionsRadios3"
-                       value="option1" checked>
-                男 </label>
+                       value="男" class="gender1 gen" >
+                男
+            </label>
+
             <label class="checkbox-inline">
                 <input type="radio" name="optionsRadiosinline" id="optionsRadios4"
-                       value="option2">
-                女 </label>
+                       value="女" class="gender2 gen" >
+                女
+            </label>
+
         </div>
     </div>
     <div class="row">
@@ -94,7 +108,16 @@
             手机号：
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="请输入11位手机号码">
+            <%--<input type="text" class="form-control" value="${sessionScope.user.tel}" placeholder="请输入11位手机号码">--%>
+            ${sessionScope.user.tel}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            电话号：
+        </div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="phone" value="${sessionScope.user.phone}" placeholder="请输入电话号码">
         </div>
     </div>
     <div class="row">
@@ -102,53 +125,56 @@
             邮箱：
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="请输入邮箱">
+            <input type="text" class="form-control" name="email" value="${sessionScope.user.email}" placeholder="请输入邮箱">
         </div>
     </div>
+    <%--<div class="row">--%>
+        <%--<div class="col-md-2">--%>
+            <%--所在地：--%>
+        <%--</div>--%>
+        <%--<div class="col-md-10">--%>
+            <%--<div data-role="page" id="test">--%>
+                <%--<div class="ui-content">--%>
+                    <%--<ul data-role="listview">--%>
+                        <%--<li id="city">--%>
+                            <%--<span style="color:#555;">请选择所在地区</span>--%>
+                        <%--</li>--%>
+                    <%--</ul>--%>
+                <%--</div>--%>
+                <%--<script type="text/javascript">--%>
+                    <%--$("#city").click(function (e) {--%>
+                        <%--SelCity(this, e);--%>
+                        <%--console.log(this);--%>
+                    <%--});--%>
+                <%--</script>--%>
+            <%--</div>--%>
+            <%--<div class="form-group m-r-10">--%>
+                <%--<input type="text" name="" id="" class="form-control" placeholder="例如:九华镇景秀花苑8幢406室">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+
     <div class="row">
-        <div class="col-md-2">
-            所在地：
-        </div>
-        <div class="col-md-10">
-            <div data-role="page" id="test">
-                <div class="ui-content">
-                    <ul data-role="listview">
-                        <li id="city">
-                            <span style="color:#555;">请选择所在地区</span>
-                        </li>
-                    </ul>
-                </div>
-                <script type="text/javascript">
-                    $("#city").click(function (e) {
-                        SelCity(this, e);
-                        console.log(this);
-                    });
-                </script>
-            </div>
-            <div class="form-group m-r-10">
-                <input type="text" name="" id="" class="form-control" placeholder="例如:九华镇景秀花苑8幢406室">
-            </div>
-        </div>
-    </div>
-    <!--<div class="row">
         <div class="col-md-2">
             生日：
         </div>
         <div class="col-md-10">
-            <input type="text" name="" id="" class="form-control">
+            <input type="text" name="birth" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${sessionScope.user.birth}" />" class="form-control" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-            个人描述
-        </div>
-        <div class="col-md-10">
-            <textarea class="form-control" rows="3"></textarea>
-</div>			</div>-->
+
+    <%--<div class="row">--%>
+        <%--<div class="col-md-2">--%>
+            <%--个人描述--%>
+        <%--</div>--%>
+        <%--<div class="col-md-10">--%>
+            <%--<textarea class="form-control" rows="3"></textarea>--%>
+        <%--</div>--%>
+    <%--</div>--%>
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-10">
-            <button type="button" class="btn btn-danger btn-block btn-lg">
+            <button type="button" id="sub" class="btn btn-danger btn-block btn-lg">
                 确 定
             </button>
         </div>
@@ -157,5 +183,63 @@
 
 <script src="<%=basePath%>fontpage/js/classie.js"></script>
 <script src="<%=basePath%>fontpage/js/main3.js"></script>
+<script type="text/javascript" src="<%=basePath%>backpage/Widget/My97DatePicker/WdatePicker.js"></script>
+
+<script>
+
+    $(function(){
+        var gender;
+        gender = $("input[name='gender']").val();
+        if(gender==null)
+        {
+            $(".gender1").prop("checked",false);
+            $(".gender2").prop("checked",false);
+        }
+        else if(gender=="男")
+        {
+            $(".gender1").prop("checked",true);
+            $(".gender2").prop("checked",false);
+        }
+        else if(gender=="女")
+        {
+            $(".gender2").prop("checked",true);
+            $(".gender1").prop("checked",false);
+        }
+        else
+        {
+            $(".gender1").prop("checked",false);
+            $(".gender2").prop("checked",false);
+        }
+
+        $("#sub").click(function () {
+            var id = $("input[name='id']").val();
+            var nickname = $("input[name='nickname']").val();
+            var realname = $("input[name='realname']").val();
+            var gender = $(".gen:checked").attr("value");
+            var email = $("input[name='email']").val();
+            var birth = $("input[name='birth']").val();
+            var phone = $("input[name='phone']").val();
+            var info = {id:id,nickname:nickname,email:email,realname:realname,phone:phone,gender:gender,birth:birth};
+            var url = "<%=basePath%>user/update";
+            console.log(id+ "  " + nickname+ "  "+realname+ "  "+gender+ "  "+email+ "  "+birth+ "  "+phone);
+            $.post(url,info, function(result){
+                    if(result==true)
+                    {
+                        alert("修改成功");
+                        window.location.href="<%=basePath%>user/toCenter";
+                    }
+                    else
+                    {
+                        alert("修改失败");
+                        window.location.href="<%=basePath%>user/toInfo";
+                    }
+            },"json");
+
+        });
+
+    })
+
+</script>
+
 </body>
 </html>

@@ -92,4 +92,27 @@ public class UserServiceImpl implements UserService{
     public User getUser(Integer uid) {
         return userMapper.selectByPrimaryKey(uid);
     }
+
+    @Override
+    public int UserInfoUpdate(User user) {
+        if(user.getEmail()=="")
+        {
+            user.setEmail(null);
+        }
+        if(user.getRealname()=="")
+        {
+            user.setRealname(null);
+        }
+        if(user.getPhone()=="")
+        {
+            user.setPhone(null);
+        }
+        if(user.getGender() != "男" || user.getGender() != "女" )
+        {
+            user.setGender(null);
+        }
+        user.setUpdatetime(DateExample.getNowTimeByDate());
+        return userMapper.updateByPrimaryKeySelective(user);
+    }
+
 }

@@ -38,7 +38,7 @@ public interface OrderMapper {
 
     Order selectOrderWithDetail(String sequence);
 
-
+    List<Order> getUserOrderByStatus(@Param("uid") Integer uid,@Param("shopstatus") Integer shopstatus,@Param("orderstatus") Integer orderstatus);
 
 
 }

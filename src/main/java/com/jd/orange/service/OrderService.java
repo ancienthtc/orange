@@ -26,4 +26,6 @@ public interface OrderService {
 
     //创建订单
     Map<String,Object> create(String json, User user,String ServerPath);
+
+    PagedResult<Order> getUserOrderByStatus(Integer uid,Integer pageNo,Integer pageSize,Integer shopstatus,Integer orderstatus);
 }
