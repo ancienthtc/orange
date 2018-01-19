@@ -29,4 +29,5 @@ public interface UserMapper {
 
     List<User> getUserList(@Param("key") String keys, @Param("sc") String start_c,@Param("ec") String end_c,@Param("su") String start_u,@Param("eu") String end_u);
     //@Param("sc") String start_c,@Param("ec") String end_c,@Param("su") String start_u,@Param("eu") String end_u
+    Integer checkTel(String tel);
 }

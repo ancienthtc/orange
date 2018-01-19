@@ -19,7 +19,8 @@ public class GenerateString {
 
     public String getRandomString(int length)
     {
-        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        //String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        String base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < length; i++) {

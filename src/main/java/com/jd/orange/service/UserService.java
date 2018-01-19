@@ -4,6 +4,7 @@ import com.jd.orange.model.User;
 import com.jd.orange.util.pagehelper.PagedResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ThinkPad on 2017/11/28.
@@ -30,4 +31,6 @@ public interface UserService {
     User getUser(Integer uid);
 
     int UserInfoUpdate(User user);
+
+    Map<String,Integer> getUserOrderCount(Integer uid);
 }

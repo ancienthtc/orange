@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
     <result column="format" property="format" jdbcType="VARCHAR" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
     <result column="amount" property="amount" jdbcType="DOUBLE" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="fclass" property="fclass" jdbcType="VARCHAR" />
@@ -19,7 +20,7 @@
     <result column="j_c" property="jC" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, goodsname, format, amount, price, fclass, message, otherdetail, picture, order,
+    id, goodsname, format, fid, amount, price, fclass, message, otherdetail, picture, order,
     goodsname_j, format_j, message_j, otherdetail_j, j_c
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -28,19 +29,40 @@
     from t_order_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!-- 根据order 来查 -->
+  <select id="selectByOrder" parameterType="int" resultType="com.jd.orange.model.OrderDetail">
+      SELECT
+      t_order_detail.goodsname,
+      t_order_detail.format,
+      t_order_detail.fid,
+      t_order_detail.amount,
+      t_order_detail.price,
+      t_order_detail.fclass,
+      t_order_detail.message,
+      t_order_detail.otherdetail,
+      t_order_detail.picture,
+      t_order_detail.`order`,
+      t_order_detail.goodsname_j,
+      t_order_detail.format_j,
+      t_order_detail.message_j,
+      t_order_detail.otherdetail_j
+      FROM t_order_detail WHERE `order` = #{value}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_order_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jd.orange.model.OrderDetail" >
     insert into t_order_detail (id, goodsname, format, 
-      amount, price, fclass,
+      fid, amount, price, fclass,
       message, otherdetail, picture,
       order, goodsname_j, format_j,
       message_j, otherdetail_j, j_c
       )
     values (#{id,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR}, 
-      #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{fclass,jdbcType=VARCHAR},
+      #{fid,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{fclass,jdbcType=VARCHAR},
       #{message,jdbcType=VARCHAR}, #{otherdetail,jdbcType=VARCHAR}, #{picture,jdbcType=INTEGER},
       #{order,jdbcType=INTEGER}, #{goodsnameJ,jdbcType=VARCHAR}, #{formatJ,jdbcType=VARCHAR},
       #{messageJ,jdbcType=VARCHAR}, #{otherdetailJ,jdbcType=VARCHAR}, #{jC,jdbcType=INTEGER}
@@ -57,6 +79,9 @@
       </if>
       <if test="format != null" >
         format,
+      </if>
+      <if test="fid != null" >
+        fid,
       </if>
       <if test="amount != null" >
         amount,
@@ -105,6 +130,9 @@
       <if test="format != null" >
         #{format,jdbcType=VARCHAR},
       </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
       <if test="amount != null" >
         #{amount,jdbcType=DOUBLE},
       </if>
@@ -152,6 +180,9 @@
       <if test="format != null" >
         format = #{format,jdbcType=VARCHAR},
       </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
       <if test="amount != null" >
         amount = #{amount,jdbcType=DOUBLE},
       </if>
@@ -195,6 +226,7 @@
     update t_order_detail
     set goodsname = #{goodsname,jdbcType=VARCHAR},
       format = #{format,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
       amount = #{amount,jdbcType=DOUBLE},
       price = #{price,jdbcType=DOUBLE},
       fclass = #{fclass,jdbcType=VARCHAR},

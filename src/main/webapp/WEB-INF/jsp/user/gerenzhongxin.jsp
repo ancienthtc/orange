@@ -106,7 +106,12 @@
                                         <li>
                                             <a href="<%=basePath%>order/toMyOrder">
                                                 <p class="txt_figure">
-                                                    5
+                                                    <c:if test="${not empty count.get('o1')}">
+                                                        ${count.get("o1")}
+                                                    </c:if>
+                                                    <c:if test="${empty count.get('o1')}">
+                                                        0
+                                                    </c:if>
                                                 </p>
                                                 <p class="txt_explain">
                                                     待付款
@@ -118,7 +123,12 @@
                                         <li>
                                             <a href="<%=basePath%>order/toMyOrder">
                                                 <p class="txt_figure">
-                                                    5
+                                                    <c:if test="${not empty count.get('o0')}">
+                                                        ${count.get("o0")}
+                                                    </c:if>
+                                                    <c:if test="${empty count.get('o0')}">
+                                                        0
+                                                    </c:if>
                                                 </p>
                                                 <p class="txt_explain">
                                                     待审核
@@ -129,7 +139,12 @@
                                         <li>
                                             <a href="<%=basePath%>order/toMyOrder">
                                                 <p class="txt_figure">
-                                                    5
+                                                    <c:if test="${not empty count.get('o3')}">
+                                                        ${count.get("o3")}
+                                                    </c:if>
+                                                    <c:if test="${empty count.get('o3')}">
+                                                        0
+                                                    </c:if>
                                                 </p>
                                                 <p class="txt_explain">
                                                     待收货
@@ -223,7 +238,7 @@
                                 </a>
                             </div>
                             <div class="step7 border-1px">
-                                <a href="denglu.php" class="s-href">
+                                <a href="<%=basePath%>login/UserSignOut" class="s-href">
                                     <div class="s-item bdb-1px">
                                         <div class="sitem-l">
                                             <i class="sitem-icon">

@@ -102,9 +102,9 @@
                                     data: { phone: phone },
                                     success: function (data) {
                                         debugger;
-                                        if (data == "true") {
+                                        if (data.status == 1) {
                                             $("#sendCode").css({ "background": "#999" });
-                                            $.prompt("验证失败", {
+                                            $.prompt(data.msg, {
                                                 buttons: { "确定": true }
                                             });
                                         } else {
@@ -166,7 +166,7 @@
                     //手机验证码发送成功返回函数
                     function ajaxMsgPhone(jsonData) {
                         debugger
-                        if (jsonData.Statu == 1) {//成功
+                        if (jsonData.Statu == 0) {//成功
                             $("#sendCode").disabled = "disabled";
                             sendVerifyNum = 60;
                             var that = this;

@@ -21,6 +21,8 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
+    Order selectBySequence(@Param("sequence") String sequence);
+
     int orderAmount();
 
     Map<String,Integer> countOrderStatus(@Param("way") Integer way);
@@ -40,5 +42,8 @@ public interface OrderMapper {
 
     List<Order> getUserOrderByStatus(@Param("uid") Integer uid,@Param("shopstatus") Integer shopstatus,@Param("orderstatus") Integer orderstatus);
 
+    Map<String,Integer> getUserOrderCount(@Param("uid")Integer uid);
+
+    List<Order> test(@Param("uid") Integer uid,@Param("shopstatus") Integer shopstatus,@Param("orderstatus") Integer orderstatus);
 
 }

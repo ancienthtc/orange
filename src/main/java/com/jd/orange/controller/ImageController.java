@@ -1,6 +1,9 @@
 package com.jd.orange.controller;
 
+import com.jd.orange.model.Picture;
+import com.jd.orange.service.ImageService;
 import com.jd.orange.util.Folder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,9 @@ import java.io.*;
 @Controller
 @RequestMapping("/image")
 public class ImageController {
+
+    @Autowired
+    private ImageService imageService;
 
     /*
      *  资源文件夹:images
@@ -79,16 +85,27 @@ public class ImageController {
 
     @ResponseBody
     @RequestMapping(value = "/order")
-    public void showOrderPicture(HttpServletRequest request, HttpServletResponse response, @RequestParam String pic)
+    public void showOrderPicture(HttpServletRequest request, HttpServletResponse response,
+                                 @RequestParam(required = false) String pic ,@RequestParam(required = false) Integer pid )
     {
-        String imagePath;
-        if(pic==null)
+        String imagePath="";
+        if(pic==null && pid==null)  //使用默认
         {
             pic="";
+            if(pic.equals("undefined") || pic.equals("") || pic.equals("null") || pic.equals("default")) //默认图片
+            {
+                imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+            }
         }
-        if(pic.equals("undefined") || pic.equals("") || pic.equals("null") || pic.equals("default")) //默认图片
+        else if( pic==null && pid!=null )   //使用pid
         {
-            imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Default.getVal() + "default.png";
+            Picture picture = imageService.getPictureById(pid);
+            //imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Order.getVal() + picture.getFilename() ;
+            imagePath = picture.getRoute() + picture.getFilename() ;
+        }
+        else if( pic!=null && pid==null )   //使用pic
+        {
+            imagePath = request.getSession().getServletContext().getRealPath("/")+ Folder.Order.getVal() + pic ;
         }
         else
         {

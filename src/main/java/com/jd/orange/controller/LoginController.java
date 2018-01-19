@@ -1,6 +1,8 @@
 package com.jd.orange.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Admin;
 import com.jd.orange.model.User;
 import com.jd.orange.service.LoginService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
 /**
  * Created by ThinkPad on 2017/11/28.
@@ -50,6 +53,14 @@ public class LoginController {
         }
     }
 
+    @AdminCheck
+    @RequestMapping("/AdminSignOut")
+    public String AdminSignOut(HttpSession session)
+    {
+        session.removeAttribute("admin");
+        return "redirect:login/AdminSignIn";
+    }
+
     //管理员登录成功后跳转/跳转到后台首页
     @AdminCheck()
     @RequestMapping("/ToAdminIndex")
@@ -74,10 +85,11 @@ public class LoginController {
     }
 
     //注册
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String register(HttpSession session,User user)
     {
+
         //log.info(user.getPassword()+" "+user.getCheckcode());
         String code=(String)session.getAttribute("textcode");
         if(user.getCheckcode().equalsIgnoreCase(code) )
@@ -99,11 +111,18 @@ public class LoginController {
     }
 
     //手机验证码
-    @RequestMapping("/sendCode")
+    @RequestMapping(value = "/sendCode" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String send(HttpSession session,String phone)
     {
-        String result="";
+        Map<String, Object> m = loginService.checkRepeat(phone) ;
+        if( Integer.valueOf(m.get("status").toString()) != 0 )
+        {
+            return "{\"Statu\":2,\"Msg\":\"手机号已存在\"}";
+        }
+
+
+        String result;
         //String code=(String)session.getAttribute("textcode");
 
 //        if(code==null)
@@ -119,27 +138,24 @@ public class LoginController {
 
         if( Integer.valueOf(result) == 0 )
         {
-            return "{\"Statu\":1,\"Msg\":\"成功\"}";
+            return "{\"Statu\":0,\"Msg\":\"成功\"}";
         }
         else
         {
-            return "{\"Statu\":0,\"Msg\":\"失败\"}";
+            return "{\"Statu\":1,\"Msg\":\"发送失败\"}";
         }
     }
 
     //检查手机号是否合法
-    @RequestMapping("/checkPhone")
+    @RequestMapping(value = "/checkPhone" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String check(String phone)
     {
-        if(phone.length()==11)
-            return "true";
-        else
-            return "false";
+        return JSON.toJSONString(loginService.checkRepeat(phone));
     }
 
     //登录
-    @RequestMapping("/UserLogin")
+    @RequestMapping(value = "/UserLogin" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String UserLogin(String name,String password, HttpSession session)
     {
@@ -150,6 +166,14 @@ public class LoginController {
             return "true";
         }
         return "false";
+    }
+
+    @UserCheck
+    @RequestMapping("/UserSignOut")
+    public String UserSignOut(HttpSession session)
+    {
+        session.removeAttribute("user");
+        return "redirect:/user/toShopIndex";
     }
 
 }

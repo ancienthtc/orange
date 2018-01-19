@@ -53,7 +53,7 @@
                     <div class="o_content">${order.contact}</div>
                 </div>
                 <div class="col-xs-3">
-                    <label class="label_name" > 收件地地址/邮编： </label>
+                    <label class="label_name" > 收件地址/邮编： </label>
                     <div class="o_content">${order.address}</div>
                 </div>
                 <%--<div class="col-xs-3">--%>
@@ -69,43 +69,26 @@
 
                 <c:forEach var="i" items="${order.orderDetails}">
                     <div class="product_info clearfix">
-                        <a href="#" class="img_link">
-                            <img src="<%=basePath%>image/show?pic=${i.filename}"/>
+                        <a href="javascript:;" class="img_link">
+                            <img src="<%=basePath%>image/order?pid=${i.picture}"/>
                         </a>
                         <span>
-                            <a href="#" class="name_link">${i.goodsname} }</a>
+                            <a href="#" class="name_link">${i.goodsname} &nbsp;</a>
                             <b>${i.otherdetail}</b>
                             <p>规格：${i.format}</p>
                             <p>数量：${i.amount}</p>
                             <p>价格：<b class="price"><i>￥</i>${i.price}</b></p>
-                            <p>状态：<i class="label label-success radius">有货</i></p>
+                            <c:if test="${not empty i.message}">
+                                <p>备注：${i.message}</p>
+                            </c:if>
+                            <c:if test="${empty i.message}">
+                                <p>备注：暂无备注</p>
+                            </c:if>
+
+                            <%--<p>状态：<i class="label label-success radius">有货</i></p>--%>
                         </span>
                     </div>
                 </c:forEach>
-
-                <div class="product_info clearfix">
-                    <a href="#" class="img_link"><img src="products/p_3.jpg"/></a>
-                    <span>
-                        <a href="#" class="name_link">美果汇 美国进口嘎啦果苹果6粒装 加力果 姬娜果 伽利果 新鲜应季水果</a>
-                        <b>也称为姬娜果，饱满色艳，个头小</b>
-                        <p>规格：500g/斤</p>
-                        <p>数量：2kg</p>
-                        <p>价格：<b class="price"><i>￥</i>56</b></p>
-                        <p>状态：<i class="label label-success radius">有货</i></p>
-                    </span>
-                </div>
-
-                <div class="product_info clearfix">
-                    <a href="#" class="img_link"><img src="products/p_5.jpg"/></a>
-                    <span>
-                        <a href="#" class="name_link">美果汇 美国进口嘎啦果苹果6粒装 加力果 姬娜果 伽利果 新鲜应季水果</a>
-                        <b>也称为姬娜果，饱满色艳，个头小</b>
-                        <p>规格：39.9/5kg</p>
-                        <p>数量：2</p>
-                        <p>价格：<b class="price"><i>￥</i>69.9</b></p>
-                        <p>状态：<i class="label label-success radius">有货</i></p>
-                    </span>
-                </div>
 
 
             </div>
@@ -135,16 +118,26 @@
                 </div>
                 <div class="col-xs-3">
                     <label class="label_name" for="form-field-2"> 订单生成日期： </label>
-                    <div class="o_content">${order.createtime}</div>
+                    <div class="o_content">
+                        <fmt:setLocale value="zh_CN" />
+                        <fmt:formatDate value="${order.createtime}" pattern="YYYY-MM-dd HH:mm:ss"/>
+                    </div>
                 </div>
-                <div class="col-xs-3">
-                    <label class="label_name" for="form-field-2"> 快递名称： </label>
-                    <div class="o_content">${order.logistics}</div>
-                </div>
+
                 <div class="col-xs-3">
                     <label class="label_name" for="form-field-2"> 付款日期： </label>
-                    <div class="o_content">${order.paytime}</div>
+                    <div class="o_content">
+                        <fmt:setLocale value="zh_CN" />
+                        <fmt:formatDate value="${order.paytime}" pattern="YYYY-MM-dd HH:mm:ss"/>
+                    </div>
                 </div>
+
+                <div class="col-xs-3">
+                    <label class="label_name" for="form-field-2"> 物流信息： </label>
+                    <div class="o_content">${order.logistics}</div>
+                </div>
+
+
             </div>
             <div class="Total_m_style"><span class="Total">总数：<b>${order.orderDetails.size()}</b></span><span
                     class="Total_price">总价：<b>${order.allprice}</b>元</span></div>
@@ -198,9 +191,13 @@
             <%--</div>--%>
         <%--</div>--%>
         <div class="Button_operation">
-            <button onclick="article_save_submit();" class="btn btn-primary radius" type="submit"><i
-                    class="icon-save "></i>返回上一步
-            </button>
+            <a href="javascript:history.back(-1)">
+                <button  class="btn btn-primary radius" type="button">
+                    <i class="icon-save "></i>返回上一步
+                </button>
+            </a>
+
+
 
             <button onclick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;
             </button>

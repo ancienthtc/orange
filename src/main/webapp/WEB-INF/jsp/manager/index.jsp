@@ -198,14 +198,14 @@
                 });
             });
             $('#Exit_system').on('click', function () {
-                layer.confirm('是否确定退出系统？', {
-                        btn: ['是', '否'],//按钮
-                        icon: 2,
-                    },
-                    function () {
-                        location.href = "login.html";
-
-                    });
+                <%--layer.confirm('是否确定退出系统？', {--%>
+                        <%--btn: ['是', '否'],//按钮--%>
+                        <%--icon: 2,--%>
+                    <%--},--%>
+                    <%--function () {--%>
+                        <%--window.location.href = "<%=basePath%>login/AdminSignOut ";--%>
+                    <%--});--%>
+                window.location.href = "../login/AdminSignOut";
             });
         });
 
@@ -236,7 +236,7 @@
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
                 <small>
-                    <img src="<%=basePath%>backpage/images/logo.png" width="470px">
+                    <img src="<%=basePath%>backpage/images/juziwu.png" width="470px">
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -265,12 +265,19 @@
                         <i class="icon-caret-down"></i>
                     </a>
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li><a href="javascript:void(0)" name="Systems.html" title="系统设置" class="iframeurl"><i
-                                class="icon-cog"></i>网站设置</a></li>
-                        <li><a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl"><i
-                                class="icon-user"></i>个人资料</a></li>
+                        <li>
+                            <a href="javascript:void(0)" name="Systems.html" title="系统设置" class="iframeurl">
+                                <i class="icon-cog"></i>网站设置
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl">
+                                <i class="icon-user"></i>个人资料
+                            </a>
+                        </li>
+
                         <li class="divider"></li>
-                        <li><a href="javascript:ovid(0)" id="Exit_system"><i class="icon-off"></i>退出</a></li>
+                        <li><a href="javascript:void(0)" id="Exit_system"><i class="icon-off"></i>退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -492,8 +499,8 @@
         ace.settings.check('footerstyle', 'fixed')
     } catch (e) {
     }</script>
-    <p class="l_f">版权所有：南京四美软件 苏ICP备11011739号</p>
-    <p class="r_f">地址：南京市鼓楼区阅江楼街道公共路64号 邮编：210011 技术支持：XXXX</p>
+    <p class="l_f">版权所有：高新区狮山桔屋超市店 苏ICP备17073101号</p>
+    <p class="r_f">地址：高新区狮山桔屋超市店  邮编：215011  技术支持：苏州极鼎科技有限公司</p>
 </div>
 <!--修改密码样式-->
 <div class="change_Pass_style" id="change_Pass">

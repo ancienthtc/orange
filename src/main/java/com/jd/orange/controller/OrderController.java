@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.common.AdminCheck;
 import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Order;
 import com.jd.orange.model.User;
@@ -47,15 +48,15 @@ public class OrderController {
     public String toAdminOrderOnline(Model model)
     {
         model.addAttribute("OrderStatus",orderService.getOrderCount(0));
-        model.addAttribute("Os0",orderService.getOrderListByStatus(0,0,0));
-        model.addAttribute("Os1",orderService.getOrderListByStatus(1,0,0));
-        model.addAttribute("Os2",orderService.getOrderListByStatus(1,1,0));
-        model.addAttribute("Os3",orderService.getOrderListByStatus(2,1,0));
-        model.addAttribute("Os4",orderService.getOrderListByStatus(3,1,0));
-        model.addAttribute("Os5",orderService.getOrderListByStatus(4,1,0));
-        model.addAttribute("Os6",orderService.getOrderListByStatus(5,2,0));
-        model.addAttribute("Os7",orderService.getOrderListByStatus(6,3,0));
-        model.addAttribute("Os8",orderService.getOrderListByStatus(7,null,0));
+//        model.addAttribute("Os0",orderService.getOrderListByStatus(0,0,0));
+//        model.addAttribute("Os1",orderService.getOrderListByStatus(1,0,0));
+//        model.addAttribute("Os2",orderService.getOrderListByStatus(1,1,0));
+//        model.addAttribute("Os3",orderService.getOrderListByStatus(2,1,0));
+//        model.addAttribute("Os4",orderService.getOrderListByStatus(3,1,0));
+//        model.addAttribute("Os5",orderService.getOrderListByStatus(4,1,0));
+//        model.addAttribute("Os6",orderService.getOrderListByStatus(5,2,0));
+//        model.addAttribute("Os7",orderService.getOrderListByStatus(6,3,0));
+//        model.addAttribute("Os8",orderService.getOrderListByStatus(7,null,0));
         return "manager/Orderform";
     }
 
@@ -64,15 +65,15 @@ public class OrderController {
     public String toAdminOrderOffline(Model model)
     {
         model.addAttribute("OrderStatus",orderService.getOrderCount(1));
-        model.addAttribute("Os0",orderService.getOrderListByStatus(0,0,1));
-        model.addAttribute("Os1",orderService.getOrderListByStatus(1,0,1));
-        model.addAttribute("Os2",orderService.getOrderListByStatus(1,1,1));
-        model.addAttribute("Os3",orderService.getOrderListByStatus(2,1,1));
-        model.addAttribute("Os4",orderService.getOrderListByStatus(3,1,1));
-        model.addAttribute("Os5",orderService.getOrderListByStatus(4,1,1));
-        model.addAttribute("Os6",orderService.getOrderListByStatus(5,2,1));
-        model.addAttribute("Os7",orderService.getOrderListByStatus(6,3,1));
-        model.addAttribute("Os8",orderService.getOrderListByStatus(7,null,1));
+//        model.addAttribute("Os0",orderService.getOrderListByStatus(0,0,1));
+//        model.addAttribute("Os1",orderService.getOrderListByStatus(1,0,1));
+//        model.addAttribute("Os2",orderService.getOrderListByStatus(1,1,1));
+//        model.addAttribute("Os3",orderService.getOrderListByStatus(2,1,1));
+//        model.addAttribute("Os4",orderService.getOrderListByStatus(3,1,1));
+//        model.addAttribute("Os5",orderService.getOrderListByStatus(4,1,1));
+//        model.addAttribute("Os6",orderService.getOrderListByStatus(5,2,1));
+//        model.addAttribute("Os7",orderService.getOrderListByStatus(6,3,1));
+//        model.addAttribute("Os8",orderService.getOrderListByStatus(7,null,1));
         return "manager/xianxiaguanli";
     }
 
@@ -84,19 +85,19 @@ public class OrderController {
     }
 
     //进入订单详情
+    //@AdminCheck
     @RequestMapping(value = "/toOrderDetail/{sequence}")
     public String toOrderDetail(@PathVariable String sequence,Model model)
     {
-        model.addAttribute("order",orderService.getOrderDetail(sequence));
+        Order order = orderService.getOrderDetail(sequence);
+        model.addAttribute("order",order);
+
+
         return "manager/order_detailed";
     }
 
-    //AJAX部分
-    public String orderStatusUpdate()
-    {
-        return "";
-    }
 
+    //AJAX部分
     //创建订单
     @RequestMapping(value = "/create" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
@@ -121,7 +122,102 @@ public class OrderController {
     }
 
 
+    //订单确认
+    @RequestMapping(value = "/accept" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String orderSure(String sequence)
+    {
+        //Order order=orderService.getOrder(sequence);
+        return JSON.toJSONString( orderService.accept(sequence) );
+    }
 
+    /** 支付接口回调函数 */
+    //付款
+    @RequestMapping("/pay")
+    @ResponseBody
+    public String orderPay(String sequence)
+    {
+        return "";
+    }
+
+    //发货
+    @RequestMapping("/send")
+    @ResponseBody
+    public String orderSend(String sequence,String logistics)    //os:1 ss:1
+    {
+        //判断线上线下
+        Order order=orderService.getOrder(sequence);
+        if(order.getBuyway()==0)    //线上 发货
+        {
+
+        }
+        else if(order.getBuyway()==1)   //线下 取货(用户到店取货，卖家发货后点击按钮)
+        {
+
+        }
+        return "{\"status\":-1}";
+    }
+
+    //接收
+    @RequestMapping("/receive")
+    @ResponseBody
+    public String orderReceive(String sequence)
+    {
+        //线下无此状态
+        return "";
+    }
+
+    //收货
+    @RequestMapping("/finish")
+    @ResponseBody
+    public String orderFinish(String sequence)
+    {
+        //线下由卖家点击
+        return "";
+    }
+
+    //确认退货
+    public String orderReturnSure()
+    {
+        return "";
+    }
+
+    //拒绝退货
+    public String orderRefuse()
+    {
+        return "";
+    }
+
+    //退货
+    public String orderReturn()
+    {
+        return "";
+    }
+
+    //拿退货
+    public String orderOver()
+    {
+        return "";
+    }
+
+    //取消
+    @RequestMapping("/cancel")
+    @ResponseBody
+    public String orderCancel(String sequence)
+    {
+        return JSON.toJSONString( orderService.cancel(sequence) );
+    }
+
+
+    public String orderStatusUpdate()
+    {
+        return "";
+    }
+
+
+
+
+    //获取线上订单
     @RequestMapping(value = "/getAdminOrderOnline" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getAdminOrderOnline(Integer pageNo, Integer pageSize, String key,String start,String end,Integer orderStatus,Integer shopStatus)
@@ -131,7 +227,15 @@ public class OrderController {
         return JSON.toJSONString( orderService.getOrderListByStatus(pageNo,pageSize,key,start,end,orderStatus,shopStatus,0) , filter );
     }
 
+    //获取线下订单
+    @RequestMapping(value = "/getAdminOrderOffline" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String getAdminOrderOffline(Integer pageNo, Integer pageSize, String key,String start,String end,Integer orderStatus,Integer shopStatus)
+    {
+        //PagedResult<Order> orderlists=orderService.getOrderListByStatus(pageNo,pageSize,key,start,end,orderStatus,shopStatus,0);
 
+        return JSON.toJSONString( orderService.getOrderListByStatus(pageNo,pageSize,key,start,end,orderStatus,shopStatus,1) , filter );
+    }
 
 
     /* 用户模块 */
@@ -143,7 +247,7 @@ public class OrderController {
         return "user/wodedingdan";
     }
 
-    @RequestMapping("/getUserNoSure")
+    @RequestMapping(value = "/getUserNoSure" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getUserNoSure(Integer pageNo,HttpSession session)
     {
@@ -152,10 +256,10 @@ public class OrderController {
         {
             return "";
         }
-        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,0) );
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,0),filter );
     }
 
-    @RequestMapping("/getUserNoPay")
+    @RequestMapping(value = "/getUserNoPay" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getUserNoPay(Integer pageNo,HttpSession session)
     {
@@ -164,10 +268,10 @@ public class OrderController {
         {
             return "";
         }
-        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,1) );
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,1),filter );
     }
 
-    @RequestMapping("/getUserNoReceive")
+    @RequestMapping(value = "/getUserNoReceive" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getUserNoReceive(Integer pageNo,HttpSession session)
     {
@@ -176,10 +280,10 @@ public class OrderController {
         {
             return "";
         }
-        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,2) );
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,2),filter );
     }
 
-    @RequestMapping("/getUserFinish")
+    @RequestMapping(value = "/getUserFinish" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String getUserFinish(Integer pageNo,HttpSession session)
     {
@@ -188,7 +292,7 @@ public class OrderController {
         {
             return "";
         }
-        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,3) );
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,3),filter );
     }
 
 }

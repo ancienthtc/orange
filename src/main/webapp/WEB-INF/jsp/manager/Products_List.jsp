@@ -57,6 +57,12 @@
                 <li style="width:90px;">
                     <button type="button" class="btn_search"><i class="icon-search"></i>查询</button>
                 </li>
+                <li style="width:90px;">
+
+                </li>
+                <li >
+                    Tips:分类级别0对应一级大类 1对应二级小类 2对应三级子菜单 , 若有对应错误请反馈!
+                </li>
             </ul>
         </div>
         <!--产品列表展示-->
@@ -84,26 +90,6 @@
                     </thead>
                     <tbody id="tbody">
 
-
-
-                    <tr>
-                        <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label>
-                        </td>
-                        <td width="80px">45631</td>
-                        <td width="250px"><u style="cursor:pointer" class="text-primary" onclick="">小米 Max 全网通 高配版 3GB内存
-                            64GB ROM 金色 移动联通电信4G手机Y</u></td>
-                        <td width="100px">5467</td>
-                        <td width="100px">4525</td>
-                        <td width="100px">法国</td>
-                        <td width="180px">2014-6-11 11:11:42</td>
-                        <!--        <td class="td-status"><span class="label label-success radius">已启用</span></td>-->
-                        <td class="td-manage">
-
-                            <a href="picture-add.html" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-                               class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
-                        </td>
-                    </tr>
 
                     </tbody>
                 </table>

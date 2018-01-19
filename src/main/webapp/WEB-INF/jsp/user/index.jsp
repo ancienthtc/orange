@@ -37,7 +37,7 @@
 </head>
 <body>
 <div class="sy_header">
-    <a href="index.php">
+    <a href="<%=basePath%>user/toShopIndex">
         <img src="<%=basePath%>fontpage/img/juziwu.png" class="logo">
     </a>
     <input type="text" name="" id="" value="" placeholder="搜索商品"/>
@@ -118,7 +118,7 @@
                         <c:forEach var="i" varStatus="s" items="${parts}">
 
                             <div class="index_u">
-                                <a href="feilei.php">
+                                <a href="<%=basePath%>goods/toGoodsListPage?pid=${i.id}">
                                     <div style="background:#FE5400;">
                                         <img src="<%=basePath%>fontpage/images/qita.png">
                                     </div>

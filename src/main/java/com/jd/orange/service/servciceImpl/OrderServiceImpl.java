@@ -6,9 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.jd.orange.dao.*;
 import com.jd.orange.model.*;
-import com.jd.orange.service.CartService;
-import com.jd.orange.service.ImageService;
-import com.jd.orange.service.OrderService;
+import com.jd.orange.service.*;
 import com.jd.orange.util.Folder;
 import com.jd.orange.util.PictureType;
 import com.jd.orange.util.StringUtil.GenerateString;
@@ -19,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +45,10 @@ public class OrderServiceImpl implements OrderService{
 
     @Resource
     private ImageService imageService;
+
+    @Resource
+    private GoodsService goodsService;
+
 
     @Override
     public int orderAmount() {
@@ -78,6 +81,10 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.selectOrderWithDetail(sequence);
     }
 
+    @Override
+    public Order getOrder(String sequence) {
+        return orderMapper.selectBySequence(sequence);
+    }
 
     //订单检查
     public boolean OrderCheckAddress(Address address)
@@ -147,9 +154,9 @@ public class OrderServiceImpl implements OrderService{
                     if (user.getScore() > AP * 0.05 * 100)   //最大抵扣
                     {
                         user.setScore(user.getScore() - new Double(AP * 0.05 * 100).intValue());
-                        order.setScorecost(AP * 0.05 * 100);
+                        order.setScorecost( new Double(new DecimalFormat("#0.0").format(AP * 0.05 * 100)) );
                     } else {   //全部抵扣
-                        order.setScorecost((double) user.getScore());
+                        order.setScorecost( new Double(new DecimalFormat("#0.0").format((double) user.getScore())) );
                         user.setScore(0);
                     }
                     userMapper.updateByPrimaryKeySelective(user);
@@ -225,6 +232,7 @@ public class OrderServiceImpl implements OrderService{
                     }
                 }
                 //6.设置
+                orderDetail.setFid(fid);//format id关联
                 orderDetail.setGoodsname(format.getGname());
                 orderDetail.setFormat(format.getFname());
                 orderDetail.setAmount(Double.valueOf(item.get("amount").toString()));//amount
@@ -282,5 +290,234 @@ public class OrderServiceImpl implements OrderService{
         PageHelper.startPage(pageNo,pageSize);
         return BeanUtil.toPagedResult( orderMapper.getUserOrderByStatus(uid,shopstatus,orderstatus) );
     }
+
+
+    //接单
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public Map<String,Object> accept(String sequence) {
+        Map<String,Object> m=new HashMap<String, Object>();
+        Order order=orderMapper.selectOrderWithDetail(sequence);
+        try {
+            if( !(order.getShopstatus()==0 && order.getOrderstatus()==0)  )
+            {
+                m.put("status",1);
+                m.put("msg","订单流程错误");
+                throw new Exception();
+            }
+            if (order.getOrderDetails() != null) {
+                //循环更新库存,销量
+                for (OrderDetail orderDetail : order.getOrderDetails()) {
+                    //取出orderDetail - amount , fid
+                    Format format = formatMapper.selectByPrimaryKey( orderDetail.getFid() );
+
+                    //减去库存
+                    if( orderDetail.getAmount() > format.getStock() )
+                    {
+                        m.put("status",2);
+                        m.put("msg","库存不足");
+                        throw new Exception();
+                    }
+                    format.setStock( format.getStock() - orderDetail.getAmount() );
+                    //销量增加
+                    format.setSales( format.getSales() + orderDetail.getAmount() );
+                    //检查下架
+                    if(format.getStock()==0)
+                    {
+                        if( !(formatMapper.goodsShelfCondition(format.getGoods()) > 0) )
+                        {
+                            goodsService.GoodsShelf(format.getGoods(),0,null);
+                        }
+                    }
+                    //更新规格表
+                    format.setUpdatetime(DateExample.getNowTimeByDate());
+                    formatMapper.updateByPrimaryKeySelective(format);
+                }
+                //订单状态更改
+                order.setOrderstatus(1);
+                orderMapper.updateByPrimaryKey(order);
+            }
+            else{
+                m.put("status",3);
+                m.put("msg","订单错误,请取消");
+                throw new Exception();
+            }
+        }catch (NullPointerException e)
+        {
+            m.put("status",4);
+            m.put("msg","空值异常");
+            return m;
+        }
+        catch (Exception e)
+        {
+            if(m.get("status")==null)
+            {
+                m.put("status",5);
+            }
+            if(m.get("msg")==null)
+            {
+                m.put("msg","程序异常:"+e.getClass());
+            }
+            return m;
+        }
+        m.put("status",0);
+        m.put("msg","已确认订单,等待用户付款");
+        return m;
+    }
+
+    //付款(回调)
+    @Override
+    public Map<String, Object> pay(String sequence) {
+        Map<String,Object> m=new HashMap<String, Object>();
+        Order order=orderMapper.selectOrderWithDetail(sequence);
+
+        //用户积分增加
+
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> send(String sequence,String logistics) {  //发货
+        Order order = orderMapper.selectBySequence(sequence);
+        Map<String,Object> m = new HashMap<String, Object>();
+        try {
+            if( order.getOrderstatus() == 1 && order.getShopstatus() == 1 && order.getBuyway() == 0 )
+            {
+                if(logistics.length() < 5)
+                {
+                    m.put("status",4);
+                    m.put("msg","物流信息不足");
+                    throw new Exception();
+                }
+                order.setLogistics(logistics);
+                order.setOrderstatus(2);
+                order.setUpdatetime(DateExample.getNowTimeByDate());
+            }
+            else
+            {
+                m.put("status",3);
+                m.put("msg","订单错误,请取消");
+                throw new Exception();
+            }
+        }catch (Exception e)
+        {
+            if(m.get("status")==null)
+            {
+                m.put("status",5);
+            }
+            if(m.get("msg")==null)
+            {
+                m.put("msg","程序异常:"+e.getClass());
+            }
+            return m;
+        }
+        if(orderMapper.updateByPrimaryKey(order) > 0)
+        {
+            m.put("status",0);
+            m.put("msg","发货成功");
+        }
+        else
+        {
+            m.put("status",1);
+            m.put("msg","发货失败");
+        }
+        return m;
+    }
+
+    @Override
+    public Map<String, Object> getsend(String sequence) {   //取货
+
+        return null;
+    }
+
+    //取消
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public Map<String, Object> cancel(String sequence) {
+        Map<String,Object> m=new HashMap<String, Object>();
+        Order order=orderMapper.selectOrderWithDetail(sequence);
+        Integer orderStatus = order.getOrderstatus();
+        Integer shopStatus = order.getShopstatus();
+        Integer buyway = order.getBuyway();
+        try {
+            //线上/线下 待接单
+            if (orderStatus == 0 && shopStatus == 0) {
+                //接单时取消退回扣除积分
+                if (order.getScorecost() > 0) {
+                    User user = userMapper.selectByPrimaryKey(order.getUser());
+                    user.setScore(user.getScore() + order.getScorecost().intValue());
+                    user.setUpdatetime(DateExample.getNowTimeByDate());
+                    userMapper.updateByPrimaryKeySelective(user);
+                }
+                order.setOrderstatus(7);
+                order.setUpdatetime(DateExample.getNowTimeByDate());
+                orderMapper.updateByPrimaryKey(order);
+            }
+            // 线上/线下 待付款
+            else if (orderStatus == 1 && shopStatus == 0) {
+                //待付款时取消 还原被扣库存和销量
+                if(order.getOrderDetails() == null )
+                {
+                    m.put("status",2);
+                    m.put("msg","订单详情异常");
+                    throw new Exception();
+                }
+                for( OrderDetail orderDetail : order.getOrderDetails() )    //遍历orderDetail 更新
+                {
+                    Format format = formatMapper.selectByPrimaryKey( orderDetail.getFid() );
+                    if( format!=null )  //规格还存在
+                    {
+                        format.setStock( format.getStock() + orderDetail.getAmount() );
+                        format.setSales( format.getSales() - orderDetail.getAmount() );
+                        if( format.getSales() < 0 )
+                        {
+                            format.setSales(0.0);
+                        }
+                        format.setUpdatetime(DateExample.getNowTimeByDate());
+                        formatMapper.updateByPrimaryKeySelective(format);
+                    }
+                }
+            }
+            // 线上  待发货
+            else if (orderStatus == 1 && shopStatus == 1 && buyway == 0) {
+                m.put("status",1);
+                m.put("msg","此状态不可取消");
+                throw new Exception();
+            }
+            // 线下  待取货
+            else if (orderStatus == 1 && shopStatus == 1 && buyway == 1) {
+                m.put("status",1);
+                m.put("msg","此状态不可取消");
+                throw new Exception();
+            }
+
+            // 已取消
+            else if (orderStatus == 7) {
+                m.put("status",1);
+                m.put("msg","此状态不可取消");
+                throw new Exception();
+            }
+            else {
+                m.put("status",7);
+                m.put("msg","未知状态");
+                throw new Exception();
+            }
+        }catch (Exception e)
+        {
+            if(m.get("status")==null)
+            {
+                m.put("status",6);
+            }
+            if(m.get("msg")==null)
+            {
+                m.put("msg","程序异常:"+e.getClass());
+            }
+            return m;
+        }
+        m.put("status",0);
+        m.put("msg","取消成功");
+        return m;
+    }
+
 
 }

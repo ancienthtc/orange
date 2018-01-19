@@ -115,7 +115,7 @@
             <c:if test="${sessionScope.user.score >= 100}">
                 <div class="aui-address-cell-bd">可用积分${sessionScope.user.score}</div>
                 <input onclick="checked=chk=!chk;" onmouseover="chk=checked;" type="radio" class="score choice" value="${sessionScope.user.score}"
-                       cost="0" choose="true" style="width: 18px;height: 18px;position: relative;top:.3vh;right: 1%;"/>
+                       cost="0" style="width: 18px;height: 18px;position: relative;top:.3vh;right: 1%;"/>
                 <c:if test="${sessionScope.user.score >= all.get('AP')*5 }">
                     <span>优惠${all.get('AP')*0.05}元</span>
                 </c:if>
@@ -171,7 +171,15 @@
 <script>
 $(function () {
     $(".score.choice").eq(0).click(function () {
-        return
+        if( $(this).prop("checked") == false )
+        {
+            $(".score.choice").eq(0).attr("cost",0);
+        }
+        else
+        {
+            $(".score.choice").eq(0).attr("cost",1);
+        }
+        //return
         //$("#ssssss").prop("checked")
     })
 })
@@ -202,6 +210,10 @@ $(function () {
         $list.each(function () {
             var fid=$(this).find("input[name='fid']").val();
             var cid=$(this).find("input[name='cid']").val();
+            if(cid==null || cid.length<=0)
+            {
+                cid="null";
+            }
             var amount=$(this).find("input[name='amount']").val();
             var detail=$(this).find("input[name='detail']").val();
             //console.log("fid="+fid+" "+"cid="+cid+" "+"amount="+amount+" "+"detail="+detail);
@@ -223,11 +235,12 @@ $(function () {
                 console.log(data);
                 if(data.status==0)
                 {
-                    alert("true");
+                    alert("创建成功");
+                    window.location.href = "<%=basePath%>order/toMyOrder";
                 }
                 else
                 {
-                    console.log(data.msg);
+                    //console.log(data.msg);
                     alert(data.msg);
                 }
             },

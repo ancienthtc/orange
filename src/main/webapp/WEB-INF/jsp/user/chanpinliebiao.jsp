@@ -37,8 +37,9 @@
                     <div class="search">
                         <input class="input" type="text" placeholder="搜索商品" name="proname" id="proname" value="">
                         <input type="hidden">
-                        <a href="chanpinliebiao.php"><input type="button" class="submit default-cursor" value=""
-                                                            onclick="GoodsQuery()"></a>
+                        <a >
+                            <input type="button" class="submit default-cursor" value="" >
+                        </a>
                     </div>
                 </div>
             </div>

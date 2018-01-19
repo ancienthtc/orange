@@ -65,6 +65,7 @@ public interface GoodsService {
     List<Goods> getNewGoods();
 
     //商品删除()
+    int GoodsDel(Integer gid);
 
     //商品销量统计
 

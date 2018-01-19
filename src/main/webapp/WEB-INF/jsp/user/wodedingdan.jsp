@@ -44,7 +44,7 @@
 </div>
 <div class="step_Tab border-1px">
     <div class="s-item">
-        <div class="sitem-l action">
+        <div class="sitem-l action ">
             待付款
         </div>
         <span class="line"></span>
@@ -65,268 +65,569 @@
 
 <div class="tab1">
     <!-- 选项卡1 -->
-    <div class="nav_coupon_none">
-        <div>
-            <div class="ddbh">
-                <ul>
-                    <li class="li1">
-                        订单编号：201712201034339b9da1
-                    </li>
-                    <li class="li2">
-                        <a href="#">
-                            <span> 待付款 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
+    <div class="nav_coupon_none" id="pay">
+
+
+        <div class="fenye">
+            <a href="#">
+                <div class="sx_ys">
+                    上一页
+                </div>
+            </a>
+
+            <div class="zj_xl">
+                <select name="">
+                    <option value="">第1页</option>
+                    <option value="">第2页</option>
+                    <option value="">第3页</option>
+                    <option value="">第4页</option>
+                </select>
             </div>
-            <div class="zfdd">
-                <ul>
-                    <li class="li3">
-                        <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
-                        </a>
-                    </li>
-                    <li class="li4">
-                        <span>×1.00</span>
-                        <span class="z_fudong">苏北稻花香大米</span>
-                        <br>
-                        <span class="jiage_3">￥48.00</span>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
-            </div>
-            <div class="ddfk">
-                <ul>
-                    <li class="li5">
-                        金额：￥48.00
-                    </li>
-                    <li class="li6">
-                        <a href="javascript:;">
-                            2017/12/20 10:34:33
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both;"></div>
-            </div>
+            <a href="#">
+                <div class="sx_ys">
+                    下一页
+                </div>
+            </a>
         </div>
-        <div>
-            <div class="ddbh">
-                <ul>
-                    <li class="li1">
-                        订单编号：201712201034339b9da1
-                    </li>
-                    <li class="li2">
-                        <a href="#">
-                            <span> 待付款 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
-            </div>
-            <div class="zfdd">
-                <ul>
-                    <li class="li3">
-                        <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
-                        </a>
-                    </li>
-                    <li class="li4">
-                        <span>×1.00</span>
-                        <span>苏北稻花香大米</span>
-                        <br>
-                        <span class="jiage_3">￥48.00</span>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
-            </div>
-            <div class="ddfk">
-                <ul>
-                    <li class="li5">
-                        金额：￥48.00
-                    </li>
-                    <li class="li6">
-                        <a href="javascript:;">
-                            2017/12/20 10:34:33
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both;"></div>
-            </div>
-        </div>
+
     </div>
 
     <div class="nav_coupon_none">
     </div>
     <!-- 选项卡2 -->
-    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;">
-        <div>
-            <div class="ddbh">
-                <ul>
-                    <li class="li1">
-                        订单编号：201712201034339b9da1
-                    </li>
-                    <li class="li2">
-                        <a href="#">
-                            <span> 待付款 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
+    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;" id="sure">
+
+
+        <div class="fenye">
+            <a href="#">
+                <div class="sx_ys">
+                    上一页
+                </div>
+            </a>
+
+            <div class="zj_xl">
+                <select name="">
+                    <option value="">第1页</option>
+                    <option value="">第2页</option>
+                    <option value="">第3页</option>
+                    <option value="">第4页</option>
+                </select>
             </div>
-            <div class="zfdd">
-                <ul>
-                    <li class="li3">
-                        <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
-                        </a>
-                    </li>
-                    <li class="li4">
-                        <span>×1.00</span>
-                        <span class="z_fudong">苏北稻花香大米</span>
-                        <br>
-                        <span class="jiage_3">￥48.00</span>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
-            </div>
-            <div class="ddfk">
-                <ul>
-                    <li class="li5">
-                        金额：￥48.00
-                    </li>
-                    <li class="li6">
-                        <a href="javascript:;">
-                            2017/12/20 10:34:33
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both;"></div>
-            </div>
+            <a href="#">
+                <div class="sx_ys">
+                    下一页
+                </div>
+            </a>
         </div>
     </div>
     <div class="nav_coupon_none">
     </div>
     <!-- 选项卡3 -->
-    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;">
-        <div>
-            <div class="ddbh">
-                <ul>
-                    <li class="li1">
-                        订单编号：201712201034339b9da1
-                    </li>
-                    <li class="li2">
-                        <a href="#">
-                            <span> 待付款 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
+    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;" id="receive">
+
+
+        <div class="fenye">
+            <a href="#">
+                <div class="sx_ys">
+                    上一页
+                </div>
+            </a>
+
+            <div class="zj_xl">
+                <select name="">
+                    <option value="">第1页</option>
+                    <option value="">第2页</option>
+                    <option value="">第3页</option>
+                    <option value="">第4页</option>
+                </select>
             </div>
-            <div class="zfdd">
-                <ul>
-                    <li class="li3">
-                        <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
-                        </a>
-                    </li>
-                    <li class="li4">
-                        <span>×1.00</span>
-                        <span class="z_fudong">苏北稻花香大米</span>
-                        <br>
-                        <span class="jiage_3">￥48.00</span>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
-            </div>
-            <div class="ddfk">
-                <ul>
-                    <li class="li5">
-                        金额：￥48.00
-                    </li>
-                    <li class="li6">
-                        <a href="javascript:;">
-                            2017/12/20 10:34:33
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both;"></div>
-            </div>
+            <a href="#">
+                <div class="sx_ys">
+                    下一页
+                </div>
+            </a>
         </div>
     </div>
     <div class="nav_coupon_none">
     </div>
     <!-- 选项卡4 -->
-    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;">
-        <div>
-            <div class="ddbh">
-                <ul>
-                    <li class="li1">
-                        订单编号：201712201034339b9da1
-                    </li>
-                    <li class="li2">
-                        <a href="#">
-                            <span> 待付款 </span>
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
+    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;" id="finish">
+
+
+        <div class="fenye">
+            <a href="#">
+                <div class="sx_ys">
+                    上一页
+                </div>
+            </a>
+
+            <div class="zj_xl">
+                <select name="">
+                    <option value="">第1页</option>
+                    <option value="">第2页</option>
+                    <option value="">第3页</option>
+                    <option value="">第4页</option>
+                </select>
             </div>
-            <div class="zfdd">
-                <ul>
-                    <li class="li3">
-                        <a href="chanpin_xqy.php">
-                            <img src="<%=basePath%>fontpage/img/g_1705310953385201177.jpg">
-                        </a>
-                    </li>
-                    <li class="li4">
-                        <span>×1.00</span>
-                        <span class="z_fudong">苏北稻花香大米</span>
-                        <br>
-                        <span class="jiage_3">￥48.00</span>
-                    </li>
-                </ul>
-                <div style="clear: both"></div>
-            </div>
-            <div class="ddfk">
-                <ul>
-                    <li class="li5">
-                        金额：￥48.00
-                    </li>
-                    <li class="li6">
-                        <a href="javascript:;">
-                            2017/12/20 10:34:33
-                        </a>
-                    </li>
-                </ul>
-                <div style="clear: both;"></div>
-            </div>
+            <a href="#">
+                <div class="sx_ys">
+                    下一页
+                </div>
+            </a>
         </div>
     </div>
 </div>
-<div class="fenye">
-    <a href="#">
-        <div class="sx_ys">
-            上一页
-        </div>
-    </a>
 
-    <div class="zj_xl">
-        <select name="">
-            <option value="">第1页</option>
-            <option value="">第2页</option>
-            <option value="">第3页</option>
-            <option value="">第4页</option>
-        </select>
-    </div>
-    <a href="#">
-        <div class="sx_ys">
-            上一页
-        </div>
-    </a>
-
-</div>
 <!-- END 选项卡1 -->
+<%--<jsp:include page="footer.jsp"></jsp:include>--%>
+
+<script>
+
+    $(function(){
+        var info = {pageNo:1};
+        var url0 = "<%=basePath%>order/getUserNoPay";
+        var url1 = "<%=basePath%>order/getUserNoSure";
+        var url2 = "<%=basePath%>order/getUserNoReceive";
+        var url3 = "<%=basePath%>order/getUserFinish";
+        send_post0(url0,info);
+        send_post1(url1,info);
+        send_post2(url2,info);
+        send_post3(url3,info);
+    })
+
+
+    function send_post0(url,info) {
+        $.post(url,info,function(result){
+            var body = $("#pay");
+            body.empty();
+            var html = "";
+            html += "<div>";
+            for (var i=0 ; i<result.dataList.length ; i++)
+            {
+                html += "<div class='ddbh'>" ;
+                html += "<ul>" ;
+                html += "<li class='li1'>订单编号："+result.dataList[i].sequence+"</li>" ;
+                html += "<li class='li2'><a href='#'><span> 待付款 </span></a></li>" ;
+                html += "</ul>";
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+                for (var j=0 ; j<result.dataList[i].orderDetails.length ;j++)
+                {
+                    html += "<div class='zfdd'>" ;
+                    html += "<ul>" ;
+                    html += "<li class='li3'>" ;
+                    html += "<a><img src='<%=basePath%>image/order?pid="+result.dataList[i].orderDetails[j].picture+"'></a>" ;
+                    html += "</li>" ;
+                    html += "<li class='li4'>" ;
+                    html += "<span>×"+result.dataList[i].orderDetails[j].amount+"</span>" ;
+                    html += "<span class='z_fudong'>" ;
+                    html += result.dataList[i].orderDetails[j].goodsname+" "+result.dataList[i].orderDetails[j].format ;
+                    html += "</span><br>" ;
+                    html += "<span class='jiage_3'>￥" + result.dataList[i].orderDetails[j].price + "</span>" ;
+                    html += "</li>" ;
+                    html += "</ul>" ;
+                    html += "<div style='clear: both'></div>" ;
+                    html += "</div>" ;
+                }
+                html += "<div class='ddfk'>" ;
+                html += "<ul>" ;
+                html += "<li class='li5'>金额：￥"+result.dataList[i].allprice+"</li>" ;
+                if( result.dataList[i].createtime != "" && result.dataList[i].createtime != undefined )
+                {
+                    var time = new Date(result.dataList[i].createtime);
+                    result.dataList[i].createtime = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                }
+                else
+                {
+                    result.dataList[i].createtime = "";
+                }
+                html += "<li class='li6'><a href='javascript:;'> "+result.dataList[i].createtime+" </a></li>" ;
+                html += "</ul>" ;
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+            }//订单结束
+            html += "<div class='fenye'>" ;
+            html += "<a class='previous pay'><div class='sx_ys'>上一页</div></a>" ;
+            html += "<div class='zj_xl'>" ;
+            html += "<select class='pg pay' all='"+result.pages+"' >" ;
+            for ( var s=1 ; s<=result.pages ; s++ )
+            {
+                html += "<option value='"+s+"' >第 "+s+" 页</option>" ;
+            }
+            html += "</select>" ;
+            html += "</div>" ;
+            html += "<a class='next pay'><div class='sx_ys'>下一页</div></a>" ;
+            html += "</div>" ;
+            html += "</div>" ;
+            body.append(html);
+            afterLoad0();
+        },"json");
+    }
+
+    function send_post1(url,info) {
+        $.post(url,info,function(result){
+            console.log(result);
+            var body = $("#sure");
+            body.empty();
+            var html = "";
+            html += "<div>";
+            for (var i=0 ; i<result.dataList.length ; i++)
+            {
+                html += "<div class='ddbh'>" ;
+                html += "<ul>" ;
+                html += "<li class='li1'>订单编号："+result.dataList[i].sequence+"</li>" ;
+                html += "<li class='li2'><a href='#'><span> 待确认 </span></a></li>" ;
+                html += "</ul>";
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+                for (var j=0 ; j<result.dataList[i].orderDetails.length ;j++)
+                {
+                    html += "<div class='zfdd'>" ;
+                    html += "<ul>" ;
+                    html += "<li class='li3'>" ;
+                    html += "<a><img src='<%=basePath%>image/order?pid="+result.dataList[i].orderDetails[j].picture+"'></a>" ;
+                    html += "</li>" ;
+                    html += "<li class='li4'>" ;
+                    html += "<span>×"+result.dataList[i].orderDetails[j].amount+"</span>" ;
+                    html += "<span class='z_fudong'>" ;
+                    html += result.dataList[i].orderDetails[j].goodsname+" "+result.dataList[i].orderDetails[j].format ;
+                    html += "</span><br>" ;
+                    html += "<span class='jiage_3'>￥" + result.dataList[i].orderDetails[j].price + "</span>" ;
+                    html += "</li>" ;
+                    html += "</ul>" ;
+                    html += "<div style='clear: both'></div>" ;
+                    html += "</div>" ;
+                }
+                html += "<div class='ddfk'>" ;
+                html += "<ul>" ;
+                html += "<li class='li5'>金额：￥"+result.dataList[i].allprice+"</li>" ;
+                if( result.dataList[i].createtime != "" && result.dataList[i].createtime != undefined )
+                {
+                    var time = new Date(result.dataList[i].createtime);
+                    result.dataList[i].createtime = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                }
+                else
+                {
+                    result.dataList[i].createtime = "";
+                }
+                html += "<li class='li6'><a href='javascript:;'> "+result.dataList[i].createtime+" </a></li>" ;
+                html += "</ul>" ;
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+            }//订单结束
+            html += "<div class='fenye'>" ;
+            html += "<a class='previous sure'><div class='sx_ys'>上一页</div></a>" ;
+            html += "<div class='zj_xl'>" ;
+            html += "<select class='pg sure' all='"+result.pages+"' >" ;
+            for ( var s=1 ; s<=result.pages ; s++ )
+            {
+                html += "<option value='"+s+"' >第 "+s+" 页</option>" ;
+            }
+            html += "</select>" ;
+            html += "</div>" ;
+            html += "<a class='next sure'><div class='sx_ys'>下一页</div></a>" ;
+            html += "</div>" ;
+            html += "</div>" ;
+            body.append(html);
+            afterLoad1();
+        },"json");
+    }
+
+    function send_post2(url,info) {
+        $.post(url,info,function(result){
+            var body = $("#receive");
+            body.empty();
+            var html = "";
+            html += "<div>";
+            for (var i=0 ; i<result.dataList.length ; i++)
+            {
+                html += "<div class='ddbh'>" ;
+                html += "<ul>" ;
+                html += "<li class='li1'>订单编号："+result.dataList[i].sequence+"</li>" ;
+                html += "<li class='li2'><a href='#'><span> 待收货 </span></a></li>" ;
+                html += "</ul>";
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+                for (var j=0 ; j<result.dataList[i].orderDetails.length ;j++)
+                {
+                    html += "<div class='zfdd'>" ;
+                    html += "<ul>" ;
+                    html += "<li class='li3'>" ;
+                    html += "<a><img src='<%=basePath%>image/order?pid="+result.dataList[i].orderDetails[j].picture+"'></a>" ;
+                    html += "</li>" ;
+                    html += "<li class='li4'>" ;
+                    html += "<span>×"+result.dataList[i].orderDetails[j].amount+"</span>" ;
+                    html += "<span class='z_fudong'>" ;
+                    html += result.dataList[i].orderDetails[j].goodsname+" "+result.dataList[i].orderDetails[j].format ;
+                    html += "</span><br>" ;
+                    html += "<span class='jiage_3'>￥" + result.dataList[i].orderDetails[j].price + "</span>" ;
+                    html += "</li>" ;
+                    html += "</ul>" ;
+                    html += "<div style='clear: both'></div>" ;
+                    html += "</div>" ;
+                }
+                html += "<div class='ddfk'>" ;
+                html += "<ul>" ;
+                html += "<li class='li5'>金额：￥"+result.dataList[i].allprice+"</li>" ;
+                if( result.dataList[i].createtime != "" && result.dataList[i].createtime != undefined )
+                {
+                    var time = new Date(result.dataList[i].createtime);
+                    result.dataList[i].createtime = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                }
+                else
+                {
+                    result.dataList[i].createtime = "";
+                }
+                html += "<li class='li6'><a href='javascript:;'> "+result.dataList[i].createtime+" </a></li>" ;
+                html += "</ul>" ;
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+            }//订单结束
+            html += "<div class='fenye'>" ;
+            html += "<a class='previous'><div class='sx_ys'>上一页</div></a>" ;
+            html += "<div class='zj_xl'>" ;
+            html += "<select class='pg' all='"+result.pages+"'>" ;
+            for ( var s=1 ; s<=result.pages ; s++ )
+            {
+                html += "<option value='"+s+"' >第 "+s+" 页</option>" ;
+            }
+            html += "</select>" ;
+            html += "</div>" ;
+            html += "<a class='next'><div class='sx_ys'>下一页</div></a>" ;
+            html += "</div>" ;
+            html += "</div>" ;
+            body.append(html);
+            afterLoad2();
+        },"json");
+    }
+
+    function send_post3(url,info) {
+        $.post(url,info,function(result){
+            var body = $("#finish");
+            body.empty();
+            var html = "";
+            html += "<div>";
+            for (var i=0 ; i<result.dataList.length ; i++)
+            {
+                html += "<div class='ddbh'>" ;
+                html += "<ul>" ;
+                html += "<li class='li1'>订单编号："+result.dataList[i].sequence+"</li>" ;
+                html += "<li class='li2'><a href='#'><span> 已完成 </span></a></li>" ;
+                html += "</ul>";
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+                for (var j=0 ; j<result.dataList[i].orderDetails.length ;j++)
+                {
+                    html += "<div class='zfdd'>" ;
+                    html += "<ul>" ;
+                    html += "<li class='li3'>" ;
+                    html += "<a><img src='<%=basePath%>image/order?pid="+result.dataList[i].orderDetails[j].picture+"'></a>" ;
+                    html += "</li>" ;
+                    html += "<li class='li4'>" ;
+                    html += "<span>×"+result.dataList[i].orderDetails[j].amount+"</span>" ;
+                    html += "<span class='z_fudong'>" ;
+                    html += result.dataList[i].orderDetails[j].goodsname+" "+result.dataList[i].orderDetails[j].format ;
+                    html += "</span><br>" ;
+                    html += "<span class='jiage_3'>￥" + result.dataList[i].orderDetails[j].price + "</span>" ;
+                    html += "</li>" ;
+                    html += "</ul>" ;
+                    html += "<div style='clear: both'></div>" ;
+                    html += "</div>" ;
+                }
+                html += "<div class='ddfk'>" ;
+                html += "<ul>" ;
+                html += "<li class='li5'>金额：￥"+result.dataList[i].allprice+"</li>" ;
+                if( result.dataList[i].createtime != "" && result.dataList[i].createtime != undefined )
+                {
+                    var time = new Date(result.dataList[i].createtime);
+                    result.dataList[i].createtime = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                }
+                else
+                {
+                    result.dataList[i].createtime = "";
+                }
+                html += "<li class='li6'><a href='javascript:;'> "+result.dataList[i].createtime+" </a></li>" ;
+                html += "</ul>" ;
+                html += "<div style='clear: both'></div>" ;
+                html += "</div>" ;
+            }//订单结束
+            html += "<div class='fenye'>" ;
+            html += "<a class='previous'><div class='sx_ys'>上一页</div></a>" ;
+            html += "<div class='zj_xl'>" ;
+            html += "<select class='pg' all='"+result.pages+"'>" ;
+            for ( var s=1 ; s<=result.pages ; s++ )
+            {
+                html += "<option value='"+s+"' >第 "+s+" 页</option>" ;
+            }
+            html += "</select>" ;
+            html += "</div>" ;
+            html += "<a class='next'><div class='sx_ys'>下一页</div></a>" ;
+            html += "</div>" ;
+            html += "</div>" ;
+            body.append(html);
+            afterLoad3();
+        },"json");
+    }
+
+    //后续绑定
+    function afterLoad0() {
+        var now = $(".pg.pay option:selected").val();
+        $(".previous.pay").click(function () {  //上一页
+            //console.log(now);
+            now = parseInt(now) - 1;
+            if(now<=0)
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url0 = "<%=basePath%>order/getUserNoPay";
+                send_post0(url0,info);
+            }
+        });
+
+        $(".next.pay").click(function () {  //下一页
+            //console.log(now);
+            now = parseInt(now) + 1;
+            if( now > $(".pg.pay").attr("all") )
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url0 = "<%=basePath%>order/getUserNoPay";
+                send_post0(url0,info);
+            }
+        });
+
+        $(".pg.pay").change(function () {
+            //console.log(now);
+            var info = {pageNo:now};
+            var url0 = "<%=basePath%>order/getUserNoPay";
+            send_post0(url0,info);
+        });
+    }
+
+    function afterLoad1() {
+        var now = $(".pg.sure option:selected").val();
+        $(".previous.sure").click(function () {  //上一页
+            //console.log(now);
+            now = parseInt(now) - 1;
+            if(now<=0)
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url1 = "<%=basePath%>order/getUserNoSure";
+                send_post1(url1,info);
+            }
+
+        });
+
+        $(".next.sure").click(function () {  //下一页
+            //console.log(now);
+            now = parseInt(now) + 1;
+            if( now > $(".pg.sure").attr("all") )
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url1 = "<%=basePath%>order/getUserNoSure";
+                send_post1(url1,info);
+            }
+
+
+        });
+
+        $(".pg.sure").change(function () {
+            console.log(now);
+            var info = {pageNo:now};
+            var url1 = "<%=basePath%>order/getUserNoSure";
+            send_post1(url1,info);
+        });
+    };
+
+    function afterLoad2() {
+        var now = $(".pg.receive option:selected").val();
+        $(".previous.receive").click(function () {  //上一页
+            //console.log(now);
+            now = parseInt(now) - 1;
+            if(now<=0)
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url2 = "<%=basePath%>order/getUserNoReceive";
+                send_post2(url2,info);
+            }
+        });
+
+        $(".next.receive").click(function () {  //下一页
+            //console.log(now);
+            now = parseInt(now) + 1;
+            if( now > $(".pg.receive").attr("all") )
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url2 = "<%=basePath%>order/getUserNoReceive";
+                send_post2(url2,info);
+            }
+        });
+
+        $(".pg.receive").change(function () {
+            //console.log(now);
+            var info = {pageNo:now};
+            var url2 = "<%=basePath%>order/getUserNoReceive";
+            send_post2(url2,info);
+        });
+    }
+
+    function afterLoad3() {
+        var now = $(".pg.finish option:selected").val();
+        $(".previous.finish").click(function () {  //上一页
+            //console.log(now);
+            now = parseInt(now) - 1;
+            if(now<=0)
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url3 = "<%=basePath%>order/getUserFinish";
+                send_post3(url3,info);
+            }
+        });
+
+        $(".next.finish").click(function () {  //下一页
+            //console.log(now);
+            now = parseInt(now) + 1;
+            if( now > $(".pg.finish").attr("all") )
+            {
+                return false;
+            }
+            else {
+                var info = {pageNo:now};
+                var url3 = "<%=basePath%>order/getUserFinish";
+                send_post3(url3,info);
+            }
+        });
+
+        $(".pg.finish").change(function () {
+            //console.log(now);
+            var info = {pageNo:now};
+            var url3 = "<%=basePath%>order/getUserFinish";
+            send_post3(url3,info);
+        });
+
+    }
+
+</script>
+
 
 <!--<script type="text/javascript">
 //初始加载

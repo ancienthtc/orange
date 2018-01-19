@@ -43,7 +43,7 @@
 <div class="loginbody">
     <div class="login-container">
         <div class="center">
-            <img src="<%=basePath%>backpage/images/logo1.png"/>
+            <%--<img src="<%=basePath%>backpage/images/logo1.png"/>--%>
         </div>
 
         <div class="space-6"></div>
@@ -113,7 +113,7 @@
         </div><!-- /position-relative -->
     </div>
 </div>
-<div class="loginbm">版权所有 2016 <a href="">南京思美软件系统有限公司</a></div>
+<div class="loginbm">版权所有 2017 <a href="">苏州极鼎科技有限公司</a></div>
 <strong></strong>
 </body>
 </html>

@@ -190,7 +190,7 @@
                     <ul class="search_content clearfix">
                         <li>
                             <label class="sx_wz">上线时间</label>
-                            <input class="cp_tjsj laydate-icon" id="start" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="${goods.shelf.toLocaleString()}" style=" margin-left:10px;width: 170px;height: 30px;">
+                            <input class="cp_tjsj laydate-icon" id="start" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" value="${goods.shelf.toLocaleString()}" style=" margin-left:10px;width: 170px;height: 30px;">
                             <button id="up" >上架</button>
                         </li>
 

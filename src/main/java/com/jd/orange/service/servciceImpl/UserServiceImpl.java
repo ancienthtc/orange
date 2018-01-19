@@ -1,6 +1,7 @@
 package com.jd.orange.service.servciceImpl;
 
 import com.github.pagehelper.PageHelper;
+import com.jd.orange.dao.OrderMapper;
 import com.jd.orange.dao.UserMapper;
 import com.jd.orange.model.User;
 import com.jd.orange.service.UserService;
@@ -11,12 +12,16 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService{
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private OrderMapper orderMapper;
 
     @Override
     public int register(User user) {
@@ -115,4 +120,9 @@ public class UserServiceImpl implements UserService{
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
+    @Override
+    public Map<String, Integer> getUserOrderCount(Integer uid) {
+
+        return orderMapper.getUserOrderCount(uid);
+    }
 }

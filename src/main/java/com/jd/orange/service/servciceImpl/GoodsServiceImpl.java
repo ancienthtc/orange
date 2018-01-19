@@ -3,7 +3,9 @@ package com.jd.orange.service.servciceImpl;
 import com.github.pagehelper.PageHelper;
 import com.jd.orange.dao.FormatMapper;
 import com.jd.orange.dao.GoodsMapper;
+import com.jd.orange.dao.PartMapper;
 import com.jd.orange.model.Goods;
+import com.jd.orange.model.Part;
 import com.jd.orange.service.GoodsService;
 import com.jd.orange.service.ImageService;
 import com.jd.orange.util.Folder;
@@ -18,19 +20,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
 
-    @Resource
+    @Autowired
     private ImageService imageService;
 
     @Autowired
     private GoodsMapper goodsMapper;
 
-    @Autowired
+    @Resource
     private FormatMapper formatMapper;
+
+    @Resource
+    private PartMapper partMapper;
 
     @Override
     @Transactional
@@ -346,8 +352,44 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Override
-    public List<Goods> GoodsListPage(Integer pid) {
-        return goodsMapper.selectGoodsWithFormatsByPart(pid);
+    public List<Goods> GoodsListPage(Integer pid) {     //商品列表页面
+        List<Goods> goodsList = new ArrayList<Goods>();
+        List<Part> partList ;
+        List<Part> addlist = new ArrayList<Part>(); // 防止出现 ConcurrentModificationException
+        Part part = partMapper.selectByPrimaryKey(pid);
+        if( part.getLevel() == 0 ) //1级父类
+        {
+            partList = partMapper.getChildPart(pid);    //2级
+
+            for ( Part p : partList)    // 2级子类
+            {
+                List<Part> childList = partMapper.getChildPart(p.getId());  //3级子类
+                if( childList.size() > 0 )
+                {
+                    //partList.addAll(childList);
+                    addlist.addAll(childList);
+                }
+            }
+            partList.addAll(addlist);
+            for ( Part p : partList )
+            {
+                goodsList.addAll( goodsMapper.selectGoodsWithFormatsByPart(p.getId()) );
+            }
+        }
+        else if( part.getLevel() == 1 ) //2级
+        {
+            partList = partMapper.getChildPart(pid);    //3级
+            partList.add(part);     //加入自己
+            for ( Part p : partList )
+            {
+                goodsList.addAll( goodsMapper.selectGoodsWithFormatsByPart(p.getId()) );
+            }
+        }
+        else    //3级
+        {
+            goodsList = goodsMapper.selectGoodsWithFormatsByPart(pid);
+        }
+        return goodsList;
     }
 
     @Override
@@ -366,5 +408,17 @@ public class GoodsServiceImpl implements GoodsService{
             goods.setPic3( goods.getPic3().substring( goods.getPic3().lastIndexOf("\\") + 1 ) );
         }
         return goods;
+    }
+
+    @Override
+    public int GoodsDel(Integer gid) {
+
+        //判断删除
+
+        //商品图片删除
+
+        //其他图片删除
+
+        return 0;
     }
 }

@@ -36,4 +36,6 @@ public interface ImageService {
     int getOtherCount();
 
     Picture ImageCopy(String absolutePath ,String ServerPath, Folder folder, PictureType type);
+
+    Picture getPictureById(Integer pid);
 }

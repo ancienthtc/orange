@@ -279,8 +279,9 @@ public class GoodsController {
     //商品删除
     @RequestMapping("/del")
     @ResponseBody
-    public String goodsDel()
+    public String goodsDel(Integer gid)
     {
+
         return "";
     }
 
@@ -338,6 +339,20 @@ public class GoodsController {
         if(pid!=null && type==null)
         {
             model.addAttribute("goods",goodsService.GoodsListPage(pid));
+        }
+        if( pid==null && type!=null )
+        {
+            switch (type)
+            {
+                case 1:     //首页-More
+                    break;
+                case 2:     //最新
+                    break;
+                case 3:     //销量降序
+                    break;
+                case 4:     //默认
+                    break;
+            }
         }
 
         return "user/chanpinliebiao";

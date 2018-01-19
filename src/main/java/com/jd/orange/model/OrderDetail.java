@@ -9,6 +9,8 @@ public class OrderDetail {
 
     private String format;
 
+    private Integer fid;
+
     private Double amount;
 
     private Double price;
@@ -58,6 +60,14 @@ public class OrderDetail {
 
     public void setFormat(String format) {
         this.format = format == null ? null : format.trim();
+    }
+
+    public Integer getFid() {
+        return fid;
+    }
+
+    public void setFid(Integer fid) {
+        this.fid = fid;
     }
 
     public Double getAmount() {

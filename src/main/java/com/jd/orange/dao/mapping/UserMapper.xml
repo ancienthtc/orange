@@ -86,6 +86,10 @@
     AND ( nickname = #{name,jdbcType=VARCHAR} OR email = #{name,jdbcType=VARCHAR} OR tel = #{name,jdbcType=VARCHAR} )
   </select>
 
+  <select id="checkTel" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT 1 FROM t_user WHERE tel = #{tel,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}

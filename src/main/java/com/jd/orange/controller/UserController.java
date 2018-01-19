@@ -104,8 +104,10 @@ public class UserController {
     //进入个人中心
     @UserCheck
     @RequestMapping("/toCenter")
-    public String toCenter()
+    public String toCenter(HttpSession session , Model model)
     {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("count",userService.getUserOrderCount(user.getId()));
         return "user/gerenzhongxin";
     }
 

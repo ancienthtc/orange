@@ -200,9 +200,8 @@ public class ImageServiceImpl implements ImageService{
     }
 
 
-    public static void copyFile3(String srcPath, String destPath) throws IOException {
-
-
-
+    @Override
+    public Picture getPictureById(Integer pid) {
+        return pictureMapper.selectByPrimaryKey(pid);
     }
 }

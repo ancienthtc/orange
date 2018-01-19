@@ -68,7 +68,10 @@
 
             <c:forEach var="i" items="${childParts}">
 
-                <h2><span class="fl"> ${i.name}</span>
+                <h2>
+                    <a href="<%=basePath%>goods/toGoodsListPage?pid=${i.id}">
+                        <span class="fl"> ${i.name}</span>
+                    </a>
                     <a href="<%=basePath%>goods/toGoodsListPage?pid=${i.id}" class="fr">
                         <img class="youjiantou" src="<%=basePath%>fontpage/img/youjiantou.png">
                     </a>

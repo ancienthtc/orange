@@ -8223,6 +8223,9 @@ input[type=checkbox].ace.ace-switch.ace-switch-7:checked+.lbl::after
 th,td,.table-bordered
 {
   border-radius: 0!important;
+  border: 1px solid #DDD;
+  padding: 8px;
+  text-align: center;
 }
 
 .table thead tr

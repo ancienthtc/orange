@@ -11,6 +11,8 @@ import com.jd.orange.util.password.Secret;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ThinkPad on 2017/11/28.
@@ -56,4 +58,23 @@ public class LoginServiceImpl implements LoginService {
         user.setPassword( Secret.enPass(user.getPassword()) );
         return userMapper.insertSelective(user);
     }
+
+    @Override
+    public Map<String, Object> checkRepeat(String phone) {
+        Map<String, Object> m = new HashMap<String, Object>();
+        if( userMapper.checkTel(phone) == null )
+        {
+            m.put("msg","成功");
+            m.put("status",0);
+        }
+        else
+        {
+            m.put("msg","已注册的号码");
+            m.put("status",1);
+        }
+        return m;
+    }
+
+
+
 }
