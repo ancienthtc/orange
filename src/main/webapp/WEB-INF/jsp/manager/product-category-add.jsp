@@ -105,7 +105,7 @@
                     var city2=$("#city2");
                     //清空第二级里面的城市
                     city2.empty();
-                    if(result.length>0)
+                    if(result!=null)
                     {
                         city2.append("<option value='-2'>创建二级子分类</option>");
                     }

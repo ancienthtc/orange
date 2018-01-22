@@ -149,7 +149,7 @@ public class OrderController {
         Order order=orderService.getOrder(sequence);
         if(order.getBuyway()==0)    //线上 发货
         {
-
+            return JSON.toJSONString( orderService.send(sequence,logistics) );
         }
         else if(order.getBuyway()==1)   //线下 取货(用户到店取货，卖家发货后点击按钮)
         {

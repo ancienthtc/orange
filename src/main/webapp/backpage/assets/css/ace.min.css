@@ -1474,6 +1474,10 @@ blockquote,blockquote.pull-right
   font-size: 24px;
   text-shadow: none;
   padding:0;
+  line-height: 75px;
+  letter-spacing: 1px;
+  font-family: cursive;
+  font-size: 30px;
 }
 
 .navbar .navbar-brand:hover,.navbar .navbar-brand:focus
@@ -1483,8 +1487,9 @@ blockquote,blockquote.pull-right
 
 .navbar .navbar-header
 {
-  margin: 0!important;
+  /*margin: 0!important;*/
   height:75px;
+  margin-left: 10%;
 }
 
 .navbar .navbar-nav>li>a,.navbar .navbar-nav>li>a:hover,.navbar .navbar-nav>li>a:focus

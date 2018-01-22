@@ -26,8 +26,8 @@
     <script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
     <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
-    <script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>
-    <script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>
+    <%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>--%>
+    <%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>--%>
     <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
     <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
     <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript"></script>

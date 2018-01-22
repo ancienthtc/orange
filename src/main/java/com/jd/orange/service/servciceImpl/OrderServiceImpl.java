@@ -377,13 +377,14 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    @Transactional(rollbackFor=Exception.class)
     public Map<String, Object> send(String sequence,String logistics) {  //发货
         Order order = orderMapper.selectBySequence(sequence);
         Map<String,Object> m = new HashMap<String, Object>();
         try {
             if( order.getOrderstatus() == 1 && order.getShopstatus() == 1 && order.getBuyway() == 0 )
             {
-                if(logistics.length() < 5)
+                if(logistics.length() < 15)
                 {
                     m.put("status",4);
                     m.put("msg","物流信息不足");
@@ -411,7 +412,7 @@ public class OrderServiceImpl implements OrderService{
             }
             return m;
         }
-        if(orderMapper.updateByPrimaryKey(order) > 0)
+        if(orderMapper.updateByPrimaryKeySelective(order) > 0)
         {
             m.put("status",0);
             m.put("msg","发货成功");

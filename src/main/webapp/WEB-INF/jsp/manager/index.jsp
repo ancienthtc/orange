@@ -235,9 +235,7 @@
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
-                <small>
-                    <img src="<%=basePath%>backpage/images/juziwu.png" width="470px">
-                </small>
+   欢迎来到橘子屋后台
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
         <div class="navbar-header operating pull-left">

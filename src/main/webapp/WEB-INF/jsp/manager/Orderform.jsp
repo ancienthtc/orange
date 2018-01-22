@@ -718,47 +718,51 @@
         $(".send").click(function () {
             var logistics = '';
             var oid = $(this).parent().attr("oid");
-            layer.prompt({title: '填写快递公司与物流单号'},function(val, index){
-                layer.msg('得到了'+val);
-                logistics = val;
+            // layer.prompt({title: '填写快递公司与物流单号'},function(val, index){
+            //     layer.msg('得到了'+val);
+            //     logistics = val;
+            //     layer.close(index);
+            // });
+            layer.prompt({
+                formType: 2,
+                value: '快递:  运单号:',
+                title: '填写快递公司与物流单号'
+            }, function(value, index, elem){
+                //alert(value); //得到value
+                if( value.length < 15 )
+                {
+                    layer.alert('不得少于15个字');
+                }
+                else
+                {
+                    $.ajax({
+                        url:"<%=basePath%>order/send",
+                        data:{sequence:oid,logistics:value},
+                        type:"get",
+                        dataType:"json",
+                        success:function(data){
+                            if( data.status == 0 )
+                            {
+                                var url="<%=basePath%>order/getAdminOrderOnline";
+                                var page=$("#pageNo2").val();
+                                var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
+                                send_post2(url,info);
+                            }
+                            else
+                            {
+                                layer.alert(data.msg);
+                            }
+                        },
+                        error:function(){
+                            alert("请求失败");
+                        }
+                    });
+                }
                 layer.close(index);
             });
-            send(oid,logistics);
-
         });
 
 
-    }
-    function send(oid,logistics) {
-        if( logistics.length < 5 )
-        {
-            layer.alert('不得少于5个字');
-        }
-        else
-        {
-            $.ajax({
-                url:"<%=basePath%>order/send",
-                data:{sequence:oid,logistics:logistics},
-                type:"get",
-                dataType:"json",
-                success:function(data){
-                    if( data.status == 0 )
-                    {
-                        var url="<%=basePath%>order/getAdminOrderOnline";
-                        var page=$("#pageNo2").val();
-                        var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
-                        send_post2(url,info);
-                    }
-                    else
-                    {
-                        layer.alert(data.msg);
-                    }
-                },
-                error:function(){
-                    alert("请求失败");
-                }
-            });
-        }
     }
 
     //待收货
@@ -1043,9 +1047,152 @@
     }
 
     //待收货
+    function send_post3(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody3=$("#tbody3");
+                //清空tbody
+                tbody3.empty();
+                var html = "";
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var a="";
+                    //tbody0.append("<tr style='text-align: center'>");
+                    html += "<tr style='text-align: center'>";
+                    //tbody0.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    html += "<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
+                    //tbody0.append("<td>"+result.dataList[i].sequence+"</td>");
+                    html += "<td>"+result.dataList[i].sequence+"</td>" ;
+                    //tbody0.append("<td >未付款</td>");
+                    html += "<td >待收货</td>" ;
+                    //tbody0.append("<td >---</td>");
+                    html += "<td >"+result.dataList[i].paytime+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    html += "<td >"+result.dataList[i].goodsprice+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    html += "<td >"+result.dataList[i].scorecost+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].allprice+"</td>");
+                    html += "<td >"+result.dataList[i].allprice+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].contact+"</td>");
+                    html += "<td >"+result.dataList[i].contact+"</td>" ;
+                    //tbody0.append("<td class='td-status'><span class='label label-success radius'>待确认</span></td>");
+                    html += "<td class='td-status'><span class='label label-success radius'>待收货</span></td>" ;
+                    a+="<td oid='"+result.dataList[i].sequence+"'>";
+                    a+="<a href='javascript:;' title='确认' class='btn btn-xs btn-success sure'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a href='javascript:;' title='取消' class='btn btn-xs btn-success cancel'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    //tbody0.append(a);
+                    html += a;
+                    //tbody0.append("</tr>");
+                    html += "</tr>" ;
+                }
+                tbody3.append(html);
+                //页码隐藏域
+                var s="<div class='page'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg3' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo3").val(result.pageNo);$("#pages3").val(result.pages);
+                $("#pagehere3").empty().append(s);$("#pagehere3").show();
+                $("#pagehere1").hide();$("#pagehere2").hide();$("#pagehere0").hide();$("#pagehere4").hide();
+                $("#pagehere5").hide();$("#pagehere6").hide();$("#pagehere7").hide();$("#pagehere8").hide();
+                afterLoad3();//事后绑定
+            },"json");
+    }
 
     //已完成
-
+    function send_post4(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody4=$("#tbody4");
+                //清空tbody
+                tbody4.empty();
+                var html = "";
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var a="";
+                    //tbody0.append("<tr style='text-align: center'>");
+                    html += "<tr style='text-align: center'>";
+                    //tbody0.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    html += "<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
+                    //tbody0.append("<td>"+result.dataList[i].sequence+"</td>");
+                    html += "<td>"+result.dataList[i].sequence+"</td>" ;
+                    //tbody0.append("<td >未付款</td>");
+                    html += "<td >已完成</td>" ;
+                    //tbody0.append("<td >---</td>");
+                    html += "<td >"+result.dataList[i].paytime+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    html += "<td >"+result.dataList[i].goodsprice+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    html += "<td >"+result.dataList[i].scorecost+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].allprice+"</td>");
+                    html += "<td >"+result.dataList[i].allprice+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].contact+"</td>");
+                    html += "<td >"+result.dataList[i].contact+"</td>" ;
+                    //tbody0.append("<td class='td-status'><span class='label label-success radius'>待确认</span></td>");
+                    html += "<td class='td-status'><span class='label label-success radius'>已完成</span></td>" ;
+                    a+="<td oid='"+result.dataList[i].sequence+"'>";
+                    a+="<a href='javascript:;' title='确认' class='btn btn-xs btn-success sure'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a href='javascript:;' title='取消' class='btn btn-xs btn-success cancel'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    //tbody0.append(a);
+                    html += a;
+                    //tbody0.append("</tr>");
+                    html += "</tr>" ;
+                }
+                tbody4.append(html);
+                //页码隐藏域
+                var s="<div class='page'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg4' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo4").val(result.pageNo);$("#pages4").val(result.pages);
+                $("#pagehere4").empty().append(s);$("#pagehere4").show();
+                $("#pagehere1").hide();$("#pagehere2").hide();$("#pagehere3").hide();$("#pagehere0").hide();
+                $("#pagehere5").hide();$("#pagehere6").hide();$("#pagehere7").hide();$("#pagehere8").hide();
+                afterLoad4();//事后绑定
+            },"json");
+    }
 
     //已取消
     function send_post8(url,info) {
