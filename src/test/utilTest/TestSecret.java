@@ -18,7 +18,7 @@ public class TestSecret {
     @Test
     public void enpass()
     {
-        String s="asdfse";
+        String s="111111";
         System.out.println(Secret.enPass(s));
     }
 
