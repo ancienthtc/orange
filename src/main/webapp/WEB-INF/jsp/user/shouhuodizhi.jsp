@@ -115,11 +115,11 @@
                             </c:forEach>
 
                         </c:if>
-                        <c:if test="${empty addressses}">
-                            <div class="step3 border-1px step3-adress">
-                                暂无地址，前去添加
-                            </div>
-                        </c:if>
+                        <%--<c:if test="${empty addressses}">--%>
+                            <%--<div class="step3 border-1px step3-adress">--%>
+                                <%--暂无地址，前去添加--%>
+                            <%--</div>--%>
+                        <%--</c:if>--%>
 
                         <%--<div class="step3 border-1px step3-adress">--%>
                             <%--<div class="s-item">--%>

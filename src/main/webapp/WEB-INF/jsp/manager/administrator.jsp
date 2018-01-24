@@ -115,7 +115,7 @@
         </div>
     </div>
     <!--添加管理员-->
-    <div id="add_administrator_style" class="add_menber" style="display:none">
+    <div id="add_administrator_style" class="add_menber" style="display:none;">
         <form action="<%=basePath%>admin/add" method="post" id="form-admin-add">
             <div class="form-group">
                 <label class="form-label"><span class="c-red">*</span>管理员：</label>
@@ -181,89 +181,7 @@
                        value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
             </div>
         </form>
-
     </div>
-
-    <!--修改管理员-->
-    <div id="add_administrator_style1" class="add_menber" style="display:none">
-        <form action="" method="post" id="form-admin-add1">
-            <div class="form-group">
-                <label class="form-label"><span class="c-red">*</span>管理员：</label>
-                <div class="formControls">
-                    <input type="text" class="input-text" value="" placeholder="" id="user-name" name="user-name"
-                           datatype="*2-16" nullmsg="用户名不能为空">
-                </div>
-                <div class="col-4"><span class="Validform_checktip"></span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label"><span class="c-red">*</span>初始密码：</label>
-                <div class="formControls">
-                    <input type="password" placeholder="密码" name="userpassword" autocomplete="off" value=""
-                           class="input-text" datatype="*6-20" nullmsg="密码不能为空">
-                </div>
-                <div class="col-4"><span class="Validform_checktip"></span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label "><span class="c-red">*</span>确认密码：</label>
-                <div class="formControls ">
-                    <input type="password" placeholder="确认新密码" autocomplete="off" class="input-text Validform_error"
-                           errormsg="您两次输入的新密码不一致！" datatype="*" nullmsg="请再输入一次新密码！" recheck="userpassword"
-                           id="newpassword2" name="newpassword2">
-                </div>
-                <div class="col-4"><span class="Validform_checktip"></span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label "><span class="c-red">*</span>性别：</label>
-                <div class="formControls  skin-minimal">
-                    <label><input name="form-field-radio" type="radio" class="ace" checked="checked"><span class="lbl">保密</span></label>&nbsp;&nbsp;
-                    <label><input name="form-field-radio" type="radio" class="ace"><span class="lbl">男</span></label>&nbsp;&nbsp;
-                    <label><input name="form-field-radio" type="radio" class="ace"><span class="lbl">女</span></label>
-                </div>
-                <div class="col-4"><span class="Validform_checktip"></span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label "><span class="c-red">*</span>手机：</label>
-                <div class="formControls ">
-                    <input type="text" class="input-text" value="" placeholder="" id="user-tel" name="user-tel"
-                           datatype="m" nullmsg="手机不能为空">
-                </div>
-                <div class="col-4"><span class="Validform_checktip"></span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label"><span class="c-red">*</span>邮箱：</label>
-                <div class="formControls ">
-                    <input type="text" class="input-text" placeholder="@" name="email" id="email" datatype="e"
-                           nullmsg="请输入邮箱！">
-                </div>
-                <div class="col-4"><span class="Validform_checktip"></span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">角色：</label>
-                <div class="formControls "> <span class="select-box" style="width:150px;">
-				<select class="select" name="admin-role" size="1">
-					<option value="0">超级管理员</option>
-					<option value="1">管理员</option>
-					<option value="2">栏目主辑</option>
-					<option value="3">栏目编辑</option>
-				</select>
-				</span></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">备注：</label>
-                <div class="formControls">
-                    <textarea name="" cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true"
-                              onkeyup="checkLength(this);"></textarea>
-                    <span class="wordage">剩余字数：<span id="sy" style="color:Red;">100</span>字</span>
-                </div>
-                <div class="col-4"></div>
-            </div>
-            <div style="text-align: center;margin-bottom: 15px;">
-                <input class="btn btn-primary radius" type="submit" id="Add_Administrator"
-                       value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
-            </div>
-        </form>
-    </div>
-
 </div>
 </body>
 </html>
@@ -561,7 +479,7 @@
             //form[0].submit();
             if (data.status == 1) {
                 layer.msg(data.info, {icon: data.status, time: 1000}, function () {
-                    location.reload();//刷新页面 
+                    location.reload();//刷新页面
                 });
             }
             else {
@@ -581,7 +499,7 @@
             //form[0].submit();
             if (data.status == 1) {
                 layer.msg(data.info, {icon: data.status, time: 1000}, function () {
-                    location.reload();//刷新页面 
+                    location.reload();//刷新页面
                 });
             }
             else {

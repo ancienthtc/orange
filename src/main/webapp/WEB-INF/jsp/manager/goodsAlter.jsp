@@ -147,6 +147,52 @@
         </form>
         <div class="clearfix_xq">
             <label class="form-label col-2">图片上传：</label>
+           <br/> <div class="yxstp">
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            <div>
+                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
+                <span>删除</span>
+            </div>
+            </div>
             <div class="formControls col-10" style="width: 100%;">
                 <div class="uploader-list-container">
                     <div class="queueList">
