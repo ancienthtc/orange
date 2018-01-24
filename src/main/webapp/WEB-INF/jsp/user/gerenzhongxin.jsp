@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/new_main.css">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/main.css">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/jquery-impromptu.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
     <script src="<%=basePath%>fontpage/js/hm.js"></script>
     <script src="<%=basePath%>fontpage/js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>fontpage/js/jquery.cookie.js"></script>

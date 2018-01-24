@@ -53,8 +53,6 @@
             &nbsp;
             <li></li>
             &nbsp;
-            <li></li>
-            &nbsp;
         </ol>
     </div>
     <div class="des_goods">
@@ -144,7 +142,8 @@
                 </span>
             </p>
             <p>
-                <span>留言:</span><span><input type="text" name="detail" id="message"></span>
+                <span>留言:</span><span><input type="text" name="detail" placeholder="说点什么吧..." id="message"
+     style="border: 1px solid #66666629;width: 84%;padding-bottom: 50px; border-radius: 4px;color: #666666;font-size: 14px;"></span>
             </p>
         </div>
     </div>
@@ -179,7 +178,7 @@
                     <span>产品参数3:</span><span>${goods.parameter3}</span>
                 </p>
                 <p>
-                    <span>${goods.detail}</span>
+                    <span style="width: 86%;height: auto;text-align: left;margin-left: 7%;">${goods.detail}</span>
                 </p>
                 <%--<p>--%>
                     <%--<span>18762678928</span><span>1<em>[xl,深蓝]</em></span><span>2015-12-04</span>--%>

@@ -28,6 +28,7 @@ a:hover{ color:#F90}
 	font-size: 0;
 	line-height: 0;
 }
+.dizhi_kb a{color: #999 !important;}
 .row{margin-right:0px; margin-left: 0px;}
 .margin-top{ margin-top:10px}
 .r_f{ float:right}

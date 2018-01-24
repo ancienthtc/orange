@@ -1483,11 +1483,12 @@ li {
 	text-align: justify;
 	font-weight: normal;
 	margin-top: 5px;
-	width: 120px;
+	width:75px;
 	height: 16px;
 	overflow: hidden;
 	float: left;
 	text-align: center;
+	margin-left: 6%;
 }
 .ddzl{font-size: 14px;}
 .aui-list-product-fl-mes {

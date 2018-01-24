@@ -18,6 +18,7 @@
     <title>购物车</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/lijigoumai.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
+    <script src="<%=basePath%>fontpage/js/jquery-1.10.2.js"></script>
 </head>
 <body>
 <div class="header">
@@ -48,7 +49,7 @@
         </c:if>
         <c:if test="${empty address}">
             <div class="dizhi_kb aid" aid="null">
-                <a href="<%=basePath%>user/toAddress">
+                <a href="<%=basePath%>user/toAddress"style="color:#999;">
                     你还没有设置收货地址 请前往个人中心添加
                 </a>
             </div>
@@ -166,7 +167,7 @@
 
 </body>
 
-<script src="<%=basePath%>fontpage/js/jquery-1.10.2.js"></script>
+
 
 <script>
 $(function () {

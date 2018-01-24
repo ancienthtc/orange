@@ -90,7 +90,10 @@ a,a:hover{text-decoration: none;}
 .header .back,.header .home{width: 44px;height: 44px;overflow: hidden;position: absolute;top: 0;}
 .header .back{left: 0;}
 .header .home{right: 0;}
-.header .back img,.header .home img{width: 44px;height: 44px;}
+.header .back img,.header .home img{width: 30px;
+    height: 30px;
+    margin: 7.5px 0 0 5px;
+    float: left;}
 .header .title{font-size: 20px;line-height: 44px;text-align:center;color:#fff;margin: 0 44px;}
 .header .action,.header .action:hover{
     color: #fff;
@@ -139,7 +142,7 @@ a,a:hover{text-decoration: none;}
     -webkit-border-radius: 0 4px 4px 0;
     border: none;
 }
-.sy_header{width: 100%;height: 50px;background: white;}
+.sy_header{background: url(../images/yinghua2.jpg);background-size: 100% 100%;width: 100%;height: 50px;}
 .logo{width:30%;height: 70%;margin: 2% 0 0 3%;float: left;}
 .sy_header input{width: 35%;height:28px;border: 1px solid #6666663d;float: right;margin: 11px 3% 0 0;border-radius: 25px;padding-left: 10px;font-size: 14px;color:#666666;}
 .suosou{width: 25px;height: 25px;margin: 11px 0 0 0;position: relative;left:56%;float: left;}

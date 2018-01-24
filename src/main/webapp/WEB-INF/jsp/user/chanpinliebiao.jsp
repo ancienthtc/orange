@@ -32,7 +32,7 @@
     <div class="wrapper">
         <div>
             <div class="header" style="background:#ee4b02;">
-                <a href="javascript:history.back();" class="back"><img src="img/tool_back.png" alt=""></a>
+                <a href="javascript:history.back();" class="back"><img src="<%=basePath%>fontpage/images/zuojiantou.png" alt=""></a>
                 <div class="searchbar">
                     <div class="search">
                         <input class="input" type="text" placeholder="搜索商品" name="proname" id="proname" value="">

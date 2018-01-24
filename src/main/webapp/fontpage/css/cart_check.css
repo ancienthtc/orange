@@ -1709,7 +1709,7 @@ span.home {
             width: 72%;
         }
 .user-list p{color: white;    font-size: 14px;font-family: 'Microsoft YaHei';line-height: 30px;}
-.user-list p:nth-child(1){width:150px;height: 30px;overflow:hidden;letter-spacing: 1px;}
+.user-list p:nth-child(1){width:150px;height:60px;overflow:hidden;letter-spacing: 1px;line-height: 60px;font-size:18px;}
 .user-list p:nth-child(2){width: 100%;height: 30px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
             .step6 .s-item .user-list .user-name {
                 color: #fff;

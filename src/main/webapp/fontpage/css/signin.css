@@ -20,7 +20,7 @@ div#shopping_cart { position: fixed; bottom: 7px; right: 2%; background: #aacc36
 .commodity_list .commodity_list_term li img { width: 80px; height: 80px; max-width: 80px; max-height: 80px; float: left; margin-left: 28px; }
 .commodity_list .commodity_list_term li .div_center { width: 50%; float: left; position: relative; margin-top: 7px; margin-left: 2%; }
 .commodity_list .commodity_list_term li .div_center h4 { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; color: #333; margin: 0; font-size: 0.7rem; margin-bottom: 2px; }
-.commodity_list .commodity_list_term li .div_center span { color: #666; font-size: 0.6rem; }
+.commodity_list .commodity_list_term li .div_center span { color: #666; font-size: 0.6rem;position: relative;top:3px; }
 .commodity_list .commodity_list_term li .div_center p { margin: 0; font-size: 0.8rem; color: #ff900d; margin-top: 6px; font-family: "-apple-system","Helvetica Neue",Roboto,"Segoe UI",sans-serif; }
 .commodity_list .commodity_list_term li .div_right { position: absolute; bottom: 10px; right: 4%; border: solid 1px #e6e6e6; border-radius: 4px; width: 82px; overflow: hidden; text-align: center; line-height: 30px; }
 .commodity_list .commodity_list_term li .div_right i { float: left; width: 33%; color: #333; }
