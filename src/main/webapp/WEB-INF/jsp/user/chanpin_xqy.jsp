@@ -163,8 +163,16 @@
         </ul>
         <div class="goods_box">
             <!-- 商品其他图片 -->
-            <img src="<%=basePath%>fontpage/images/1.jpg" width="100%">
-            <img src="<%=basePath%>fontpage/images/3.jpg" width="100%">
+            <c:if test="${empty images}">
+                <img src="<%=basePath%>fontpage/images/1.jpg" width="100%">
+                <img src="<%=basePath%>fontpage/images/3.jpg" width="100%">
+            </c:if>
+            <c:if test="${not empty images}">
+                <c:forEach var="i" items="${images}">
+                    <img src="<%=basePath%>image/show?pic=${i.filename}" width="100%">
+                </c:forEach>
+            </c:if>
+
         </div>
         <div class="goods_box" style="display: none">
             <div class="deal_list">

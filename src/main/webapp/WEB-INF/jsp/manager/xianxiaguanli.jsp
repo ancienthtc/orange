@@ -386,6 +386,11 @@
         var info1={pageNo:1,pageSize:10,orderStatus:1,shopStatus:0}
         var info2={pageNo:1,pageSize:10,orderStatus:1,shopStatus:1}
 
+        var info4={pageNo:1,pageSize:10,orderStatus:3,shopStatus:1}
+
+
+        var info8={pageNo:1,pageSize:10,orderStatus:7}
+
         var url="<%=basePath%>order/getAdminOrderOffline"
         send_post0(url,info0);
 
@@ -397,6 +402,15 @@
         })
         $("#send2").click(function () { //待取货
             send_post2(url,info2);
+        })
+
+        $("#send4").click(function () { //已完成
+            send_post4(url,info4);
+        })
+
+
+        $("#send8").click(function () { //已取消
+            send_post8(url,info8);
         })
 
 
@@ -695,12 +709,205 @@
             send_post1(url,info);
         });
         /**特殊**/
+        $(".send").click(function () {
+            //var logistics = '';
+            var oid = $(this).parent().attr("oid");
+            // layer.prompt({title: '填写快递公司与物流单号'},function(val, index){
+            //     layer.msg('得到了'+val);
+            //     logistics = val;
+            //     layer.close(index);
+            // });
+            layer.msg('你确定发货吗？', {
+                time: 0 //不自动关闭
+                ,btn: ['发货', '取消']
+                ,yes: function(index){
+                    layer.close(index);
+                    $.ajax({
+                        url:"<%=basePath%>order/send",
+                        data:{sequence:oid},
+                        type:"get",
+                        dataType:"json",
+                        success:function(data){
+                            if( data.status == 0 )
+                            {
+                                var url="<%=basePath%>order/getAdminOrderOffline";
+                                var page=$("#pageNo2").val();
+                                var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
+                                send_post2(url,info);
+                            }
+                            else
+                            {
+                                layer.alert(data.msg);
+                            }
+                        },
+                        error:function(){
+                            alert("请求失败");
+                        }
+                    });
 
+                }
+            });
+
+        });
     }
 
 
-
     //已完成
+    function afterLoad4() {
+        var orderstatus=3;
+        var shopstatus=1;
+        //var keys=$(".text_add").val();
+        var keys=$("#keys").val();
+        var start=$('#start').val();
+        var end=$("#start1").val();
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
+
+        $(".del").click(function () {
+            $.ajax({
+                url:"<%=basePath%>/",
+                data:{pid:$(this).attr("pid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
+
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo4").val();//变
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)-1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info);
+            send_post4(url,info);//变
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo4").val();//变
+            var pages=$("#pages4").val();//变
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)+1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info);
+            send_post4(url,info);//变
+        });
+
+        //页码
+        $(".pg4").click(function () {//变
+            var page= $(this).text();
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info );
+            send_post4(url,info);//变
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg4").val();//变
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info );
+            send_post4(url,info);//变
+        });
+        /**特殊**/
+    }
+
+
+    //已取消
+    function afterLoad8() {
+        var orderstatus=7;
+        //var keys=$(".text_add").val();
+        var keys=$("#keys").val();
+        var start=$('#start').val();
+        var end=$("#start1").val();
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
+
+        $(".del").click(function () {
+            $.ajax({
+                url:"<%=basePath%>/",
+                data:{pid:$(this).attr("pid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
+
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo8").val();//变
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)-1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info);
+            send_post8(url,info);
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo8").val();//变
+            var pages=$("#pages8").val();//变
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)+1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info);
+            send_post8(url,info);
+        });
+
+        //页码
+        $(".pg8").click(function () {
+            var page= $(this).text();
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info );
+            send_post8(url,info);
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg8").val();//变
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus}
+            var url="<%=basePath%>order/getAdminOrderOffline";
+            //console.log(info );
+            send_post8(url,info);
+        });
+        /**特殊**/
+
+    }
 
     //发送AJAX
     //待确认
@@ -901,7 +1108,139 @@
 
 
     //已完成
+    function send_post4(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody4=$("#tbody4");
+                //清空tbody
+                tbody4.empty();
+                var html = "";
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var a="";
+                    //tbody0.append("<tr style='text-align: center'>");
+                    html += "<tr style='text-align: center'>";
+                    //tbody0.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    html += "<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
+                    //tbody0.append("<td>"+result.dataList[i].sequence+"</td>");
+                    html += "<td>"+result.dataList[i].sequence+"</td>" ;
+                    //tbody0.append("<td >未付款</td>");
+                    html += "<td >已完成</td>" ;
+                    //tbody0.append("<td >---</td>");
+                    html += "<td >"+result.dataList[i].paytime+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    html += "<td >"+result.dataList[i].goodsprice+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    html += "<td >"+result.dataList[i].scorecost+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].allprice+"</td>");
+                    html += "<td >"+result.dataList[i].allprice+"</td>" ;
+                    //tbody0.append("<td >"+result.dataList[i].contact+"</td>");
+                    html += "<td >"+result.dataList[i].contact+"</td>" ;
+                    //tbody0.append("<td class='td-status'><span class='label label-success radius'>待确认</span></td>");
+                    html += "<td class='td-status'><span class='label label-success radius'>已完成</span></td>" ;
+                    a+="<td oid='"+result.dataList[i].sequence+"'>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    //tbody0.append(a);
+                    html += a;
+                    //tbody0.append("</tr>");
+                    html += "</tr>" ;
+                }
+                tbody4.append(html);
+                //页码隐藏域
+                var s="<div class='page'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg4' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo4").val(result.pageNo);$("#pages4").val(result.pages);
+                $("#pagehere4").empty().append(s);$("#pagehere4").show();
+                $("#pagehere1").hide();$("#pagehere2").hide();$("#pagehere3").hide();$("#pagehere0").hide();
+                $("#pagehere5").hide();$("#pagehere6").hide();$("#pagehere7").hide();$("#pagehere8").hide();
+                afterLoad4();//事后绑定
+            },"json");
+    }
 
+
+
+
+    //已取消
+    function send_post8(url,info) {
+        $.post(url,info,
+            function(result){
+                //获取tbody
+                var tbody8=$("#tbody8");
+                //清空tbody
+                tbody8.empty();
+                var html = "";
+                for(var i=0;i<result.dataList.length;i++)
+                {
+                    var a="";
+                    html += "<tr style='text-align: center'>";
+                    html += "<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
+                    html += "<td>"+result.dataList[i].sequence+"</td>" ;
+                    html += "<td >已取消</td>" ;
+                    html += "<td >"+result.dataList[i].paytime+"</td>" ;
+                    html += "<td >"+result.dataList[i].goodsprice+"</td>" ;
+                    html += "<td >"+result.dataList[i].scorecost+"</td>" ;
+                    html += "<td >"+result.dataList[i].allprice+"</td>" ;
+                    html += "<td >"+result.dataList[i].contact+"</td>" ;
+                    html += "<td class='td-status'><span class='label label-success radius'>已取消</span></td>" ;
+                    a+="<td oid='"+result.dataList[i].sequence+"'>";
+                    a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
+                        " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
+                    a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
+                    a+="</td>";
+                    html += a;
+                    html += "</tr>" ;
+                }
+                tbody8.append(html);
+                //页码隐藏域
+                var s="<div class='page'>";
+                s+="<div class='pagelist'>";
+                s+="<span class='jump previous'>上一页</span>";
+                for(var i=1 ; i<=result.pages ; i++  )
+                {
+                    if(i==result.pageNo)
+                    {
+                        s+="<span class='jump fyhover pg' value='"+i+"'>"+i+"</span>";
+                    }
+                    else
+                    {
+                        s+="<span class='jump pg' value='"+i+"'>"+i+"</span>";
+                    }
+                }
+                s+="<span class='jump next'>下一页</span>";
+                s+="<span class='jumppoint'>跳转到：</span>";
+                s+="<span class='jumpinp'><input type='text' v-model='changePage' id='pg8' ></span>";
+                s+="<span class='jump go'>GO</span>";
+                s+="<span class='jump'>当前 "+result.pageNo+" / "+result.pages+" 共</span>";
+                s+="</div></div>";
+                $("#pageNo8").val(result.pageNo);$("#pages8").val(result.pages);
+                $("#pagehere8").empty().append(s);$("#pagehere8").show();
+                $("#pagehere1").hide();$("#pagehere2").hide();$("#pagehere3").hide();$("#pagehere4").hide();
+                $("#pagehere5").hide();$("#pagehere6").hide();$("#pagehere7").hide();$("#pagehere0").hide();
+                afterLoad8();//事后绑定
+            },"json");
+    }
 
 </script>
 

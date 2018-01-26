@@ -16,6 +16,7 @@ public @interface AdminCheck {
      */
     //String option();
 
-    //等级
+    //权限等级
     //int level();
+    Alevel value();
 }

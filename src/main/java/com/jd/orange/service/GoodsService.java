@@ -35,6 +35,9 @@ public interface GoodsService {
 
     int GoodsAdd(Goods goods,MultipartFile file1,MultipartFile file2,MultipartFile file3,String ServerPath);
 
+    //商品其他图片添加
+    void OtherPicAdd(MultipartFile[] files,String ServerPath,Integer gid);
+
     int goodsPicDel(Integer gid,String detail);
 
     //update
@@ -74,6 +77,14 @@ public interface GoodsService {
 
     //商品列表页面
     List<Goods> GoodsListPage(Integer pid);
+
+    //(进阶)商品列表页面
+    PagedResult<Goods> GoodsListPage(Integer pid , Integer pageNo , Integer pageSize);
+
+    //商品搜索
+    List<Goods> goodsSearch(String[] key);
+
+    PagedResult<Goods> goodsSearch(Integer pageNo, Integer pageSize,String[] key);
 
     Goods getGoodsDetail(Integer id);
 

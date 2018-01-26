@@ -211,7 +211,7 @@
                     tbody.append("<td>"+result.dataList[i].level+"</td>");
                     tbody.append("<td>"+result.dataList[i].alogin+"</td>");
                     a+="<td class='td-manage'>";
-                    a+="<a class='btn btn-xs btn-info x_gai'><i class='fa fa-edit bigger-120'></i></a>";
+                    a+="<a class='btn btn-xs btn-info x_gai' aid='"+result.dataList[i].id+"'><i class='fa fa-edit bigger-120'></i></a>";
                     a+="<a title='删除' href='javascript:;' aid='"+result.dataList[i].id+"' class='btn btn-xs btn-warning del'><i class='fa fa-trash  bigger-120'></i></a>";
                     a+="</td>";
                     tbody.append(a);
@@ -341,6 +341,21 @@
             //console.log(info );
             send_post(url,info);
         });
+
+        //进入修改
+        $(".x_gai").click(function () {
+            var aid = $(this).attr("aid")
+            <%--layer.open({--%>
+                <%--type: 2,--%>
+                <%--area: ['700px', '450px'],--%>
+                <%--fixed: false, //不固定--%>
+                <%--maxmin: true,--%>
+                <%--content: '<%=basePath%>admin/alter?aid='+aid--%>
+            <%--});--%>
+            window.location.href = "<%=basePath%>admin/toAlter?aid="+aid;
+
+        });
+
 
     }
 

@@ -8,9 +8,11 @@ import com.jd.orange.service.UserService;
 import com.jd.orange.util.date.DateExample;
 import com.jd.orange.util.pagehelper.BeanUtil;
 import com.jd.orange.util.pagehelper.PagedResult;
+import com.jd.orange.util.password.Secret;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -125,4 +127,30 @@ public class UserServiceImpl implements UserService{
 
         return orderMapper.getUserOrderCount(uid);
     }
+
+    @Override
+    public Map<String, Object> alterPass(Integer uid, String oldPass, String newPass) {
+        User user = userMapper.selectByPrimaryKey(uid);
+        Map<String,Object> m = new HashMap<String, Object>();
+        if ( Secret.enPass(oldPass).equals(user.getPassword()) )
+        {
+            user.setPassword( Secret.enPass(newPass) );
+            if ( userMapper.updateByPrimaryKeySelective(user) > 0 )
+            {
+                m.put("status",0);
+                m.put("msg","旧密码错误");
+            }
+            else {
+                m.put("status",2);
+                m.put("msg","修改失败");
+            }
+        }
+        else
+        {
+            m.put("status",3);
+            m.put("msg","旧密码错误");
+        }
+        return m;
+    }
+
 }

@@ -46,7 +46,6 @@ public class ImageServiceImpl implements ImageService{
         String title=new GenerateString().getUUID() +"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
         String folderPath=serverPath+Folder.Upload + "\\" ;
 
-
         if (!file.isEmpty()) {
             try {
                 // 文件夹不存在就创建
@@ -116,6 +115,19 @@ public class ImageServiceImpl implements ImageService{
         if(pictype!=null && id!=null)   //type+id
         {
 
+        }
+        return false;
+    }
+
+    @Override
+    public boolean imageDelete(Integer imgId) {
+        Picture picture = pictureMapper.selectByPrimaryKey(imgId);
+        if( fileDel(picture.getRoute()+picture.getFilename()) )
+        {
+            if( pictureMapper.deleteByPrimaryKey(imgId) > 0 )
+            {
+                return true;
+            }
         }
         return false;
     }

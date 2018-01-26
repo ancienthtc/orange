@@ -140,6 +140,33 @@
     ORDER BY shelf DESC
   </select>
 
+  <select id="selectGoodsWithFormatsByPartAdvance" parameterType="java.lang.Integer" resultMap="GoodsFormats">
+    SELECT
+    t_goods.id gid,t_goods.`name`,t_goods.freight,t_goods.parameter1,t_goods.parameter2,
+    t_goods.parameter3,t_goods.shelf,t_goods.detail,t_goods.pic1,
+    t_goods.pic2,t_goods.pic3,t_goods.picture,t_goods.recommend,
+    t_goods.createtime,t_goods.updatetime,t_goods.part,t_goods.name_j,
+    t_goods.parameter1_j,t_goods.parameter2_j,t_goods.parameter3_j,t_goods.detail_j,t_goods.j_c,
+    t_format.id fid,t_format.fname,t_format.fclass,t_format.price,
+    t_format.stock,t_format.sales,t_format.createtime,t_format.updatetime,
+    t_format.goods,t_format.fname_j,t_format.fclass_j,t_format.j_c
+    FROM
+    t_goods
+    LEFT JOIN t_format ON t_format.goods = t_goods.id
+    WHERE
+    t_goods.part IN (
+      SELECT id FROM t_part
+      WHERE
+      belong IN( SELECT id FROM t_part WHERE belong = #{pid,jdbcType=INTEGER} )
+      OR
+      id IN (SELECT id FROM t_part WHERE belong = #{pid,jdbcType=INTEGER} )
+      OR id = #{pid,jdbcType=INTEGER}
+    )
+    AND shelf IS NOT NULL
+    GROUP BY gid
+    ORDER BY shelf DESC
+  </select>
+
   <select id="selectGoodsWithFormatById" parameterType="java.lang.Integer" resultMap="GoodsFormats">
     SELECT
     t_goods.id gid,t_goods.`name`,t_goods.freight,t_goods.parameter1,t_goods.parameter2,
@@ -154,6 +181,33 @@
     t_goods
     LEFT JOIN t_format ON t_format.goods = t_goods.id
     WHERE t_goods.id = #{id,jdbcType=INTEGER}
+    ORDER BY shelf DESC
+  </select>
+
+  <select id="goodsSearch" resultMap="GoodsFormats">
+    SELECT
+    t_goods.id gid,t_goods.`name`,t_goods.freight,t_goods.parameter1,t_goods.parameter2,
+    t_goods.parameter3,t_goods.shelf,t_goods.detail,t_goods.pic1,
+    t_goods.pic2,t_goods.pic3,t_goods.picture,t_goods.recommend,
+    t_goods.createtime,t_goods.updatetime,t_goods.part,t_goods.name_j,
+    t_goods.parameter1_j,t_goods.parameter2_j,t_goods.parameter3_j,t_goods.detail_j,t_goods.j_c,
+    t_format.id fid,t_format.fname,t_format.fclass,t_format.price,
+    t_format.stock,t_format.sales,t_format.createtime,t_format.updatetime,
+    t_format.goods,t_format.fname_j,t_format.fclass_j,t_format.j_c
+    FROM
+    t_goods
+    LEFT JOIN t_format ON t_format.goods = t_goods.id
+    WHERE
+    <if test="array!=null">
+      <foreach collection="array" item="item" index="index"  separator="OR">
+        t_goods.`name` LIKE CONCAT('%',#{item},'%')
+        OR t_format.fname LIKE CONCAT('%',#{item},'%')
+        OR t_format.price LIKE CONCAT('%',#{item},'%')
+        OR t_format.fname_j LIKE CONCAT('%',#{item},'%')
+        OR t_goods.name_j LIKE CONCAT('%',#{item},'%')
+      </foreach>
+    </if>
+    AND shelf IS NOT NULL
     ORDER BY shelf DESC
   </select>
 

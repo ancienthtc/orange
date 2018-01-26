@@ -33,6 +33,8 @@ public interface GoodsMapper {
 
     List<Goods> selectGoodsWithFormatsByPart(@Param("pid") Integer pid);
 
+    List<Goods> selectGoodsWithFormatsByPartAdvance(@Param("pid") Integer pid); //(进阶) 获取一个大分类下全部商品(包含一个规格)
+
     Goods selectGoodsWithFormatById(@Param("id") Integer id);
 
     //推荐商品个数
@@ -46,5 +48,7 @@ public interface GoodsMapper {
 
     //新商品
     List<Goods> getNewGoods(@Param("limit") Integer limit);
+
+    List<Goods> goodsSearch(String[] key);
 
 }

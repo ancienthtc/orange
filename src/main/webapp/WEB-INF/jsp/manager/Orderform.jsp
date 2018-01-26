@@ -395,7 +395,8 @@
         var info0={pageNo:1,pageSize:10,orderStatus:0,shopStatus:0}
         var info1={pageNo:1,pageSize:10,orderStatus:1,shopStatus:0}
         var info2={pageNo:1,pageSize:10,orderStatus:1,shopStatus:1}
-
+        var info3={pageNo:1,pageSize:10,orderStatus:2,shopStatus:1}
+        var info4={pageNo:1,pageSize:10,orderStatus:3,shopStatus:1}
 
         var info8={pageNo:1,pageSize:10,orderStatus:7}
 
@@ -412,7 +413,13 @@
             send_post2(url,info2);
         })
 
+        $("#send3").click(function () { //待收货
+            send_post3(url,info3);
+        })
 
+        $("#send4").click(function () { //已完成
+            send_post4(url,info4);
+        })
 
 
         $("#send8").click(function () { //已取消
@@ -766,9 +773,160 @@
     }
 
     //待收货
+    function afterLoad3() {
+        var orderstatus=2;
+        var shopstatus=1;
+        //var keys=$(".text_add").val();
+        var keys=$("#keys").val();
+        var start=$('#start').val();
+        var end=$("#start1").val();
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
+
+        $(".del").click(function () {
+            $.ajax({
+                url:"<%=basePath%>/",
+                data:{pid:$(this).attr("pid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
+
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo3").val();//变
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)-1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info);
+            send_post3(url,info);//变
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo3").val();//变
+            var pages=$("#pages3").val();//变
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)+1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info);
+            send_post3(url,info);//变
+        });
+
+        //页码
+        $(".pg3").click(function () {//变
+            var page= $(this).text();
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info );
+            send_post3(url,info);//变
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg3").val();//变
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info );
+            send_post3(url,info);//变
+        });
+        /**特殊**/
+    }
 
     //已完成
+    function afterLoad4() {
+        var orderstatus=3;
+        var shopstatus=1;
+        //var keys=$(".text_add").val();
+        var keys=$("#keys").val();
+        var start=$('#start').val();
+        var end=$("#start1").val();
+        $(".jump").click(function(){
+            $(this).addClass("fyhover").siblings().removeClass("fyhover");
+        })
 
+        $(".del").click(function () {
+            $.ajax({
+                url:"<%=basePath%>/",
+                data:{pid:$(this).attr("pid")},
+                type:"get",
+                dataType:"text",
+                success:function(data){
+                    if(data=="true")
+                        alert("删除成功");
+                    else
+                        alert("删除失败");
+                    window.location.href="<%=basePath%> / ";
+                },
+                error:function(){
+                    alert("请求失败");
+                }
+            });
+        });
+
+        //上一页
+        $(".previous").click(function () {
+            var page= $("#pageNo4").val();//变
+            if( parseInt(page) -1 <= 0 )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)-1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info);
+            send_post4(url,info);//变
+        });
+
+        //下一页
+        $(".next").click(function () {
+            var page=$("#pageNo4").val();//变
+            var pages=$("#pages4").val();//变
+            if( parseInt(page) + 1 > pages )
+            {
+                return false;
+            }
+            var info={pageNo:parseInt(page)+1,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info);
+            send_post4(url,info);//变
+        });
+
+        //页码
+        $(".pg4").click(function () {//变
+            var page= $(this).text();
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info );
+            send_post4(url,info);//变
+        });
+
+        //直接跳转
+        $(".go").click(function () {
+            var page=$("#pg4").val();//变
+            var info={pageNo:page,pageSize:10,key:keys,start:start,end:end,orderStatus:orderstatus,shopStatus:shopstatus}
+            var url="<%=basePath%>order/getAdminOrderOnline";
+            //console.log(info );
+            send_post4(url,info);//变
+        });
+        /**特殊**/
+    }
 
 
     //已取消
@@ -1079,8 +1237,6 @@
                     //tbody0.append("<td class='td-status'><span class='label label-success radius'>待确认</span></td>");
                     html += "<td class='td-status'><span class='label label-success radius'>待收货</span></td>" ;
                     a+="<td oid='"+result.dataList[i].sequence+"'>";
-                    a+="<a href='javascript:;' title='确认' class='btn btn-xs btn-success sure'><i class='fa fa-cubes bigger-120'></i></a>";
-                    a+="<a href='javascript:;' title='取消' class='btn btn-xs btn-success cancel'><i class='fa fa-cubes bigger-120'></i></a>";
                     a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
                         " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
                     a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
@@ -1153,8 +1309,6 @@
                     //tbody0.append("<td class='td-status'><span class='label label-success radius'>待确认</span></td>");
                     html += "<td class='td-status'><span class='label label-success radius'>已完成</span></td>" ;
                     a+="<td oid='"+result.dataList[i].sequence+"'>";
-                    a+="<a href='javascript:;' title='确认' class='btn btn-xs btn-success sure'><i class='fa fa-cubes bigger-120'></i></a>";
-                    a+="<a href='javascript:;' title='取消' class='btn btn-xs btn-success cancel'><i class='fa fa-cubes bigger-120'></i></a>";
                     a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
                         " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
                     a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
@@ -1194,6 +1348,8 @@
             },"json");
     }
 
+
+
     //已取消
     function send_post8(url,info) {
         $.post(url,info,
@@ -1210,7 +1366,7 @@
                     html += "<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
                     html += "<td>"+result.dataList[i].sequence+"</td>" ;
                     html += "<td >已取消</td>" ;
-                    html += "<td >---</td>" ;
+                    html += "<td >"+result.dataList[i].paytime+"</td>" ;
                     html += "<td >"+result.dataList[i].goodsprice+"</td>" ;
                     html += "<td >"+result.dataList[i].scorecost+"</td>" ;
                     html += "<td >"+result.dataList[i].allprice+"</td>" ;

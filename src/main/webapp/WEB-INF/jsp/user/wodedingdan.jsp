@@ -25,7 +25,11 @@
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/animate.css">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/new_main1.css">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/jquery-impromptu.css">
-    <script src="<%=basePath%>fontpage/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%=basePath%>backpage/js/jquery-1.9.1.min.js"></script>
+    <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript"></script>
+    <script src="<%=basePath%>backpage/assets/layer/extend/layer.ext.js" type="text/javascript"></script>
+    <script src="<%=basePath%>backpage/assets/laydate/laydate.js" type="text/javascript"></script>
+
     <style>
         .action {
             border-bottom: 2px solid #ee4b02;
@@ -207,7 +211,7 @@
                 html += "<div class='ddbh'>" ;
                 html += "<ul>" ;
                 html += "<li class='li1'>订单编号："+result.dataList[i].sequence+"</li>" ;
-                html += "<li class='li2'><a href='#'><span> 待付款 </span></a></li>" ;
+                html += "<li class='li2'><a href='<%=basePath%>order/toChoose?sequence="+result.dataList[i].sequence+"'><span> 点击付款 </span></a></li>" ;
                 html += "</ul>";
                 html += "<div style='clear: both'></div>" ;
                 html += "</div>" ;
@@ -333,6 +337,7 @@
         },"json");
     }
 
+    //
     function send_post2(url,info) {
         $.post(url,info,function(result){
             var body = $("#receive");
@@ -344,7 +349,7 @@
                 html += "<div class='ddbh'>" ;
                 html += "<ul>" ;
                 html += "<li class='li1'>订单编号："+result.dataList[i].sequence+"</li>" ;
-                html += "<li class='li2'><a href='#'><span> 待收货 </span></a></li>" ;
+                html += "<li class='li2'><a class='receive' oid='"+result.dataList[i].sequence+"'><span> 点击收货 </span></a></li>" ;
                 html += "</ul>";
                 html += "<div style='clear: both'></div>" ;
                 html += "</div>" ;
@@ -382,6 +387,13 @@
                 html += "</ul>" ;
                 html += "<div style='clear: both'></div>" ;
                 html += "</div>" ;
+                //增加地址信息
+                html += "<div class='ddfk'>" ;
+                html += "<ul>" ;
+                html += "<li class='li5'>地址:"+result.dataList[i].address+"</li>" ;
+                html += "<li class='li6'><a href='javascript:;'>"+ result.dataList[i].recipient +"  "+result.dataList[i].logistics+" </a></li>" ;
+                html += "</ul>" ;
+                html += "</div>" ;
             }//订单结束
             html += "<div class='fenye'>" ;
             html += "<a class='previous'><div class='sx_ys'>上一页</div></a>" ;
@@ -401,6 +413,7 @@
         },"json");
     }
 
+    //已完成
     function send_post3(url,info) {
         $.post(url,info,function(result){
             var body = $("#finish");
@@ -585,6 +598,42 @@
             var url2 = "<%=basePath%>order/getUserNoReceive";
             send_post2(url2,info);
         });
+        /** 特殊 */
+        $(".receive").click(function () {
+            var oid = $(this).attr("oid");
+            layer.msg('确定收货?', {
+                time: 0 //不自动关闭
+                ,btn: ['收货', '取消']
+                ,yes: function(index){
+                    layer.close(index);
+                    //layer.alert(oid);
+                    $.ajax({
+                        url:"<%=basePath%>order/receive",
+                        data:{sequence:oid},
+                        type:"get",
+                        dataType:"json",
+                        success:function(data){
+                            if( data.status == 0 )
+                            {
+                                layer.alert("收货成功");
+                                var info = {pageNo:now};
+                                var url2 = "<%=basePath%>order/getUserNoReceive";
+                                send_post2(url2,info);
+                            }
+                            else
+                            {
+                                layer.alert(data.msg);
+                            }
+                        },
+                        error:function(){
+                            alert("请求失败");
+                        }
+                    });
+                }
+            });
+
+        });
+
     }
 
     function afterLoad3() {

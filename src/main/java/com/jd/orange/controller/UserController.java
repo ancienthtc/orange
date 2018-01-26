@@ -3,6 +3,7 @@ package com.jd.orange.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.Alevel;
 import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Address;
 import com.jd.orange.model.User;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -52,7 +55,7 @@ public class UserController {
     private AddressService addressService;
 
     /*  管理员模块  */
-    @AdminCheck
+    @AdminCheck(Alevel.L3)
     @RequestMapping("/toUserList")
     public String toUserPageList(Model model)
     {
@@ -60,7 +63,7 @@ public class UserController {
         return "manager/user_list";
     }
 
-    @AdminCheck
+    @AdminCheck(Alevel.L3)
     @RequestMapping("/toUserDetail")
     public String toUserDetail(Model model,Integer uid)
     {
@@ -143,6 +146,7 @@ public class UserController {
     }
 
     //进入修改密码
+    @UserCheck
     @RequestMapping("/toAlterPass")
     public String toAlterPass()
     {
@@ -157,6 +161,7 @@ public class UserController {
     }
 
     //进入忘记密码
+    @UserCheck
     @RequestMapping("/toForgetPass")
     public String forgetPass()
     {
@@ -164,6 +169,7 @@ public class UserController {
     }
 
     //进入重置密码
+    @UserCheck
     @RequestMapping("/toResetPass")
     public String resetPass()
     {
@@ -241,6 +247,22 @@ public class UserController {
             return "true";
         }
         return "false";
+    }
+
+    @RequestMapping(value = "/alterPass" , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String AlterPass(HttpSession session,String oldPass,String newPass)
+    {
+        User user = (User) session.getAttribute("user");
+        Map<String,Object> m = new HashMap<String, Object>();
+        if( user == null )
+        {
+            m.put("status",1);
+            m.put("msg","尚未登陆");
+            return JSON.toJSONString( m );
+        }
+        m = userService.alterPass(user.getId(),oldPass,newPass);
+        return JSON.toJSONString( m );
     }
 
 }

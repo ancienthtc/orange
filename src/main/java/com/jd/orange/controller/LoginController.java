@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.Alevel;
 import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Admin;
 import com.jd.orange.model.User;
@@ -53,7 +54,7 @@ public class LoginController {
         }
     }
 
-    @AdminCheck
+    @AdminCheck(Alevel.L1)
     @RequestMapping("/AdminSignOut")
     public String AdminSignOut(HttpSession session)
     {
@@ -62,7 +63,7 @@ public class LoginController {
     }
 
     //管理员登录成功后跳转/跳转到后台首页
-    @AdminCheck()
+    @AdminCheck(Alevel.L1)
     @RequestMapping("/ToAdminIndex")
     public String AdminLoginSucess()
     {

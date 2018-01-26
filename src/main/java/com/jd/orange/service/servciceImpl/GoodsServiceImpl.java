@@ -4,11 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.jd.orange.dao.FormatMapper;
 import com.jd.orange.dao.GoodsMapper;
 import com.jd.orange.dao.PartMapper;
+import com.jd.orange.dao.PictureMapper;
 import com.jd.orange.model.Goods;
 import com.jd.orange.model.Part;
+import com.jd.orange.model.Picture;
 import com.jd.orange.service.GoodsService;
 import com.jd.orange.service.ImageService;
 import com.jd.orange.util.Folder;
+import com.jd.orange.util.PictureType;
 import com.jd.orange.util.StringUtil.GenerateString;
 import com.jd.orange.util.date.DateExample;
 import com.jd.orange.util.pagehelper.BeanUtil;
@@ -37,6 +40,9 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Resource
     private PartMapper partMapper;
+
+    @Resource
+    private PictureMapper pictureMapper;
 
     @Override
     @Transactional
@@ -67,6 +73,29 @@ public class GoodsServiceImpl implements GoodsService{
             return 0;
     }
 
+    @Override
+    public void OtherPicAdd(MultipartFile[] files, String ServerPath, Integer gid) {
+        for (MultipartFile file : files) {
+            if(!file.isEmpty()){
+
+                String folderPath = ServerPath + Folder.Upload + "\\";
+                String filename = new GenerateString().getFileName("goods")+getOriginal(file);
+
+                if( imageService.pictureAdd(file,folderPath,filename) > 0 )
+                {
+                    Picture picture = new Picture();
+                    picture.setRoute(folderPath);
+                    picture.setFilename(filename);
+                    picture.setPictype(PictureType.Goods.toString()+gid);
+                    picture.setCreatetime(DateExample.getNowTimeByDate());
+                    pictureMapper.insertSelective(picture);
+                }
+
+            }
+        }
+
+
+    }
 
     @Override
     public int getGoodsCount() {
@@ -390,6 +419,28 @@ public class GoodsServiceImpl implements GoodsService{
             goodsList = goodsMapper.selectGoodsWithFormatsByPart(pid);
         }
         return goodsList;
+    }
+
+    @Override
+    public PagedResult<Goods> GoodsListPage(Integer pid, Integer pageNo, Integer pageSize) {
+        pageNo = pageNo == null?1:pageNo;
+        pageSize = pageSize == null?16:pageSize;
+        PageHelper.startPage(pageNo,pageSize);
+        return BeanUtil.toPagedResult( goodsMapper.selectGoodsWithFormatsByPartAdvance(pid) );
+    }
+
+    @Override
+    public List<Goods> goodsSearch(String[] key) {
+        return goodsMapper.goodsSearch(key);
+    }
+
+    @Override
+    public PagedResult<Goods> goodsSearch(Integer pageNo, Integer pageSize, String[] key) {
+        pageNo = pageNo == null?1:pageNo;
+        pageSize = pageSize == null?16:pageSize;
+        PageHelper.startPage(pageNo,pageSize);  //startPage是告诉拦截器说我要开始分页了。分页参数是这两个。
+
+        return BeanUtil.toPagedResult( goodsMapper.goodsSearch(key) );
     }
 
     @Override

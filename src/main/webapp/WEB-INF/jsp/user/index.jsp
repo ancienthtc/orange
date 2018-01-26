@@ -40,8 +40,8 @@
     <a href="<%=basePath%>user/toShopIndex">
         <img src="<%=basePath%>fontpage/img/juziwu.png" class="logo">
     </a>
-    <input type="text" name="" id="" value="" placeholder="搜索商品"/>
-    <a href="chanpinliebiao.php"><img src="<%=basePath%>fontpage/img/sousuo.png" class="suosou"/></a>
+    <input type="text" name="" id="search-key" value="" placeholder="搜索商品"/>
+    <a id="search"><img src="<%=basePath%>fontpage/img/sousuo.png" class="suosou"/></a>
 </div>
 <div class="container" id="container">
     <div class="wrapper">
@@ -746,6 +746,15 @@
 <div class="index_foot_fg"></div>
 
 <jsp:include page="footer.jsp"></jsp:include>
+
+<script>
+
+    $("#search").click(function () {
+        var key = $("#search-key").val();
+        window.location.href = "<%=basePath%>goods/toGoodsListPage?type=5&&keys="+key;
+    });
+
+</script>
 
 <script>
     $(function () {

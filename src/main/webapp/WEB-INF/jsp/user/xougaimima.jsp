@@ -115,21 +115,20 @@
                     }
                     else {
                         $.ajax({
-                            url: '/my/resetPwd',
+                            url: '../user/alterPass',
                             type: 'post',
                             data: {
-                                oPwd: oPwd,
-                                pwd: pwd,
-                                repwd: repwd
+                                oldPass: oPwd,
+                                newPass: pwd
                             },
                             dataType: 'json',
                             success: function (data) {
-                                if (data.Statu == 1) {
+                                if (data.status == 0) {
                                     //$.modal({ title: '提示信息', content: data.msg, top: '20%', bottom: [{ name: '确定', click: 'go_index()', classs: 'btn-ios-default' }] });
-                                    $.prompt(data.Msg, {
+                                    $.prompt(data.msg, {
                                         buttons: { "确定": true }
                                     });
-                                    window.location.href = data.BackUrl;
+                                    window.location.href = "<%=basePath%>user/toCenter";
                                 } else {
                                     //$.modal({ title: '提示信息', content: data.msg, top: '20%', bottom: [{ name: '确定', click: '$.close()', classs: 'btn-ios-default' }] });
                                     $.prompt(data.Msg, {

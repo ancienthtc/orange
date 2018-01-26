@@ -56,6 +56,10 @@
     </trim>
   </select>
 
+  <select id="adminCheck" resultType="java.lang.Integer">
+    SELECT 1 FROM `t_admin` WHERE admin = #{admin,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_admin
     where id = #{id,jdbcType=INTEGER}

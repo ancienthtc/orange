@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.Alevel;
 import com.jd.orange.model.Part;
 import com.jd.orange.service.PartService;
 import com.jd.orange.util.pagehelper.PagedResult;
@@ -36,7 +37,7 @@ public class PartController {
     private PartService partService;
 
     /**后台页面板块页面*/
-    @AdminCheck
+    @AdminCheck(Alevel.L2)
     @RequestMapping("/toPartList")
     public String toBackPartPage()
     {
@@ -44,7 +45,7 @@ public class PartController {
     }
 
     //创建分类(frame)
-    @AdminCheck
+    @AdminCheck(Alevel.L2)
     @RequestMapping("/toPartAddFrame")
     public String toBackPartCreate()
     {
@@ -52,7 +53,7 @@ public class PartController {
     }
 
     //创建分类(内容)
-    @AdminCheck
+    @AdminCheck(Alevel.L2)
     @RequestMapping("/toPartAdd")
     public String toBackPartCreate2(Model model)
     {

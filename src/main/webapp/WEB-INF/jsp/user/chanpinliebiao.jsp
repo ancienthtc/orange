@@ -24,8 +24,8 @@
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/main.css">
     <!--   <link rel="stylesheet" href="css/jquery-impromptu.css">-->
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/new_main.css">
-    <!--<script src="js/jquery-1.10.1.min.js"></script>
-    <script src="js/jquery-impromptu.min.js"></script>-->
+    <script src="<%=basePath%>fontpage/js/jquery-1.10.1.min.js"></script>
+    <script src="<%=basePath%>fontpage/js/jquery-impromptu.min.js"></script>
 </head>
 <body style="">
 <div class="container" id="container">
@@ -37,7 +37,7 @@
                     <div class="search">
                         <input class="input" type="text" placeholder="搜索商品" name="proname" id="proname" value="">
                         <input type="hidden">
-                        <a >
+                        <a id="search">
                             <input type="button" class="submit default-cursor" value="" >
                         </a>
                     </div>
@@ -275,5 +275,15 @@
 </script>-->
 
 <jsp:include page="footer.jsp"></jsp:include>
+
+<script>
+
+    $("#search").click(function () {
+        var key = $("#proname").val();
+        window.location.href = "<%=basePath%>goods/toGoodsListPage?type=5&&keys="+key;
+    });
+
+</script>
+
 </body>
 </html>

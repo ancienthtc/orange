@@ -160,7 +160,15 @@ public class CartServiceImpl implements CartService{
         map.put("gid",format.getGoods());
         map.put("gname",format.getGname());
         map.put("freight",format.getFreight());
-        map.put("pic1",format.getPic1());
+        if(format.getPic1()==null)
+        {
+            map.put("pic1",null );
+        }
+        else
+        {
+            map.put("pic1",format.getPic1().substring( format.getPic1().lastIndexOf("\\")+1 ) );
+        }
+
         result.add(map);
         return result;
     }

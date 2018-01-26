@@ -33,7 +33,8 @@
 <div class="clearfix" id="add_picture">
     <div class="page_right_style" style="height: auto !important;">
         <div class="type_title">添加商品</div>
-        <form action="<%=basePath%>goods/update" method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+        <form action="<%=basePath%>goods/update" method="post" class="form form-horizontal" id="form-article-add"
+              enctype="multipart/form-data">
             <input type="hidden" name="id" id="gid" value="${goods.id}">
             <div class=" clearfix cl">
                 <div class="spmc_tj">
@@ -78,9 +79,11 @@
                                 <span class="btn btn-primary btn-file">
                                     <span class="fileinput-new">选择文件</span>
                                     <span class="fileinput-exists">换一张</span>
-                                    <input type="file" name="file1" id="picID1" accept="image/gif,image/jpeg,image/x-png">
+                                    <input type="file" name="file1" id="picID1"
+                                           accept="image/gif,image/jpeg,image/x-png">
                                 </span>
-                                <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                   data-dismiss="fileinput">移除</a>
                             </div>
                         </div>
                         <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
@@ -94,9 +97,11 @@
                                 <span class="btn btn-primary btn-file">
                                     <span class="fileinput-new">选择文件</span>
                                     <span class="fileinput-exists">换一张</span>
-                                    <input type="file" name="file2" id="picID2" accept="image/gif,image/jpeg,image/x-png">
+                                    <input type="file" name="file2" id="picID2"
+                                           accept="image/gif,image/jpeg,image/x-png">
                                 </span>
-                                <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                   data-dismiss="fileinput">移除</a>
                             </div>
                         </div>
                         <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
@@ -112,9 +117,11 @@
                                     <span class="fileinput-new">选择文件</span>
                                     <span class="fileinput-exists">换一张</span>
 
-                                    <input type="file" name="file3" id="picID3" accept="image/gif,image/jpeg,image/x-png"/>
+                                    <input type="file" name="file3" id="picID3"
+                                           accept="image/gif,image/jpeg,image/x-png"/>
                                 </span>
-                                <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                                <a href="javascript:;" class="btn btn-warning fileinput-exists"
+                                   data-dismiss="fileinput">移除</a>
                             </div>
                         </div>
                     </div>
@@ -125,73 +132,48 @@
             <div class="spms_bj">
                 <label class="form-label col-2">详情描述：</label>
                 <div class="formControls col-10">
-                    <textarea name="detail" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-100"
-                              dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)">${goods.detail}</textarea>
+                    <textarea name="detail" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符"
+                              datatype="*10-100"
+                              dragonfly="true" nullmsg="备注不能为空！"
+                              onKeyUp="textarealength(this,200)">${goods.detail}</textarea>
                     <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
                 </div>
             </div>
             <div class="spms_bj">
                 <label class="form-label col-2">详情描述(日)：</label>
                 <div class="formControls col-10">
-                    <textarea name="detailJ" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-100"
-                              dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)">${goods.detailJ}</textarea>
+                    <textarea name="detailJ" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符"
+                              datatype="*10-100"
+                              dragonfly="true" nullmsg="备注不能为空！"
+                              onKeyUp="textarealength(this,200)">${goods.detailJ}</textarea>
                     <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
                 </div>
             </div>
 
             <div class="clearfix cl" style="margin: 0 0 20px 0;">
                 <div class="Button_operation">
-                    <button class="btn btn-primary radius" type="submit" id="goodsSub"><i class="icon-save "></i>确认</button>
+                    <button class="btn btn-primary radius" type="submit" id="goodsSub"><i class="icon-save "></i>确认
+                    </button>
                 </div>
             </div>
         </form>
         <div class="clearfix_xq">
             <label class="form-label col-2">图片上传：</label>
-           <br/> <div class="yxstp">
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
-            <div>
-                <img src="<%=basePath%>backpage/images/yinghua.jpg" alt="">
-                <span>删除</span>
-            </div>
+            <br/>
+            <div class="yxstp">
+
+                <c:if test="${not empty pics}">
+                    <c:forEach var="i" items="${pics}">
+                        <div>
+                            <img src="<%=basePath%>image/show?pic=${i.filename}" alt="">
+                            <span class="otherDel" pcid="${i.id}">删除</span>
+                        </div>
+                    </c:forEach>
+                </c:if>
+                <c:if test="${empty pics}">
+                    暂无详情图片，请上传!
+                </c:if>
+
             </div>
             <div class="formControls col-10" style="width: 100%;">
                 <div class="uploader-list-container">
@@ -236,8 +218,11 @@
                     <ul class="search_content clearfix">
                         <li>
                             <label class="sx_wz">上线时间</label>
-                            <input class="cp_tjsj laydate-icon" id="start" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});" value="${goods.shelf.toLocaleString()}" style=" margin-left:10px;width: 170px;height: 30px;">
-                            <button id="up" >上架</button>
+                            <input class="cp_tjsj laydate-icon" id="start"
+                                   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});"
+                                   value="${goods.shelf.toLocaleString()}"
+                                   style=" margin-left:10px;width: 170px;height: 30px;">
+                            <button id="up">上架</button>
                         </li>
 
                     </ul>
@@ -246,10 +231,10 @@
         </div>
         <div class="shangxiaxian">
             <c:if test="${goods.recommend==0}"><!-- 不推荐 -->
-                <input type="checkbox" name="recommend">是否推荐(推荐上限:6)
+            <input type="checkbox" name="recommend">是否推荐(推荐上限:6)
             </c:if>
             <c:if test="${goods.recommend==1}"><!-- 推荐 -->
-                <input type="checkbox" name="recommend" checked="checked">是否推荐(推荐上限:6)
+            <input type="checkbox" name="recommend" checked="checked">是否推荐(推荐上限:6)
             </c:if>
 
         </div>
@@ -258,45 +243,45 @@
             <div class="cpguige_bt">产品规格:(Tips:1.更改销量会导致统计结果不准确 2.每个商品最多10个规格)</div>
             <table border="1" cellspacing="0" cellpadding="0" class="cpgg_nr">
                 <thead>
-                    <tr>
-                        <th>规格号</th>
-                        <th>规格名</th>
-                        <th>规格名(日)</th>
-                        <th>单位</th>
-                        <th>单位(日)</th>
-                        <th>价格</th>
-                        <th>库存</th>
-                        <th>销量</th>
-                        <th>修改</th>
-                        <th>删除</th>
-                    </tr>
+                <tr>
+                    <th>规格号</th>
+                    <th>规格名</th>
+                    <th>规格名(日)</th>
+                    <th>单位</th>
+                    <th>单位(日)</th>
+                    <th>价格</th>
+                    <th>库存</th>
+                    <th>销量</th>
+                    <th>修改</th>
+                    <th>删除</th>
+                </tr>
                 </thead>
                 <tbody id="tbody">
-                    <c:forEach var="i" items="${formats}">
-                        <tr class="cp_wzbj" value="${i.id}">
-                            <th>${i.id}</th>
-                            <th><input type="text" name="fname" value="${i.fname}"/></th>
-                            <th><input type="text" name="fnameJ" value="${i.fnameJ}"/></th>
-                            <th><input type="text" name="fclass" value="${i.fclass}"/></th>
-                            <th><input type="text" name="fclassJ" value="${i.fclassJ}"/></th>
-                            <th><input type="text" name="price" value="${i.price}"/></th>
-                            <th><input type="text" name="stock" value="${i.stock}"/></th>
-                            <th><input type="text" name="sales" value="${i.sales}"/></th>
-                            <th><input type="button" value="修改" class="table_xg"/></th>
-                            <th><input type="button" value="删除" class="table_sc"/></th>
-                        </tr>
-                    </c:forEach>
+                <c:forEach var="i" items="${formats}">
+                    <tr class="cp_wzbj" value="${i.id}">
+                        <th>${i.id}</th>
+                        <th><input type="text" name="fname" value="${i.fname}"/></th>
+                        <th><input type="text" name="fnameJ" value="${i.fnameJ}"/></th>
+                        <th><input type="text" name="fclass" value="${i.fclass}"/></th>
+                        <th><input type="text" name="fclassJ" value="${i.fclassJ}"/></th>
+                        <th><input type="text" name="price" value="${i.price}"/></th>
+                        <th><input type="text" name="stock" value="${i.stock}"/></th>
+                        <th><input type="text" name="sales" value="${i.sales}"/></th>
+                        <th><input type="button" value="修改" class="table_xg"/></th>
+                        <th><input type="button" value="删除" class="table_sc"/></th>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
             <form action="<%=basePath%>goods/formatAdd" method="post" id="formatForm">
                 <input type="hidden" name="goods" value="${goods.id}">
                 <div class="cpgg_tj">
                     <span>规格名:</span>
-                    <input type="text" name="fname"  value="" placeholder="请输入规格名"/>
+                    <input type="text" name="fname" value="" placeholder="请输入规格名"/>
                 </div>
                 <div class="cpgg_tj">
                     <span>规格名(日):</span>
-                    <input type="text" name="fnameJ"  value="" placeholder="请输入规格名"/>
+                    <input type="text" name="fnameJ" value="" placeholder="请输入规格名"/>
                 </div>
                 <div class="cpgg_tj_2">
                     <div>
@@ -373,85 +358,80 @@
             $("#formatForm").ajaxSubmit({
                 beforeSubmit: function () {
                 },
-                success:function (date) {
+                success: function (date) {
                     //console.log(date);
-                    if(date=="true" || date==true)
+                    if (date == "true" || date == true)
                         alert("添加成功");
                     else
                         alert("添加失败");
-                    window.location.href="<%=basePath%>goods/toGoodsAlter/"+$("#gid").val();
+                    window.location.href = "<%=basePath%>goods/toGoodsAlter/" + $("#gid").val();
                 },
-                error : function(data) {
+                error: function (data) {
                     alert("错误");
                 }
             })
         });
 
         <!-- 下架 -->
-        var radios=$('input[name="checked"]');
+        var radios = $('input[name="checked"]');
         radios.change(function () {
-            var s=$(this).val();
-            if(s=="off")
-            {
+            var s = $(this).val();
+            if (s == "off") {
                 //alert("下架");
-                $.post("<%=basePath%>goods/shelf",{id:$("#gid").val(),shelf:null},
-                    function(result){
-                    if(result=="true" || result==true)
-                        alert("下架成功");
-                    else
-                        alert("下架失败");
-                },"json");
+                $.post("<%=basePath%>goods/shelf", {id: $("#gid").val(), shelf: null},
+                    function (result) {
+                        if (result == "true" || result == true)
+                            alert("下架成功");
+                        else
+                            alert("下架失败");
+                    }, "json");
             }
         });
         <!-- 上架 -->
         $("#up").click(function () {
-            var v=$('input[name="checked"]:checked').val();
-            if(v=="on")
-            {
-                if($("#start").val().length<=0)
-                {
+            var v = $('input[name="checked"]:checked').val();
+            if (v == "on") {
+                if ($("#start").val().length <= 0) {
                     alert("必须选日期");
                     return false;
                 }
                 //alert("上架");
-                $.post("<%=basePath%>goods/shelf",{id:$("#gid").val(),shelf:$("#start").val()},
-                    function(result){
-                        if(result=="true" || result==true)
+                $.post("<%=basePath%>goods/shelf", {id: $("#gid").val(), shelf: $("#start").val()},
+                    function (result) {
+                        if (result == "true" || result == true)
                             alert("上架成功");
                         else
                             alert("上架失败,请确保至少一个库存大于0的规格");
-                },"json");
+                    }, "json");
             }
         });
 
-        var recommend=$('input[name="recommend"]');
+        var recommend = $('input[name="recommend"]');
         recommend.change(function () {
-           if(recommend.prop("checked"))
-           {
-               //alert("选中");//推荐
-               $.post("<%=basePath%>goods/recommend",{id:$("#gid").val(),recommend:1},
-                   function(result){
-                       if(result==true)
-                           alert("推荐成功");
-                       else
-                       {
-                           alert("推荐失败");
-                           recommend.removeAttr("checked");
-                       }
+            if (recommend.prop("checked")) {
+                //alert("选中");//推荐
+                $.post("<%=basePath%>goods/recommend", {id: $("#gid").val(), recommend: 1},
+                    function (result) {
+                        if (result == true)
+                            alert("推荐成功");
+                        else {
+                            alert("推荐失败");
+                            recommend.removeAttr("checked");
+                        }
 
 
-                   },"json");
-           }
-           else {
-               //alert("未选中");//取消
-               $.post("<%=basePath%>goods/recommend",{id:$("#gid").val(),recommend:0},
-                   function(result){
-                       if(result==true)
-                           alert("取消成功");
-                       else
-                           alert("取消失败");
-               },"json");
-           }
+                    }, "json");
+            }
+            else {
+                //alert("未选中");//取消
+                $.post("<%=basePath%>goods/recommend", {id: $("#gid").val(), recommend: 0},
+                    function (result) {
+                        if (result == true)
+                            alert("取消成功");
+                        else
+                            alert("取消失败");
+                    }, "json");
+            }
         });
 
     })
@@ -459,8 +439,8 @@
 
     //规格修改
     $('.table_xg').click(function () {
-        var tr=$(this).parent().parent();
-        var id=tr.attr("value");
+        var tr = $(this).parent().parent();
+        var id = tr.attr("value");
         var fname = tr.find("input[name='fname']").val();
         var fnameJ = tr.find("input[name='fnameJ']").val();
         var fclass = tr.find("input[name='fclass']").val();
@@ -468,40 +448,74 @@
         var price = tr.find("input[name='price']").val();
         var stock = tr.find("input[name='stock']").val();
         var sales = tr.find("input[name='sales']").val();
-        var date={id:id,fname:fname,fnameJ:fnameJ,fclass:fclass,fclassJ:fclassJ,price:price,stock:stock,sales:sales};
-        $.post("<%=basePath%>goods/formatUpdate",date,
-            function(result){
-                if(result==true)
+        var date = {
+            id: id,
+            fname: fname,
+            fnameJ: fnameJ,
+            fclass: fclass,
+            fclassJ: fclassJ,
+            price: price,
+            stock: stock,
+            sales: sales
+        };
+        $.post("<%=basePath%>goods/formatUpdate", date,
+            function (result) {
+                if (result == true)
                     alert("修改成功");
                 else
                     alert("修改失败");
-        },"json");
+            }, "json");
     });
 
     //规格删除
     $(".table_sc").click(function () {
-        var tr=$(this).parent().parent();
-        var id=tr.attr("value");
+        var tr = $(this).parent().parent();
+        var id = tr.attr("value");
         $.confirm({
             title: '警告',
             content: '确认删除?',
-            confirm: function(){
-                var date={id:id};
-                $.post("<%=basePath%>goods/formatDel",date,
-                    function(result){
-                        if(result==true)
-                        {
+            confirm: function () {
+                var date = {id: id};
+                $.post("<%=basePath%>goods/formatDel", date,
+                    function (result) {
+                        if (result == true) {
                             alert("删除成功");
                             tr.remove();
                         }
                         else
                             alert("修改失败");
-                },"json");
+                    }, "json");
             },
-            cancel: function(){
+            cancel: function () {
 
             }
         });
+    });
+
+    $(".otherDel").click(function () {
+
+        //alert($(this).attr("pcid"));
+        var $div = $(this).parent();
+        $.ajax({
+            url:"<%=basePath%>goods/delOtherPic",
+            data:{id:$(this).attr("pcid")},
+            type:"get",
+            dataType:"json",
+            success:function(data){
+                if(data==true)
+                {
+                    alert("删除成功");
+                    $div.remove();
+                }
+                else
+                    alert("删除失败");
+                //window.location.href="<%=basePath%> / ";
+            },
+            error:function(){
+                alert("请求失败");
+            }
+        });
+
     });
 
 
@@ -618,7 +632,7 @@
             swf: 'lib/webuploader/0.1.5/Uploader.swf',
 
             // 文件接收服务端。
-            server: 'http://lib.h-ui.net/webuploader/0.1.5/server/fileupload.php',
+            server: '<%=basePath%>goods/addOtherPicture/${goods.id}',  //改
 
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -862,7 +876,7 @@
                 swf: 'lib/webuploader/0.1.5/Uploader.swf',
                 chunked: false,
                 chunkSize: 512 * 1024,
-                server: 'http://lib.h-ui.net/webuploader/0.1.5/server/fileupload.php',
+                server: '<%=basePath%>goods/addOtherPicture/${goods.id}',  //改
                 // runtimeOrder: 'flash',
 
                 // accept: {
@@ -1186,6 +1200,7 @@
                         stats = uploader.getStats();
                         if (stats.successNum) {
                             alert('上传成功');
+                            window.location.href = "<%=basePath%>goods/toGoodsAlter/${goods.id}";
                         } else {
                             // 没有成功的图片，重设
                             state = 'done';

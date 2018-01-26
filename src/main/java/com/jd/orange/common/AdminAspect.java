@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class AdminAspect {
     /**
      * 定义Pointcut，Pointcut的名称，此方法不能有返回值，该方法只是一个标示
      */
-    @Pointcut("@annotation(com.jd.orange.common.AdminCheck)")
+    @Pointcut(value = "@annotation(com.jd.orange.common.AdminCheck)" )
     public void controllerAspect()
     {
 
@@ -84,13 +85,37 @@ public class AdminAspect {
     {
         HttpServletRequest request =((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session =request.getSession();
-        //System.out.println(session.getAttribute("admin"));
-        //HttpSession session=null;
         Admin admin= (Admin) session.getAttribute("admin");
+        String methodName=pjp.getSignature().getName();
+        Integer level = 0;
+        //获取注解属性
+        Class<?> classTarget=pjp.getTarget().getClass();
+        Class<?>[] par=((MethodSignature) pjp.getSignature()).getParameterTypes();
+        Method objMethod=classTarget.getMethod(methodName, par);
+        AdminCheck adminCheck=objMethod.getAnnotation(AdminCheck.class);
+        if(adminCheck!=null){
+            level = adminCheck.value().value() ;
+            //System.out.println(adminCheck.value().value());
+        }
+
 
         if(admin == null) {
             logger.info("-------------没有登录-------------");
             return "redirect:/login/AdminSignIn";
+        }
+        else {
+            Integer al = admin.getLevel();
+            if(al==null)
+            {
+                logger.info("-------------帐号错误-------------");
+                return "redirect:/login/AdminSignIn";
+            }
+            if( al < level )
+            {
+                logger.info("-------------权限不足-------------");
+                return "redirect:/admin/lack";
+            }
+
         }
         return pjp.proceed();
 

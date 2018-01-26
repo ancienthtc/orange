@@ -3,6 +3,7 @@ package com.jd.orange.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.Alevel;
 import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Order;
 import com.jd.orange.model.User;
@@ -44,6 +45,7 @@ public class OrderController {
 
     //页面跳转部分
     //进入线上订单管理
+    @AdminCheck(Alevel.L2)
     @RequestMapping(value = "/toAdminOrderOnline")
     public String toAdminOrderOnline(Model model)
     {
@@ -61,6 +63,7 @@ public class OrderController {
     }
 
     //进入线下订单管理
+    @AdminCheck(Alevel.L2)
     @RequestMapping(value = "/toAdminOrderOffline")
     public String toAdminOrderOffline(Model model)
     {
@@ -77,7 +80,23 @@ public class OrderController {
         return "manager/xianxiaguanli";
     }
 
+    @RequestMapping("/info")
+    public String toInfo(Integer status , Model model)
+    {
+        if(status == 0)
+        {
+            model.addAttribute("info","支付成功,等待跳转");
+            return "user/info_";
+        }
+        else
+        {
+            model.addAttribute("info","支付失败");
+            return "user/info_";
+        }
+    }
+
     //进入订单统计
+    @AdminCheck(Alevel.L2)
     @RequestMapping(value = "/toAdminOrderCount")
     public String toAdminOrderCount()
     {
@@ -86,6 +105,7 @@ public class OrderController {
 
     //进入订单详情
     //@AdminCheck
+    @AdminCheck(Alevel.L2)
     @RequestMapping(value = "/toOrderDetail/{sequence}")
     public String toOrderDetail(@PathVariable String sequence,Model model)
     {
@@ -131,17 +151,27 @@ public class OrderController {
         return JSON.toJSONString( orderService.accept(sequence) );
     }
 
+
     /** 支付接口回调函数 */
-    //付款
+    //确认付款
     @RequestMapping("/pay")
-    @ResponseBody
-    public String orderPay(String sequence)
+    //@ResponseBody
+    public String orderPay(String sequence,String price,Integer status)
     {
-        return "";
+        System.out.println( sequence + "  "+ price + "  " + status );
+        Map<String,Object> m = orderService.pay(sequence,price,status);
+        if( Integer.valueOf(m.get("status").toString()) == 0 )
+        {
+            return "redirect:/order/info?status=0";
+        }
+        else
+        {
+            return "redirect:/order/info?status=1";
+        }
     }
 
     //发货
-    @RequestMapping("/send")
+    @RequestMapping(value = "/send" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String orderSend(String sequence,String logistics)    //os:1 ss:1
     {
@@ -153,28 +183,20 @@ public class OrderController {
         }
         else if(order.getBuyway()==1)   //线下 取货(用户到店取货，卖家发货后点击按钮)
         {
-
+            return JSON.toJSONString( orderService.getsend(sequence) );
         }
         return "{\"status\":-1}";
     }
 
-    //接收
-    @RequestMapping("/receive")
+    //买家收货
+    @RequestMapping(value = "/receive" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String orderReceive(String sequence)
     {
         //线下无此状态
-        return "";
+        return JSON.toJSONString( orderService.receive(sequence) );
     }
 
-    //收货
-    @RequestMapping("/finish")
-    @ResponseBody
-    public String orderFinish(String sequence)
-    {
-        //线下由卖家点击
-        return "";
-    }
 
     //确认退货
     public String orderReturnSure()
@@ -246,6 +268,35 @@ public class OrderController {
     {
         return "user/wodedingdan";
     }
+
+    @UserCheck
+    @RequestMapping("/toChoose")
+    public String toChoosePay(HttpSession session,@RequestParam String sequence,Model model)
+    {
+        User user = (User) session.getAttribute("user");
+        Order order = orderService.getOrder(sequence);
+        if( user.getId() == order.getUser() )
+        {
+            model.addAttribute("sequence",sequence);
+            return "user/zhifufangshi";
+        }
+        else
+        {
+            return "redirect:/order/toMyOrder";
+        }
+    }
+
+    @UserCheck
+    @RequestMapping("/toWxPay")
+    public String toPay(@RequestParam String sequence)
+    {
+        Order order = orderService.getOrder(sequence);
+        String body = order.getSequence()+"号订单付款";
+        String orderid = order.getSequence();
+        String price = String.valueOf( new Double(order.getAllprice()*100 ).intValue()  );
+        return "redirect:/WxPay/pay?body="+body+"&&orderid="+orderid+"&&price="+price;
+    }
+
 
     @RequestMapping(value = "/getUserNoSure" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody

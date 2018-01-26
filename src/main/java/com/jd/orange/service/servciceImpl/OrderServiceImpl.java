@@ -367,13 +367,71 @@ public class OrderServiceImpl implements OrderService{
 
     //付款(回调)
     @Override
-    public Map<String, Object> pay(String sequence) {
+    @Transactional(rollbackFor=Exception.class)
+    public Map<String, Object> pay(String sequence,String rprice , Integer stauts) //订单，实付金额
+    {
+        //System.out.println("进入Pay方法");
+        //System.out.println("sequence:"+sequence + "  rprice:"+rprice + "  stauts:"+stauts);
         Map<String,Object> m=new HashMap<String, Object>();
-        Order order=orderMapper.selectOrderWithDetail(sequence);
+        Order order=orderMapper.selectBySequence(sequence);
+        //Integer OS = order.getOrderstatus();
+        //Integer SS = order.getShopstatus();
+        //System.out.println("OS:"+OS + "  SS:"+SS);
+        try {
+            if(stauts!=0)   //0正确  1错误
+            {
+                m.put("status",1);
+                m.put("msg","订单错误,请取消");
+                throw new Exception();
+            }
+            //System.out.println("判断Order状态");
+            if(order.getOrderstatus() == 1 && order.getShopstatus() == 0 )
+            {
+                //System.out.println(Double.valueOf(rprice));
+                if (Double.valueOf(rprice)/100 < order.getAllprice() )
+                {
+                    m.put("status",2);
+                    m.put("msg","付款金额不符");
+                    throw new Exception();
+                }
 
-        //用户积分增加
-
-        return null;
+                order.setShopstatus(1);
+                order.setUpdatetime(DateExample.getNowTimeByDate());
+                int i = orderMapper.updateByPrimaryKeySelective(order) ;
+                if( i<=0 )
+                {
+                    m.put("status",3);
+                    m.put("msg","状态更新失败");
+                    throw new Exception();
+                }
+            }
+            else
+            {
+                System.out.println( order.getOrderstatus()+ "  " + order.getShopstatus());
+                m.put("status",1);
+                m.put("msg","订单错误,请取消");
+                throw new Exception();
+            }
+            //用户积分增加
+            User user = userMapper.selectByPrimaryKey(order.getUser());
+            Double price = order.getAllprice();
+            user.setScore( user.getScore() + price.intValue() );
+            if( !( userMapper.updateByPrimaryKeySelective(user) > 0 ) )
+            {
+                m.put("status",4);
+                m.put("msg","积分增加失败");
+                throw new Exception();
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage() + " " + e.getCause() + " " +e.getStackTrace());
+            System.out.println( JSON.toJSON(m) );
+            return m;
+        }
+        m.put("status",0);
+        m.put("msg","支付成功");
+        System.out.println( JSON.toJSON(m) );
+        return m;
     }
 
     @Override
@@ -427,8 +485,70 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Map<String, Object> getsend(String sequence) {   //取货
+        Order order = orderMapper.selectBySequence(sequence);
+        Map<String,Object> m = new HashMap<String, Object>();
+        try {
+            if( order.getOrderstatus() == 1 && order.getShopstatus() == 1 && order.getBuyway() == 1 )
+            {
+                order.setOrderstatus(3);    //取完货完成
+                order.setUpdatetime(DateExample.getNowTimeByDate());
+            }
+            else
+            {
+                m.put("status",3);
+                m.put("msg","订单错误,请取消");
+                throw new Exception();
+            }
+        }catch (Exception e)
+        {
+            if(m.get("status")==null)
+            {
+                m.put("status",5);
+            }
+            if(m.get("msg")==null)
+            {
+                m.put("msg","程序异常:"+e.getClass());
+            }
+            return m;
+        }
+        if(orderMapper.updateByPrimaryKeySelective(order) > 0)
+        {
+            m.put("status",0);
+            m.put("msg","发货成功");
+        }
+        else
+        {
+            m.put("status",1);
+            m.put("msg","发货失败");
+        }
+        return m;
+    }
 
-        return null;
+    @Override
+    public Map<String, Object> receive(String sequence) {
+        Map<String,Object> m = new HashMap<String, Object>();
+        Order order = orderMapper.selectBySequence(sequence);
+        if (order.getShopstatus() == 1 && order.getOrderstatus() == 2 && order.getBuyway() == 1 )   //线下
+        {
+            m.put("status",1);
+            m.put("msg","订单错误,请取消");
+        }
+        else if (order.getShopstatus() == 1 && order.getOrderstatus() == 2 && order.getBuyway() == 0)  //线上
+        {
+            order.setOrderstatus(3);//已完成
+            order.setUpdatetime(DateExample.getNowTimeByDate());
+            if( orderMapper.updateByPrimaryKeySelective(order) > 0 )
+            {
+                m.put("status",0);
+                m.put("msg","收货成功");
+            }
+            else
+            {
+                m.put("status",0);
+                m.put("msg","收货失败");
+            }
+        }
+        return m;
     }
 
     //取消

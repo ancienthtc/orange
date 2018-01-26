@@ -33,4 +33,6 @@ public interface UserService {
     int UserInfoUpdate(User user);
 
     Map<String,Integer> getUserOrderCount(Integer uid);
+
+    Map<String,Object> alterPass(Integer uid , String oldPass ,String newPass);
 }

@@ -21,5 +21,14 @@ public interface AdminService {
 
     int AdminAdd(Admin admin);
 
+    int AdminAlter(Admin admin);
+
+    int AdminPassAlter(Integer id,String oldp ,String newp);
+
     int AdminDel(Integer aid);
+
+
+    Admin getAdmin(String admin,String pass);
+
+    Admin getAdmin(Integer id);
 }

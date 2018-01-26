@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.jd.orange.dao.AdminMapper;
 import com.jd.orange.model.Admin;
 import com.jd.orange.service.AdminService;
+import com.jd.orange.util.date.DateExample;
 import com.jd.orange.util.pagehelper.BeanUtil;
 import com.jd.orange.util.pagehelper.PagedResult;
 import com.jd.orange.util.password.Secret;
@@ -49,8 +50,39 @@ public class AdminServiceImpl implements AdminService {
         {
             return 0;
         }
+        if( adminMapper.adminCheck(admin.getAdmin()) != null )  //重复
+        {
+            return 0;
+        }
         admin.setPassword(Secret.enPass(admin.getPassword()) );
+        admin.setCreatetime(DateExample.getNowTimeByDate());
         return adminMapper.insertSelective(admin);
+    }
+
+    @Override
+    public int AdminAlter(Admin admin) {
+        System.out.println(admin.getPassword());
+        if(admin.getPassword() != null && !admin.getPassword().equals("null") )
+        {
+            admin.setPassword( Secret.enPass(admin.getPassword()) );
+        }
+        admin.setUpdatetime(DateExample.getNowTimeByDate());
+        return adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
+    public int AdminPassAlter(Integer id, String oldp, String newp) {
+        Admin admin = adminMapper.selectByPrimaryKey(id);
+        if( Secret.enPass(oldp).equals(admin.getPassword())  )
+        {
+            admin.setPassword( Secret.enPass(newp) );
+            admin.setUpdatetime(DateExample.getNowTimeByDate());
+            return adminMapper.updateByPrimaryKeySelective(admin);
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     @Override
@@ -58,4 +90,15 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.deleteByPrimaryKey(aid);
     }
 
+    @Override
+    public Admin getAdmin(String admin, String pass) {
+        return adminMapper.adminLogin(admin,pass);
+    }
+
+    @Override
+    public Admin getAdmin(Integer id) {
+        Admin admin = adminMapper.selectByPrimaryKey(id);
+        admin.setPassword( Secret.dePass(admin.getPassword()) );
+        return admin;
+    }
 }

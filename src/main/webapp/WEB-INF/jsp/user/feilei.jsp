@@ -38,7 +38,7 @@
         <div id="segmentedControls"
              class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
 
-            <c:forEach var="i" items="${fatherPart}">
+            <c:forEach var="i" items="${fatherPart}" varStatus="s">
 
                 <c:if test="${not empty pid}">
                     <c:if test="${i.id==pid}">
@@ -53,9 +53,18 @@
                     </c:if>
                 </c:if>
                 <c:if test="${empty pid}">
-                    <a class="mui-control-item" href="<%=basePath%>part/toShopList?pid=${i.id}">
-                            ${i.name}
-                    </a>
+
+                    <c:if test="${s.count==1}"><!-- 第一条 -->
+                        <a class="mui-control-item mui-active" href="<%=basePath%>part/toShopList?pid=${i.id}">
+                                ${i.name}
+                        </a>
+                    </c:if>
+                    <c:if test="${s.count>1}">
+                        <a class="mui-control-item" href="<%=basePath%>part/toShopList?pid=${i.id}">
+                                ${i.name}
+                        </a>
+                    </c:if>
+
                 </c:if>
 
             </c:forEach>

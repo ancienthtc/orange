@@ -265,12 +265,12 @@
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 
                         <li>
-                            <a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl">
+                            <a href="javascript:void(0)" name="<%=basePath%>admin/toInfo" title="个人信息" class="iframeurl">
                                 <i class="icon-user"></i>个人资料
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" name="Systems.html" title="系统设置" class="iframeurl">
+                            <a href="javascript:void(0)" name="<%=basePath%>login/AdminSignOut" title="系统设置" class="iframeurl">
                                 <i class="icon-off"></i>退出
                             </a>
                         </li>

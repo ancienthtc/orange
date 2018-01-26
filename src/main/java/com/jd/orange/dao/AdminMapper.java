@@ -23,4 +23,6 @@ public interface AdminMapper {
     Admin adminLogin(@Param("admin") String admin, @Param("password")String password);
 
     List<Admin> getAdminListByLevel(@Param("key") String key,@Param("start") String start,@Param("end") String end ,@Param("level") Integer level);
+
+    Integer adminCheck(@Param("admin") String admin);
 }

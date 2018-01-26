@@ -56,7 +56,7 @@
                                 <a href="javascript:SendPhone();" id="sendCode" style="background-color: #999" class="sendcode">获取验证码</a>
                             </div>
                             <div class="control-group">
-                                <a  class="btn-style1" id="submit">立即注册</a>
+                                <a  class="btn-style1" id="submit" style="z-index: 999">立即注册</a>
                                                                       <!--id="submit"-->
                             </div>
                         </div>

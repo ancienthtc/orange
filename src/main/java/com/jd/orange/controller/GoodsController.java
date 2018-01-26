@@ -3,6 +3,7 @@ package com.jd.orange.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.jd.orange.common.AdminCheck;
+import com.jd.orange.common.Alevel;
 import com.jd.orange.model.Format;
 import com.jd.orange.model.Goods;
 import com.jd.orange.service.FormatService;
@@ -22,7 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/goods")
@@ -49,7 +53,7 @@ public class GoodsController {
     private ImageService imageService;
 
     //跳转到产品列表(后台管理)
-    @AdminCheck
+    @AdminCheck(Alevel.L1)
     @RequestMapping("/toGoodsList")
     public String toGoodsList(Model model)
     {
@@ -58,7 +62,7 @@ public class GoodsController {
     }
 
     //跳转商品详情
-    @AdminCheck
+    @AdminCheck(Alevel.L1)
     @RequestMapping("/toGoodsDetail/{gid}")
     public String toGoodsDetail(Model model,@PathVariable Integer gid)
     {
@@ -73,7 +77,7 @@ public class GoodsController {
     }
 
     //跳转商品添加
-    @AdminCheck
+    @AdminCheck(Alevel.L1)
     @RequestMapping("/toGoodsAdd")
     public String toGoodsAdd()
     {
@@ -81,12 +85,14 @@ public class GoodsController {
     }
 
     //跳转到商品修改
-    @AdminCheck
+    @AdminCheck(Alevel.L1)
     @RequestMapping("/toGoodsAlter/{gid}")
     public String toGoodsAlter(@PathVariable Integer gid,Model model)
     {
         model.addAttribute("goods",goodsService.getGoods(gid));
         model.addAttribute("formats",formatService.formatList(gid));
+        //其他图片
+        model.addAttribute("pics",imageService.pictures(PictureType.Goods,gid));
         return "manager/goodsAlter";
     }
 
@@ -100,9 +106,31 @@ public class GoodsController {
 
     @RequestMapping("/tp2")
     @ResponseBody
-    public String testFile(@RequestParam("file") MultipartFile file )
+    public String testFile(@RequestParam("file") MultipartFile[] file ,HttpServletRequest request)
     {
-        log.info(file.getName() + "/" );
+        //log.info(file.getName() + "/" );
+
+        //获得物理路径webapp所在路径
+        String pathRoot = request.getSession().getServletContext().getRealPath("");
+        String path="";
+        List<String> listImagePath=new ArrayList<String>();
+        for (MultipartFile mf : file) {
+            log.info(mf.getSize()+"");
+            if(!mf.isEmpty()){
+                //生成uuid作为文件名称
+                //String uuid = UUID.randomUUID().toString().replaceAll("-","");
+                //获得文件类型（可以判断如果不是图片，禁止上传）
+                String contentType=mf.getContentType();
+                //获得文件后缀名称
+                //String imageName=contentType.substring(contentType.indexOf("/")+1);
+                String name = "." + mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".") + 1) ;
+                path="/static/images/"+mf.getName()+name;
+                log.info(pathRoot+path);
+                //mf.transferTo(new File(pathRoot+path));
+                //listImagePath.add(path);
+            }
+        }
+
         return "t";
     }
 
@@ -148,15 +176,12 @@ public class GoodsController {
     }
 
     //商品其他图片添加
-    @RequestMapping("/addOtherPicture")
+    @RequestMapping("/addOtherPicture/{gid}")
     @ResponseBody
-    public String addGoodsPicture(@RequestParam("file") MultipartFile file,HttpServletRequest request)
+    public String addGoodsPicture(@RequestParam("file") MultipartFile[] file,HttpServletRequest request,@PathVariable Integer gid)
     {
-        String title= new GenerateString().getUUID() +"."+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-        String filepath=request.getSession().getServletContext().getRealPath("/") + Folder.Upload + "/" + title;
-
-        log.info(title+"  "+filepath);
-
+        String ServerPath = request.getSession().getServletContext().getRealPath("/");
+        goodsService.OtherPicAdd(file,ServerPath,gid);
         return "";
     }
 
@@ -168,6 +193,17 @@ public class GoodsController {
     {
         //detail:pic1 pic2 pic3
         if( goodsService.goodsPicDel(gid,detail) > 0 )
+        {
+            return "true";
+        }
+        return "false";
+    }
+
+    @RequestMapping("/delOtherPic")
+    @ResponseBody
+    public String delOtherPic(Integer id)
+    {
+        if( imageService.imageDelete(id)  )
         {
             return "true";
         }
@@ -334,11 +370,16 @@ public class GoodsController {
     /* 用户模块 */
     //进入商品列表
     @RequestMapping("/toGoodsListPage")
-    public String goodsListPage( @RequestParam(required = false) Integer pid , @RequestParam(required = false) Integer type , Model model)
+    public String goodsListPage( @RequestParam(required = false) Integer pid , @RequestParam(required = false) Integer type,
+            String keys,Integer pageNo, Integer pageSize , Model model)
     {
+        if(pageSize == null)
+        {
+            pageSize = 16;
+        }
         if(pid!=null && type==null)
         {
-            model.addAttribute("goods",goodsService.GoodsListPage(pid));
+            model.addAttribute("goods",goodsService.GoodsListPage(pid));    //goodsList 分区 subList
         }
         if( pid==null && type!=null )
         {
@@ -352,6 +393,10 @@ public class GoodsController {
                     break;
                 case 4:     //默认
                     break;
+                case 5:     //关键词搜索
+                    String[] key=keys.split("\\s+");
+                    model.addAttribute("goods",goodsService.goodsSearch(key));
+                    break;
             }
         }
 
@@ -363,6 +408,7 @@ public class GoodsController {
     public String goodsDetailPage( @RequestParam(required = true) Integer gid , Model model )
     {
         model.addAttribute("goods",goodsService.getGoodsDetail(gid));
+        model.addAttribute("images",imageService.pictures(PictureType.Goods,gid));
         return "user/chanpin_xqy";
     }
 

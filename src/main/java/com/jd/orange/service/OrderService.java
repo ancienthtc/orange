@@ -37,13 +37,16 @@ public interface OrderService {
     Map<String,Object> accept(String sequence);
 
     //付款(回调)
-    Map<String,Object> pay(String sequence);
+    Map<String,Object> pay(String sequence,String price, Integer stauts);
 
     //发货
     Map<String,Object> send(String sequence,String logistics);
 
     //取货
     Map<String,Object> getsend(String sequence);
+
+    //收货
+    Map<String,Object> receive(String sequence);
 
     //取消
     Map<String,Object> cancel(String sequence);

@@ -29,6 +29,8 @@ public interface ImageService {
      */
     boolean imageDelete(String absolutePath,Integer id , String pictype);
 
+    boolean imageDelete(Integer imgId);
+
     boolean fileDel(String absolutePath);
 
     boolean figureDel(Integer pid);
