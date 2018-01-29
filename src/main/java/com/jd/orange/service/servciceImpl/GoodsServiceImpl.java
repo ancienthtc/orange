@@ -461,15 +461,42 @@ public class GoodsServiceImpl implements GoodsService{
         return goods;
     }
 
+    //商品删除
     @Override
+    @Transactional
     public int GoodsDel(Integer gid) {
 
-        //判断删除
-
+        //判断删除(下架,无规格)
+        if( formatMapper.goodsShelfCondition(gid) > 0 )//下架
+        {
+            return 0;
+        }
+        if( formatMapper.formatList(gid).size() > 0 )
+        {
+            return 0;
+        }
         //商品图片删除
-
+        Goods goods = goodsMapper.selectByPrimaryKey(gid);
+        if( goods.getPic1() != null)
+        {
+            imageService.fileDel(goods.getPic1());
+        }
+        if( goods.getPic2() != null )
+        {
+            imageService.fileDel(goods.getPic2());
+        }
+        if( goods.getPic3() != null )
+        {
+            imageService.fileDel(goods.getPic3());
+        }
         //其他图片删除
+        List<Picture> pictureList = pictureMapper.getPictureList(PictureType.Goods.toString()+gid);
+        for (Picture p:pictureList)
+        {
+            imageService.fileDel(p.getRoute()+p.getFilename());
+        }
+        pictureMapper.deleteByType(PictureType.Goods.toString()+gid);
 
-        return 0;
+        return goodsMapper.deleteByPrimaryKey(gid);
     }
 }

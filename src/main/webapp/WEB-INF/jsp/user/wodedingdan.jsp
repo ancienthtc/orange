@@ -390,8 +390,8 @@
                 //增加地址信息
                 html += "<div class='ddfk'>" ;
                 html += "<ul>" ;
-                html += "<li class='li5'>地址:"+result.dataList[i].address+"</li>" ;
-                html += "<li class='li6'><a href='javascript:;'>"+ result.dataList[i].recipient +"  "+result.dataList[i].logistics+" </a></li>" ;
+                //html += "<li class='li5'>地址:"+result.dataList[i].address+"</li>" ;
+                html += "<li class='li6'><a href='javascript:;'>收件人:"+ result.dataList[i].recipient +" 物流: "+result.dataList[i].logistics+" </a></li>" ;
                 html += "</ul>" ;
                 html += "</div>" ;
             }//订单结束

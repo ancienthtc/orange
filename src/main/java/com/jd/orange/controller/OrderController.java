@@ -145,10 +145,19 @@ public class OrderController {
     //订单确认
     @RequestMapping(value = "/accept" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
-    public String orderSure(String sequence)
+    public String orderSure(String sequence,Object freight)
     {
+        Map<String,Object> m = new HashMap<String, Object>();
+        try {
+            Double f = Double.parseDouble( freight.toString() );
+            m = orderService.accept(sequence,f);
+        }catch (Exception e)
+        {
+            m.put("status",-1);
+            m.put("msg","运费错误!");
+        }
         //Order order=orderService.getOrder(sequence);
-        return JSON.toJSONString( orderService.accept(sequence) );
+        return JSON.toJSONString( m );
     }
 
 

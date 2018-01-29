@@ -259,6 +259,9 @@
                             <c:if test="${sessionScope.admin.level==2}">
                                 超级管理员
                             </c:if>
+                            <c:if test="${sessionScope.admin.level==3}">
+                                顶级管理员
+                            </c:if>
                         </span>
                         <i class="icon-caret-down"></i>
                     </a>

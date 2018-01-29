@@ -515,29 +515,42 @@
         /**特殊**/
         $(".sure").click(function () {//确认订单
             var oid = $(this).parent().attr("oid");
-            $.ajax({
-                url: "../order/accept",
-                type: 'post',
-                dataType: 'json',
-                data: { sequence: oid },
-                success: function (data) {
-                    if(data.status==0)
-                    {
-                        console.log(data.msg);
-                        var url="<%=basePath%>order/getAdminOrderOnline";
-                        var page=$("#pageNo0").val();
-                        var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
-                        send_post0(url,info);
+
+            layer.prompt({
+                formType: 2,
+                //value: '',
+                title: '填写运费(非负数)'
+            }, function(value, index, elem){
+                //alert(value); //得到value
+                $.ajax({
+                    url: "../order/accept",
+                    type: 'post',
+                    dataType: 'json',
+                    data: { sequence: oid , freight:value },
+                    success: function (data) {
+                        if(data.status==0)
+                        {
+                            console.log(data.msg);
+                            var url="<%=basePath%>order/getAdminOrderOnline";
+                            var page=$("#pageNo0").val();
+                            var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
+                            send_post0(url,info);
+                        }
+                        else
+                        {
+                            alert(data.msg);
+                        }
+                    },
+                    error: function () {
+                        alert('服务器繁忙..请稍后重试！');
                     }
-                    else
-                    {
-                        alert(data.msg);
-                    }
-                },
-                error: function () {
-                    alert('服务器繁忙..请稍后重试！');
-                }
+                });
+                layer.close(index);
             });
+
+
+
+
         });
         $(".cancel").click(function () {//取消订单
             var oid = $(this).parent().attr("oid");

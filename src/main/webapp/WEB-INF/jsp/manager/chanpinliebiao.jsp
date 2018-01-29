@@ -223,16 +223,20 @@
         $(".del").click(function () {
             //alert( $(this).attr("pid") );
             $.ajax({
-                url:"<%=basePath%> / ",
+                url:"<%=basePath%>goods/del",
                 data:{gid:$(this).attr("gid")},
                 type:"get",
-                dataType:"text",
+                dataType:"json",
                 success:function(data){
-                    if(data=="true")
+                    if(data==true)
+                    {
                         alert("删除成功");
+                        var info={pageNo:1,pageSize:10};
+                        var url="<%=basePath%>goods/getGoodsList";
+                        send_post(url,info);
+                    }
                     else
                         alert("删除失败");
-                    window.location.href="<%=basePath%> / ";
                 },
                 error:function(){
                     alert("请求失败");

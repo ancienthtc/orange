@@ -97,42 +97,42 @@ public class GoodsController {
     }
 
 
-    //测试页面
-    @RequestMapping("/tp")
-    public String testPage()
-    {
-        return "manager/test";
-    }
-
-    @RequestMapping("/tp2")
-    @ResponseBody
-    public String testFile(@RequestParam("file") MultipartFile[] file ,HttpServletRequest request)
-    {
-        //log.info(file.getName() + "/" );
-
-        //获得物理路径webapp所在路径
-        String pathRoot = request.getSession().getServletContext().getRealPath("");
-        String path="";
-        List<String> listImagePath=new ArrayList<String>();
-        for (MultipartFile mf : file) {
-            log.info(mf.getSize()+"");
-            if(!mf.isEmpty()){
-                //生成uuid作为文件名称
-                //String uuid = UUID.randomUUID().toString().replaceAll("-","");
-                //获得文件类型（可以判断如果不是图片，禁止上传）
-                String contentType=mf.getContentType();
-                //获得文件后缀名称
-                //String imageName=contentType.substring(contentType.indexOf("/")+1);
-                String name = "." + mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".") + 1) ;
-                path="/static/images/"+mf.getName()+name;
-                log.info(pathRoot+path);
-                //mf.transferTo(new File(pathRoot+path));
-                //listImagePath.add(path);
-            }
-        }
-
-        return "t";
-    }
+//    //测试页面
+//    @RequestMapping("/tp")
+//    public String testPage()
+//    {
+//        return "manager/test";
+//    }
+//
+//    @RequestMapping("/tp2")
+//    @ResponseBody
+//    public String testFile(@RequestParam("file") MultipartFile[] file ,HttpServletRequest request)
+//    {
+//        //log.info(file.getName() + "/" );
+//
+//        //获得物理路径webapp所在路径
+//        String pathRoot = request.getSession().getServletContext().getRealPath("");
+//        String path="";
+//        List<String> listImagePath=new ArrayList<String>();
+//        for (MultipartFile mf : file) {
+//            log.info(mf.getSize()+"");
+//            if(!mf.isEmpty()){
+//                //生成uuid作为文件名称
+//                //String uuid = UUID.randomUUID().toString().replaceAll("-","");
+//                //获得文件类型（可以判断如果不是图片，禁止上传）
+//                String contentType=mf.getContentType();
+//                //获得文件后缀名称
+//                //String imageName=contentType.substring(contentType.indexOf("/")+1);
+//                String name = "." + mf.getOriginalFilename().substring(mf.getOriginalFilename().lastIndexOf(".") + 1) ;
+//                path="/static/images/"+mf.getName()+name;
+//                log.info(pathRoot+path);
+//                //mf.transferTo(new File(pathRoot+path));
+//                //listImagePath.add(path);
+//            }
+//        }
+//
+//        return "t";
+//    }
 
 
     //商品添加
@@ -317,8 +317,11 @@ public class GoodsController {
     @ResponseBody
     public String goodsDel(Integer gid)
     {
-
-        return "";
+        if( goodsService.GoodsDel(gid) > 0 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
     //规格添加

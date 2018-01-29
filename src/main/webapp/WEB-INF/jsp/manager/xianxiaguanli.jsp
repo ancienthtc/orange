@@ -503,29 +503,39 @@
         /**特殊**/
         $(".sure").click(function () {//确认订单
             var oid = $(this).parent().attr("oid");
-            $.ajax({
-                url: "../order/accept",
-                type: 'post',
-                dataType: 'json',
-                data: { sequence: oid },
-                success: function (data) {
-                    if(data.status==0)
-                    {
-                        console.log(data.msg);
-                        var url="<%=basePath%>order/getAdminOrderOffline";
-                        var page=$("#pageNo0").val();
-                        var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
-                        send_post0(url,info);
+
+            layer.prompt({
+                formType: 2,
+                //value: '',
+                title: '填写运费(非负数)'
+            }, function(value, index, elem){
+                //alert(value); //得到value
+                $.ajax({
+                    url: "../order/accept",
+                    type: 'post',
+                    dataType: 'json',
+                    data: { sequence: oid , freight:value },
+                    success: function (data) {
+                        if(data.status==0)
+                        {
+                            console.log(data.msg);
+                            var url="<%=basePath%>order/getAdminOrderOffline";
+                            var page=$("#pageNo0").val();
+                            var info={pageNo:page,pageSize:10,orderStatus:orderstatus,shopStatus:shopstatus}
+                            send_post0(url,info);
+                        }
+                        else
+                        {
+                            alert(data.msg);
+                        }
+                    },
+                    error: function () {
+                        alert('服务器繁忙..请稍后重试！');
                     }
-                    else
-                    {
-                        alert(data.msg);
-                    }
-                },
-                error: function () {
-                    alert('服务器繁忙..请稍后重试！');
-                }
+                });
+                layer.close(index);
             });
+
         });
         $(".cancel").click(function () {//取消订单
             var oid = $(this).parent().attr("oid");
@@ -711,7 +721,7 @@
         /**特殊**/
         $(".send").click(function () {
             //var logistics = '';
-            var oid = $(this).parent().attr("oid");
+            var oid = $(this).attr("oid");
             // layer.prompt({title: '填写快递公司与物流单号'},function(val, index){
             //     layer.msg('得到了'+val);
             //     logistics = val;
@@ -1050,32 +1060,32 @@
         $.post(url,info,
             function(result){
                 //获取tbody
-                var tbody1=$("#tbody0");
+                var tbody2=$("#tbody2");
                 //清空tbody
-                tbody1.empty();
+                tbody2.empty();
                 for(var i=0;i<result.dataList.length;i++)
                 {
                     var show1="";
                     var a="";
-                    tbody1.append("<tr style='text-align: center'>");
-                    tbody1.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
-                    tbody1.append("<td>"+result.dataList[i].sequence+"</td>");
-                    tbody1.append("<td >已付款</td>");//变
-                    tbody1.append("<td >"+result.dataList[i].paytime+"</td>");
-                    tbody1.append("<td >"+result.dataList[i].goodsprice+"</td>");
-                    tbody1.append("<td >"+result.dataList[i].scorecost+"</td>");
-                    tbody1.append("<td >"+result.dataList[i].allprice+"</td>");
-                    tbody1.append("<td >"+result.dataList[i].contact+"</td>");
-                    tbody1.append("<td class='td-status'><span class='label label-success radius'>待取货</span></td>");//变
+                    tbody2.append("<tr style='text-align: center'>");
+                    tbody2.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
+                    tbody2.append("<td>"+result.dataList[i].sequence+"</td>");
+                    tbody2.append("<td >已付款</td>");//变
+                    tbody2.append("<td >"+result.dataList[i].paytime+"</td>");
+                    tbody2.append("<td >"+result.dataList[i].goodsprice+"</td>");
+                    tbody2.append("<td >"+result.dataList[i].scorecost+"</td>");
+                    tbody2.append("<td >"+result.dataList[i].allprice+"</td>");
+                    tbody2.append("<td >"+result.dataList[i].contact+"</td>");
+                    tbody2.append("<td class='td-status'><span class='label label-success radius'>待取货</span></td>");//变
 
                     a+="<td>";
-                    a+="<a href='javascript:;' title='发货' class='btn btn-xs btn-success'><i class='fa fa-cubes bigger-120'></i></a>";
+                    a+="<a href='javascript:;' title='发货' oid='"+result.dataList[i].sequence+"' class='btn btn-xs btn-success send'><i class='fa fa-cubes bigger-120'></i></a>";
                     a+="<a title='订单详细' href='<%=basePath%>order/toOrderDetail/"+result.dataList[i].sequence+"'" +
                         " class='btn btn-xs btn-info order_detailed'><i class='fa fa-list bigger-120'></i></a>";
                     a+="<a title='删除' href='javascript:;' class='btn btn-xs btn-warning'><i class='fa fa-trash bigger-120'></i></a>";
                     a+="</td>";
-                    tbody1.append(a);
-                    tbody1.append("</tr>");
+                    tbody2.append(a);
+                    tbody2.append("</tr>");
                 }
                 //页码隐藏域
                 var s="<div class='page'  v-show='show'>";

@@ -34,7 +34,7 @@ public interface OrderService {
     PagedResult<Order> getUserOrderByStatus(Integer uid,Integer pageNo,Integer pageSize,Integer shopstatus,Integer orderstatus);
 
     //接单
-    Map<String,Object> accept(String sequence);
+    Map<String,Object> accept(String sequence, Double freight);
 
     //付款(回调)
     Map<String,Object> pay(String sequence,String price, Integer stauts);

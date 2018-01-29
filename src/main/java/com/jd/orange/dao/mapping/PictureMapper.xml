@@ -36,6 +36,11 @@
     delete from t_picture
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  
+  <delete id="deleteByType" parameterType="java.lang.String" >
+    DELETE FROM `t_picture` WHERE pictype = #{type,jdbcType=VARCHAR}
+  </delete>
+  
   <insert id="insert" parameterType="com.jd.orange.model.Picture" >
     insert into t_picture (id, route, filename, 
       pictype, createtime, j_c

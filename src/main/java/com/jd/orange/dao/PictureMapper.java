@@ -23,4 +23,6 @@ public interface PictureMapper {
 
     //获取数量
     int getOtherPicCount();
+
+    int deleteByType(String type);
 }

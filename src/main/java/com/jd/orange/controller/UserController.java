@@ -80,6 +80,18 @@ public class UserController {
         return JSON.toJSONString(userPagedResult,filter);
     }
 
+    //用户注销
+    @RequestMapping("/userDel")
+    @ResponseBody
+    public String userDel(Integer uid)
+    {
+        //短信验证
+
+        //删除购物车,收货地址,(图片),所有订单
+
+        return "";
+    }
+
 
     /*  用户模块  */
     //进入商城首页

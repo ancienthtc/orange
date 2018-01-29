@@ -186,16 +186,22 @@
         $(".del").click(function () {
             //alert( $(this).attr("pid") );
             $.ajax({
-                url:"<%=basePath%>/",
-                data:{pid:$(this).attr("pid")},
+                url:"<%=basePath%>part/del",
+                data:{id:$(this).attr("pid")},
                 type:"get",
-                dataType:"text",
+                dataType:"json",
                 success:function(data){
-                    if(data=="true")
+                    if(data == true)
+                    {
                         alert("删除成功");
+                        var info={pageNo:1,pageSize:10}
+                        var url="<%=basePath%>part/getInitList";
+                        send_post(url,info);
+                    }
                     else
                         alert("删除失败");
-                    window.location.href="<%=basePath%> / ";
+                    //window.location.href="<%=basePath%>part/del";
+
                 },
                 error:function(){
                     alert("请求失败");

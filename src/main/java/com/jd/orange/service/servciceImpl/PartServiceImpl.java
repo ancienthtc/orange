@@ -1,6 +1,7 @@
 package com.jd.orange.service.servciceImpl;
 
 import com.github.pagehelper.PageHelper;
+import com.jd.orange.dao.GoodsMapper;
 import com.jd.orange.dao.PartMapper;
 import com.jd.orange.model.Part;
 import com.jd.orange.service.PartService;
@@ -18,6 +19,9 @@ public class PartServiceImpl implements PartService {
     @Resource
     private PartMapper partMapper;
 
+    @Resource
+    private GoodsMapper goodsMapper;
+
     @Override
     public List<Part> getFatherPart() {
         return partMapper.getFatherParts();
@@ -33,7 +37,14 @@ public class PartServiceImpl implements PartService {
     public int PartDel(Integer pid) {
         if(partMapper.getChildPart(pid).isEmpty())
         {
-            return partMapper.deleteByPrimaryKey(pid);
+            if( goodsMapper.selectGoodsWithFormatsByPart(pid).size() == 0 ) //分类下没有商品
+            {
+                return partMapper.deleteByPrimaryKey(pid);
+            }
+            else
+            {
+                return 0;
+            }
         }
         return 0;
     }

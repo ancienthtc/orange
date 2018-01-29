@@ -84,11 +84,11 @@
                     <td class="munber"><a href="#">10</a>&nbsp;个</td>
                 </tr>
                 <tr>
-                    <td class="name">待结算订单：</td>
+                    <td class="name">待付款订单：</td>
                     <td class="munber"><a href="#">13</a>&nbsp;个</td>
                 </tr>
                 <tr>
-                    <td class="name">已成交订单数：</td>
+                    <td class="name">已完成订单数：</td>
                     <td class="munber"><a href="#">26</a>&nbsp;个</td>
                 </tr>
                 <tr>
@@ -107,7 +107,7 @@
                     <td class="munber"><a href="#">340</a>&nbsp;个</td>
                 </tr>
                 <tr>
-                    <td class="name">回收站商品：</td>
+                    <td class="name">下架商品：</td>
                     <td class="munber"><a href="#">10</a>&nbsp;个</td>
                 </tr>
                 <tr>
@@ -115,11 +115,11 @@
                     <td class="munber"><a href="#">13</a>&nbsp;个</td>
                 </tr>
                 <tr>
-                    <td class="name">下架商品：</td>
+                    <td class="name">总规格数：</td>
                     <td class="munber"><a href="#">26</a>&nbsp;个</td>
                 </tr>
                 <tr>
-                    <td class="name">商品评论：</td>
+                    <td class="name">总销量：</td>
                     <td class="munber"><a href="#">21s6</a>&nbsp;条</td>
                 </tr>
 

@@ -295,7 +295,7 @@ public class OrderServiceImpl implements OrderService{
     //接单
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public Map<String,Object> accept(String sequence) {
+    public Map<String,Object> accept(String sequence , Double freight) {
         Map<String,Object> m=new HashMap<String, Object>();
         Order order=orderMapper.selectOrderWithDetail(sequence);
         try {
@@ -335,6 +335,10 @@ public class OrderServiceImpl implements OrderService{
                 }
                 //订单状态更改
                 order.setOrderstatus(1);
+                //运费加入
+                order.setFreight(freight);
+                //总价变更
+                order.setAllprice( order.getAllprice() + freight );
                 orderMapper.updateByPrimaryKey(order);
             }
             else{
