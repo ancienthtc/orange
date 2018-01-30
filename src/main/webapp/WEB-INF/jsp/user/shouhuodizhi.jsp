@@ -86,7 +86,7 @@
                                             <c:if test="${i.ismain==0}">
                                                 <span class="default-icon"></span>
                                             </c:if>
-                                            <p class="cellName" style="width:95%">${i.recipient}(tel: ${i.tel} / phone: ${i.phone})</p>
+                                            <p class="cellName" style="width:95%">${i.recipient} ${i.tel}</p>
                                             <p class="cellAddress" style="width:95%">${i.detail} / ${i.zip}</p>
                                         </div>
                                         <div class="sitem-m">

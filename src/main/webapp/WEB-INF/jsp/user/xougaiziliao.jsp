@@ -31,6 +31,15 @@
     <!--[if IE]>
     <script src="<%=basePath%>fontpage/js/html5.js"></script>
     <![endif]-->
+    <style>
+        .x_b{width: 30%;float: left;}
+.xingbie{width: 75%;}
+        .sjh{float: left;}
+        .gender1{margin-left: -50% !important;position: relative;top:6%;border-radius: 100%;}
+        .gender2{position: relative;top:6%;border-radius: 100%;}
+        .xb_wz{height: 30px;line-height: 30px;position: relative;top: -3px;}
+        .checkbox-inline{padding-left: 0;}
+    </style>
 </head>
 <body class="huibg">
 <div class="header">
@@ -84,42 +93,45 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 x_b">
             性别：
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 xingbie">
 
             <label class="checkbox-inline">
                 <input type="radio" name="optionsRadiosinline" id="optionsRadios3"
-                       value="男" class="gender1 gen" >
-                男
+                       value="男" class="gender1 gen" checked="checked" >
+                <span class="xb_wz">男</span>
             </label>
 
             <label class="checkbox-inline">
                 <input type="radio" name="optionsRadiosinline" id="optionsRadios4"
-                       value="女" class="gender2 gen" >
-                女
+                       value="女" class="gender2 gen"  checked="checked">
+                <span class="xb_wz">女</span>
             </label>
 
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 sjh">
             手机号：
         </div>
         <div class="col-md-10">
-            <%--<input type="text" class="form-control" value="${sessionScope.user.tel}" placeholder="请输入11位手机号码">--%>
+            <div style="margin-left: -5%;display: inline-block;">
             ${sessionScope.user.tel}
+            </div>
+            <%--<input type="text" class="form-control" value="${sessionScope.user.tel}" placeholder="请输入11位手机号码">--%>
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2">
-            电话号：
-        </div>
-        <div class="col-md-10">
-            <input type="text" class="form-control" name="phone" value="${sessionScope.user.phone}" placeholder="请输入电话号码">
-        </div>
-    </div>
+    <%--<div class="row">--%>
+        <%--<div class="col-md-2">--%>
+            <%--电话号：--%>
+        <%--</div>--%>
+        <%--<div class="col-md-10">--%>
+            <%--<input type="text" class="form-control" name="phone" value="${sessionScope.user.phone}" placeholder="请输入电话号码">--%>
+        <%--</div>--%>
+    <%--</div>--%>
     <div class="row">
         <div class="col-md-2">
             邮箱：

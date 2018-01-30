@@ -64,12 +64,12 @@ public class LoginServiceImpl implements LoginService {
         Map<String, Object> m = new HashMap<String, Object>();
         if( userMapper.checkTel(phone) == null )
         {
-            m.put("msg","成功");
+            m.put("msg","注册成功");
             m.put("status",0);
         }
         else
         {
-            m.put("msg","已注册的号码");
+            m.put("msg","手机号已被注册");
             m.put("status",1);
         }
         return m;

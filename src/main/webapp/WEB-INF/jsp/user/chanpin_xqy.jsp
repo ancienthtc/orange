@@ -129,7 +129,7 @@
             <p class="pay_type">
                 <span class="pr">支付类别：</span>
                 <span>
-						<img src="<%=basePath%>fontpage/images/zhifubao.png" width="35" height="35">
+						<img src="<%=basePath%>fontpage/images/zhifubao.png" width="32" height="30">
 						支付宝
 						</span>
                 <span>
@@ -142,8 +142,8 @@
                 </span>
             </p>
             <p>
-                <span>留言:</span><span><input type="text" name="detail" placeholder="说点什么吧..." id="message"
-     style="border: 1px solid #66666629;width: 84%;padding-bottom: 50px; border-radius: 4px;color: #666666;font-size: 14px;"></span>
+                <span style="margin-left: 6.6%">留 言：</span><span><input type="text" name="detail" placeholder="说点什么吧..." id="message"
+     style="border: 1px solid #cccccc ;width: 70%;padding-bottom: 40px; border-radius: 4px;color: #666666;font-size: 14px;margin-left: 1.8%"></span>
             </p>
         </div>
     </div>

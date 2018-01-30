@@ -53,7 +53,7 @@
 				<img src="<%=basePath%>fontpage/images/zuojiantou.png">
 			</a>
 			<div>
-				个人资料
+				收货地址
 			</div>
 		</div>
                 <div class="common-wrapper mbNone">
@@ -81,9 +81,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="name_tips">
-                            苏州市里河新村82-1幢里河菜场79号
-                        </div>
+                        <%--<div class="name_tips">--%>
+                            <%--苏州市里河新村82-1幢里河菜场79号--%>
+                        <%--</div>--%>
                         <div class="step4 border-1px">
                             <div class="s-item bdb-1px">
                                 <div class="sitem-r">
@@ -113,22 +113,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="step4 border-1px">
-                            <div class="s-item bdb-1px">
-                                <div class="sitem-r">
-                                    <c:if test="${empty address}">
-                                        <input type="text" id="Phone" name="Phone" class="w8" placeholder="请输入电话号">
-                                    </c:if>
-                                    <c:if test="${not empty address}">
-                                        <input type="text" id="Phone" name="Phone" class="w8" value="${address.phone}" placeholder="请输入电话号">
-                                    </c:if>
-
-
-                                    <b class="jf-close" style="right:20px;display:none;"></b>
-                                </div>
-                            </div>
-                        </div>
                         <div class="step4 border-1px">
                             <div class="s-item bdb-1px">
                                 <div class="sitem-r">
@@ -147,7 +131,7 @@
                         <c:if test="${empty address}">
                             <div class="f_choose f_choose_selected" data-checked="true">
                                 <b></b>
-                                <label>设置为默认地址</label>
+                                <label class="sh_mr">设置为默认地址</label>
                             </div>
                         </c:if>
                         <c:if test="${not empty address}">
@@ -241,7 +225,7 @@
             }
             var UserName = $('#UserName').val();
             if (UserName == "" || UserName == null) {
-                $.prompt("姓名不能为空", {
+                alert("姓名不能为空", {
                     buttons: { "确定": true }
                 });
                 return;
@@ -254,7 +238,7 @@
 
             var Tel = $('#Tel').val();
             if (Tel == "" || Tel == null) {
-                $.prompt("手机号码不能为空", {
+                alert("手机号码不能为空", {
                     buttons: { "确定": true }
                 });
                 return;
@@ -280,7 +264,7 @@
 
             var ZipCode = $('#ZipCode').val();
             if (ZipCode == "" || ZipCode == null) {
-                $.prompt("邮编不能为空", {
+                alert("邮编不能为空", {
                     buttons: { "确定": true }
                 });
                 return;
@@ -301,13 +285,13 @@
                 success: function (data) {
                     debugger
                     if (data == true) {
-                        $.prompt("成功", {
+                        alert("成功", {
                             buttons: { "确定": true }
                         });
                         debugger
                         window.location.href = "<%=basePath%>user/toAddress";
                     } else {
-                        $.prompt("失败", {
+                        alert("失败", {
                             buttons: { "确定": true }
                         });
                     }

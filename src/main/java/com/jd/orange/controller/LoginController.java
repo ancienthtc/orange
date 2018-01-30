@@ -139,7 +139,7 @@ public class LoginController {
 
         if( Integer.valueOf(result) == 0 )
         {
-            return "{\"Statu\":0,\"Msg\":\"成功\"}";
+            return "{\"Statu\":0,\"Msg\":\"注册成功\"}";
         }
         else
         {

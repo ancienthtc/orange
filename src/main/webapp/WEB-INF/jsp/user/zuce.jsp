@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/new_main.css" />
     <script src="<%=basePath%>fontpage/js/jquery-1.10.1.min.js"></script>
     <script src="<%=basePath%>fontpage/js/jquery-impromptu.min.js"></script>
+    <style>
+        .jqidefaultbutton{background: #ee4b02 !important;}
+        /*.jqibox{position: inherit !important;}*/
+      input[type=submit]{ -webkit-appearance: none;}
+        .jqi{top: 185px !important;}
+
+    </style>
 </head>
 <body>
     <div class="container" id="container">
@@ -56,8 +63,8 @@
                                 <a href="javascript:SendPhone();" id="sendCode" style="background-color: #999" class="sendcode">获取验证码</a>
                             </div>
                             <div class="control-group">
-                                <a  class="btn-style1" id="submit" style="z-index: 999">立即注册</a>
-                                                                      <!--id="submit"-->
+                                <%--<a id="submit" class="btn-style1">立即注册</a>--%>
+                                <input type="submit" id="submit" class="btn-style1" value="立即注册">
                             </div>
                         </div>
                         <!--<div class="clearfix">
@@ -70,6 +77,17 @@
                 </div>
 
                 <script type="text/javascript">
+                    // $("#phone").blur(function () {
+                    //     phone = this.value;
+                    //     RegCellPhone = /^(1)([0-9]{10})?$/;
+                    //     falg=phone.search(RegCellPhone);
+                    //     if (falg==-1){
+                    //         $.prompt("请输入正确的手机号码");
+                    //
+                    //         return false;
+                    //         this.focus();
+                    //     }
+                    // });
                     //验证手机号码
                     function checkTel(phone) {
                         var reg = /^1[3|4|5|7|8](\d){9}$/;
@@ -80,44 +98,44 @@
                         }
                     }
                     //手机号码焦点离开事件
-                    function is_reg_phone() {
-                        debugger;
-                        var phone = $("#phone").val();
-                        if (phone.length != 11) {
-                            $.prompt("您的手机号码不正确", {
-                                buttons: { "确定": true }
-                            });
-                            return;
-                        }else if (phone.length == 11) {
-                            if (!checkTel(phone)) {
-                                $.prompt("您的手机号码不正确", {
-                                    buttons: { "确定": true }
-                                });
-                                return;
-                            } else {//验证手机号码是否可以注册
-                                $.ajax({
-                                    url: "../login/checkPhone",
-                                    type: 'post',
-                                    dataType: 'json',
-                                    data: { phone: phone },
-                                    success: function (data) {
-                                        debugger;
-                                        if (data.status == 1) {
-                                            $("#sendCode").css({ "background": "#999" });
-                                            $.prompt(data.msg, {
-                                                buttons: { "确定": true }
-                                            });
-                                        } else {
-                                            $("#sendCode").css({ "background": "#093" });
-                                        }
-                                    },
-                                    error: function () {
-                                        alert('服务器繁忙..请稍后重试！');
-                                    }
-                                });
-                            }
-                        }
-                    }
+                    // function is_reg_phone() {
+                    //     debugger;
+                    //     var phone = $("#phone").val();
+                    //     if (phone.length != 11) {
+                    //         $.prompt("请输入您的11位手机号码", {
+                    //             buttons: { "确定": true }
+                    //         });
+                    //         return;
+                    //     }else if (phone.length == 11) {
+                    //         if (!checkTel(phone)) {
+                    //             $.prompt("您的手机号码不正确", {
+                    //                 buttons: { "确定": true }
+                    //             });
+                    //             return;
+                    //         } else {//验证手机号码是否可以注册
+                    //             $.ajax({
+                    //                 url: "../login/checkPhone",
+                    //                 type: 'post',
+                    //                 dataType: 'json',
+                    //                 data: { phone: phone },
+                    //                 success: function (data) {
+                    //                     debugger;
+                    //                     if (data.status == 1) {
+                    //                         $("#sendCode").css({ "background": "#999" });
+                    //                         $.prompt(data.msg, {
+                    //                             buttons: { "确定": true }
+                    //                         });
+                    //                     } else {
+                    //                         $("#sendCode").css({ "background": "#093" });
+                    //                     }
+                    //                 },
+                    //                 error: function () {
+                    //                     alert('服务器繁忙..请稍后重试！');
+                    //                 }
+                    //             });
+                    //         }
+                    //     }
+                    // }
 
                     //验证登陆密码
                     function is_reg_pwd()
@@ -311,17 +329,18 @@
     </div>
     <script type="text/javascript">
 
-        $(function () {
-
-            $(".returntop").click(function () {
-                $('body,html').animate({ scrollTop: 0 }, 1000);
-            });
-            var height = document.getElementById("container").offsetHeight;
-            if (height >= 568) {
-                $("#minHeight").removeClass('minHeight');
-                $(".returntop").show();
-            }
-        });
+        // $(function () {
+        //
+        //     $(".returntop").click(function () {
+        //
+        //         $('body,html').animate({ scrollTop: 0 }, 1000);
+        //     });
+        //     var height = document.getElementById("container").offsetHeight;
+        //     if (height >= 568) {
+        //         $("#minHeight").removeClass('minHeight');
+        //         $(".returntop").show();
+        //     }
+        // });
     </script>
 </body>
 </html>

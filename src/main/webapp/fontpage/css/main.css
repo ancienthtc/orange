@@ -107,6 +107,7 @@ a,a:hover{text-decoration: none;}
     margin: 0 auto;
     height: 39px;
     padding-top: 5px;
+    margin-left: 22%;
 }
 .header .search{
     width: 232px;
@@ -144,7 +145,7 @@ a,a:hover{text-decoration: none;}
 }
 .sy_header{background: url(../images/yinghua2.jpg);background-size: 100% 100%;width: 100%;height: 50px;}
 .logo{width:30%;height: 70%;margin: 2% 0 0 3%;float: left;}
-.sy_header input{width: 35%;height:28px;border: 1px solid #6666663d;float: right;margin: 11px 3% 0 0;border-radius: 25px;padding-left: 10px;font-size: 14px;color:#666666;}
+.sy_header input{width: 35%;height:28px;border: 1px solid #cccccc;float: right;margin: 11px 3% 0 0;border-radius: 25px;padding-left: 10px;font-size: 14px;color:#666666;}
 .suosou{width: 25px;height: 25px;margin: 11px 0 0 0;position: relative;left:56%;float: left;}
 /*common*/
 .fs-style1{

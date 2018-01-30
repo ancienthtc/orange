@@ -43,7 +43,7 @@
         <img src="<%=basePath%>fontpage/images/zuojiantou.png">
     </a>
     <div>
-        分类
+        我的订单
     </div>
 </div>
 <div class="step_Tab border-1px">
@@ -51,17 +51,18 @@
         <div class="sitem-l action ">
             待付款
         </div>
-        <span class="line"></span>
+        <%--<span class="line"></span>--%>
         <div class="sitem-l">
             审核中
         </div>
-        <span class="line"></span>
         <div class="sitem-l">
             待收货
         </div>
-        <span class="line"></span>
         <div class="sitem-l">
             已完成
+        </div>
+        <div class="sitem-l">
+            待发货
         </div>
     </div>
 </div>
@@ -100,15 +101,12 @@
     </div>
     <!-- 选项卡2 -->
     <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;" id="sure">
-
-
         <div class="fenye">
             <a href="#">
                 <div class="sx_ys">
                     上一页
                 </div>
             </a>
-
             <div class="zj_xl">
                 <select name="">
                     <option value="">第1页</option>
@@ -158,6 +156,30 @@
     <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;" id="finish">
 
 
+        <div class="fenye">
+            <a href="#">
+                <div class="sx_ys">
+                    上一页
+                </div>
+            </a>
+
+            <div class="zj_xl">
+                <select name="">
+                    <option value="">第1页</option>
+                    <option value="">第2页</option>
+                    <option value="">第3页</option>
+                    <option value="">第4页</option>
+                </select>
+            </div>
+            <a href="#">
+                <div class="sx_ys">
+                    下一页
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- 选项卡5 -->
+    <div class="nav_coupon_none" style="text-align: center; line-height: 20px;display: none;" id="finish">
         <div class="fenye">
             <a href="#">
                 <div class="sx_ys">
