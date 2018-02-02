@@ -64,7 +64,7 @@ public class LoginServiceImpl implements LoginService {
         Map<String, Object> m = new HashMap<String, Object>();
         if( userMapper.checkTel(phone) == null )
         {
-            m.put("msg","注册成功");
+            m.put("msg","可以注册");//手机号不存在
             m.put("status",0);
         }
         else

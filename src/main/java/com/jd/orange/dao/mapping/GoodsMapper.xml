@@ -196,7 +196,7 @@
     t_format.goods,t_format.fname_j,t_format.fclass_j,t_format.j_c
     FROM
     t_goods
-    LEFT JOIN t_format ON t_format.goods = t_goods.id
+    RIGHT JOIN t_format ON t_format.goods = t_goods.id
     WHERE
     <if test="array!=null">
       <foreach collection="array" item="item" index="index"  separator="OR">
@@ -207,7 +207,8 @@
         OR t_goods.name_j LIKE CONCAT('%',#{item},'%')
       </foreach>
     </if>
-    AND shelf IS NOT NULL
+    AND t_goods.shelf IS NOT NULL
+    GROUP BY gid
     ORDER BY shelf DESC
   </select>
 
@@ -229,7 +230,7 @@
     WHERE g.shelf is not null and g.recommend=1
     ORDER BY b.sales DESC,b.price , b.stock desc
     ) as t
-    #WHERE shelf is not null and recommend=1
+    WHERE shelf is not null and recommend=1
     GROUP BY t.id
   </select>
 
@@ -266,6 +267,82 @@
     GROUP BY t.id
     LIMIT #{limit,jdbcType=INTEGER}
   </select>
+
+  <!-- 最新排序 -->
+  <select id="OrderByNew" resultType="com.jd.orange.model.Goods">
+      SELECT * FROM
+      (
+        SELECT
+            g.id gid,g.`name`,g.freight,g.shelf,g.detail,g.pic1,
+            g.recommend,g.createtime,g.updatetime,g.part,g.j_c,
+            f.id fid  , f.fclass as fclass ,f.price , f.sales ,f.stock
+        from t_goods g
+        RIGHT JOIN t_format f ON g.id= f.id
+        WHERE g.shelf is not NULL
+      ) as t
+      GROUP BY t.gid
+      ORDER BY  t.shelf desc , t.createtime DESC
+  </select>
+
+  <!-- 默认排序 -->
+  <select id="OrderByDefault" resultType="com.jd.orange.model.Goods">
+      SELECT * FROM
+      (
+        SELECT
+            g.id gid,g.`name`,g.freight,g.shelf,g.detail,g.pic1,
+            g.recommend,g.createtime,g.updatetime,g.part,g.j_c,
+            f.id fid  , f.fclass as fclass ,f.price , f.sales ,f.stock
+        from t_goods g
+        RIGHT JOIN t_format f ON g.id= f.id
+        WHERE g.shelf is not NULL
+      ) as t
+      GROUP BY t.gid
+  </select>
+
+  <!-- 价格最低排序 -->
+  <select id="OrderByLowPrice" resultType="com.jd.orange.model.Goods">
+    SELECT * from
+    (
+      SELECT
+      g.id ,g.`name`,g.freight,g.shelf
+      ,g.pic1,g.pic2,g.pic3,g.recommend,
+      b.stock,b.sales,b.price
+      FROM
+      t_goods g
+      LEFT JOIN
+      t_format as b
+      ON b.goods = g.id
+      WHERE g.shelf is not null
+      ORDER BY b.price , b.stock desc
+    ) as t
+    WHERE shelf is not null
+    GROUP BY t.id
+    ORDER BY t.price
+  </select>
+
+  <select id="OrderByHighSales" resultType="com.jd.orange.model.Goods">
+    SELECT * from
+    (
+        SELECT
+        g.id ,g.`name`,g.freight,
+        g.shelf,g.pic1,g.pic2,
+        g.pic3,g.recommend,
+        b.stock,b.sales,b.price
+        FROM
+        t_goods g
+        LEFT JOIN
+        t_format as b
+        ON b.goods = g.id
+        WHERE g.shelf is not null
+    )
+    AS t LEFT JOIN
+    (SELECT goods ,SUM(sales) as `total` FROM t_format GROUP BY goods)
+    AS f ON f.goods = t.id
+    WHERE shelf is not null
+    GROUP BY t.id
+    ORDER BY total DESC
+  </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_goods
@@ -556,4 +633,7 @@
       j_c = #{jC,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
 </mapper>

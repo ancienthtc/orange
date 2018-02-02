@@ -26,7 +26,7 @@ import java.util.TreeMap;
 @Controller
 @RequestMapping("/WxPay")
 @Scope("prototype")
-public class WxPayController {
+public class WxScanPayController {
 
     @Autowired
     private OrderService orderService;
@@ -39,7 +39,7 @@ public class WxPayController {
      * @param price 单位:分
      * @return
      */
-    @RequestMapping("/pay")
+    @RequestMapping("/pay") //二维码支付
     public String pay(HttpServletRequest request, Model model, @RequestParam String body, @RequestParam String orderid, @RequestParam String price)
     {
 
@@ -91,6 +91,17 @@ public class WxPayController {
         return "user/QR";
     }
 
+
+
+
+    @RequestMapping("/pay2")
+    public String pay2()
+    {
+        return "";
+    }
+
+
+
     @RequestMapping("/QRcode")
     @ResponseBody
     public void getQrCode(String code_url, HttpServletResponse response) throws Exception {
@@ -104,7 +115,9 @@ public class WxPayController {
     @RequestMapping(value = "/result")
     @ResponseBody
     public void wechatOrderBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("--------result--------");
         System.out.println("ok!!!!!");
+        System.out.println("--------result--------");
         // 创建支付应答对象
         ResponseHandler resHandler = new ResponseHandler(request, response);
         resHandler.setKey(GlobalConfig.KEY);
@@ -155,6 +168,8 @@ public class WxPayController {
             System.out.println("通知签名验证失败");
         }
     }
+
+
 
 
     public String getIpAddr(HttpServletRequest request){

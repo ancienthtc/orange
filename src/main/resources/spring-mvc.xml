@@ -76,6 +76,8 @@
     <mvc:resources mapping="/assets/**" location="/assets/"/>
     <mvc:resources mapping="/fontpage/**" location="/fontpage/"/>
     <mvc:resources mapping="/backpage/**" location="/backpage/"/>
+
+    <mvc:resources mapping="/mp/*.txt" location="/mp/"/>
     <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
     <!--<mvc:resources mapping="/lib/**" location="/lib/"/>-->
 

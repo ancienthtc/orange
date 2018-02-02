@@ -166,7 +166,12 @@ public class CartController {
         else if(type==0)
         {
             Double amount=Double.valueOf( object.getString("amount") ) ;
+            if(object.getString("format") == null || object.getString("format").length()<=0)
+            {
+                return "user/gouwuche";
+            }
             Integer fid=Integer.valueOf( object.getString("format") );
+
             String detail = object.getString("detail");
             show = cartService.itemDetail(fid,amount,detail);
         }

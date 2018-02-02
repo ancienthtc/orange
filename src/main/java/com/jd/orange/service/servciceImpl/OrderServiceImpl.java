@@ -378,9 +378,9 @@ public class OrderServiceImpl implements OrderService{
         //System.out.println("sequence:"+sequence + "  rprice:"+rprice + "  stauts:"+stauts);
         Map<String,Object> m=new HashMap<String, Object>();
         Order order=orderMapper.selectBySequence(sequence);
-        //Integer OS = order.getOrderstatus();
-        //Integer SS = order.getShopstatus();
-        //System.out.println("OS:"+OS + "  SS:"+SS);
+//        Integer OS = order.getOrderstatus();
+//        Integer SS = order.getShopstatus();
+//        System.out.println("OS:"+OS + "  SS:"+SS);
         try {
             if(stauts!=0)   //0正确  1错误
             {
@@ -389,14 +389,17 @@ public class OrderServiceImpl implements OrderService{
                 throw new Exception();
             }
             //System.out.println("判断Order状态");
-            if(order.getOrderstatus() == 1 && order.getShopstatus() == 0 )
+            if(order.getOrderstatus() == 1 && order.getShopstatus() == 0 || order.getOrderstatus() == 1 && order.getShopstatus() == 1 )
             {
                 //System.out.println(Double.valueOf(rprice));
-                if (Double.valueOf(rprice)/100 < order.getAllprice() )
+                if(rprice!=null && (!rprice.equalsIgnoreCase("null"))   )
                 {
-                    m.put("status",2);
-                    m.put("msg","付款金额不符");
-                    throw new Exception();
+                    if (Double.valueOf(rprice)/100 < order.getAllprice() )
+                    {
+                        m.put("status",2);
+                        m.put("msg","付款金额不符");
+                        throw new Exception();
+                    }
                 }
 
                 order.setShopstatus(1);
@@ -419,6 +422,10 @@ public class OrderServiceImpl implements OrderService{
             //用户积分增加
             User user = userMapper.selectByPrimaryKey(order.getUser());
             Double price = order.getAllprice();
+            if(user.getInvalid()==null)
+            {
+                user.setInvalid(DateExample.getNowTimeByDate());//第一次获取积分
+            }
             user.setScore( user.getScore() + price.intValue() );
             if( !( userMapper.updateByPrimaryKeySelective(user) > 0 ) )
             {

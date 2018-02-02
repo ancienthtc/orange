@@ -46,4 +46,18 @@ public interface OrderMapper {
 
     List<Order> test(@Param("uid") Integer uid,@Param("shopstatus") Integer shopstatus,@Param("orderstatus") Integer orderstatus);
 
+    /* 定时任务 */
+
+    /**
+     * 7天不付款自动取消(压力操作)
+     * @return
+     */
+    int CancelOrderWithNoPay();
+
+    /**
+     * 线上订单14天不收货自动收货(压力操作)
+     * @return
+     */
+    int AutoReceiveInOnline();
+
 }

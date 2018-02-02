@@ -275,7 +275,7 @@
                     <div class="index_sale_z1" id="ganhuo">热销产品</div>
                     <div class="new">New</div>
                     <a href="chanpinliebiao.php">
-                        <div class="more">More</div>
+                        <%--<div class="more">More</div>--%>
                     </a>
                 </div>
                 <div class="index_floor_list">
@@ -315,7 +315,7 @@
                     <div class="index_sale_z1" id="ganhuo">推荐产品</div>
                     <div class="new">New</div>
                     <a href="chanpinliebiao.php">
-                        <div class="more">More</div>
+                        <%--<div class="more">More</div>--%>
                     </a>
                 </div>
                 <div class="index_floor_list">
@@ -344,7 +344,7 @@
                     <div class="index_sale_z1" id="ganhuo">最新产品</div>
                     <div class="new">New</div>
                     <a href="chanpinliebiao.php">
-                        <div class="more">More</div>
+                        <%--<div class="more">More</div>--%>
                     </a>
                 </div>
                 <div class="index_floor_list">

@@ -25,9 +25,11 @@ public class TestSecret {
     @Test
     public void depass()
     {
-        String s="iuf9imiiQRI";
+        String s="fovtZnZPnPI";
         System.out.println(Secret.dePass(s));
     }
+
+
 
 }
 //jwaOCl/P5PTtWKlGENiguwQ7oR4UGHfn

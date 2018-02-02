@@ -73,8 +73,8 @@ public class Juhe {
         }
     }
 
-    //实际使用
-    public static String sendCode(String mobile,String code){
+    //实际使用1
+    public static String sendCode_register(String mobile, String code){
         String result =null;
         String url ="http://v.juhe.cn/sms/send";//请求接口地址
         Map params = new HashMap();//请求参数
@@ -102,6 +102,30 @@ public class Juhe {
             return null;
         }
     }//{"reason":"操作成功","result":{"sid":"180103105338103011100003","fee":1,"count":1},"error_code":0}
+
+
+    //实际使用2
+    public static String sendCode_forget(String mobile,String code){
+        String result =null;
+        String url ="http://v.juhe.cn/sms/send";//请求接口地址
+        Map params = new HashMap();//请求参数
+        params.put("mobile",mobile);//接收短信的手机号码     //
+        params.put("tpl_id","62896");//短信模板ID，请参考个人中心短信模板设置  //57473
+        params.put("tpl_value","%23code%23%3d"+code);//变量名和变量值对。如果你的变量名或者变量值中带有#&=中的任意一个特殊符号，请先分别进行urlencode编码后再传递，<a href="http://www.juhe.cn/news/index/id/50" target="_blank">详细说明></a>
+        params.put("key",APPKEY);//应用APPKEY(应用详细页查询)
+        params.put("dtype","");//返回数据的格式,xml或json，默认json
+
+        try {
+            result =net(url, params, "GET");
+            JSONObject object = JSONObject.fromObject(result);
+            log.info( object.get("error_code")+":"+object.get("reason") );
+            return object.get("error_code").toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }//{"reason":"操作成功","result":{"sid":"180103105338103011100003","fee":1,"count":1},"error_code":0}
+
 
     public static void main(String[] args) {
         getRequest2();

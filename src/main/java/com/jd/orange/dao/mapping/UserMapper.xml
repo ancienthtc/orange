@@ -90,6 +90,11 @@
     SELECT 1 FROM t_user WHERE tel = #{tel,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectUserByTel" parameterType="java.lang.String" resultType="com.jd.orange.model.User">
+    SELECT <include refid="Base_Column_List" />
+    FROM `t_user` WHERE tel = #{tel,jdbcType=CHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
@@ -328,6 +333,10 @@
     UPDATE t_user
     SET logintime = #{time,jdbcType=TIMESTAMP}
     WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="ScoreInvalid">
+    UPDATE t_user SET score=0 ,invalid = NULL WHERE DATE_SUB(CURDATE(), INTERVAL 1 YEAR) > date(invalid)
   </update>
 
 </mapper>

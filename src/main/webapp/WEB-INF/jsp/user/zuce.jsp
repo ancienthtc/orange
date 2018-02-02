@@ -121,12 +121,12 @@
                     //                 success: function (data) {
                     //                     debugger;
                     //                     if (data.status == 1) {
-                    //                         $("#sendCode").css({ "background": "#999" });
+                    //                         $("#sendCode_register").css({ "background": "#999" });
                     //                         $.prompt(data.msg, {
                     //                             buttons: { "确定": true }
                     //                         });
                     //                     } else {
-                    //                         $("#sendCode").css({ "background": "#093" });
+                    //                         $("#sendCode_register").css({ "background": "#093" });
                     //                     }
                     //                 },
                     //                 error: function () {
@@ -167,7 +167,7 @@
                         if (sendVerifyNum == 0) {
                             $.ajax({
                                 type: "POST",
-                                url: "../login/sendCode",    //发送验证码
+                                url: "../login/sendCode_register",    //发送验证码
                                 data: {
                                     "phone": phone
                                 },
@@ -185,17 +185,17 @@
                     function ajaxMsgPhone(jsonData) {
                         debugger
                         if (jsonData.Statu == 0) {//成功
-                            $("#sendCode").disabled = "disabled";
+                            $("#sendCode_register").disabled = "disabled";
                             sendVerifyNum = 60;
                             var that = this;
                             //计时器
                             that.timer = setInterval(function () {
                                 sendVerifyNum--;
-                                $("#sendCode").html("" + sendVerifyNum + " 秒");
+                                $("#sendCode_register").html("" + sendVerifyNum + " 秒");
                                 if (sendVerifyNum <= 1) {
                                     sendVerifyNum = 0;
-                                    $("#sendCode").html("获取验证码");
-                                    $("#sendCode").disabled = "";
+                                    $("#sendCode_register").html("获取验证码");
+                                    $("#sendCode_register").disabled = "";
                                     clearInterval(that.timer);
                                 }
                             }, 1000);                                             

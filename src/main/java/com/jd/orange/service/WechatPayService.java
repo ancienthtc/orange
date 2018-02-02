@@ -105,7 +105,6 @@ public class WechatPayService {
 		client.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 		CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
 		HttpPost httpPost = new HttpPost(refundUrl);
-
 		try {
 			httpPost.setEntity(new StringEntity(xml, "UTF-8"));
 			CloseableHttpResponse response = httpClient.execute(httpPost);

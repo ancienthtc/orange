@@ -30,4 +30,17 @@ public interface UserMapper {
     List<User> getUserList(@Param("key") String keys, @Param("sc") String start_c,@Param("ec") String end_c,@Param("su") String start_u,@Param("eu") String end_u);
     //@Param("sc") String start_c,@Param("ec") String end_c,@Param("su") String start_u,@Param("eu") String end_u
     Integer checkTel(String tel);
+
+    User selectUserByTel(@Param("tel") String tel);
+
+
+    /* 定时任务 */
+    /**
+     * 积分失效 , 清除失效日期(压力操作)
+     * @return
+     */
+    int ScoreInvalid();
+
+
+
 }

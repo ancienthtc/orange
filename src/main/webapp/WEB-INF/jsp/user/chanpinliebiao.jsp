@@ -51,17 +51,20 @@
                         <!-- 排序类型 （0默认 1正序 2 倒序）
                              排序字段 （0默认 1 销量 2 创建时间 3 价格）-->
                         <li>
-                            <a href="javascript:GoodsSort(0);" class="cur" onclick="SelChange(this)">默认</a>
+                            <%--<a href="javascript:GoodsSort(0);" class="cur" onclick="SelChange(this)">默认</a>--%>
+                            <a id="default-list" class="cur" >默认</a>
                         </li>
                         <li>
-                            <a href="javascript:GoodsSort(1);" onclick="SelChange(this)" class="">最新↓</a>
+                            <%--<a href="javascript:GoodsSort(1);" onclick="SelChange(this)" class="">最新↓</a>--%>
+                            <a id="new-list" class="cur" >最新↓</a>
                         </li>
                         <li>
-                            <a href="javascript:GoodsSort(2);" onclick="SelChange(this)" class="">销量↓</a>
+                            <%--<a href="javascript:GoodsSort(2);" onclick="SelChange(this)" class="">销量↓</a>--%>
+                            <a id="sales-list" class="cur" >销量↓</a>
                         </li>
                         <li>
-                            <a href="javascript:GoodsSort(3);" onclick="SelChange(this)" class=""
-                               style="border-right: none;">价格↑</a>
+                            <%--<a href="javascript:GoodsSort(3);" onclick="SelChange(this)" class="" style="border-right: none;">价格↑</a>--%>
+                            <a id="price-list" class="" style="border-right: none;">价格↑</a>
                         </li>
                     </ul>
                 </div>
@@ -282,6 +285,24 @@
         var key = $("#proname").val();
         window.location.href = "<%=basePath%>goods/toGoodsListPage?type=5&&keys="+key;
     });
+
+    $("#default-list").click(function () {
+        window.location.href = "<%=basePath%>goods/toGoodsListPage?type=4";
+    });
+
+    $("#price-list").click(function () {
+        window.location.href = "<%=basePath%>goods/toGoodsListPage?type=1";
+    });
+
+    $("#new-list").click(function () {
+        window.location.href = "<%=basePath%>goods/toGoodsListPage?type=2";
+    });
+
+    $("#sales-list").click(function () {
+        window.location.href = "<%=basePath%>goods/toGoodsListPage?type=3";
+    });
+
+
 
 </script>
 

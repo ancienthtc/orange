@@ -101,6 +101,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserByTel(String tel) {
+        User user;
+        try {
+            user = userMapper.selectUserByTel(tel);
+        }catch (Exception e)
+        {
+            return null;
+        }
+        return user;
+
+    }
+
+    @Override
     public int UserInfoUpdate(User user) {
         if(user.getEmail()=="")
         {
@@ -151,6 +164,17 @@ public class UserServiceImpl implements UserService{
             m.put("msg","旧密码错误");
         }
         return m;
+    }
+
+    @Override
+    public int resetPass(Integer uid, String pass) {
+        User user = userMapper.selectByPrimaryKey(uid);
+        if(user == null)
+        {
+            return 0;
+        }
+        user.setPassword(Secret.enPass(pass));
+        return userMapper.updateByPrimaryKeySelective(user);
     }
 
 }

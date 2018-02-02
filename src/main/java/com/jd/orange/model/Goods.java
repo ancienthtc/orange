@@ -69,6 +69,9 @@ public class Goods {
     @Transient
     private Double sales;
 
+    @Transient
+    private String fclass;
+
     public Integer getId() {
         return id;
     }
@@ -283,5 +286,13 @@ public class Goods {
 
     public void setSales(Double sales) {
         this.sales = sales;
+    }
+
+    public String getFclass() {
+        return fclass;
+    }
+
+    public void setFclass(String fclass) {
+        this.fclass = fclass;
     }
 }

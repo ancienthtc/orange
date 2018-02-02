@@ -1,7 +1,13 @@
 package functionTest;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.dao.CartMapper;
+import com.jd.orange.dao.FormatMapper;
+import com.jd.orange.dao.GoodsMapper;
 import com.jd.orange.dao.OrderMapper;
+import com.jd.orange.model.Format;
 import com.jd.orange.model.Goods;
 import com.jd.orange.model.Part;
 import com.jd.orange.model.User;
@@ -21,6 +27,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,11 +45,31 @@ public class MybatisTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
     @Resource
     private OrderMapper orderMapper;
 
-    @Autowired
-    private OrderService orderService;
+    @Resource
+    private GoodsMapper goodsMapper;
+
+    @Resource
+    private FormatMapper formatMapper;
+
+    @Resource
+    private CartMapper cartMapper;
+
+
+
+    private ValueFilter filter = new ValueFilter() {
+        @Override
+        public Object process(Object obj, String s, Object v) {
+            if(v==null)
+                return "";
+            return v;
+        }
+    };
 
     @Test
     public void test1(){
@@ -124,5 +151,68 @@ public class MybatisTest {
         System.out.println( JSON.toJSON( orderService.getOrderDetail("1") ) );
     }
 
+    @Test
+    public void test6()
+    {
+        System.out.println(JSON.toJSON( orderService.getOrderListByStatus(1,10,null,null,null,0,0,0) ));
+    }
 
+    @Test
+    public void test7()
+    {
+        System.out.println(JSON.toJSON(goodsService.GoodsListPage(4)));
+//        List<Goods> g=goodsService.GoodsListPage(4);
+//        for (int i=0;i<g.size();i++)
+//        {
+//            for (int j=0;j<g.get(i).getFormats().size();j++)
+//            {
+//                System.out.println(i+" "+j+" "+g.get(i).getFormats().get(j).getFname() );
+//            }
+//        }
+
+    }
+
+    @Test
+    public void test8()
+    {
+        System.out.println(goodsMapper.selectGoodsWithFormatById(11).getId()+goodsMapper.selectGoodsWithFormatById(11).getFormats().get(1).getFname());
+    }
+
+    @Test
+    public void test9()
+    {
+        System.out.println( JSON.toJSON(formatMapper.formatList(10) ) );
+    }
+
+    @Test
+    public void test10()
+    {
+        System.out.println( JSON.toJSON( goodsMapper.getRecommendGoods() ) );
+    }
+
+    @Test
+    public void test11()
+    {
+        System.out.println( JSON.toJSON( goodsService.getNewGoods() ) );
+    }
+
+    @Test
+    public void test12()
+    {
+        List<Integer> ints=new ArrayList<Integer>();
+        ints.add(2);ints.add(3);
+        //System.out.println( cartMapper.test(ints) );
+    }
+
+    @Test
+    public void test13()
+    {
+        System.out.println(JSON.toJSONString(orderService.getUserOrderByStatus(3,1,5,0,0)));
+    }
+
+    @Test
+    public void test14()
+    {
+        System.out.println( JSON.toJSON(goodsService.goodsSearch(null,null,new String[]{"车","BCD"} )) );
+    }
 }

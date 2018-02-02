@@ -30,9 +30,13 @@ public interface UserService {
 
     User getUser(Integer uid);
 
+    User getUserByTel(String tel);
+
     int UserInfoUpdate(User user);
 
     Map<String,Integer> getUserOrderCount(Integer uid);
 
     Map<String,Object> alterPass(Integer uid , String oldPass ,String newPass);
+
+    int resetPass(Integer uid , String pass);
 }

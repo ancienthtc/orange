@@ -9,6 +9,7 @@ import com.jd.orange.model.Order;
 import com.jd.orange.model.User;
 import com.jd.orange.service.OrderService;
 import com.jd.orange.service.UserService;
+import com.jd.orange.util.api.wx2.GlobalConfig;
 import com.jd.orange.util.pagehelper.PagedResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +84,7 @@ public class OrderController {
     @RequestMapping("/info")
     public String toInfo(Integer status , Model model)
     {
+        System.out.println( "info status:" + status);
         if(status == 0)
         {
             model.addAttribute("info","支付成功,等待跳转");
@@ -145,11 +147,15 @@ public class OrderController {
     //订单确认
     @RequestMapping(value = "/accept" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
     @ResponseBody
-    public String orderSure(String sequence,Object freight)
+    public String orderSure(String sequence,String freight)
     {
         Map<String,Object> m = new HashMap<String, Object>();
         try {
-            Double f = Double.parseDouble( freight.toString() );
+            Double f = Double.parseDouble( freight );
+            if(f<0)
+            {
+                throw new Exception();
+            }
             m = orderService.accept(sequence,f);
         }catch (Exception e)
         {
@@ -167,7 +173,7 @@ public class OrderController {
     //@ResponseBody
     public String orderPay(String sequence,String price,Integer status)
     {
-        System.out.println( sequence + "  "+ price + "  " + status );
+        System.out.println( "**pay**:  " + sequence + "  "+ price + "  " + status );
         Map<String,Object> m = orderService.pay(sequence,price,status);
         if( Integer.valueOf(m.get("status").toString()) == 0 )
         {
@@ -287,6 +293,9 @@ public class OrderController {
         if( user.getId() == order.getUser() )
         {
             model.addAttribute("sequence",sequence);
+            //直接付款
+            model.addAttribute("AppId", GlobalConfig.APPID);
+            model.addAttribute("AppSecret",GlobalConfig.APPSECRET);
             return "user/zhifufangshi";
         }
         else
@@ -296,15 +305,20 @@ public class OrderController {
     }
 
     @UserCheck
-    @RequestMapping("/toWxPay")
+    @RequestMapping("/toWxScanPay")
     public String toPay(@RequestParam String sequence)
     {
         Order order = orderService.getOrder(sequence);
         String body = order.getSequence()+"号订单付款";
-        String orderid = order.getSequence();
+        //String orderid = order.getSequence();
+        if(order.getShopstatus()==1)
+        {
+            return "redirect:/order/toMyOrder";
+        }
         String price = String.valueOf( new Double(order.getAllprice()*100 ).intValue()  );
-        return "redirect:/WxPay/pay?body="+body+"&&orderid="+orderid+"&&price="+price;
+        return "redirect:/WxPay/pay?body="+body+"&&orderid="+sequence+"&&price="+price;
     }
+
 
 
     @RequestMapping(value = "/getUserNoSure" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
@@ -329,6 +343,18 @@ public class OrderController {
             return "";
         }
         return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,0,1),filter );
+    }
+
+    @RequestMapping(value = "/getUserNoSend" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String getUserNoSend(Integer pageNo,HttpSession session)
+    {
+        User user = (User) session.getAttribute("user");
+        if(user==null)
+        {
+            return "";
+        }
+        return JSON.toJSONString( orderService.getUserOrderByStatus(user.getId(),pageNo,5,1,1),filter );
     }
 
     @RequestMapping(value = "/getUserNoReceive" , method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")

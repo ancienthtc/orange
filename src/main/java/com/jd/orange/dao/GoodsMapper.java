@@ -51,4 +51,15 @@ public interface GoodsMapper {
 
     List<Goods> goodsSearch(String[] key);
 
+    //按默认排序
+    List<Goods> OrderByDefault();
+
+    //按最新排序
+    List<Goods> OrderByNew();
+
+    //按价格最低排序
+    List<Goods> OrderByLowPrice();
+
+    //按销量最高排
+    List<Goods> OrderByHighSales();
 }

@@ -84,6 +84,18 @@ public interface GoodsService {
     //商品搜索
     List<Goods> goodsSearch(String[] key);
 
+    //默认排序
+    List<Goods> selectDefaultList();
+
+    //最新排序
+    List<Goods> selectNewList();
+
+    //销量
+    List<Goods> selectSalesList();
+
+    //价格
+    List<Goods> selectPriceList();
+
     PagedResult<Goods> goodsSearch(Integer pageNo, Integer pageSize,String[] key);
 
     Goods getGoodsDetail(Integer id);

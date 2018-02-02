@@ -435,6 +435,26 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Override
+    public List<Goods> selectDefaultList() {
+        return goodsMapper.OrderByDefault();
+    }
+
+    @Override
+    public List<Goods> selectNewList() {
+        return goodsMapper.OrderByNew();
+    }
+
+    @Override
+    public List<Goods> selectSalesList() {
+        return goodsMapper.OrderByHighSales();
+    }
+
+    @Override
+    public List<Goods> selectPriceList() {
+        return goodsMapper.OrderByLowPrice();
+    }
+
+    @Override
     public PagedResult<Goods> goodsSearch(Integer pageNo, Integer pageSize, String[] key) {
         pageNo = pageNo == null?1:pageNo;
         pageSize = pageSize == null?16:pageSize;

@@ -173,18 +173,21 @@ public class UserController {
     }
 
     //进入忘记密码
-    @UserCheck
+    //@UserCheck
     @RequestMapping("/toForgetPass")
     public String forgetPass()
     {
+
         return "user/zhaohuimima";
     }
 
     //进入重置密码
-    @UserCheck
-    @RequestMapping("/toResetPass")
-    public String resetPass()
+    //@UserCheck
+    @RequestMapping(value = "/toResetPass" , method = RequestMethod.POST)
+    public String resetPass(Model model,String phone)
     {
+        User user = userService.getUserByTel(phone);
+        model.addAttribute("user",user);
         return "user/zhaohuimima_cz";
     }
 
@@ -261,6 +264,7 @@ public class UserController {
         return "false";
     }
 
+    //修改密码
     @RequestMapping(value = "/alterPass" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String AlterPass(HttpSession session,String oldPass,String newPass)
@@ -275,6 +279,18 @@ public class UserController {
         }
         m = userService.alterPass(user.getId(),oldPass,newPass);
         return JSON.toJSONString( m );
+    }
+
+    //重置密码
+    @RequestMapping(value = "/resetPass" , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String ResetPass(Integer id ,String newPass)
+    {
+        if( userService.resetPass(id,newPass) == 1 )
+        {
+            return "true";
+        }
+        return "false";
     }
 
 }

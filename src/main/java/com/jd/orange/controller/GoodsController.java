@@ -388,13 +388,19 @@ public class GoodsController {
         {
             switch (type)
             {
-                case 1:     //首页-More
+                case 0:     //首页-More(取消中)
+                    break;
+                case 1:     //价格升序
+                    model.addAttribute("goods",goodsService.selectPriceList());
                     break;
                 case 2:     //最新
+                    model.addAttribute("goods",goodsService.selectNewList());
                     break;
                 case 3:     //销量降序
+                    model.addAttribute("goods",goodsService.selectSalesList());
                     break;
                 case 4:     //默认
+                    model.addAttribute("goods",goodsService.selectDefaultList());
                     break;
                 case 5:     //关键词搜索
                     String[] key=keys.split("\\s+");

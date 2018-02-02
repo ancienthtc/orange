@@ -14,11 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.Map;
 
 /**
@@ -111,7 +112,7 @@ public class LoginController {
 
     }
 
-    //手机验证码
+    //手机验证码(注册)
     @RequestMapping(value = "/sendCode" , produces = "text/html;charset=UTF-8;")
     @ResponseBody
     public String send(HttpSession session,String phone)
@@ -129,17 +130,17 @@ public class LoginController {
 //        if(code==null)
 //        {
 //            session.setAttribute("textcode",new GenerateString().getRandomString(4));
-//            result= Juhe.sendCode(phone,(String)session.getAttribute("textcode"));
+//            result= Juhe.sendCode_register(phone,(String)session.getAttribute("textcode"));
 //        }
 
-        session.setAttribute("textcode",new GenerateString().getRandomString(4));
+        session.setAttribute("textcode",new GenerateString().getRandomString_Num(4));
         session.setMaxInactiveInterval(15 * 60);//session 15分钟时长
-        result= Juhe.sendCode(phone,(String)session.getAttribute("textcode"));
+        result= Juhe.sendCode_register(phone,(String)session.getAttribute("textcode"));
 
 
         if( Integer.valueOf(result) == 0 )
         {
-            return "{\"Statu\":0,\"Msg\":\"注册成功\"}";
+            return "{\"Statu\":0,\"Msg\":\"发送成功\"}";
         }
         else
         {
@@ -168,6 +169,57 @@ public class LoginController {
         }
         return "false";
     }
+
+    //找回密码
+    @RequestMapping(value = "/forgetSend", produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String ForgetPassCheck(HttpSession session,@RequestParam String phone)
+    {
+        Map<String, Object> m = loginService.checkRepeat(phone) ;
+        if( Integer.valueOf(m.get("status").toString()) == 0 )
+        {
+            return "{\"Statu\":2,\"Msg\":\"手机号不存在\"}";
+        }
+        else
+        {
+            if( session.getAttribute("numcode")!=null && session.getAttribute("tel")!=null )
+            {
+                return "{\"Statu\":1,\"Msg\":\"请勿重复发送\"}";
+            }
+
+            String result;
+            session.setAttribute("numcode",new GenerateString().getRandomString_Num(4));
+            session.setAttribute("tel",phone);
+            session.setMaxInactiveInterval(5 * 60);//session 5分钟时长
+            result= Juhe.sendCode_forget(phone,(String)session.getAttribute("numcode"));
+            if( Integer.valueOf(result) == 0 )
+            {
+                return "{\"Statu\":0,\"Msg\":\"发送成功\"}";
+            }
+            else
+            {
+                return "{\"Statu\":1,\"Msg\":\"发送失败\"}";
+            }
+        }
+    }
+
+    //提交验证码(忘记密码)
+    @RequestMapping(value = "/subForget", method = RequestMethod.POST , produces = "text/html;charset=UTF-8;")
+    @ResponseBody
+    public String submitCode(HttpSession session, @RequestParam String tel,@RequestParam String code)
+    {
+        String s_tel = (String) session.getAttribute("tel");
+        String s_num = (String) session.getAttribute("numcode");
+
+        if( s_tel.equals(tel) && s_num.equals(code) )
+        {
+            session.removeAttribute("tel");
+            session.removeAttribute("numcode");
+            return "{\"Statu\":0,\"Msg\":\"验证成功\"}";
+        }
+        return "{\"Statu\":1,\"Msg\":\"验证失败\"}";
+    }
+
 
     @UserCheck
     @RequestMapping("/UserSignOut")
