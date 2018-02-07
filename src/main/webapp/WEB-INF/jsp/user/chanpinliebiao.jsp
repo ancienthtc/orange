@@ -80,8 +80,16 @@
                                     <div class="goolist_name">
                                         <p class="title">${i.name}</p>
                                         <p>
-                                            <span class="price">¥${i.formats.get(0).price}</span>
-                                            <span class="kilo" style="float:right">¥ ${i.formats.get(0).price}/${i.formats.get(0).fclass}</span>
+                                            <c:if test="${not empty i.formats}">
+                                                <span class="price">¥${i.formats.get(0).price}</span>
+                                                <span class="kilo" style="float:right">¥ ${i.formats.get(0).price}/${i.formats.get(0).fclass}</span>
+                                            </c:if>
+                                            <c:if test="${empty i.formats}">
+                                                <span class="price">¥${i.price}</span>
+                                                <span class="kilo" style="float:right">¥ ${i.price}/${i.fclass}</span>
+                                            </c:if>
+
+
                                         </p>
                                             <%--<a href="gouwuche.php">--%>
                                             <%--<span class="addcart"  onclick="addcart($(this))">--%>

@@ -53,10 +53,12 @@
         </div>
         <%--<span class="line"></span>--%>
         <div class="sitem-l">
-            审核中
+            待收货
+            <%--审核中--%>
         </div>
         <div class="sitem-l">
-            待收货
+            审核中
+            <%--待收货--%>
         </div>
         <div class="sitem-l">
             已完成

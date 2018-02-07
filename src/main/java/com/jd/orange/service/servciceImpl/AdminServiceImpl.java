@@ -3,6 +3,7 @@ package com.jd.orange.service.servciceImpl;
 import com.github.pagehelper.PageHelper;
 import com.jd.orange.dao.AdminMapper;
 import com.jd.orange.model.Admin;
+import com.jd.orange.model.advanced.CountInfo;
 import com.jd.orange.service.AdminService;
 import com.jd.orange.util.date.DateExample;
 import com.jd.orange.util.pagehelper.BeanUtil;
@@ -11,6 +12,7 @@ import com.jd.orange.util.password.Secret;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -100,5 +102,25 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = adminMapper.selectByPrimaryKey(id);
         admin.setPassword( Secret.dePass(admin.getPassword()) );
         return admin;
+    }
+
+    @Override
+    public boolean GuideDel(String absolutePath) {
+        File file = new File(absolutePath);
+        if (file.exists()){
+            return file.delete();
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public CountInfo getCal() {
+        CountInfo info ;
+        info = adminMapper.goodsCal();
+        info.add( adminMapper.formatCal() );
+        info.add( adminMapper.orderCal() );
+        System.out.println(info.toString() );
+        return info;
     }
 }

@@ -137,22 +137,25 @@ public class GoodsController {
 
     //商品添加
     @RequestMapping("/add")
-    @ResponseBody
+    //@ResponseBody
     public String GoodsInsert(HttpServletRequest request, Goods goods ,@RequestParam("file1") MultipartFile file1
-            ,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3)
+            ,@RequestParam("file2") MultipartFile file2,@RequestParam("file3") MultipartFile file3,Model model)
     {
         String ServerPath=null;
+        model.addAttribute("URL","goods/toGoodsList");
         //request.getSession().getServletContext().getRealPath("/") + "goods/"+ title + ".jpg"
         ServerPath=request.getSession().getServletContext().getRealPath("/");
         String[] str = request.getParameterValues("part");
         if(str.length<2)
         {
-            return "false";
+            //return "false";
+            model.addAttribute("MESSAGE","错误分类");
         }
         else if(str.length==2)
         {
             if(Integer.valueOf(str[1])<0) {
-                return "false";
+                //return "false";
+                model.addAttribute("MESSAGE","错误分类");
             }
             goods.setPart(Integer.valueOf(str[1]));
         }
@@ -165,14 +168,17 @@ public class GoodsController {
         }
         else
         {
-            return "false";
+            //return "false";
+            model.addAttribute("MESSAGE","失败");
         }
 
         if (goodsService.GoodsAdd(goods,file1,file2,file3,ServerPath) > 0)
         {
-            return "true";
+            //return "true";
+            model.addAttribute("MESSAGE","成功");
         }
-        return "false";
+        //return "false";
+        return "manager/alert_info";
     }
 
     //商品其他图片添加

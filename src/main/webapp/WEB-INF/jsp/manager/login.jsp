@@ -85,7 +85,7 @@
                                     <%--</label>--%>
 
                                     <button type="button" class="width-35 pull-right btn btn-sm btn-primary"
-                                            id="login_btn">
+                                            id="login_btn" style="position: relative;left: -100px;top: -7px;">
                                         <i class="icon-key"></i>
                                         登陆
                                     </button>

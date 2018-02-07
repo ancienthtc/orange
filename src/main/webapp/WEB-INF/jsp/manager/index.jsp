@@ -400,6 +400,19 @@
                             <!--  <li class="home"><a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl"><i class="icon-double-angle-right"></i>个人信息</a></li>-->
                         </ul>
                     </li>
+
+                    <li><a href="#" class="dropdown-toggle"><i class="icon-db"></i><span
+                            class="menu-text">案内管理 </span><b class="arrow icon-angle-down"></b></a>
+                        <ul class="submenu">
+                            <!--								<li class="home"><a href="javascript:void(0)" name="admin_Competence.html" title="权限管理"  class="iframeurl"><i class="icon-double-angle-right"></i>权限管理</a></li>
+                            -->
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>admin/toGuideWrite" title="编辑案内"
+                                                class="iframeurl"><i class="icon-double-angle-right"></i>自定义案内</a></li>
+                            <li class="home"><a href="javascript:void(0)" name="<%=basePath%>admin/toGuideDel" title="管理员列表"
+                                                class="iframeurl"><i class="icon-double-angle-right"></i>默认案内</a></li>
+                            <!--  <li class="home"><a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl"><i class="icon-double-angle-right"></i>个人信息</a></li>-->
+                        </ul>
+                    </li>
                     <!--<li>
                     <a href="#" class="dropdown-toggle"><i class="icon-list"></i><span class="menu-text"> 交易管理 </span><b class="arrow icon-angle-down"></b></a>
                     <ul class="submenu">

@@ -2,6 +2,7 @@ package com.jd.orange.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.ValueFilter;
+import com.jd.orange.baidu.ueditor.ActionEnter;
 import com.jd.orange.common.AdminCheck;
 import com.jd.orange.common.Alevel;
 import com.jd.orange.model.Admin;
@@ -24,9 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 @Controller
@@ -67,7 +72,8 @@ public class AdminController {
         model.addAttribute("userAmount",userService.getUserAmount());
         //商城订单数量
         model.addAttribute("orderAmount",orderService.orderAmount());
-        //
+        //统计
+        model.addAttribute("cal",adminService.getCal());
         return "manager/home";
     }
 
@@ -112,6 +118,21 @@ public class AdminController {
     {
         model.addAttribute("admin",adminService.getAdmin(aid));
         return "manager/adminAlter";
+    }
+
+    //进入案内
+    @AdminCheck(Alevel.L1)
+    @RequestMapping("/toGuideWrite")
+    public String toGuideWrite()
+    {
+        return "manager/guide_write";
+    }
+
+    @AdminCheck(Alevel.L1)
+    @RequestMapping("/toGuideDel")
+    public String toGuideDel()
+    {
+        return "manager/default_guide";
     }
 
     //进入个人中心
@@ -222,6 +243,75 @@ public class AdminController {
         }
         return "false";
     }
+
+    /* 案内管理 */
+    @RequestMapping("/getHtml")
+    //@ResponseBody
+    public String getHtml(HttpServletRequest request, HttpServletResponse response , Model model)
+    {
+        PrintWriter out = null;
+        String BasePath = request.getSession().getServletContext().getRealPath("/");
+        try {
+            String wait = request.getParameter("param");
+            //加JSP头
+            wait = "<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" %>" + "\n" + wait;
+            //替换head
+            String replace = "<head><meta charset=\"UTF-8\">" + "\n";
+            replace += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">";
+            replace += "\n";
+            //开始替换
+            wait = wait.replaceFirst("<head>", replace);
+            //输出流
+            out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(BasePath+"file\\guide.jsp"), "utf-8"));
+            out.println(wait);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(out!=null) out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        model.addAttribute("URL","admin/toGuideWrite");
+        model.addAttribute("MESSAGE","完成");
+        return "manager/alert_info";    //todo: 增加页面 ， 专门接收alert信息
+    }
+
+    @RequestMapping("/GuideDel")
+    //@ResponseBody
+    public String GuideDel(HttpServletRequest request,Model model)
+    {
+        String basePath = request.getSession().getServletContext().getRealPath("/");
+        String absolutePath = basePath + "file\\guide.jsp";
+        model.addAttribute("URL","admin/toGuideWrite");
+        if( adminService.GuideDel(absolutePath) )
+        {
+            model.addAttribute("MESSAGE","完成");
+        }
+        else
+        {
+            model.addAttribute("MESSAGE","没有文件可删 ");
+        }
+        return "manager/alert_info";
+    }
+
+    /**
+     * 百度富文本编辑器：图片上传
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/upload")
+    public void imgUploadByUeditor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding( "utf-8" );
+        response.setHeader("Content-Type" , "text/html");
+        ServletContext application=request.getServletContext();
+        String rootPath = application.getRealPath( "/" );
+        PrintWriter out = response.getWriter();
+        out.write( new ActionEnter( request, rootPath ).exec() );
+    }
+
 
     //权限不足提示
     @RequestMapping("/lack")

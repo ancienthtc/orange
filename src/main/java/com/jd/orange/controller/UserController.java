@@ -10,6 +10,8 @@ import com.jd.orange.model.User;
 import com.jd.orange.service.*;
 import com.jd.orange.util.PictureType;
 import com.jd.orange.util.pagehelper.PagedResult;
+import com.jd.orange.util.word.TempleWordUtil;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,8 +116,14 @@ public class UserController {
 
     //进入案内
     @RequestMapping("/toGuide")
-    public String toGuide()
+    public String toGuide(HttpServletRequest request)
     {
+        String basePath = request.getSession().getServletContext().getRealPath("/") + "file"+"\\";
+        String fileName = "guide.jsp";
+        if( new File(basePath+fileName).exists() )
+        {
+            return "redirect:/file/guide.jsp";
+        }
         return "user/annei";
     }
 
@@ -292,5 +303,40 @@ public class UserController {
         }
         return "false";
     }
+
+//    @RequestMapping(value = "/exportWord")
+//    public void exportWord(HttpServletResponse response, HttpServletRequest request) throws IOException {
+//        String templatePath = request.getServletContext().getRealPath("") + "/template/税源信息比对.docx";
+//        String fileName = new String("税源信息比对".getBytes("gb2312"), "ISO8859-1") + ".docx";
+//        /*数据*/
+//        Map<String, Object> params = new HashMap<String, Object>();
+//        params.put("${name}", "aaaa");
+//        params.put("${sex}", "bbbb");
+//
+//        TempleWordUtil wordUtil = new TempleWordUtil();
+//
+//        XWPFDocument doc;
+//        InputStream is = new FileInputStream(templatePath);
+//        //  is = getClass().getClassLoader().getResourceAsStream(templatePath);
+//        doc = new XWPFDocument(is);   //只能使用.docx的
+//
+//        wordUtil.replaceInPara(doc, params);
+//        //替换表格里面的变量
+//        wordUtil.replaceInTable(doc, params);
+//        OutputStream os = response.getOutputStream();
+//
+//        response.setContentType("application/vnd.ms-excel");
+//        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+//
+//        doc.write(os);
+//
+//        wordUtil.close(os);
+//        wordUtil.close(is);
+//
+//        os.flush();
+//        os.close();
+//
+//    }
+
 
 }

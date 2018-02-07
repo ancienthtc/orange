@@ -49,7 +49,7 @@
             <span class="wx">微信扫码</span>
             <br/><span class="wx_1">找人扫一扫代付</span>
             <span class="xuanzhong">
-                <input id="item3" type="radio" name="test" value="1" checked>
+                <input id="item3" type="radio" name="test" value="1">
                 <label for="item3"></label>
             </span>
         </div>

@@ -60,6 +60,30 @@
     SELECT 1 FROM `t_admin` WHERE admin = #{admin,jdbcType=VARCHAR}
   </select>
 
+  <!-- 统计 CountInfo -->
+  <select id="goodsCal" resultType="com.jd.orange.model.advanced.CountInfo">
+    SELECT
+    COUNT(1) goodsCount ,
+    SUM(CASE WHEN shelf is not NULL then 1 else 0 end) goodsCountLoad ,
+    SUM(CASE WHEN shelf is NULL then 1 else 0 end) goodsCountUnder
+    FROM
+    t_goods
+  </select>
+
+  <select id="formatCal" resultType="com.jd.orange.model.advanced.CountInfo">
+    SELECT SUM(sales) goodsAllSales , count(1) goodsFormatCount FROM t_format
+  </select>
+
+  <select id="orderCal" resultType="com.jd.orange.model.advanced.CountInfo">
+    SELECT
+    SUM(CASE WHEN orderstatus=0 AND shopstatus=0 then 1 else 0 end) orderCountNoSure,
+    SUM(CASE WHEN orderstatus=1 AND shopstatus=0 then 1 else 0 end) orderCountNoPay,
+    SUM(CASE WHEN orderstatus=1 AND shopstatus=1 then 1 else 0 end) orderCountNoSend,
+    SUM(CASE WHEN orderstatus=1 AND shopstatus=3 then 1 else 0 end) orderCountFinish,
+    SUM(CASE WHEN orderstatus=7 then 1 else 0 end) orderCountCancel
+    FROM t_order
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_admin
     where id = #{id,jdbcType=INTEGER}

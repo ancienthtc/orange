@@ -273,14 +273,14 @@
       SELECT * FROM
       (
         SELECT
-            g.id gid,g.`name`,g.freight,g.shelf,g.detail,g.pic1,
+            g.id,g.`name`,g.freight,g.shelf,g.detail,g.pic1,
             g.recommend,g.createtime,g.updatetime,g.part,g.j_c,
             f.id fid  , f.fclass as fclass ,f.price , f.sales ,f.stock
         from t_goods g
         RIGHT JOIN t_format f ON g.id= f.id
         WHERE g.shelf is not NULL
       ) as t
-      GROUP BY t.gid
+      GROUP BY t.id
       ORDER BY  t.shelf desc , t.createtime DESC
   </select>
 
@@ -289,14 +289,14 @@
       SELECT * FROM
       (
         SELECT
-            g.id gid,g.`name`,g.freight,g.shelf,g.detail,g.pic1,
+            g.id,g.`name`,g.freight,g.shelf,g.detail,g.pic1,
             g.recommend,g.createtime,g.updatetime,g.part,g.j_c,
             f.id fid  , f.fclass as fclass ,f.price , f.sales ,f.stock
         from t_goods g
         RIGHT JOIN t_format f ON g.id= f.id
         WHERE g.shelf is not NULL
       ) as t
-      GROUP BY t.gid
+      GROUP BY t.id
   </select>
 
   <!-- 价格最低排序 -->

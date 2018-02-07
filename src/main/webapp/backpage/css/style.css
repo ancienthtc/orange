@@ -47,7 +47,7 @@ body
 	font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif ;
 	font-size: 13px;
 	color: #393939;
-	line-height: 1.5;
+	/*line-height: 1.5;*/
 }
 .page-content {
 	background: #fff;

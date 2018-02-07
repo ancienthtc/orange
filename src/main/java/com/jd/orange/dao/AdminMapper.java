@@ -1,6 +1,7 @@
 package com.jd.orange.dao;
 
 import com.jd.orange.model.Admin;
+import com.jd.orange.model.advanced.CountInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +26,12 @@ public interface AdminMapper {
     List<Admin> getAdminListByLevel(@Param("key") String key,@Param("start") String start,@Param("end") String end ,@Param("level") Integer level);
 
     Integer adminCheck(@Param("admin") String admin);
+
+    CountInfo goodsCal();
+
+    CountInfo formatCal();
+
+    CountInfo orderCal();
+
+
 }

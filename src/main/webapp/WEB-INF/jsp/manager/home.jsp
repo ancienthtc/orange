@@ -77,23 +77,23 @@
                 <tbody>
                 <tr>
                     <td class="name">未处理订单：</td>
-                    <td class="munber"><a href="#">0</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.orderCountNoSure}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">待发货订单：</td>
-                    <td class="munber"><a href="#">10</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.orderCountNoSend}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">待付款订单：</td>
-                    <td class="munber"><a href="#">13</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.orderCountNoPay}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">已完成订单数：</td>
-                    <td class="munber"><a href="#">26</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.orderCountFinish}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">交易失败：</td>
-                    <td class="munber"><a href="#">26</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.orderCountCancel}</a>&nbsp;个</td>
                 </tr>
                 </tbody>
             </table>
@@ -104,23 +104,23 @@
                 <tbody>
                 <tr>
                     <td class="name">商品总数：</td>
-                    <td class="munber"><a href="#">340</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.goodsCount}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">下架商品：</td>
-                    <td class="munber"><a href="#">10</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.goodsCountUnder}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">上架商品：</td>
-                    <td class="munber"><a href="#">13</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.goodsCountLoad}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">总规格数：</td>
-                    <td class="munber"><a href="#">26</a>&nbsp;个</td>
+                    <td class="munber"><a href="#">${cal.goodsFormatCount}</a>&nbsp;个</td>
                 </tr>
                 <tr>
                     <td class="name">总销量：</td>
-                    <td class="munber"><a href="#">21s6</a>&nbsp;条</td>
+                    <td class="munber"><a href="#">${cal.goodsAllSales}</a>&nbsp;条</td>
                 </tr>
 
                 </tbody>

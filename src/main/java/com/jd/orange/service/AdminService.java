@@ -1,6 +1,7 @@
 package com.jd.orange.service;
 
 import com.jd.orange.model.Admin;
+import com.jd.orange.model.advanced.CountInfo;
 import com.jd.orange.util.pagehelper.PagedResult;
 
 import java.util.List;
@@ -31,4 +32,9 @@ public interface AdminService {
     Admin getAdmin(String admin,String pass);
 
     Admin getAdmin(Integer id);
+
+    boolean GuideDel(String absolutePath);
+
+    //数量统计(首页)
+    CountInfo getCal();
 }

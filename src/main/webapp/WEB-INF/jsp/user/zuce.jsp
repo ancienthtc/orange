@@ -167,7 +167,7 @@
                         if (sendVerifyNum == 0) {
                             $.ajax({
                                 type: "POST",
-                                url: "../login/sendCode_register",    //发送验证码
+                                url: "../login/sendCode",    //发送验证码
                                 data: {
                                     "phone": phone
                                 },
@@ -185,17 +185,17 @@
                     function ajaxMsgPhone(jsonData) {
                         debugger
                         if (jsonData.Statu == 0) {//成功
-                            $("#sendCode_register").disabled = "disabled";
+                            $("#sendCode").disabled = "disabled";
                             sendVerifyNum = 60;
                             var that = this;
                             //计时器
                             that.timer = setInterval(function () {
                                 sendVerifyNum--;
-                                $("#sendCode_register").html("" + sendVerifyNum + " 秒");
+                                $("#sendCode").html("" + sendVerifyNum + " 秒");
                                 if (sendVerifyNum <= 1) {
                                     sendVerifyNum = 0;
-                                    $("#sendCode_register").html("获取验证码");
-                                    $("#sendCode_register").disabled = "";
+                                    $("#sendCode").html("获取验证码");
+                                    $("#sendCode").disabled = "";
                                     clearInterval(that.timer);
                                 }
                             }, 1000);                                             

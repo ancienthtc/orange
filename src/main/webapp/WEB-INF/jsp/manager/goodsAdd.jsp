@@ -109,7 +109,7 @@
             <%--</div>--%>
 
             <div class="clearfix cl">
-                <label class="form-label col-2">图片说明1：</label>
+                <label class="form-label col-2">图片说明1*：</label>
                 <div class="formControls col-2 "  style="margin-top: 5px">
                     <input type="file" id="exampleInputFile1" name="file1" >
                 </div>

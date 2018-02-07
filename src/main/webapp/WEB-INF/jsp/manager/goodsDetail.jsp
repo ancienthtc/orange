@@ -96,7 +96,7 @@
             <div class="clearfix cl">
                 <div class="fc">
                 <div class="tupian">
-                    <label class="form-label col-2">图片说明1：</label>
+                    <label class="form-label col-2">图片说明1*：</label>
                 </div>
 
                 <div class="formControls col-2 tupian-img" >

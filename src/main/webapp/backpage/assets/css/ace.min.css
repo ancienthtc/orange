@@ -434,7 +434,7 @@ blockquote,blockquote.pull-right
 
 .position-relative
 {
-  position: relative;
+  position: relative;top: 150px;
 }
 
 .position-absolute
