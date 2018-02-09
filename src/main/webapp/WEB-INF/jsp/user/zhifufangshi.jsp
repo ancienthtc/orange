@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
     <link href="<%=basePath%>fontpage/css/mall.css" rel="stylesheet" type="text/css">
     <script src="<%=basePath%>fontpage/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>

@@ -15,6 +15,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>橘子屋</title>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/style.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/font_1459473269_4751618.css">
     <link href="<%=basePath%>fontpage/css/bootstrap.min.css" rel="stylesheet">

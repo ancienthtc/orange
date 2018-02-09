@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
     <link href="<%=basePath%>backpage/assets/css/codemirror.css" rel="stylesheet">
@@ -157,7 +158,7 @@
 
             <div class="clearfix cl">
                 <div class="Button_operation">
-                    <button  class="btn btn-primary radius" type="submit"><i class="icon-save "></i>保存并提交审核</button>
+                    <button  class="btn btn-primary radius" type="submit"><i class="icon-save "></i>保存</button>
                     <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
                 </div>
             </div>
@@ -184,8 +185,30 @@
 <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
 <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
 
+<script type="text/javascript" src="<%=basePath%>backpage/js/form.js"></script>
+
 <script>
     $(function() {
+
+        <!-- format表单提交 -->
+        $("#submit").click(function () {
+            $("#form-article-add").ajaxSubmit({
+                beforeSubmit: function () {
+                },
+                success: function (date) {
+                    //console.log(date);
+                    if (date == "true" || date == true)
+                        layer.msg("添加成功");
+                    else
+                        layer.msg("添加失败");
+                    window.location.href = "<%=basePath%>goods/toGoodsAdd" ;
+                },
+                error: function (data) {
+                    alert("错误");
+                }
+            })
+        });
+
 
         $.ajax({
             url:"<%=basePath%>part/getPartChoiceFather",

@@ -78,6 +78,12 @@
     <servlet-name>default</servlet-name>
     <url-pattern>*.css</url-pattern>
   </servlet-mapping>
+  <!-- ICO图标 -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.ico</url-pattern>
+  </servlet-mapping>
+
 
   <!-- spring mvc servlet-->
   <servlet>
@@ -97,6 +103,10 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <mime-mapping>
+    <extension>ico</extension>
+    <mime-type>image/x-icon</mime-type>
+  </mime-mapping>
 
   <welcome-file-list>
     <welcome-file>/index.jsp</welcome-file>
@@ -118,8 +128,6 @@
   <session-config>
     <session-timeout>15</session-timeout>
   </session-config>
-
-
 
   <!-- 获取根目录 like E:\develop_tools\apache-tomcat-7.0.59\webapps\bookMobile -->
   <!-- 通过 System.getProperty("evan.webapp") 获取 -->

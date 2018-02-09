@@ -565,11 +565,11 @@
   </update>
 
   <update id="CancelOrderWithNoPay">
-    UPDATE t_order SET orderstatus = 7 where DATE_SUB(CURDATE(), INTERVAL 7 DAY) > date(updatetime) and orderstatus = 1 and shopstatus = 0
+    UPDATE t_order SET orderstatus = 7 , updatetime = now()  where DATE_SUB(CURDATE(), INTERVAL 7 DAY) > date(updatetime) and orderstatus = 1 and shopstatus = 0
   </update>
 
   <update id="AutoReceiveInOnline">
-    UPDATE t_order SET orderstatus = 3 where DATE_SUB(CURDATE(), INTERVAL 14 DAY) > date(updatetime)
+    UPDATE t_order SET orderstatus = 3 , updatetime = now() where DATE_SUB(CURDATE(), INTERVAL 14 DAY) > date(updatetime)
     AND orderstatus = 2 AND shopstatus = 1 AND buyway = 0
   </update>
 

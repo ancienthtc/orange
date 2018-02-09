@@ -7,6 +7,7 @@ import com.jd.orange.common.Alevel;
 import com.jd.orange.common.UserCheck;
 import com.jd.orange.model.Order;
 import com.jd.orange.model.User;
+import com.jd.orange.service.AdminService;
 import com.jd.orange.service.OrderService;
 import com.jd.orange.service.UserService;
 import com.jd.orange.util.api.wx2.GlobalConfig;
@@ -32,6 +33,9 @@ public class OrderController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AdminService adminService;
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
@@ -100,8 +104,10 @@ public class OrderController {
     //进入订单统计
     @AdminCheck(Alevel.L2)
     @RequestMapping(value = "/toAdminOrderCount")
-    public String toAdminOrderCount()
+    public String toAdminOrderCount(Model model)
     {
+        //统计
+        model.addAttribute("cal",adminService.getCal());
         return "manager/Shops_Audit";
     }
 

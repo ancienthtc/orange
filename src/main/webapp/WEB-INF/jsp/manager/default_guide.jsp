@@ -16,6 +16,7 @@
 <html>
 <head>
     <title>ensure</title>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/ace.min.css"/>

@@ -13,6 +13,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
     <link href="<%=basePath%>backpage/assets/css/codemirror.css" rel="stylesheet">
@@ -83,7 +84,7 @@
             </tr>
             <tr>
                 <td class="name">总销量：</td>
-                <td class="munber"><a href="#">${cal.goodsAllSales}</a>&nbsp;条</td>
+                <td class="munber"><a href="#">${cal.goodsAllSales}</a>&nbsp;个</td>
             </tr>
 
             </tbody>

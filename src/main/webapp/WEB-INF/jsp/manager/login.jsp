@@ -9,6 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css"/>
     <!--[if IE 7]>

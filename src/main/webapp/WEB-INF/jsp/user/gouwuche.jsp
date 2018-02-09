@@ -17,6 +17,7 @@
 
     <script src="<%=basePath%>fontpage/js/jquery-1.10.2.js"></script>
     <!-- ionic框架  css -->
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
     <link href="<%=basePath%>fontpage/css/weixin.css" rel="stylesheet" type="text/css"/>
     <link href="<%=basePath%>fontpage/css/ionic.min.css" rel="stylesheet" type="text/css"/>

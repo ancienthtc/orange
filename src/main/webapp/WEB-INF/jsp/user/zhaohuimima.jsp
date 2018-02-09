@@ -18,6 +18,7 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
     <title>找回密码</title>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/main.css"/>
     <link rel="stylesheet" href="<%=basePath%>fontpage/css/jquery-impromptu.css"/>

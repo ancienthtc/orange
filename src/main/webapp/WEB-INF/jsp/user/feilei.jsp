@@ -14,6 +14,7 @@
     <meta name="apple-wap-web-app-capable" content="yes">
     <meta name="apple-wap-web-app-status-bar-style" content="black-translucent">
     <title>分类</title>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>fontpage/css/mui.min.css" rel="stylesheet"/>
     <link href="<%=basePath%>fontpage/css/ionic.min.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>

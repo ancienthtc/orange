@@ -12,6 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/ace.min.css"/>
@@ -120,7 +121,7 @@
                 </tr>
                 <tr>
                     <td class="name">总销量：</td>
-                    <td class="munber"><a href="#">${cal.goodsAllSales}</a>&nbsp;条</td>
+                    <td class="munber"><a href="#">${cal.goodsAllSales}</a>&nbsp;个</td>
                 </tr>
 
                 </tbody>

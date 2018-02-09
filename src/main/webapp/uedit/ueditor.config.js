@@ -28,7 +28,7 @@ var basePath=localhostPath+projectName+"/";
      */
     //var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
-    window.UEDITOR_HOME_URL =basePath+"/uedit/";
+    window.UEDITOR_HOME_URL = "../uedit/";
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
     /**
@@ -40,7 +40,7 @@ var basePath=localhostPath+projectName+"/";
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl:  basePath+"/admin/upload"//这个是后台请求的路径，与上面的action对应
+        , serverUrl:  "../admin/upload"//这个是后台请求的路径，与上面的action对应
         // ，其中的ctx 是在引入富文本编辑器的也没中定义的，等于var ctx='${pageContext.request.contextPath}'
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义

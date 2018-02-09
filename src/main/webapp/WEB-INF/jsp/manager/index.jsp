@@ -11,6 +11,7 @@
     <meta charset="utf-8"/>
     <title>网站后台管理系统 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css"/>
     <!--[if IE 7]>

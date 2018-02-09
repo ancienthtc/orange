@@ -78,14 +78,17 @@
     <mvc:resources mapping="/backpage/**" location="/backpage/"/>
     <mvc:resources mapping="/uedit/**" location="/uedit/"/>
 
+    <mvc:resources mapping="favicon.ico" location="favicon.ico"/>
+    <mvc:resources mapping="favicon.ico" location="/images/favicon.ico"/>
+
     <mvc:resources mapping="/mp/*.txt" location="/mp/"/>
 
     <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
     <!--<mvc:resources mapping="/lib/**" location="/lib/"/>-->
 
-    <!--
-    <mvc:default-servlet-handler />
-    -->
+
+    <!--<mvc:default-servlet-handler />-->
+
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
     <mvc:annotation-driven />

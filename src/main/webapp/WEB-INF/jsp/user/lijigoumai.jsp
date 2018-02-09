@@ -18,6 +18,7 @@
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
     <title>购物车</title>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/lijigoumai.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>fontpage/css/style.css"/>
     <script src="<%=basePath%>fontpage/js/jquery-1.10.2.js"></script>

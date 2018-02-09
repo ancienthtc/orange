@@ -8,6 +8,7 @@
 %>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
     <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="<%=basePath%>css/admin/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
     <script src = "<%=basePath%>backpage/js/jquery-1.9.1.min.js" ></script>

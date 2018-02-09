@@ -9,31 +9,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
-        <link href="<%=basePath%>backpage/assets/css/codemirror.css" rel="stylesheet">
-        <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/ace.min.css" />
-        <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="<%=basePath%>css/admin/other.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/x-icon" href="<%=basePath%>favicon.ico">
+    <link href="<%=basePath%>backpage/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<%=basePath%>backpage/css/style.css"/>
+    <link href="<%=basePath%>backpage/assets/css/codemirror.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>backpage/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>css/admin/other.css"/>
 
-		<script src="<%=basePath%>backpage/assets/js/jquery.min.js"></script>
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='<%=basePath%>backpage/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='<%=basePath%>backpage/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
-		<script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
-		<!-- page specific plugin scripts -->
-		<%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>--%>
-		<%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>--%>
+    <script src="<%=basePath%>backpage/assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='<%=basePath%>backpage/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    </script>
+    <script type="text/javascript">
+        if("ontouchend" in document) document.write("<script src='<%=basePath%>backpage/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+    <script src="<%=basePath%>backpage/assets/js/bootstrap.min.js"></script>
+    <script src="<%=basePath%>backpage/assets/js/typeahead-bs2.min.js"></script>
+    <!-- page specific plugin scripts -->
+    <%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.min.js"></script>--%>
+    <%--<script src="<%=basePath%>backpage/assets/js/jquery.dataTables.bootstrap.js"></script>--%>
 
-        <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
-        <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
-        <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript" ></script>
-        <script src="<%=basePath%>backpage/assets/laydate/laydate.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.js"></script>
+    <script type="text/javascript" src="<%=basePath%>backpage/js/H-ui.admin.js"></script>
+    <script src="<%=basePath%>backpage/assets/layer/layer.js" type="text/javascript" ></script>
+    <script src="<%=basePath%>backpage/assets/laydate/laydate.js" type="text/javascript"></script>
 <title>用户列表</title>
 </head>
 
@@ -154,6 +155,34 @@
                 {
                     var show1="";
                     var a="";
+                    //生日
+                    if(result.dataList[i].birth!=""&&result.dataList[i].birth!=undefined)
+                    {
+                        /*将时间戳转化为日期*/
+                        var time = new Date(result.dataList[i].birth);
+                        result.dataList[i].birth = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                    }else{
+                        result.dataList[i].birth="";
+                    }
+                    //登录时间
+                    if(result.dataList[i].logintime!=""&&result.dataList[i].logintime!=undefined)
+                    {
+                        /*将时间戳转化为日期*/
+                        var time = new Date(result.dataList[i].logintime);
+                        result.dataList[i].logintime = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                    }else{
+                        result.dataList[i].logintime="";
+                    }
+                    //创建时间
+                    if(result.dataList[i].createtime!=""&&result.dataList[i].createtime!=undefined)
+                    {
+                        /*将时间戳转化为日期*/
+                        var time = new Date(result.dataList[i].createtime);
+                        result.dataList[i].createtime = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate();
+                    }else{
+                        result.dataList[i].createtime="";
+                    }
+
                     tbody.append("<tr style='text-align: center'>");
                     tbody.append("<td width='25px'><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>");
                     tbody.append("<td>"+result.dataList[i].id+"</td>");

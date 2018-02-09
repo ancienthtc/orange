@@ -77,7 +77,7 @@
 <h1>正在进行微信支付....
     <br/>
     <small>请不要关闭</small>
-    ${result.sequence}
+    订单号:${result.sequence}
 </h1>
     <input id="appId" type="hidden" value="${result.appId}" /><br/>
     <input id="timeStamp" type="hidden" value="${result.timestamp}" /><br/>
